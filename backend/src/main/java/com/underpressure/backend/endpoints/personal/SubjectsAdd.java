@@ -4,64 +4,53 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.postgresql.util.PGobject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.underpressure.backend.endpoints.errors.PropertyValidation;
+
 @RestController
-public class PersonalSubjectsEndpoint {
+public class SubjectsAdd {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
     @CrossOrigin(origins = "*")
-    @PostMapping("/personal/subjects")
-    @ResponseBody
-    public Map<String, Object> dispatchPersonalSubjects(@RequestBody Map<String, Object> requestData) {
-
-        String userId = (String) requestData.get("userId");
-
-        Map<String, Object> res = new HashMap<>();
-
-        try {
-            String sql = "SELECT subjects.name FROM subject_instances INNER JOIN subjects ON subject_instances.subject_id=subjects.id WHERE subject_instances.user_id='"
-                    + userId + "'";
-
-            List<PGobject> data = jdbcTemplate.queryForList(sql, PGobject.class);
-
-            res.put("status", "success");
-            res.put("message", "These are the subjects that the user has chosen.");
-            res.put("data", data);
-
-            return res;
-        } catch (Exception e) {
-            res.put("status", "fail");
-            res.put("message", e.getMessage());
-            res.put("data", null);
-
-            return res;
-        }
-    }
-
-    @CrossOrigin(origins = "*")
     @PostMapping("/personal/subjects/add")
     public Map<String, Object> addSubject(@RequestBody Map<String, Object> requestData) {
+        Map<String, Object> res = new HashMap<>();
 
         String userId = (String) requestData.get("userId");
         String subjectName = (String) requestData.get("subjectName");
 
-        Map<String, Object> res = new HashMap<>();
+        Map<String, Object> temp;
+
+        temp = PropertyValidation.userId(userId, jdbcTemplate);
+        if (temp != null)
+            return temp;
+
+        temp = PropertyValidation.subjectName(subjectName, jdbcTemplate);
+        if (temp != null)
+            return temp;
 
         try {
 
             String requestForSubjectId = "SELECT id FROM subjects WHERE name='" + subjectName + "';";
 
-            String subjectId = jdbcTemplate.queryForList(requestForSubjectId, String.class).get(0);
+            List<String> subjectIds = jdbcTemplate.queryForList(requestForSubjectId, String.class);
+
+            if (subjectIds.size() == 0) {
+                res.put("status", "fail");
+                res.put("message", "A subject with such name was not found.");
+
+                return res;
+            }
+
+            String subjectId = subjectIds.get(0);
 
             String findSubjectInstance = "SELECT id from subject_instances WHERE user_id='" + userId
                     + "' AND subject_id='" + subjectId + "';";
@@ -99,5 +88,4 @@ public class PersonalSubjectsEndpoint {
         }
 
     }
-
 }

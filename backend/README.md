@@ -8,34 +8,44 @@ Server port: `9090`
 
 ## Endpoints
 
-### `/subjects`
-
-#### GET
+### GET `/subjects`
 
 Returns all of the subjects available.
 
-<br>
-
-### `{userId}/subjects`
-
-#### GET
+### POST `/personal/subjects`
 
 Returns all of the subjects that a user with userId has chosen.
 
-#### POST
-
 ```
 data = {
-    userId: <userId>
-    subjectName: <subjectName>
+    string userId: <userId>
 }
 ```
 
-### `/{userId}/subjects/`
+### POST `/personal/subjects/add`
+
+A new subject instance is created. If this subject instance already exists the request ends results in a failure.
+
+```
+data = {
+    string userId: <userId>
+    string subjectName: <subjectName>
+}
+```
+
+### POST `/personal/entries/add`
+
+A new entry is created.
+
+```
+data = {
+    string userId: <userId>,
+    string subjectName: <subjectName>,
+    integer stressLevel: <stressLevel>
+}
+```
 
 #### GET
 
 #### POST
-
-<br>
 
