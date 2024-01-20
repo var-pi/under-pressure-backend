@@ -24,6 +24,6 @@ Table subject_instances {
 Table entries {
   id integer [primary key]
   subject_instance_id integer [ref: > subject_instances.id]
-  created_at timestamp
+  created_at date
   stress_level integer [ note: '0-100' ]
 }

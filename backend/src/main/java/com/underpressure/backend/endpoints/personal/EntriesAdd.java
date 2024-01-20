@@ -11,9 +11,13 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.underpressure.backend.endpoints.helpers.validate.ValidateProperty;
+import com.underpressure.backend.endpoints.helpers.FeedbackMap;
+import com.underpressure.backend.endpoints.helpers.Set;
+import com.underpressure.backend.endpoints.helpers.ValidateProperty;
 
+@RestController
 public class EntriesAdd {
 
     @Autowired
@@ -22,36 +26,22 @@ public class EntriesAdd {
     @CrossOrigin(origins = "*")
     @PostMapping("/personal/entries/add")
     @ResponseBody
-    public Map<String, Object> dispatchPersonalSubjects(@RequestBody Map<String, Object> requestData) {
+    public Map<String, Object> dispatchEntries(@RequestBody Map<String, Object> requestData) {
 
         String userId = (String) requestData.get("userId");
         String subjectName = (String) requestData.get("subjectName");
-        int stressLevel = (int) requestData.get("stressLevel");
-
-        Map<String, Object> res = new HashMap<>();
+        Integer stressLevel = (Integer) requestData.get("stressLevel");
 
         try {
-
             ValidateProperty.userId(userId, jdbcTemplate);
             ValidateProperty.subjectName(subjectName, jdbcTemplate);
             ValidateProperty.stressLevel(stressLevel);
 
-            String sql = "SELECT subjects.name FROM subject_instances INNER JOIN subjects ON subject_instances.subject_id=subjects.id WHERE subject_instances.user_id='"
-                    + userId + "'";
+            Set.entry(userId, subjectName, stressLevel, jdbcTemplate);
 
-            List<PGobject> data = jdbcTemplate.queryForList(sql, PGobject.class);
-
-            res.put("status", "success");
-            res.put("message", "These are the subjects that the user has chosen.");
-            res.put("data", data);
-
-            return res;
+            return FeedbackMap.create(true, "The entry was successfully created/updated.");
         } catch (Exception e) {
-            res.put("status", "fail");
-            res.put("message", e.getMessage());
-            res.put("data", null);
-
-            return res;
+            return FeedbackMap.create(false, e.getMessage());
         }
     }
 

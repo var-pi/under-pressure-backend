@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.underpressure.backend.endpoints.helpers.FeedbackMap;
 import com.underpressure.backend.endpoints.helpers.Get;
-import com.underpressure.backend.endpoints.helpers.validate.ValidateProperty;
+import com.underpressure.backend.endpoints.helpers.ValidateProperty;
 
 @RestController
 public class Subjects {
@@ -29,9 +29,7 @@ public class Subjects {
         try {
             ValidateProperty.userId(userId, jdbcTemplate);
 
-            return FeedbackMap.create(
-                    true,
-                    "These are the subjects that the user has chosen.",
+            return FeedbackMap.create(true, "These are the subjects that the user has chosen.",
                     Get.subjects(userId, jdbcTemplate));
         } catch (Exception e) {
             return FeedbackMap.create(false, e.getMessage(), null);

@@ -16,7 +16,7 @@ CREATE TABLE "subject_instances" (
 CREATE TABLE "entries" (
   "id" SERIAL PRIMARY KEY,
   "subject_instance_id" integer,
-  "created_at" timestamp,
+  "created_at" date,
   "stress_level" integer
 );
 

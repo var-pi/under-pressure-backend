@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.underpressure.backend.endpoints.helpers.Add;
 import com.underpressure.backend.endpoints.helpers.FeedbackMap;
 import com.underpressure.backend.endpoints.helpers.Get;
-import com.underpressure.backend.endpoints.helpers.validate.ValidateNonexistance;
-import com.underpressure.backend.endpoints.helpers.validate.ValidateProperty;
+import com.underpressure.backend.endpoints.helpers.IfExists;
+import com.underpressure.backend.endpoints.helpers.ValidateProperty;
 
 @RestController
 public class SubjectsAdd {
@@ -33,7 +33,8 @@ public class SubjectsAdd {
 
             Integer subjectId = Get.subjectId(subjectName, jdbcTemplate);
 
-            ValidateNonexistance.subjecet_instance(userId, subjectId, jdbcTemplate);
+            if (IfExists.subjecetInstance(userId, subjectId, jdbcTemplate))
+                throw new Exception("This user already follows this subject. Creation of subject instance rejected.");
 
             return Add.subjectInstance(userId, subjectId, jdbcTemplate);
         } catch (Exception e) {
