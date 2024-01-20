@@ -10,6 +10,12 @@ import com.underpressure.backend.endpoints.exceptions.NotFoundException;
 
 public class Get {
 
+    public static List<String> subjects(JdbcTemplate jdbcTemplate) {
+        String sql = "SELECT name FROM subjects;";
+
+        return jdbcTemplate.queryForList(sql, String.class);
+    }
+
     public static Integer subjectId(String subjectName, JdbcTemplate jdbcTemplate) throws Exception {
         String requestForSubjectId = "SELECT id FROM subjects WHERE name='" + subjectName + "';";
 

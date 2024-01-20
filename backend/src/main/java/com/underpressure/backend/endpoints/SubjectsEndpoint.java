@@ -1,6 +1,5 @@
 package com.underpressure.backend.endpoints;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +8,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.underpressure.backend.endpoints.helpers.FeedbackMap;
+import com.underpressure.backend.endpoints.helpers.Get;
 
 @RestController
 public class SubjectsEndpoint {
@@ -20,26 +22,10 @@ public class SubjectsEndpoint {
     @GetMapping("/subjects")
     public Map<String, Object> dispatchSubjects() {
 
-        Map<String, Object> res = new HashMap<>();
-
         try {
-            String sql = "SELECT name FROM subjects;";
-
-            List<String> data = jdbcTemplate.queryForList(sql, String.class);
-
-            System.out.println(data);
-
-            res.put("status", "success");
-            res.put("message", "These are all of the available subjects.");
-            res.put("data", data);
-
-            return res;
+            return FeedbackMap.create(true, "These are all of the available subjects.", Get.subjects(jdbcTemplate));
         } catch (Exception e) {
-            res.put("status", "fail");
-            res.put("message", e.getMessage());
-            res.put("data", null);
-
-            return res;
+            return FeedbackMap.create(false, e.getMessage(), null);
         }
     }
 
