@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.underpressure.backend.endpoints.errors.PropertyValidation;
+import com.underpressure.backend.endpoints.errors.ValidateProperty;
 
 @RestController
 public class SubjectsAdd {
@@ -22,22 +22,14 @@ public class SubjectsAdd {
     @CrossOrigin(origins = "*")
     @PostMapping("/personal/subjects/add")
     public Map<String, Object> addSubject(@RequestBody Map<String, Object> requestData) {
-        Map<String, Object> res = new HashMap<>();
-
         String userId = (String) requestData.get("userId");
         String subjectName = (String) requestData.get("subjectName");
 
-        Map<String, Object> temp;
-
-        temp = PropertyValidation.userId(userId, jdbcTemplate);
-        if (temp != null)
-            return temp;
-
-        temp = PropertyValidation.subjectName(subjectName, jdbcTemplate);
-        if (temp != null)
-            return temp;
+        Map<String, Object> res = new HashMap<>();
 
         try {
+            ValidateProperty.userId(userId, jdbcTemplate);
+            ValidateProperty.subjectName(subjectName, jdbcTemplate);
 
             String requestForSubjectId = "SELECT id FROM subjects WHERE name='" + subjectName + "';";
 

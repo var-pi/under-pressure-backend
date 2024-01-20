@@ -11,26 +11,30 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.underpressure.backend.endpoints.errors.ValidateProperty;
 
-@RestController
-public class Subjects {
+public class EntriesAdd {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
     @CrossOrigin(origins = "*")
-    @PostMapping("/personal/subjects")
+    @PostMapping("/personal/entries/add")
     @ResponseBody
     public Map<String, Object> dispatchPersonalSubjects(@RequestBody Map<String, Object> requestData) {
-        Map<String, Object> res = new HashMap<>();
 
         String userId = (String) requestData.get("userId");
+        String subjectName = (String) requestData.get("subjectName");
+        int stressLevel = (int) requestData.get("stressLevel");
+
+        Map<String, Object> res = new HashMap<>();
 
         try {
+
             ValidateProperty.userId(userId, jdbcTemplate);
+            ValidateProperty.subjectName(subjectName, jdbcTemplate);
+            ValidateProperty.stressLevel(stressLevel);
 
             String sql = "SELECT subjects.name FROM subject_instances INNER JOIN subjects ON subject_instances.subject_id=subjects.id WHERE subject_instances.user_id='"
                     + userId + "'";
