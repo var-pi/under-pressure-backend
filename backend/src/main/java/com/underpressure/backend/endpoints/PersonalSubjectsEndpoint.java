@@ -1,4 +1,4 @@
-package com.underpressure.backend.endpoints.personal;
+package com.underpressure.backend.endpoints;
 
 import java.util.Map;
 
