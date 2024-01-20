@@ -1,10 +1,7 @@
 package com.underpressure.backend.endpoints;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import org.postgresql.util.PGobject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -26,7 +23,7 @@ public class EntriesAddEndpoint {
     @CrossOrigin(origins = "*")
     @PostMapping("/personal/entries/add")
     @ResponseBody
-    public Map<String, Object> dispatchEntries(@RequestBody Map<String, Object> requestData) {
+    public Map<String, Object> addAnEntry(@RequestBody Map<String, Object> requestData) {
 
         String userId = (String) requestData.get("userId");
         String subjectName = (String) requestData.get("subjectName");

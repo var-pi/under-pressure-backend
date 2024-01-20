@@ -1,26 +1,12 @@
 # Backend server API
 
-Request URL: `http://<address>:<port>/<endpoint>`
-
-## Server
-
-Server port: `9090`
+Request URL: `http://<url><endpoint>`
 
 ## Endpoints
 
 ### GET `/subjects`
 
 Returns all of the subjects available.
-
-### POST `/personal/subjects`
-
-Returns all of the subjects that a user with userId has chosen.
-
-```
-data = {
-    string userId: <userId>
-}
-```
 
 ### POST `/personal/subjects/add`
 
@@ -30,6 +16,16 @@ A new subject instance is created. If this subject instance already exists the r
 data = {
     string userId: <userId>
     string subjectName: <subjectName>
+}
+```
+
+### POST `/personal/subjects`
+
+Returns all of the subjects that a user with userId has chosen.
+
+```
+data = {
+    string userId: <userId>
 }
 ```
 
@@ -45,7 +41,14 @@ data = {
 }
 ```
 
-<!-- #### GET
+### POST `/personal/entries`
 
-#### POST -->
+Returns all the entries made by given user on the particular subject.
+
+```
+data = {
+    string userId: <userId>,
+    string subjectName: <subjectName>
+}
+```
 
