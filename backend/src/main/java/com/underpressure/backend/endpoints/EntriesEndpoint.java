@@ -6,10 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.RowFilter.Entry;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -25,7 +22,7 @@ import com.underpressure.backend.endpoints.helpers.ValidateProperty;
 @RestController
 public class EntriesEndpoint {
 
-    private class EntryData {
+    public class EntryData {
         private Date createdAt;
         private Integer stressLevel;
 
