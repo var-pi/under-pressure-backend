@@ -21,9 +21,9 @@ public class Get {
         return subjectIds.get(0);
     }
 
-    public static List<String> subjects(String userId, JdbcTemplate jdbcTemplate) {
+    public static List<String> followedSubjects(String userId, JdbcTemplate jdbcTemplate) {
         String sql = "SELECT subjects.name FROM subject_instances INNER JOIN subjects ON subject_instances.subject_id=subjects.id WHERE subject_instances.user_id='"
-                + userId + "'";
+                + userId + "' AND if_followed=TRUE";
 
         List<PGobject> PGobjects = jdbcTemplate.queryForList(sql, PGobject.class);
 

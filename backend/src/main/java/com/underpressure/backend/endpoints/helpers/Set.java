@@ -9,6 +9,8 @@ public class Set {
             throws Exception {
         Integer subjectId = Get.subjectId(subjectName, jdbcTemplate);
         Integer subjectInstanceId = Get.subjectInstanceId(userId, subjectId, jdbcTemplate);
+        if (!If.subjectInstanceFollowed(subjectInstanceId, jdbcTemplate))
+            throw new Exception("Subject instance exists but is not followed.");
 
         try {
             Integer entryId = Get.entryId(subjectInstanceId, jdbcTemplate);

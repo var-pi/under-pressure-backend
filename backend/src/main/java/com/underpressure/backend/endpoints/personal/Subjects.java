@@ -30,7 +30,7 @@ public class Subjects {
             ValidateProperty.userId(userId, jdbcTemplate);
 
             return FeedbackMap.create(true, "These are the subjects that the user has chosen.",
-                    Get.subjects(userId, jdbcTemplate));
+                    Get.followedSubjects(userId, jdbcTemplate));
         } catch (Exception e) {
             return FeedbackMap.create(false, e.getMessage(), null);
         }

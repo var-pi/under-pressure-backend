@@ -8,8 +8,9 @@ public class Add {
     public static Map<String, Object> subjectInstance(String userId, Integer subjectId, JdbcTemplate jdbcTemplate)
             throws Exception {
 
-        String addSubjectInstance = "INSERT INTO subject_instances (user_id, subject_id) VALUES ('" + userId + "',"
-                + subjectId + ");";
+        String addSubjectInstance = "INSERT INTO subject_instances (user_id, subject_id, if_followed) VALUES ('"
+                + userId + "',"
+                + subjectId + ",TRUE);";
 
         int numOfRowsAffected = jdbcTemplate.update(addSubjectInstance);
 
