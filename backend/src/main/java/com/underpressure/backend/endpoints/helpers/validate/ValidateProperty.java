@@ -1,4 +1,4 @@
-package com.underpressure.backend.endpoints.errors;
+package com.underpressure.backend.endpoints.helpers.validate;
 
 import java.util.List;
 

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.underpressure.backend.endpoints.errors.ValidateProperty;
+import com.underpressure.backend.endpoints.helpers.validate.ValidateProperty;
 
 public class EntriesAdd {
 
