@@ -5,7 +5,7 @@ import java.util.Map;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 public class Add {
-    public static Map<String, Object> subjectInstance(String userId, Integer subjectId, JdbcTemplate jdbcTemplate)
+    public static void subjectInstance(String userId, Integer subjectId, JdbcTemplate jdbcTemplate)
             throws Exception {
 
         String addSubjectInstance = "INSERT INTO subject_instances (user_id, subject_id, if_followed) VALUES ('"
@@ -16,7 +16,5 @@ public class Add {
 
         if (numOfRowsAffected == 0)
             throw new Exception("No expected flaw was detected but the subject instace wasn't created.");
-
-        return FeedbackMap.create(true, "The subject instance was successfully added.");
     }
 }

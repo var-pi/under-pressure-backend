@@ -29,6 +29,14 @@ public class Set {
             if (numOfRowsAffected == 0)
                 throw new Exception("No expected exception was triggered but the entry was not created.");
         }
+    }
 
+    public static void toFollow(Integer subjectInstanceId, JdbcTemplate jdbcTemplate) throws Exception {
+        String sql = "UPDATE subject_instances SET if_followed=TRUE WHERE id=" + subjectInstanceId + ";";
+
+        Integer numOfRowsAffected = jdbcTemplate.update(sql);
+
+        if (numOfRowsAffected == 0)
+            throw new Exception("No rows were updated.");
     }
 }
