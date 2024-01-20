@@ -1,7 +1,10 @@
 package com.underpressure.backend.endpoints.personal;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.postgresql.util.PGobject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -11,28 +14,34 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.underpressure.backend.endpoints.helpers.FeedbackMap;
-import com.underpressure.backend.endpoints.helpers.Get;
+import com.underpressure.backend.endpoints.helpers.Set;
 import com.underpressure.backend.endpoints.helpers.ValidateProperty;
 
 @RestController
-public class Subjects {
+public class EntriesAddEndpoint {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
     @CrossOrigin(origins = "*")
-    @PostMapping("/personal/subjects")
+    @PostMapping("/personal/entries/add")
     @ResponseBody
-    public Map<String, Object> dispatchPersonalSubjects(@RequestBody Map<String, Object> requestData) {
+    public Map<String, Object> dispatchEntries(@RequestBody Map<String, Object> requestData) {
+
         String userId = (String) requestData.get("userId");
+        String subjectName = (String) requestData.get("subjectName");
+        Integer stressLevel = (Integer) requestData.get("stressLevel");
 
         try {
             ValidateProperty.userId(userId, jdbcTemplate);
+            ValidateProperty.subjectName(subjectName, jdbcTemplate);
+            ValidateProperty.stressLevel(stressLevel);
 
-            return FeedbackMap.create(true, "These are the subjects that the user has chosen.",
-                    Get.followedSubjects(userId, jdbcTemplate));
+            Set.entry(userId, subjectName, stressLevel, jdbcTemplate);
+
+            return FeedbackMap.create(true, "The entry was successfully created/updated.");
         } catch (Exception e) {
-            return FeedbackMap.create(false, e.getMessage(), null);
+            return FeedbackMap.create(false, e.getMessage());
         }
     }
 
