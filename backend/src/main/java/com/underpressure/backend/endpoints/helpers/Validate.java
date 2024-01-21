@@ -49,4 +49,9 @@ public class Validate {
         if (If.subjectInstanceFollowed(subjectInstanceId, jdbcTemplate))
             throw new Exception("This subject is followed.");
     }
+
+    public static void userDoesNotExists(String userId, JdbcTemplate jdbcTemplate) throws Exception {
+        if (If.userExists(userId, jdbcTemplate))
+            throw new Exception("User with this userId exists.");
+    }
 }

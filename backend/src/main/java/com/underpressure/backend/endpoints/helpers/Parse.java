@@ -6,12 +6,18 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 public class Parse {
 
-    public static String userId(Map<String, Object> requestData, JdbcTemplate jdbcTemplate) throws Exception {
+    public static String userId(Map<String, Object> requestData, JdbcTemplate jdbcTemplate, Boolean validate)
+            throws Exception {
         String userId = (String) requestData.get("userId");
 
-        Validate.userId(userId, jdbcTemplate);
+        if (validate)
+            Validate.userId(userId, jdbcTemplate);
 
         return userId;
+    }
+
+    public static String userId(Map<String, Object> requestData, JdbcTemplate jdbcTemplate) throws Exception {
+        return userId(requestData, jdbcTemplate, false);
     }
 
     public static String subjectName(Map<String, Object> requestData, JdbcTemplate jdbcTemplate) throws Exception {

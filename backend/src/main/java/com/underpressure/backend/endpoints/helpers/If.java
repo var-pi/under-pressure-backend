@@ -31,4 +31,12 @@ public class If {
 
         return ids.size() != 0;
     }
+
+    public static boolean userExists(String userId, JdbcTemplate jdbcTemplate) {
+        String sql = "SELECT COUNT(*) FROM users WHERE id='" + userId + "';";
+
+        int rowCount = jdbcTemplate.queryForObject(sql, Integer.class);
+
+        return rowCount > 0;
+    }
 }
