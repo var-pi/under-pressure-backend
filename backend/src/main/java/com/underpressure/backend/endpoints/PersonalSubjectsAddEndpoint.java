@@ -23,8 +23,8 @@ public class PersonalSubjectsAddEndpoint {
     private JdbcTemplate jdbcTemplate;
 
     @CrossOrigin(origins = "*")
-    @PostMapping("/personal/subjects/add")
-    public Map<String, Object> addSubject(@RequestBody Map<String, Object> requestData) {
+    @PostMapping("/personal/subjects/follow")
+    public Map<String, Object> followSubject(@RequestBody Map<String, Object> requestData) {
         String userId = (String) requestData.get("userId");
         String subjectName = (String) requestData.get("subjectName");
 

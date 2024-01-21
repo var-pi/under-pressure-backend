@@ -8,7 +8,17 @@ Request URL: `http://<url><endpoint>`
 
 Returns all of the subjects available.
 
-### POST `/personal/subjects/add`
+### POST `/personal/subjects`
+
+Returns all of the subjects that a user with userId has chosen.
+
+```
+data = {
+    string userId: <userId>
+}
+```
+
+### POST `/personal/subjects/follow`
 
 A new subject instance is created. If this subject instance already exists the request ends results in a failure.
 
@@ -19,13 +29,16 @@ data = {
 }
 ```
 
-### POST `/personal/subjects`
+<!-- ### POST `/personal/subjects/unfollow` -->
 
-Returns all of the subjects that a user with userId has chosen.
+### POST `/personal/entries`
+
+Returns all the entries made by given user on the particular subject.
 
 ```
 data = {
-    string userId: <userId>
+    string userId: <userId>,
+    string subjectName: <subjectName>
 }
 ```
 
@@ -38,17 +51,6 @@ data = {
     string userId: <userId>,
     string subjectName: <subjectName>,
     integer stressLevel: <stressLevel>
-}
-```
-
-### POST `/personal/entries`
-
-Returns all the entries made by given user on the particular subject.
-
-```
-data = {
-    string userId: <userId>,
-    string subjectName: <subjectName>
 }
 ```
 
