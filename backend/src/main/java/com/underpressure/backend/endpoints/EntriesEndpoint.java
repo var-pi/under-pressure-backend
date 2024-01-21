@@ -12,7 +12,6 @@ import com.underpressure.backend.endpoints.classes.request.data.EntryData;
 import com.underpressure.backend.endpoints.helpers.FeedbackMap;
 import com.underpressure.backend.endpoints.helpers.Get;
 import com.underpressure.backend.endpoints.helpers.Parse;
-import com.underpressure.backend.endpoints.helpers.Validate;
 
 @RestController
 public class EntriesEndpoint extends PostEndpoint {
@@ -27,8 +26,6 @@ public class EntriesEndpoint extends PostEndpoint {
 
             Integer subjectId = Get.subjectId(subjectName, jdbcTemplate);
             Integer subjectInstanceId = Get.subjectInstanceId(userId, subjectId, jdbcTemplate);
-
-            Validate.isFollowed(subjectInstanceId, jdbcTemplate);
 
             List<EntryData> entries = Get.entries(subjectInstanceId, jdbcTemplate);
 
