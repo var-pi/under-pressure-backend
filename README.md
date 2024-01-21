@@ -10,7 +10,7 @@ Returns all of the subjects available.
 
 ### POST `/personal/subjects`
 
-Returns all of the subjects that a user with userId has chosen.
+Returns all of the subjects that this particular user is following.
 
 ```
 data = {
@@ -20,7 +20,7 @@ data = {
 
 ### POST `/personal/subjects/follow`
 
-A new subject instance is created. If this subject instance already exists the request ends results in a failure.
+If user hasn't ever followed the subjec then new subject instance is created. If the subject instance was unfollowed at some point, it starts to be followed again. If subject instance is already being followed, the request results in a failure.
 
 ```
 data = {
@@ -29,7 +29,16 @@ data = {
 }
 ```
 
-<!-- ### POST `/personal/subjects/unfollow` -->
+### POST `/personal/subjects/unfollow`
+
+If subject is currently followed, it is unfollowed. If the subject doesn't exist or is already unfollowed, the request results in an failure.
+
+```
+data = {
+    string userId: <userId>
+    string subjectName: <subjectName>
+}
+```
 
 ### POST `/personal/entries`
 
