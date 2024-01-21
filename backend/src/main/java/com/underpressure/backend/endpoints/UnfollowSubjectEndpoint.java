@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.underpressure.backend.endpoints.classes.endpoints.PostEndpoint;
 import com.underpressure.backend.endpoints.helpers.FeedbackMap;
 import com.underpressure.backend.endpoints.helpers.Get;
+import com.underpressure.backend.endpoints.helpers.Parse;
 import com.underpressure.backend.endpoints.helpers.Set;
 import com.underpressure.backend.endpoints.helpers.Validate;
 
@@ -18,12 +19,9 @@ public class UnfollowSubjectEndpoint extends PostEndpoint {
     @PostMapping("/personal/subjects/unfollow")
     public Map<String, Object> handle(Map<String, Object> requestData) {
 
-        String userId = (String) requestData.get("userId");
-        String subjectName = (String) requestData.get("subjectName");
-
         try {
-            Validate.userId(userId, jdbcTemplate);
-            Validate.subjectName(subjectName, jdbcTemplate);
+            String userId = Parse.userId(requestData, jdbcTemplate);
+            String subjectName = Parse.subjectName(requestData, jdbcTemplate);
 
             Integer subjectId = Get.subjectId(subjectName, jdbcTemplate);
 

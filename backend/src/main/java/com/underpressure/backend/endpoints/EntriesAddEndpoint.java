@@ -11,6 +11,7 @@ import com.underpressure.backend.endpoints.helpers.Add;
 import com.underpressure.backend.endpoints.helpers.FeedbackMap;
 import com.underpressure.backend.endpoints.helpers.Get;
 import com.underpressure.backend.endpoints.helpers.If;
+import com.underpressure.backend.endpoints.helpers.Parse;
 import com.underpressure.backend.endpoints.helpers.Update;
 import com.underpressure.backend.endpoints.helpers.Validate;
 
@@ -21,14 +22,10 @@ public class EntriesAddEndpoint extends PostEndpoint {
     @PostMapping("/personal/entries/add")
     public Map<String, Object> handle(@RequestBody Map<String, Object> requestData) {
 
-        String userId = (String) requestData.get("userId");
-        String subjectName = (String) requestData.get("subjectName");
-        Integer stressLevel = (Integer) requestData.get("stressLevel");
-
         try {
-            Validate.userId(userId, jdbcTemplate);
-            Validate.subjectName(subjectName, jdbcTemplate);
-            Validate.stressLevel(stressLevel);
+            String userId = Parse.userId(requestData, jdbcTemplate);
+            String subjectName = Parse.subjectName(requestData, jdbcTemplate);
+            Integer stressLevel = Parse.stressLevel(requestData, jdbcTemplate);
 
             Integer subjectId = Get.subjectId(subjectName, jdbcTemplate);
             Integer subjectInstanceId = Get.subjectInstanceId(userId, subjectId, jdbcTemplate);
