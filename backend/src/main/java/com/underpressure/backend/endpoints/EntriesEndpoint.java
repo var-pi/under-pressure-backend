@@ -6,21 +6,18 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.underpressure.backend.endpoints.classes.PostEndpoint;
 import com.underpressure.backend.endpoints.helpers.FeedbackMap;
 import com.underpressure.backend.endpoints.helpers.Get;
 import com.underpressure.backend.endpoints.helpers.ValidateProperty;
 
 @RestController
-public class EntriesEndpoint {
+public class EntriesEndpoint extends PostEndpoint {
 
     public class EntryData {
         private Date createdAt;
@@ -57,13 +54,9 @@ public class EntriesEndpoint {
         }
     }
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
-
-    @CrossOrigin(origins = "*")
+    @Override
     @PostMapping("/personal/entries")
-    @ResponseBody
-    public Map<String, Object> dispatchEntries(@RequestBody Map<String, Object> requestData) {
+    public Map<String, Object> handle(@RequestBody Map<String, Object> requestData) {
 
         String userId = (String) requestData.get("userId");
         String subjectName = (String) requestData.get("subjectName");
