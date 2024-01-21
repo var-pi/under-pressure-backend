@@ -17,7 +17,7 @@ public class Parse {
     }
 
     public static String userId(Map<String, Object> requestData, JdbcTemplate jdbcTemplate) throws Exception {
-        return userId(requestData, jdbcTemplate, false);
+        return userId(requestData, jdbcTemplate, true);
     }
 
     public static String subjectName(Map<String, Object> requestData, JdbcTemplate jdbcTemplate) throws Exception {

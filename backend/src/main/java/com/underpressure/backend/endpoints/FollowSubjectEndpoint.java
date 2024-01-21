@@ -28,9 +28,9 @@ public class FollowSubjectEndpoint extends PostEndpoint {
 
             Integer subjectId = Get.subjectId(subjectName, jdbcTemplate);
 
-            Integer subjectInstanceId = Get.subjectInstanceId(userId, subjectId, jdbcTemplate);
-
             if (If.subjecetInstanceExists(userId, subjectId, jdbcTemplate)) {
+                Integer subjectInstanceId = Get.subjectInstanceId(userId, subjectId, jdbcTemplate);
+
                 Validate.isUnfollowed(subjectInstanceId, jdbcTemplate);
 
                 Set.toFollow(subjectInstanceId, jdbcTemplate);
