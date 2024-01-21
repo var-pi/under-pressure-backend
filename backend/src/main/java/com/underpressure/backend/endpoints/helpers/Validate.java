@@ -9,10 +9,10 @@ public class Validate {
         if (userId == null)
             throw new Exception("The passed data object didn't contain a userId property.");
 
-        String sql = "SELECT id FROM users WHERE id='" + userId + "';";
+        String sql = "SELECT id FROM users WHERE id=?";
 
         try {
-            jdbcTemplate.queryForObject(sql, String.class);
+            jdbcTemplate.queryForObject(sql, String.class, userId);
         } catch (EmptyResultDataAccessException e) {
             throw new Exception("A user with given userId doesn't exists.");
         }
@@ -23,10 +23,10 @@ public class Validate {
         if (subjectName == null)
             throw new Exception("The passed data object didn't contain a subjectName property.");
 
-        String sql = "SELECT id FROM subjects WHERE name='" + subjectName + "';";
+        String sql = "SELECT id FROM subjects WHERE name=?";
 
         try {
-            jdbcTemplate.queryForObject(sql, Integer.class);
+            jdbcTemplate.queryForObject(sql, Integer.class, subjectName);
         } catch (EmptyResultDataAccessException e) {
             throw new Exception("A subject with given subjectName doesn't exists.");
         }
