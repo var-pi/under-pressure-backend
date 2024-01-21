@@ -15,4 +15,17 @@ public class Add {
         if (numOfRowsAffected == 0)
             throw new Exception("No expected flaw was detected but the subject instace wasn't created.");
     }
+
+    public static void entry(Integer subjectInstanceId, Integer stressLevel, JdbcTemplate jdbcTemplate)
+            throws Exception {
+
+        String sql = "INSERT INTO entries (subject_instance_id, created_at, stress_level) VALUES ("
+                + subjectInstanceId
+                + ", CURRENT_DATE, " + stressLevel + ")";
+
+        int numOfRowsAffected = jdbcTemplate.update(sql);
+        if (numOfRowsAffected == 0)
+            throw new Exception("No expected exception was triggered but the entry was not created.");
+
+    }
 }

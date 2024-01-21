@@ -5,7 +5,7 @@ import java.util.Map;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.underpressure.backend.endpoints.classes.GetEndpoint;
+import com.underpressure.backend.endpoints.classes.endpoints.GetEndpoint;
 import com.underpressure.backend.endpoints.helpers.FeedbackMap;
 import com.underpressure.backend.endpoints.helpers.Get;
 

@@ -6,10 +6,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.underpressure.backend.endpoints.classes.PostEndpoint;
+import com.underpressure.backend.endpoints.classes.endpoints.PostEndpoint;
+import com.underpressure.backend.endpoints.helpers.Add;
 import com.underpressure.backend.endpoints.helpers.FeedbackMap;
-import com.underpressure.backend.endpoints.helpers.Set;
-import com.underpressure.backend.endpoints.helpers.ValidateProperty;
+import com.underpressure.backend.endpoints.helpers.Get;
+import com.underpressure.backend.endpoints.helpers.If;
+import com.underpressure.backend.endpoints.helpers.Update;
+import com.underpressure.backend.endpoints.helpers.Validate;
 
 @RestController
 public class EntriesAddEndpoint extends PostEndpoint {
@@ -23,13 +26,25 @@ public class EntriesAddEndpoint extends PostEndpoint {
         Integer stressLevel = (Integer) requestData.get("stressLevel");
 
         try {
-            ValidateProperty.userId(userId, jdbcTemplate);
-            ValidateProperty.subjectName(subjectName, jdbcTemplate);
-            ValidateProperty.stressLevel(stressLevel);
+            Validate.userId(userId, jdbcTemplate);
+            Validate.subjectName(subjectName, jdbcTemplate);
+            Validate.stressLevel(stressLevel);
 
-            Set.entry(userId, subjectName, stressLevel, jdbcTemplate);
+            Integer subjectId = Get.subjectId(subjectName, jdbcTemplate);
+            Integer subjectInstanceId = Get.subjectInstanceId(userId, subjectId, jdbcTemplate);
 
-            return FeedbackMap.create(true, "The entry was successfully created/updated.");
+            Validate.isFollowed(subjectInstanceId, jdbcTemplate);
+
+            if (If.entryExists(subjectInstanceId, jdbcTemplate)) {
+                Integer entryId = Get.entryId(subjectInstanceId, jdbcTemplate);
+
+                Update.entry(entryId, stressLevel, jdbcTemplate);
+                return FeedbackMap.create(true, "The entry was successfully updated.");
+            } else {
+                Add.entry(subjectInstanceId, stressLevel, jdbcTemplate);
+                return FeedbackMap.create(true, "The entry was successfully created.");
+            }
+
         } catch (Exception e) {
             return FeedbackMap.create(false, e.getMessage());
         }

@@ -5,12 +5,11 @@ import java.util.Map;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.underpressure.backend.endpoints.classes.PostEndpoint;
+import com.underpressure.backend.endpoints.classes.endpoints.PostEndpoint;
 import com.underpressure.backend.endpoints.helpers.FeedbackMap;
 import com.underpressure.backend.endpoints.helpers.Get;
-import com.underpressure.backend.endpoints.helpers.If;
 import com.underpressure.backend.endpoints.helpers.Set;
-import com.underpressure.backend.endpoints.helpers.ValidateProperty;
+import com.underpressure.backend.endpoints.helpers.Validate;
 
 @RestController
 public class UnfollowSubjectEndpoint extends PostEndpoint {
@@ -23,15 +22,14 @@ public class UnfollowSubjectEndpoint extends PostEndpoint {
         String subjectName = (String) requestData.get("subjectName");
 
         try {
-            ValidateProperty.userId(userId, jdbcTemplate);
-            ValidateProperty.subjectName(subjectName, jdbcTemplate);
+            Validate.userId(userId, jdbcTemplate);
+            Validate.subjectName(subjectName, jdbcTemplate);
 
             Integer subjectId = Get.subjectId(subjectName, jdbcTemplate);
 
             Integer subjectInstanceId = Get.subjectInstanceId(userId, subjectId, jdbcTemplate);
 
-            if (!If.subjectInstanceFollowed(subjectInstanceId, jdbcTemplate))
-                throw new Exception("The subject is already unfollowed.");
+            Validate.isFollowed(subjectInstanceId, jdbcTemplate);
 
             Set.toNotFollow(subjectInstanceId, jdbcTemplate);
 

@@ -7,6 +7,10 @@ import org.postgresql.util.PGobject;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import com.underpressure.backend.endpoints.classes.request.data.EntryData;
+import com.underpressure.backend.endpoints.classes.request.data.EntryDataRowMapper;
+import com.underpressure.backend.endpoints.exceptions.NotFoundException;
+
 public class Get {
 
     public static List<String> subjects(JdbcTemplate jdbcTemplate) {
@@ -58,7 +62,13 @@ public class Get {
         try {
             return jdbcTemplate.queryForObject(sql, Integer.class);
         } catch (EmptyResultDataAccessException e) {
-            throw new Exception("An entry hasn't yet been aadded today for this subject_instance.");
+            throw new NotFoundException("An entry hasn't yet been aadded today for this subject_instance.");
         }
+    }
+
+    public static List<EntryData> entries(Integer subjectInstanceId, JdbcTemplate jdbcTemplate) {
+        String sql = "SELECT * FROM entries WHERE subject_instance_id=" + subjectInstanceId + ";";
+
+        return jdbcTemplate.query(sql, new EntryDataRowMapper());
     }
 }

@@ -3,7 +3,7 @@ package com.underpressure.backend.endpoints.helpers;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-public class ValidateProperty {
+public class Validate {
 
     public static void userId(String userId, JdbcTemplate jdbcTemplate) throws Exception {
         if (userId == null)
@@ -40,4 +40,13 @@ public class ValidateProperty {
             throw new Exception("The passed stressedLevel was outside the range of [0,100].");
     }
 
+    public static void isFollowed(Integer subjectInstanceId, JdbcTemplate jdbcTemplate) throws Exception {
+        if (!If.subjectInstanceFollowed(subjectInstanceId, jdbcTemplate))
+            throw new Exception("This subject is unfollowed.");
+    }
+
+    public static void isUnfollowed(Integer subjectInstanceId, JdbcTemplate jdbcTemplate) throws Exception {
+        if (If.subjectInstanceFollowed(subjectInstanceId, jdbcTemplate))
+            throw new Exception("This subject is followed.");
+    }
 }

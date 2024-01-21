@@ -1,15 +1,16 @@
 package com.underpressure.backend.endpoints;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.underpressure.backend.endpoints.classes.PostEndpoint;
+import com.underpressure.backend.endpoints.classes.endpoints.PostEndpoint;
 import com.underpressure.backend.endpoints.helpers.FeedbackMap;
 import com.underpressure.backend.endpoints.helpers.Get;
-import com.underpressure.backend.endpoints.helpers.ValidateProperty;
+import com.underpressure.backend.endpoints.helpers.Validate;
 
 @RestController
 public class FollowedSubjectsEndpoint extends PostEndpoint {
@@ -20,10 +21,10 @@ public class FollowedSubjectsEndpoint extends PostEndpoint {
         String userId = (String) requestData.get("userId");
 
         try {
-            ValidateProperty.userId(userId, jdbcTemplate);
+            Validate.userId(userId, jdbcTemplate);
 
-            return FeedbackMap.create(true, "These are the subjects that the user has chosen.",
-                    Get.followedSubjects(userId, jdbcTemplate));
+            List<String> followedSubjects = Get.followedSubjects(userId, jdbcTemplate);
+            return FeedbackMap.create(true, "These are the subjects that the user has chosen.", followedSubjects);
         } catch (Exception e) {
             return FeedbackMap.create(false, e.getMessage(), null);
         }

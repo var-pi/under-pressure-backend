@@ -6,13 +6,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.underpressure.backend.endpoints.classes.PostEndpoint;
+import com.underpressure.backend.endpoints.classes.endpoints.PostEndpoint;
 import com.underpressure.backend.endpoints.helpers.Add;
 import com.underpressure.backend.endpoints.helpers.FeedbackMap;
 import com.underpressure.backend.endpoints.helpers.Get;
 import com.underpressure.backend.endpoints.helpers.If;
 import com.underpressure.backend.endpoints.helpers.Set;
-import com.underpressure.backend.endpoints.helpers.ValidateProperty;
+import com.underpressure.backend.endpoints.helpers.Validate;
 
 @RestController
 public class FollowSubjectEndpoint extends PostEndpoint {
@@ -24,22 +24,19 @@ public class FollowSubjectEndpoint extends PostEndpoint {
         String subjectName = (String) requestData.get("subjectName");
 
         try {
-            ValidateProperty.userId(userId, jdbcTemplate);
-            ValidateProperty.subjectName(subjectName, jdbcTemplate);
+            Validate.userId(userId, jdbcTemplate);
+            Validate.subjectName(subjectName, jdbcTemplate);
 
             Integer subjectId = Get.subjectId(subjectName, jdbcTemplate);
 
             Integer subjectInstanceId = Get.subjectInstanceId(userId, subjectId, jdbcTemplate);
 
             if (If.subjecetInstanceExists(userId, subjectId, jdbcTemplate)) {
-                if (If.subjectInstanceFollowed(subjectInstanceId, jdbcTemplate))
-                    throw new Exception(
-                            "This user already follows this subject. Creation of subject instance rejected.");
-                else {
-                    Set.toFollow(subjectInstanceId, jdbcTemplate);
-                    return FeedbackMap.create(true,
-                            "The subject instance was successfully started to be followed again.");
-                }
+                Validate.isUnfollowed(subjectInstanceId, jdbcTemplate);
+
+                Set.toFollow(subjectInstanceId, jdbcTemplate);
+                return FeedbackMap.create(true,
+                        "The subject instance was successfully started to be followed again.");
             }
 
             Add.subjectInstance(userId, subjectId, jdbcTemplate);

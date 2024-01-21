@@ -1,4 +1,4 @@
-package com.underpressure.backend.endpoints.classes;
+package com.underpressure.backend.endpoints.classes.endpoints;
 
 import java.util.Map;
 
