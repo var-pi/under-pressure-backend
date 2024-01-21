@@ -17,7 +17,7 @@ import com.underpressure.backend.endpoints.helpers.Set;
 import com.underpressure.backend.endpoints.helpers.ValidateProperty;
 
 @RestController
-public class PersonalSubjectsAddEndpoint {
+public class FollowSubjectEndpoint {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
