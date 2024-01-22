@@ -1,11 +1,11 @@
-package com.underpressure.backend.endpoints.classes.endpoints;
+package com.underpressure.backend.controllers.classes.abstracts;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-import com.underpressure.backend.endpoints.classes.ApiResponse;
+import com.underpressure.backend.controllers.classes.ApiResponse;
 
-public abstract class GetEndpoint<T> extends Endpoint {
+public abstract class GetController<T> extends Controller {
 
     @CrossOrigin(origins = "*") // TODO Change to an appropriate url
     // public abstract Map<String, Object> handle();

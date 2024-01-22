@@ -1,4 +1,4 @@
-package com.underpressure.backend.endpoints;
+package com.underpressure.backend.controllers;
 
 import java.util.Map;
 
@@ -6,17 +6,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.underpressure.backend.endpoints.classes.endpoints.PostEndpoint;
-import com.underpressure.backend.endpoints.helpers.Add;
-import com.underpressure.backend.endpoints.helpers.FeedbackMap;
-import com.underpressure.backend.endpoints.helpers.Get;
-import com.underpressure.backend.endpoints.helpers.If;
-import com.underpressure.backend.endpoints.helpers.Parse;
-import com.underpressure.backend.endpoints.helpers.Set;
-import com.underpressure.backend.endpoints.helpers.Validate;
+import com.underpressure.backend.controllers.classes.abstracts.PostController;
+import com.underpressure.backend.controllers.helpers.Add;
+import com.underpressure.backend.controllers.helpers.FeedbackMap;
+import com.underpressure.backend.controllers.helpers.Get;
+import com.underpressure.backend.controllers.helpers.If;
+import com.underpressure.backend.controllers.helpers.Parse;
+import com.underpressure.backend.controllers.helpers.Set;
+import com.underpressure.backend.controllers.helpers.Validate;
 
 @RestController
-public class FollowSubjectEndpoint extends PostEndpoint {
+public class FollowSubjectController extends PostController {
 
     @Override
     @PostMapping("/personal/subjects/follow")

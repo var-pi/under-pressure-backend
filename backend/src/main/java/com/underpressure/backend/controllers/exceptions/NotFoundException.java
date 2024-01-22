@@ -1,4 +1,4 @@
-package com.underpressure.backend.endpoints.exceptions;
+package com.underpressure.backend.controllers.exceptions;
 
 public class NotFoundException extends Exception {
     public NotFoundException(String message) {

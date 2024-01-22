@@ -1,18 +1,18 @@
-package com.underpressure.backend.endpoints;
+package com.underpressure.backend.controllers;
 
 import java.util.Map;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.underpressure.backend.endpoints.classes.endpoints.PostEndpoint;
-import com.underpressure.backend.endpoints.helpers.Add;
-import com.underpressure.backend.endpoints.helpers.FeedbackMap;
-import com.underpressure.backend.endpoints.helpers.Parse;
-import com.underpressure.backend.endpoints.helpers.Validate;
+import com.underpressure.backend.controllers.classes.abstracts.PostController;
+import com.underpressure.backend.controllers.helpers.Add;
+import com.underpressure.backend.controllers.helpers.FeedbackMap;
+import com.underpressure.backend.controllers.helpers.Parse;
+import com.underpressure.backend.controllers.helpers.Validate;
 
 @RestController
-public class CreateUserEndpoint extends PostEndpoint {
+public class CreateUserController extends PostController {
 
     @Override
     @PostMapping("/users/create")

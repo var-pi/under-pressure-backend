@@ -1,4 +1,4 @@
-package com.underpressure.backend.endpoints;
+package com.underpressure.backend.controllers;
 
 import java.util.List;
 import java.util.Map;
@@ -7,14 +7,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.underpressure.backend.endpoints.classes.endpoints.PostEndpoint;
-import com.underpressure.backend.endpoints.classes.request.data.EntryData;
-import com.underpressure.backend.endpoints.helpers.FeedbackMap;
-import com.underpressure.backend.endpoints.helpers.Get;
-import com.underpressure.backend.endpoints.helpers.Parse;
+import com.underpressure.backend.controllers.classes.abstracts.PostController;
+import com.underpressure.backend.controllers.classes.request.data.EntryData;
+import com.underpressure.backend.controllers.helpers.FeedbackMap;
+import com.underpressure.backend.controllers.helpers.Get;
+import com.underpressure.backend.controllers.helpers.Parse;
 
 @RestController
-public class EntriesEndpoint extends PostEndpoint {
+public class EntriesController extends PostController {
 
     @Override
     @PostMapping("/personal/entries")

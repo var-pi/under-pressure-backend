@@ -1,4 +1,4 @@
-package com.underpressure.backend.endpoints.helpers;
+package com.underpressure.backend.controllers.helpers;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 

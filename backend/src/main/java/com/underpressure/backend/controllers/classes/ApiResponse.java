@@ -1,4 +1,4 @@
-package com.underpressure.backend.endpoints.classes;
+package com.underpressure.backend.controllers.classes;
 
 public class ApiResponse<T> {
 

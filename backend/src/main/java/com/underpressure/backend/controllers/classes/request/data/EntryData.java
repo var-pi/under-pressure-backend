@@ -1,4 +1,4 @@
-package com.underpressure.backend.endpoints.classes.request.data;
+package com.underpressure.backend.controllers.classes.request.data;
 
 import java.sql.Date;
 

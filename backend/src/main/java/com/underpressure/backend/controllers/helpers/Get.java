@@ -1,4 +1,4 @@
-package com.underpressure.backend.endpoints.helpers;
+package com.underpressure.backend.controllers.helpers;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -7,9 +7,9 @@ import org.postgresql.util.PGobject;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import com.underpressure.backend.endpoints.classes.request.data.EntryData;
-import com.underpressure.backend.endpoints.classes.request.data.EntryDataRowMapper;
-import com.underpressure.backend.endpoints.exceptions.NotFoundException;
+import com.underpressure.backend.controllers.classes.request.data.EntryData;
+import com.underpressure.backend.controllers.classes.request.data.EntryDataRowMapper;
+import com.underpressure.backend.controllers.exceptions.NotFoundException;
 
 public class Get {
 
