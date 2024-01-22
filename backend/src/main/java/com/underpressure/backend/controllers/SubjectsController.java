@@ -24,8 +24,8 @@ public class SubjectsController extends GetController<List<String>> {
 
         } catch (Exception e) {
             return new ResponseEntity<>(
-                    new ApiResponse<>(false, null, e.getMessage()),
-                    HttpStatus.BAD_REQUEST);
+                    new ApiResponse<>(false, null, "Anna arendajale teada, et miski on valesti."),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
