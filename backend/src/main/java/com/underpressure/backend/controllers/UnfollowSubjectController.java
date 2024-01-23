@@ -2,22 +2,25 @@ package com.underpressure.backend.controllers;
 
 import java.util.Map;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.underpressure.backend.controllers.classes.ApiResponse;
 import com.underpressure.backend.controllers.classes.abstracts.PostController;
-import com.underpressure.backend.controllers.helpers.FeedbackMap;
 import com.underpressure.backend.controllers.helpers.Get;
 import com.underpressure.backend.controllers.helpers.Parse;
 import com.underpressure.backend.controllers.helpers.Set;
 import com.underpressure.backend.controllers.helpers.Validate;
+import com.underpressure.backend.exceptions.RequestException;
 
 @RestController
-public class UnfollowSubjectController extends PostController {
+public class UnfollowSubjectController extends PostController<String> {
 
     @Override
     @PostMapping("/personal/subjects/unfollow")
-    public Map<String, Object> handle(Map<String, Object> requestData) {
+    public ResponseEntity<ApiResponse<String>> handle(Map<String, Object> requestData) {
 
         try {
             String userId = Parse.userId(requestData, jdbcTemplate);
@@ -31,10 +34,14 @@ public class UnfollowSubjectController extends PostController {
 
             Set.toNotFollow(subjectInstanceId, jdbcTemplate);
 
-            return FeedbackMap.create(true, "The subject was successfully unfollowed.");
+            return new ResponseEntity<>(
+                    new ApiResponse<>(true, null, null),
+                    HttpStatus.NO_CONTENT);
 
-        } catch (Exception e) {
-            return FeedbackMap.create(false, e.getMessage());
+        } catch (RequestException e) {
+            return new ResponseEntity<>(
+                    new ApiResponse<>(false, null, e.getMessage()),
+                    e.getHttpStatus());
         }
     }
 

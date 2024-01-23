@@ -3,22 +3,25 @@ package com.underpressure.backend.controllers;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.underpressure.backend.controllers.classes.ApiResponse;
 import com.underpressure.backend.controllers.classes.abstracts.PostController;
 import com.underpressure.backend.controllers.classes.request.data.EntryData;
-import com.underpressure.backend.controllers.helpers.FeedbackMap;
 import com.underpressure.backend.controllers.helpers.Get;
 import com.underpressure.backend.controllers.helpers.Parse;
+import com.underpressure.backend.exceptions.RequestException;
 
 @RestController
-public class EntriesController extends PostController {
+public class EntriesController extends PostController<List<EntryData>> {
 
     @Override
     @PostMapping("/personal/entries")
-    public Map<String, Object> handle(@RequestBody Map<String, Object> requestData) {
+    public ResponseEntity<ApiResponse<List<EntryData>>> handle(@RequestBody Map<String, Object> requestData) {
 
         try {
             String userId = Parse.userId(requestData, jdbcTemplate);
@@ -29,9 +32,14 @@ public class EntriesController extends PostController {
 
             List<EntryData> entries = Get.entries(subjectInstanceId, jdbcTemplate);
 
-            return FeedbackMap.create(true, "These are all the entries of this user for this subject", entries);
-        } catch (Exception e) {
-            return FeedbackMap.create(false, e.getMessage(), null);
+            return new ResponseEntity<>(
+                    new ApiResponse<>(true, entries, null),
+                    HttpStatus.OK);
+
+        } catch (RequestException e) {
+            return new ResponseEntity<>(
+                    new ApiResponse<>(false, null, e.getMessage()),
+                    e.getHttpStatus());
         }
     }
 

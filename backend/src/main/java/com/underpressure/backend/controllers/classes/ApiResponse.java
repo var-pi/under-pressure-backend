@@ -6,8 +6,8 @@ public class ApiResponse<T> {
     private T data;
     private String message;
 
-    public ApiResponse(boolean status, T data, String message) {
-        this.status = status ? "success" : "fail";
+    public ApiResponse(boolean isSucess, T data, String message) {
+        this.status = isSucess ? "success" : "fail";
         this.data = data;
         this.message = message;
     }

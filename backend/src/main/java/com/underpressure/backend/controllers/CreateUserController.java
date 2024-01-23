@@ -12,6 +12,7 @@ import com.underpressure.backend.controllers.classes.abstracts.PostController;
 import com.underpressure.backend.controllers.helpers.Add;
 import com.underpressure.backend.controllers.helpers.Parse;
 import com.underpressure.backend.controllers.helpers.Validate;
+import com.underpressure.backend.exceptions.RequestException;
 
 @RestController
 public class CreateUserController extends PostController<String> {
@@ -31,10 +32,10 @@ public class CreateUserController extends PostController<String> {
                     new ApiResponse<>(true, null, null),
                     HttpStatus.NO_CONTENT);
 
-        } catch (Exception e) {
+        } catch (RequestException e) {
             return new ResponseEntity<>(
                     new ApiResponse<>(false, null, e.getMessage()),
-                    HttpStatus.OK);
+                    e.getHttpStatus());
         }
     }
 
