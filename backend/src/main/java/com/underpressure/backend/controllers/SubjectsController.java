@@ -17,16 +17,11 @@ public class SubjectsController extends GetController<List<String>> {
     @Override
     @GetMapping("/subjects")
     public ResponseEntity<ApiResponse<List<String>>> handle() {
-        try {
-            return new ResponseEntity<>(
-                    new ApiResponse<>(true, Get.subjects(jdbcTemplate), null),
-                    HttpStatus.OK);
 
-        } catch (Exception e) {
-            return new ResponseEntity<>(
-                    new ApiResponse<>(false, null, "Anna arendajale teada, et miski on valesti."),
-                    HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        return new ResponseEntity<>(
+                new ApiResponse<>(true, Get.subjects(jdbcTemplate), null),
+                HttpStatus.OK);
+
     }
 
 }
