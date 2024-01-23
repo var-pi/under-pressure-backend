@@ -1,5 +1,8 @@
 package com.underpressure.backend.controllers;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -24,6 +27,9 @@ public class FollowedSubjectsControllerTests {
 
     @Test
     public void Should_Succeed_On_Valid_Request() {
+
+        followedSubjectsController.handle(null);
+
     }
 
 }
