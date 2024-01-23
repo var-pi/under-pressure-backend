@@ -1,53 +1,40 @@
 package com.underpressure.backend.controllers;
 
-import static org.mockito.Mockito.when;
-
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.stubbing.OngoingStubbing;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.batch.BatchProperties.Jdbc;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import org.springframework.context.annotation.Import;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
-import java.util.Arrays;
+import org.springframework.test.context.jdbc.Sql;
+
+import com.underpressure.backend.controllers.classes.ApiResponse;
+
 import java.util.List;
 
-import org.hamcrest.CoreMatchers;
+import static org.assertj.core.api.Assertions.assertThat;
 
-@WebMvcTest(controllers = SubjectsController.class)
-@AutoConfigureMockMvc(addFilters = false)
-@ExtendWith(MockitoExtension.class)
+@JdbcTest
+@AutoConfigureTestDatabase
+@Import(SubjectsController.class)
+@Sql({ "classpath:createUsersTable.sql", "classpath:fillUsersTable.sql" })
 public class SubjectsControllerTest {
 
-    @MockBean
-    JdbcTemplate jdbcTemplate;
-
     @Autowired
-    private MockMvc mockMvc;
+    SubjectsController subjectsController;
 
     @Test
-    public void Should_Succeed_On_Valid_Request() throws Exception {
-        String sql = "SELECT name FROM subjects";
-        List<String> subjects = Arrays.asList(new String[] { "S1, S2, S3" });
+    public void Should_Succeed_On_Valid_Request() {
 
-        when(jdbcTemplate.queryForList(sql, String.class)).thenReturn(subjects);
+        ResponseEntity<ApiResponse<List<String>>> responseEntity = subjectsController.handle();
 
-        ResultActions response = mockMvc.perform(get("/subjects"));
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(responseEntity.getBody().getData().size()).isEqualTo(3);
+        assertThat(responseEntity.getBody().getData().get(2)).isEqualTo("Subject 2");
 
-        response.andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data",
-                        CoreMatchers.instanceOf(List.class)));
     }
 
 }
