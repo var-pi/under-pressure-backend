@@ -3,7 +3,7 @@ package com.underpressure.backend.controllers.helpers;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 public class If {
-    public static boolean subjecetInstanceExists(String userId, Integer subjectId,
+    public static boolean subjectInstanceExists(String userId, Integer subjectId,
             JdbcTemplate jdbcTemplate) {
         String sql = "SELECT COUNT(*) from subject_instances WHERE user_id=? AND subject_id=?";
 

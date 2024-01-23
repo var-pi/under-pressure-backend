@@ -10,28 +10,32 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.underpressure.backend.controllers.classes.ApiResponse;
 import com.underpressure.backend.controllers.classes.abstracts.PostController;
+import com.underpressure.backend.controllers.classes.abstracts.PostControllerNew;
+import com.underpressure.backend.controllers.classes.request.body.FollowSubjectRequestBody;
 import com.underpressure.backend.controllers.helpers.Add;
 import com.underpressure.backend.controllers.helpers.Get;
 import com.underpressure.backend.controllers.helpers.If;
-import com.underpressure.backend.controllers.helpers.Parse;
 import com.underpressure.backend.controllers.helpers.Set;
 import com.underpressure.backend.controllers.helpers.Validate;
 import com.underpressure.backend.exceptions.RequestException;
 
 @RestController
-public class FollowSubjectController extends PostController<String> {
+public class FollowSubjectController extends PostControllerNew<String, FollowSubjectRequestBody> {
 
     @Override
     @PostMapping("/personal/subjects/follow")
-    public ResponseEntity<ApiResponse<String>> handle(@RequestBody Map<String, Object> requestData) {
+    public ResponseEntity<ApiResponse<String>> handle(@RequestBody FollowSubjectRequestBody requestData) {
 
         try {
-            String userId = Parse.userId(requestData, jdbcTemplate);
-            String subjectName = Parse.subjectName(requestData, jdbcTemplate);
+            String userId = requestData.getUserId();
+            String subjectName = requestData.getSubjectName();
+
+            Validate.userId(userId, jdbcTemplate);
+            Validate.subjectName(subjectName, jdbcTemplate);
 
             Integer subjectId = Get.subjectId(subjectName, jdbcTemplate);
 
-            if (If.subjecetInstanceExists(userId, subjectId, jdbcTemplate)) {
+            if (If.subjectInstanceExists(userId, subjectId, jdbcTemplate)) {
                 Integer subjectInstanceId = Get.subjectInstanceId(userId, subjectId, jdbcTemplate);
 
                 Validate.isUnfollowed(subjectInstanceId, jdbcTemplate);

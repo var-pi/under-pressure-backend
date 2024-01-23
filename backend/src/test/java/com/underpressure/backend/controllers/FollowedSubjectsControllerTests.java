@@ -9,6 +9,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.jdbc.Sql;
 
 import com.underpressure.backend.controllers.classes.ApiResponse;
@@ -26,13 +27,14 @@ import static org.assertj.core.api.Assertions.assertThat;
         "classpath:fillUsersTable.sql",
         "classpath:createSubjectInstancesTable.sql",
         "classpath:fillSubjectInstancesTable.sql" })
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class FollowedSubjectsControllerTests {
 
     @Autowired
     FollowedSubjectsController controller;
 
     @Test
-    public void Should_Succeed_On_Valid_Request() {
+    public void Should_Return_Followed_Subjects_On_Valid_Request() {
         ResponseEntity<ApiResponse<List<String>>> responseEntity = controller
                 .handle(new FollowedSubjectsRequestBody("User 1"));
 
@@ -42,9 +44,9 @@ public class FollowedSubjectsControllerTests {
     }
 
     @Test
-    public void Should_Return_Not_Found_On_Nonexistant_User() {
+    public void Should_Result_In_Not_Found_exception_If_User_Not_Found() {
         ResponseEntity<ApiResponse<List<String>>> responseEntity = controller
-                .handle(new FollowedSubjectsRequestBody("User Nan"));
+                .handle(new FollowedSubjectsRequestBody("NaN"));
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
         assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");

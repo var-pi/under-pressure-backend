@@ -3,9 +3,6 @@ package com.underpressure.backend.controllers.classes.request.body;
 public class FollowedSubjectsRequestBody {
     private String userId;
 
-    public FollowedSubjectsRequestBody() {
-    }
-
     public FollowedSubjectsRequestBody(String userId) {
         this.userId = userId;
     }

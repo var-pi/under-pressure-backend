@@ -40,7 +40,7 @@ public class Get {
 
     public static Integer subjectInstanceId(String userId, Integer subjectId, JdbcTemplate jdbcTemplate)
             throws RequestException {
-        String sql = "SELECT id FROM subject_instances WHERE user_id=? AND subject_id=? AND is_followed=true";
+        String sql = "SELECT id FROM subject_instances WHERE user_id=? AND subject_id=?";
 
         try {
             return jdbcTemplate.queryForObject(sql, Integer.class, userId, subjectId);

@@ -20,12 +20,14 @@ public class FollowedSubjectsController extends PostControllerNew<List<String>, 
 
     @Override
     @PostMapping("/personal/subjects")
-    public ResponseEntity<ApiResponse<List<String>>> handle(@RequestBody FollowedSubjectsRequestBody r) {
+    public ResponseEntity<ApiResponse<List<String>>> handle(@RequestBody FollowedSubjectsRequestBody requestBody) {
 
         try {
-            Validate.userId(r.getUserId(), jdbcTemplate);
+            String userId = requestBody.getUserId();
 
-            List<String> followedSubjects = Get.followedSubjects(r.getUserId(), jdbcTemplate);
+            Validate.userId(userId, jdbcTemplate);
+
+            List<String> followedSubjects = Get.followedSubjects(userId, jdbcTemplate);
             return new ResponseEntity<>(
                     new ApiResponse<>(true, followedSubjects, null),
                     HttpStatus.OK);
