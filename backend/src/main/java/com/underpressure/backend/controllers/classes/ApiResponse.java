@@ -2,21 +2,21 @@ package com.underpressure.backend.controllers.classes;
 
 public class ApiResponse<T> {
 
-    private boolean status;
+    private String status;
     private T data;
     private String message;
 
     public ApiResponse(boolean status, T data, String message) {
-        this.status = status;
+        this.status = status ? "success" : "fail";
         this.data = data;
         this.message = message;
     }
 
-    public boolean isStatus() {
+    public String isStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
