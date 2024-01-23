@@ -12,7 +12,7 @@ public class ApiResponse<T> {
         this.message = message;
     }
 
-    public String isStatus() {
+    public String getStatus() {
         return status;
     }
 

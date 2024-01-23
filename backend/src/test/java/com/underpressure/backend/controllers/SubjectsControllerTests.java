@@ -20,8 +20,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @JdbcTest
 @AutoConfigureTestDatabase
 @Import(SubjectsController.class)
-@Sql({ "classpath:createUsersTable.sql", "classpath:fillUsersTable.sql" })
-public class SubjectsControllerTest {
+@Sql({ "classpath:createSubjectsTable.sql", "classpath:fillSubjectsTable.sql" })
+public class SubjectsControllerTests {
 
     @Autowired
     SubjectsController subjectsController;
@@ -32,6 +32,7 @@ public class SubjectsControllerTest {
         ResponseEntity<ApiResponse<List<String>>> responseEntity = subjectsController.handle();
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(responseEntity.getBody().getStatus()).isEqualTo("success");
         assertThat(responseEntity.getBody().getData().size()).isEqualTo(3);
         assertThat(responseEntity.getBody().getData().get(2)).isEqualTo("Subject 2");
 
