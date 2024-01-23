@@ -33,7 +33,7 @@ public class EntriesAddController extends PostController {
             Validate.isFollowed(subjectInstanceId, jdbcTemplate);
 
             if (If.entryExists(subjectInstanceId, jdbcTemplate)) {
-                Integer entryId = Get.entryId(subjectInstanceId, jdbcTemplate);
+                Integer entryId = Get.todaysEntryId(subjectInstanceId, jdbcTemplate);
 
                 Update.entry(entryId, stressLevel, jdbcTemplate);
                 return FeedbackMap.create(true, "The entry was successfully updated.");

@@ -4,10 +4,12 @@ import java.util.Map;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import com.underpressure.backend.exceptions.RequestException;
+
 public class Parse {
 
     public static String userId(Map<String, Object> requestData, JdbcTemplate jdbcTemplate, Boolean validate)
-            throws Exception {
+            throws RequestException {
         String userId = (String) requestData.get("userId");
 
         if (validate)
@@ -16,11 +18,12 @@ public class Parse {
         return userId;
     }
 
-    public static String userId(Map<String, Object> requestData, JdbcTemplate jdbcTemplate) throws Exception {
+    public static String userId(Map<String, Object> requestData, JdbcTemplate jdbcTemplate) throws RequestException {
         return userId(requestData, jdbcTemplate, true);
     }
 
-    public static String subjectName(Map<String, Object> requestData, JdbcTemplate jdbcTemplate) throws Exception {
+    public static String subjectName(Map<String, Object> requestData, JdbcTemplate jdbcTemplate)
+            throws RequestException {
         String subjectName = (String) requestData.get("subjectName");
 
         Validate.subjectName(subjectName, jdbcTemplate);
@@ -28,7 +31,8 @@ public class Parse {
         return subjectName;
     }
 
-    public static Integer stressLevel(Map<String, Object> requestData, JdbcTemplate jdbcTemplate) throws Exception {
+    public static Integer stressLevel(Map<String, Object> requestData, JdbcTemplate jdbcTemplate)
+            throws RequestException {
         Integer stressLevel = (Integer) requestData.get("stressLevel");
 
         Validate.stressLevel(stressLevel);

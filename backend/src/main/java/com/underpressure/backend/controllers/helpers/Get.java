@@ -9,7 +9,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.underpressure.backend.controllers.classes.request.data.EntryData;
 import com.underpressure.backend.controllers.classes.request.data.EntryDataRowMapper;
-import com.underpressure.backend.controllers.exceptions.NotFoundException;
+import com.underpressure.backend.exceptions.RequestException;
+import com.underpressure.backend.exceptions.does_not_exist.TodaysEntryDoesNotExistException;
+import com.underpressure.backend.exceptions.does_not_exist.SubjectDoesNotExist;
+import com.underpressure.backend.exceptions.does_not_exist.SubjectInstanceDoesNotExistsException;
 
 public class Get {
 
@@ -19,13 +22,13 @@ public class Get {
         return jdbcTemplate.queryForList(sql, String.class);
     }
 
-    public static Integer subjectId(String subjectName, JdbcTemplate jdbcTemplate) throws Exception {
+    public static Integer subjectId(String subjectName, JdbcTemplate jdbcTemplate) throws RequestException {
         String requestForSubjectId = "SELECT id FROM subjects WHERE name=?";
 
         try {
             return jdbcTemplate.queryForObject(requestForSubjectId, Integer.class, subjectName);
         } catch (EmptyResultDataAccessException e) {
-            throw new Exception("There are no subjects with this name.");
+            throw new SubjectDoesNotExist();
         }
     }
 
@@ -42,24 +45,24 @@ public class Get {
     }
 
     public static Integer subjectInstanceId(String userId, Integer subjectId, JdbcTemplate jdbcTemplate)
-            throws Exception {
-        String sql = "SELECT id FROM subject_instances WHERE user_id=? AND subject_id=?";
+            throws RequestException {
+        String sql = "SELECT id FROM subject_instances WHERE user_id=? AND subject_id=? AND is_followed=TRUE";
 
         try {
             return jdbcTemplate.queryForObject(sql, Integer.class, userId, subjectId);
         } catch (EmptyResultDataAccessException e) {
-            throw new Exception("A subject_instance with given userId and subject_id doesn't exists.");
+            throw new SubjectInstanceDoesNotExistsException();
         }
 
     }
 
-    public static Integer entryId(Integer subjectInstanceId, JdbcTemplate jdbcTemplate) throws Exception {
+    public static Integer todaysEntryId(Integer subjectInstanceId, JdbcTemplate jdbcTemplate) throws RequestException {
         String sql = "SELECT id FROM entries WHERE subject_instance_id=? AND created_at=CURRENT_DATE";
 
         try {
             return jdbcTemplate.queryForObject(sql, Integer.class, subjectInstanceId);
         } catch (EmptyResultDataAccessException e) {
-            throw new NotFoundException("An entry hasn't yet been aadded today for this subject_instance.");
+            throw new TodaysEntryDoesNotExistException(sql);
         }
     }
 

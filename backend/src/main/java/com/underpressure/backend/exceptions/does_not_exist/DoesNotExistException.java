@@ -7,7 +7,7 @@ import com.underpressure.backend.exceptions.RequestException;
 public class DoesNotExistException extends RequestException {
 
     public DoesNotExistException(String message) {
-        super(message, HttpStatus.BAD_REQUEST);
+        super(message, HttpStatus.NOT_FOUND);
     }
 
 }
