@@ -10,17 +10,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.underpressure.backend.controllers.classes.ApiResponse;
 import com.underpressure.backend.controllers.classes.abstracts.PostControllerNew;
-import com.underpressure.backend.controllers.classes.request.body.PersonalSubjectsRequestBody;
+import com.underpressure.backend.controllers.classes.request.body.FollowedSubjectsRequestBody;
 import com.underpressure.backend.controllers.helpers.Get;
 import com.underpressure.backend.controllers.helpers.Validate;
 import com.underpressure.backend.exceptions.RequestException;
 
 @RestController
-public class FollowedSubjectsController extends PostControllerNew<List<String>, PersonalSubjectsRequestBody> {
+public class FollowedSubjectsController extends PostControllerNew<List<String>, FollowedSubjectsRequestBody> {
 
     @Override
     @PostMapping("/personal/subjects")
-    public ResponseEntity<ApiResponse<List<String>>> handle(@RequestBody PersonalSubjectsRequestBody r) {
+    public ResponseEntity<ApiResponse<List<String>>> handle(@RequestBody FollowedSubjectsRequestBody r) {
 
         try {
             Validate.userId(r.getUserId(), jdbcTemplate);

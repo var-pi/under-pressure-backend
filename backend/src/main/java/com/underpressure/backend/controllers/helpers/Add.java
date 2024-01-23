@@ -11,7 +11,7 @@ public class Add {
         public static void subjectInstance(String userId, Integer subjectId, JdbcTemplate jdbcTemplate)
                         throws RequestException {
 
-                String sql = "INSERT INTO subject_instances (user_id, subject_id, if_followed) VALUES (?,?,TRUE)";
+                String sql = "INSERT INTO subject_instances (user_id, subject_id, if_followed) VALUES (?,?,true)";
 
                 int numOfRowsAffected = jdbcTemplate.update(sql, userId, subjectId);
 

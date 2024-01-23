@@ -33,20 +33,14 @@ public class Get {
     }
 
     public static List<String> followedSubjects(String userId, JdbcTemplate jdbcTemplate) {
-        String sql = "SELECT subjects.name FROM subject_instances INNER JOIN subjects ON subject_instances.subject_id=subjects.id WHERE subject_instances.user_id=? AND if_followed=TRUE";
+        String sql = "SELECT subjects.name FROM subject_instances INNER JOIN subjects ON subject_instances.subject_id=subjects.id WHERE subject_instances.user_id=? AND if_followed=true";
 
-        List<PGobject> PGobjects = jdbcTemplate.queryForList(sql, PGobject.class, userId);
-
-        List<String> subjectNames = new LinkedList<>();
-        for (PGobject pgobject : PGobjects)
-            subjectNames.add(pgobject.getValue());
-
-        return subjectNames;
+        return jdbcTemplate.queryForList(sql, String.class, userId);
     }
 
     public static Integer subjectInstanceId(String userId, Integer subjectId, JdbcTemplate jdbcTemplate)
             throws RequestException {
-        String sql = "SELECT id FROM subject_instances WHERE user_id=? AND subject_id=? AND is_followed=TRUE";
+        String sql = "SELECT id FROM subject_instances WHERE user_id=? AND subject_id=? AND is_followed=true";
 
         try {
             return jdbcTemplate.queryForObject(sql, Integer.class, userId, subjectId);

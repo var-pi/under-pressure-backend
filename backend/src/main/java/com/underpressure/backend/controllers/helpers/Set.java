@@ -7,7 +7,7 @@ import com.underpressure.backend.exceptions.unexpected.NoRowsUpdatedUnexpectedEx
 
 public class Set {
     public static void toFollow(Integer subjectInstanceId, JdbcTemplate jdbcTemplate) throws RequestException {
-        String sql = "UPDATE subject_instances SET if_followed=TRUE WHERE id=?";
+        String sql = "UPDATE subject_instances SET if_followed=true WHERE id=?";
 
         Integer numOfRowsAffected = jdbcTemplate.update(sql, subjectInstanceId);
 
@@ -16,7 +16,7 @@ public class Set {
     }
 
     public static void toNotFollow(Integer subjectInstanceId, JdbcTemplate jdbcTemplate) throws RequestException {
-        String sql = "UPDATE subject_instances SET if_followed=FALSE WHERE id=?";
+        String sql = "UPDATE subject_instances SET if_followed=false WHERE id=?";
 
         Integer numOfRowsAffected = jdbcTemplate.update(sql, subjectInstanceId);
 

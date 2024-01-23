@@ -1,3 +1,3 @@
-INSERT INTO subject_instances (user_id, subject_id) VALUES ('User 0', 0);
-INSERT INTO subject_instances (user_id, subject_id) VALUES ('User 0', 1);
-INSERT INTO subject_instances (user_id, subject_id) VALUES ('User 1', 2);
+INSERT INTO subject_instances (user_id, subject_id, if_followed) VALUES ('User 1', 1, true);
+INSERT INTO subject_instances (user_id, subject_id, if_followed) VALUES ('User 1', 2, true);
+INSERT INTO subject_instances (user_id, subject_id, if_followed) VALUES ('User 2', 3, true);

@@ -13,7 +13,7 @@ public class If {
     }
 
     public static boolean subjectInstanceFollowed(Integer subjectInstanceId, JdbcTemplate jdbcTemplate) {
-        String sql = "SELECT COUNT(*) FROM subject_instances WHERE id=? AND if_followed=TRUE";
+        String sql = "SELECT COUNT(*) FROM subject_instances WHERE id=? AND if_followed=true";
 
         Integer rowCount = jdbcTemplate.queryForObject(sql, Integer.class, subjectInstanceId);
 
