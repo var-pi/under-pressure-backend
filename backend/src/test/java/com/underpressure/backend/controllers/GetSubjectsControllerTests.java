@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.jdbc.Sql;
 
 import com.underpressure.backend.controllers.classes.ApiResponse;
+import com.underpressure.backend.controllers.classes.request.params.GetSubjectsParams;
 
 import java.util.List;
 
@@ -29,12 +30,12 @@ public class GetSubjectsControllerTests {
     @Test
     public void Should_Succeed_On_Valid_Request() {
 
-        ResponseEntity<ApiResponse<List<String>>> responseEntity = subjectsController.handle();
+        ResponseEntity<ApiResponse<List<String>>> responseEntity = subjectsController.handle(new GetSubjectsParams());
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(responseEntity.getBody().getStatus()).isEqualTo("success");
         assertThat(responseEntity.getBody().getData().size()).isEqualTo(3);
-        assertThat(responseEntity.getBody().getData().get(2)).isEqualTo("Subject 2");
+        assertThat(responseEntity.getBody().getData().get(2)).isEqualTo("Subject 3");
 
     }
 
