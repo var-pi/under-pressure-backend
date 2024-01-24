@@ -16,17 +16,22 @@ import com.underpressure.backend.exceptions.range.StressLevelRangeException;
 
 public class Validate {
 
-    public static void userId(String userId, JdbcTemplate jdbcTemplate) throws RequestException {
+    public static void userId(String userId, JdbcTemplate jdbcTemplate, boolean hasToExist) throws RequestException {
         if (userId == null)
             throw new UserIdParameterException();
 
         String sql = "SELECT id FROM users WHERE id=?";
 
-        try {
-            jdbcTemplate.queryForObject(sql, String.class, userId);
-        } catch (EmptyResultDataAccessException e) {
-            throw new UserDoesNotExistException();
-        }
+        if (hasToExist)
+            try {
+                jdbcTemplate.queryForObject(sql, String.class, userId);
+            } catch (EmptyResultDataAccessException e) {
+                throw new UserDoesNotExistException();
+            }
+    }
+
+    public static void userId(String userId, JdbcTemplate jdbcTemplate) throws RequestException {
+        userId(userId, jdbcTemplate, true);
     }
 
     public static void subjectName(String subjectName, JdbcTemplate jdbcTemplate) throws RequestException {

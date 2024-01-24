@@ -14,6 +14,7 @@ import org.springframework.test.context.jdbc.Sql;
 
 import com.underpressure.backend.controllers.classes.ApiResponse;
 import com.underpressure.backend.controllers.classes.request.body.FollowSubjectRequestBody;
+import com.underpressure.backend.controllers.classes.request.body.UnfollowSubjectsRequestBody;
 
 @JdbcTest
 @AutoConfigureTestDatabase
@@ -30,6 +31,26 @@ public class FollowSubjectControllerTests {
 
         @Autowired
         FollowSubjectController controller;
+
+        @Test
+        public void Should_Result_In_Bad_Request_If_UserId_Null() {
+                ResponseEntity<ApiResponse<String>> responseEntity = controller
+                                .handle(new FollowSubjectRequestBody(null, "Subject 1"));
+
+                assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+                assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");
+                assertThat(responseEntity.getBody().getMessage()).isNotBlank();
+        }
+
+        @Test
+        public void Should_Result_In_Bad_Request_If_SubjectName_Null() {
+                ResponseEntity<ApiResponse<String>> responseEntity = controller
+                                .handle(new FollowSubjectRequestBody("User 1", null));
+
+                assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+                assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");
+                assertThat(responseEntity.getBody().getMessage()).isNotBlank();
+        }
 
         @Test
         public void Should_Result_In_Not_Found_Exception_If_User_Not_Found() {
@@ -70,10 +91,12 @@ public class FollowSubjectControllerTests {
                                 .handle(new FollowSubjectRequestBody(userId, subjectName));
 
                 assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
+                assertThat(responseEntity.getBody().getStatus()).isEqualTo("success");
 
-                responseEntity = controller
-                                .handle(new FollowSubjectRequestBody(userId, subjectName));
+                responseEntity = controller.handle(new FollowSubjectRequestBody(userId, subjectName));
 
                 assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+                assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");
+                assertThat(responseEntity.getBody().getMessage()).isNotBlank();
         }
 }

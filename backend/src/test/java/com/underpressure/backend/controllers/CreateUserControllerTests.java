@@ -13,32 +13,28 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.jdbc.Sql;
 
 import com.underpressure.backend.controllers.classes.ApiResponse;
-import com.underpressure.backend.controllers.classes.request.body.FollowSubjectRequestBody;
-import com.underpressure.backend.controllers.classes.request.body.FollowedSubjectsRequestBody;
+import com.underpressure.backend.controllers.classes.request.body.CreateUserRequestBody;
+import com.underpressure.backend.controllers.classes.request.body.UnfollowSubjectsRequestBody;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @JdbcTest
 @AutoConfigureTestDatabase
-@Import(FollowedSubjectsController.class)
+@Import(CreateUserController.class)
 @Sql({
-        "classpath:createSubjectsTable.sql",
-        "classpath:fillSubjectsTable.sql",
         "classpath:createUsersTable.sql",
         "classpath:fillUsersTable.sql",
-        "classpath:createSubjectInstancesTable.sql",
-        "classpath:fillSubjectInstancesTable.sql"
 })
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-public class FollowedSubjectsControllerTests {
+public class CreateUserControllerTests {
 
     @Autowired
-    FollowedSubjectsController controller;
+    CreateUserController controller;
 
     @Test
     public void Should_Result_In_Bad_Request_If_UserId_Null() {
-        ResponseEntity<ApiResponse<List<String>>> responseEntity = controller
-                .handle(new FollowedSubjectsRequestBody(null));
+        ResponseEntity<ApiResponse<String>> responseEntity = controller
+                .handle(new CreateUserRequestBody(null));
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
         assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");
@@ -46,23 +42,30 @@ public class FollowedSubjectsControllerTests {
     }
 
     @Test
-    public void Should_Result_In_Not_Found_exception_If_User_Not_Found() {
-        ResponseEntity<ApiResponse<List<String>>> responseEntity = controller
-                .handle(new FollowedSubjectsRequestBody("NaN"));
+    public void Should_Result_In_Bad_Request_If_User_Already_Exists() {
+        ResponseEntity<ApiResponse<String>> responseEntity = controller
+                .handle(new CreateUserRequestBody("User 1"));
 
-        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
         assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");
-        assertThat(responseEntity.getBody().getMessage()).isNotEmpty();
+        assertThat(responseEntity.getBody().getMessage()).isNotBlank();
     }
 
     @Test
-    public void Should_Return_Followed_Subjects_On_Valid_Request() {
-        ResponseEntity<ApiResponse<List<String>>> responseEntity = controller
-                .handle(new FollowedSubjectsRequestBody("User 1"));
+    public void Should_Create_User_If_Request_Valid() {
+        String userId = "New User";
 
-        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+        ResponseEntity<ApiResponse<String>> responseEntity = controller
+                .handle(new CreateUserRequestBody(userId));
+
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
         assertThat(responseEntity.getBody().getStatus()).isEqualTo("success");
-        assertThat(responseEntity.getBody().getData().size()).isEqualTo(2);
+
+        responseEntity = controller
+                .handle(new CreateUserRequestBody(userId));
+
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+        assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");
     }
 
 }
