@@ -19,12 +19,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @JdbcTest
 @AutoConfigureTestDatabase
-@Import(SubjectsController.class)
+@Import(GetSubjectsController.class)
 @Sql({ "classpath:createSubjectsTable.sql", "classpath:fillSubjectsTable.sql" })
-public class SubjectsControllerTests {
+public class GetSubjectsControllerTests {
 
     @Autowired
-    SubjectsController subjectsController;
+    GetSubjectsController subjectsController;
 
     @Test
     public void Should_Succeed_On_Valid_Request() {

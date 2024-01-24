@@ -83,8 +83,26 @@ public class FollowSubjectControllerTests {
         }
 
         @Test
-        public void Should_Follow_A_Subject_On_Valid_Request() {
+        public void Should_Create_A_Subject_On_Valid_Request() {
                 String userId = "User 1";
+                String subjectName = "Subject 3";
+
+                ResponseEntity<ApiResponse<String>> responseEntity = controller
+                                .handle(new FollowSubjectRequestBody(userId, subjectName));
+
+                assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.CREATED);
+                assertThat(responseEntity.getBody().getStatus()).isEqualTo("success");
+
+                responseEntity = controller.handle(new FollowSubjectRequestBody(userId, subjectName));
+
+                assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+                assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");
+                assertThat(responseEntity.getBody().getMessage()).isNotBlank();
+        }
+
+        @Test
+        public void Should_Follow_A_Subject_On_Valid_Request() {
+                String userId = "User 2";
                 String subjectName = "Subject 3";
 
                 ResponseEntity<ApiResponse<String>> responseEntity = controller
@@ -99,4 +117,5 @@ public class FollowSubjectControllerTests {
                 assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");
                 assertThat(responseEntity.getBody().getMessage()).isNotBlank();
         }
+
 }

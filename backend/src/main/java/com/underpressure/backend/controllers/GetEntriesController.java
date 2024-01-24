@@ -1,7 +1,6 @@
 package com.underpressure.backend.controllers;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,18 +10,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.underpressure.backend.controllers.classes.ApiResponse;
 import com.underpressure.backend.controllers.classes.abstracts.PostControllerNew;
-import com.underpressure.backend.controllers.classes.request.body.EntriesRequestBody;
+import com.underpressure.backend.controllers.classes.request.body.GetEntriesRequestBody;
 import com.underpressure.backend.controllers.classes.request.data.EntryData;
 import com.underpressure.backend.controllers.helpers.Get;
 import com.underpressure.backend.controllers.helpers.Validate;
 import com.underpressure.backend.exceptions.RequestException;
 
 @RestController
-public class EntriesController extends PostControllerNew<List<EntryData>, EntriesRequestBody> {
+public class GetEntriesController extends PostControllerNew<List<EntryData>, GetEntriesRequestBody> {
 
     @Override
     @PostMapping("/personal/entries")
-    public ResponseEntity<ApiResponse<List<EntryData>>> handle(@RequestBody EntriesRequestBody requestData) {
+    public ResponseEntity<ApiResponse<List<EntryData>>> handle(@RequestBody GetEntriesRequestBody requestData) {
 
         try {
             String userId = requestData.getUserId();

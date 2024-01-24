@@ -12,7 +12,7 @@ import com.underpressure.backend.controllers.classes.abstracts.GetController;
 import com.underpressure.backend.controllers.helpers.Get;
 
 @RestController
-public class SubjectsController extends GetController<List<String>> {
+public class GetSubjectsController extends GetController<List<String>> {
 
     @Override
     @GetMapping("/subjects")

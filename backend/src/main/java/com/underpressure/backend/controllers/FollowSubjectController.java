@@ -41,12 +41,17 @@ public class FollowSubjectController extends PostControllerNew<String, FollowSub
                 Validate.isUnfollowed(subjectInstanceId, jdbcTemplate);
 
                 Set.toFollow(subjectInstanceId, jdbcTemplate);
-            } else
+
+                return new ResponseEntity<>(
+                        new ApiResponse<>(true, null, null),
+                        HttpStatus.NO_CONTENT);
+            } else {
                 Add.subjectInstance(userId, subjectId, jdbcTemplate);
 
-            return new ResponseEntity<>(
-                    new ApiResponse<>(true, null, null),
-                    HttpStatus.NO_CONTENT);
+                return new ResponseEntity<>(
+                        new ApiResponse<>(true, null, null),
+                        HttpStatus.CREATED);
+            }
 
         } catch (RequestException e) {
             return new ResponseEntity<>(
