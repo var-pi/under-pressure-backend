@@ -1,20 +1,12 @@
 # Backend server API
 
-Request URL: `http://<address>:<port>/<endpoint>`
-
-## Server
-
-Server port: `9090`
+Request URL: `http://<url><endpoint>`
 
 ## Endpoints
 
-### GET `/subjects`
+### POST `/users/create`
 
-Returns all of the subjects available.
-
-### POST `/personal/subjects`
-
-Returns all of the subjects that a user with userId has chosen.
+If no such user exists then a new one is created. Otherwise the request results in a failure.
 
 ```
 data = {
@@ -22,13 +14,49 @@ data = {
 }
 ```
 
-### POST `/personal/subjects/add`
+### GET `/subjects`
 
-A new subject instance is created. If this subject instance already exists the request ends results in a failure.
+Returns all of the subjects available.
+
+### POST `/personal/subjects`
+
+Returns all of the subjects that this particular user is following.
 
 ```
 data = {
     string userId: <userId>
+}
+```
+
+### POST `/personal/subjects/follow`
+
+If user hasn't ever followed the subjec then new subject instance is created. If the subject instance was unfollowed at some point, it starts to be followed again. If subject instance is already being followed, the request results in a failure.
+
+```
+data = {
+    string userId: <userId>
+    string subjectName: <subjectName>
+}
+```
+
+### POST `/personal/subjects/unfollow`
+
+If subject is currently followed, it is unfollowed. If the subject doesn't exist or is already unfollowed, the request results in an failure.
+
+```
+data = {
+    string userId: <userId>
+    string subjectName: <subjectName>
+}
+```
+
+### POST `/personal/entries`
+
+Returns all the entries made by given user on the particular subject.
+
+```
+data = {
+    string userId: <userId>,
     string subjectName: <subjectName>
 }
 ```
@@ -44,8 +72,4 @@ data = {
     integer stressLevel: <stressLevel>
 }
 ```
-
-<!-- #### GET
-
-#### POST -->
 
