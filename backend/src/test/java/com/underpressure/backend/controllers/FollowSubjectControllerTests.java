@@ -14,7 +14,6 @@ import org.springframework.test.context.jdbc.Sql;
 
 import com.underpressure.backend.controllers.classes.ApiResponse;
 import com.underpressure.backend.controllers.classes.request.body.FollowSubjectRequestBody;
-import com.underpressure.backend.controllers.classes.request.body.UnfollowSubjectsRequestBody;
 
 @JdbcTest
 @AutoConfigureTestDatabase
@@ -25,7 +24,8 @@ import com.underpressure.backend.controllers.classes.request.body.UnfollowSubjec
                 "classpath:createUsersTable.sql",
                 "classpath:fillUsersTable.sql",
                 "classpath:createSubjectInstancesTable.sql",
-                "classpath:fillSubjectInstancesTable.sql" })
+                "classpath:fillSubjectInstancesTable.sql"
+})
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class FollowSubjectControllerTests {
 

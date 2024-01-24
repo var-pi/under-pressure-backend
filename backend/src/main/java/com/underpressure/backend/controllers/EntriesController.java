@@ -10,22 +10,26 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.underpressure.backend.controllers.classes.ApiResponse;
-import com.underpressure.backend.controllers.classes.abstracts.PostController;
+import com.underpressure.backend.controllers.classes.abstracts.PostControllerNew;
+import com.underpressure.backend.controllers.classes.request.body.EntriesRequestBody;
 import com.underpressure.backend.controllers.classes.request.data.EntryData;
 import com.underpressure.backend.controllers.helpers.Get;
-import com.underpressure.backend.controllers.helpers.Parse;
+import com.underpressure.backend.controllers.helpers.Validate;
 import com.underpressure.backend.exceptions.RequestException;
 
 @RestController
-public class EntriesController extends PostController<List<EntryData>> {
+public class EntriesController extends PostControllerNew<List<EntryData>, EntriesRequestBody> {
 
     @Override
     @PostMapping("/personal/entries")
-    public ResponseEntity<ApiResponse<List<EntryData>>> handle(@RequestBody Map<String, Object> requestData) {
+    public ResponseEntity<ApiResponse<List<EntryData>>> handle(@RequestBody EntriesRequestBody requestData) {
 
         try {
-            String userId = Parse.userId(requestData, jdbcTemplate);
-            String subjectName = Parse.subjectName(requestData, jdbcTemplate);
+            String userId = requestData.getUserId();
+            String subjectName = requestData.getSubjectName();
+
+            Validate.userId(userId, jdbcTemplate);
+            Validate.subjectName(subjectName, jdbcTemplate);
 
             Integer subjectId = Get.subjectId(subjectName, jdbcTemplate);
             Integer subjectInstanceId = Get.subjectInstanceId(userId, subjectId, jdbcTemplate);
