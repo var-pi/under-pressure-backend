@@ -1,9 +1,7 @@
 package com.underpressure.backend.controllers.helpers;
 
-import java.util.LinkedList;
 import java.util.List;
 
-import org.postgresql.util.PGobject;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 

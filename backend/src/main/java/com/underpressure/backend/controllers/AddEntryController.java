@@ -1,7 +1,5 @@
 package com.underpressure.backend.controllers;
 
-import java.util.Map;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.underpressure.backend.controllers.classes.ApiResponse;
-import com.underpressure.backend.controllers.classes.abstracts.PostControllerNew;
+import com.underpressure.backend.controllers.classes.abstracts.PostController;
 import com.underpressure.backend.controllers.classes.request.body.AddEntryRequestBody;
 import com.underpressure.backend.controllers.helpers.Add;
 import com.underpressure.backend.controllers.helpers.Get;
@@ -19,7 +17,7 @@ import com.underpressure.backend.controllers.helpers.Validate;
 import com.underpressure.backend.exceptions.RequestException;
 
 @RestController
-public class AddEntryController extends PostControllerNew<String, AddEntryRequestBody> {
+public class AddEntryController extends PostController<String, AddEntryRequestBody> {
 
     @Override
     @PostMapping("/personal/entries/add")

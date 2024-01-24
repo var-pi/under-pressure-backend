@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.underpressure.backend.controllers.classes.ApiResponse;
-import com.underpressure.backend.controllers.classes.abstracts.PostControllerNew;
+import com.underpressure.backend.controllers.classes.abstracts.PostController;
 import com.underpressure.backend.controllers.classes.request.body.GetEntriesRequestBody;
 import com.underpressure.backend.controllers.classes.request.data.EntryData;
 import com.underpressure.backend.controllers.helpers.Get;
@@ -17,7 +17,7 @@ import com.underpressure.backend.controllers.helpers.Validate;
 import com.underpressure.backend.exceptions.RequestException;
 
 @RestController
-public class GetEntriesController extends PostControllerNew<List<EntryData>, GetEntriesRequestBody> {
+public class GetEntriesController extends PostController<List<EntryData>, GetEntriesRequestBody> {
 
     @Override
     @PostMapping("/personal/entries")

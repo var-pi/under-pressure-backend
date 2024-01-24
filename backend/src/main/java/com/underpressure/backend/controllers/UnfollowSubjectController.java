@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.underpressure.backend.controllers.classes.ApiResponse;
-import com.underpressure.backend.controllers.classes.abstracts.PostControllerNew;
+import com.underpressure.backend.controllers.classes.abstracts.PostController;
 import com.underpressure.backend.controllers.classes.request.body.UnfollowSubjectsRequestBody;
 import com.underpressure.backend.controllers.helpers.Get;
 import com.underpressure.backend.controllers.helpers.Set;
@@ -14,7 +14,7 @@ import com.underpressure.backend.controllers.helpers.Validate;
 import com.underpressure.backend.exceptions.RequestException;
 
 @RestController
-public class UnfollowSubjectController extends PostControllerNew<String, UnfollowSubjectsRequestBody> {
+public class UnfollowSubjectController extends PostController<String, UnfollowSubjectsRequestBody> {
 
     @Override
     @PostMapping("/personal/subjects/unfollow")
