@@ -38,7 +38,7 @@ public class GetEntriesControllerTests {
     GetEntriesController controller;
 
     @Test
-    public void Should_Result_In_Bad_Request_If_UserId_Null() {
+    public void Should_Result_In_Bad_Request_When_UserId_Null() {
         ResponseEntity<ApiResponse<List<EntryData>>> responseEntity = controller
                 .handle(new GetEntriesRequestBody(null, "Subject 1"));
 
@@ -48,7 +48,7 @@ public class GetEntriesControllerTests {
     }
 
     @Test
-    public void Should_Result_In_Bad_Request_If_SubjectName_Null() {
+    public void Should_Result_In_Bad_Request_When_SubjectName_Null() {
         ResponseEntity<ApiResponse<List<EntryData>>> responseEntity = controller
                 .handle(new GetEntriesRequestBody("User 1", null));
 
@@ -58,7 +58,7 @@ public class GetEntriesControllerTests {
     }
 
     @Test
-    public void Should_Result_In_Not_Found_Exception_If_User_Not_Found() {
+    public void Should_Result_In_Not_Found_Exception_When_User_Not_Found() {
         ResponseEntity<ApiResponse<List<EntryData>>> responseEntity = controller
                 .handle(new GetEntriesRequestBody("NaN", "Subject 1"));
 
@@ -68,7 +68,7 @@ public class GetEntriesControllerTests {
     }
 
     @Test
-    public void Should_Result_In_Not_Found_Exception_If_Subject_Not_Found() {
+    public void Should_Result_In_Not_Found_Exception_When_Subject_Not_Found() {
         ResponseEntity<ApiResponse<List<EntryData>>> responseEntity = controller
                 .handle(new GetEntriesRequestBody("User 1", "NaN"));
 
@@ -78,7 +78,7 @@ public class GetEntriesControllerTests {
     }
 
     @Test
-    public void Should_Return_Entries_If_Request_Valid() {
+    public void Should_Return_Entries_When_Request_Valid() {
         ResponseEntity<ApiResponse<List<EntryData>>> responseEntity = controller
                 .handle(new GetEntriesRequestBody("User 1", "Subject 1"));
 

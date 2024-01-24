@@ -35,7 +35,7 @@ public class FollowedSubjectsControllerTests {
     FollowedSubjectsController controller;
 
     @Test
-    public void Should_Result_In_Bad_Request_If_UserId_Null() {
+    public void Should_Result_In_Bad_Request_When_UserId_Null() {
         ResponseEntity<ApiResponse<List<String>>> responseEntity = controller
                 .handle(new FollowedSubjectsRequestBody(null));
 
@@ -45,7 +45,7 @@ public class FollowedSubjectsControllerTests {
     }
 
     @Test
-    public void Should_Result_In_Not_Found_exception_If_User_Not_Found() {
+    public void Should_Result_In_Not_Found_exception_When_User_Not_Found() {
         ResponseEntity<ApiResponse<List<String>>> responseEntity = controller
                 .handle(new FollowedSubjectsRequestBody("NaN"));
 
@@ -55,7 +55,7 @@ public class FollowedSubjectsControllerTests {
     }
 
     @Test
-    public void Should_Return_Followed_Subjects_On_Valid_Request() {
+    public void Should_Return_Followed_Subjects_When_Request_Valid() {
         ResponseEntity<ApiResponse<List<String>>> responseEntity = controller
                 .handle(new FollowedSubjectsRequestBody("User 1"));
 

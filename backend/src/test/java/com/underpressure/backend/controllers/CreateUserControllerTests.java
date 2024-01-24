@@ -29,7 +29,7 @@ public class CreateUserControllerTests {
         CreateUserController controller;
 
         @Test
-        public void Should_Result_In_Bad_Request_If_UserId_Null() {
+        public void Should_Result_In_Bad_Request_When_UserId_Null() {
                 ResponseEntity<ApiResponse<String>> responseEntity = controller
                                 .handle(new CreateUserRequestBody(null));
 
@@ -39,7 +39,7 @@ public class CreateUserControllerTests {
         }
 
         @Test
-        public void Should_Result_In_Bad_Request_If_User_Already_Exists() {
+        public void Should_Result_In_Bad_Request_When_User_Already_Exists() {
                 ResponseEntity<ApiResponse<String>> responseEntity = controller
                                 .handle(new CreateUserRequestBody("User 1"));
 
@@ -49,7 +49,7 @@ public class CreateUserControllerTests {
         }
 
         @Test
-        public void Should_Create_User_If_Request_Valid() {
+        public void Should_Create_User_When_Request_Valid() {
                 String userId = "New User";
 
                 ResponseEntity<ApiResponse<String>> responseEntity = controller

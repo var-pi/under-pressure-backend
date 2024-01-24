@@ -32,7 +32,7 @@ public class UnfollowSubjectControllerTests {
         UnfollowSubjectController controller;
 
         @Test
-        public void Should_Result_In_Bad_Request_If_UserId_Null() {
+        public void Should_Result_In_Bad_Request_When_UserId_Null() {
                 ResponseEntity<ApiResponse<String>> responseEntity = controller
                                 .handle(new UnfollowSubjectsRequestBody(null, "Subject 1"));
 
@@ -42,7 +42,7 @@ public class UnfollowSubjectControllerTests {
         }
 
         @Test
-        public void Should_Result_In_Bad_Request_If_SubjectName_Null() {
+        public void Should_Result_In_Bad_Request_When_SubjectName_Null() {
                 ResponseEntity<ApiResponse<String>> responseEntity = controller
                                 .handle(new UnfollowSubjectsRequestBody("User 1", null));
 
@@ -52,7 +52,7 @@ public class UnfollowSubjectControllerTests {
         }
 
         @Test
-        public void Should_Result_In_Not_Found_Exception_If_User_Not_Found() {
+        public void Should_Result_In_Not_Found_Exception_When_User_Not_Found() {
                 ResponseEntity<ApiResponse<String>> responseEntity = controller
                                 .handle(new UnfollowSubjectsRequestBody("NaN", "Subject 1"));
 
@@ -62,7 +62,7 @@ public class UnfollowSubjectControllerTests {
         }
 
         @Test
-        public void Should_Result_In_Not_Found_Exception_If_Subject_Not_Found() {
+        public void Should_Result_In_Not_Found_Exception_When_Subject_Not_Found() {
                 ResponseEntity<ApiResponse<String>> responseEntity = controller
                                 .handle(new UnfollowSubjectsRequestBody("User 1", "NaN"));
 
@@ -72,7 +72,7 @@ public class UnfollowSubjectControllerTests {
         }
 
         @Test
-        public void Should_Result_In_Bad_Request_On_Request_To_Unfollow_Having_Never_Followed() {
+        public void Should_Result_In_Bad_Request_When_Request_To_Unfollow_Having_Never_Followed() {
                 ResponseEntity<ApiResponse<String>> responseEntity = controller
                                 .handle(new UnfollowSubjectsRequestBody("User 1", "Subject 3"));
 
@@ -82,7 +82,7 @@ public class UnfollowSubjectControllerTests {
         }
 
         @Test
-        public void Should_Result_In_Bad_Request_On_Request_To_Unfollow_Already_Unfollowed() {
+        public void Should_Result_In_Bad_Request_When_Requested_To_Unfollow_Already_Unfollowed() {
                 ResponseEntity<ApiResponse<String>> responseEntity = controller
                                 .handle(new UnfollowSubjectsRequestBody("User 2", "Subject 3"));
 
@@ -92,7 +92,7 @@ public class UnfollowSubjectControllerTests {
         }
 
         @Test
-        public void Should_Unfollow_A_Subject_On_Valid_Request() {
+        public void Should_Unfollow_A_Subject_When_Request_Valid() {
                 String userId = "User 1";
                 String subjectName = "Subject 1";
 

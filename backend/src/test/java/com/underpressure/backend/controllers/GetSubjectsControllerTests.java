@@ -28,7 +28,7 @@ public class GetSubjectsControllerTests {
     GetSubjectsController subjectsController;
 
     @Test
-    public void Should_Succeed_On_Valid_Request() {
+    public void Should_Succeed_When_Request_Valid() {
 
         ResponseEntity<ApiResponse<List<String>>> responseEntity = subjectsController.handle(new GetSubjectsParams());
 

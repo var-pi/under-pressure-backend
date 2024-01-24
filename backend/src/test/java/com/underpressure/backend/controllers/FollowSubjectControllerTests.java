@@ -33,7 +33,7 @@ public class FollowSubjectControllerTests {
         FollowSubjectController controller;
 
         @Test
-        public void Should_Result_In_Bad_Request_If_UserId_Null() {
+        public void Should_Result_In_Bad_Request_When_UserId_Null() {
                 ResponseEntity<ApiResponse<String>> responseEntity = controller
                                 .handle(new FollowSubjectRequestBody(null, "Subject 1"));
 
@@ -43,7 +43,7 @@ public class FollowSubjectControllerTests {
         }
 
         @Test
-        public void Should_Result_In_Bad_Request_If_SubjectName_Null() {
+        public void Should_Result_In_Bad_Request_When_SubjectName_Null() {
                 ResponseEntity<ApiResponse<String>> responseEntity = controller
                                 .handle(new FollowSubjectRequestBody("User 1", null));
 
@@ -53,7 +53,7 @@ public class FollowSubjectControllerTests {
         }
 
         @Test
-        public void Should_Result_In_Not_Found_Exception_If_User_Not_Found() {
+        public void Should_Result_In_Not_Found_Exception_When_User_Not_Found() {
                 ResponseEntity<ApiResponse<String>> responseEntity = controller
                                 .handle(new FollowSubjectRequestBody("NaN", "Subject 1"));
 
@@ -63,7 +63,7 @@ public class FollowSubjectControllerTests {
         }
 
         @Test
-        public void Should_Result_In_Not_Found_Exception_If_Subject_Not_Found() {
+        public void Should_Result_In_Not_Found_Exception_When_Subject_Not_Found() {
                 ResponseEntity<ApiResponse<String>> responseEntity = controller
                                 .handle(new FollowSubjectRequestBody("User 1", "NaN"));
 
@@ -73,7 +73,7 @@ public class FollowSubjectControllerTests {
         }
 
         @Test
-        public void Should_Result_In_Bad_Request_On_Request_To_Follow_Already_Followed() {
+        public void Should_Result_In_Bad_Request_When_Requested_To_Follow_Already_Followed() {
                 ResponseEntity<ApiResponse<String>> responseEntity = controller
                                 .handle(new FollowSubjectRequestBody("User 1", "Subject 1"));
 
@@ -83,7 +83,7 @@ public class FollowSubjectControllerTests {
         }
 
         @Test
-        public void Should_Create_A_Subject_On_Valid_Request() {
+        public void Should_Create_A_Subject_When_Request_Valid() {
                 String userId = "User 1";
                 String subjectName = "Subject 3";
 
@@ -101,7 +101,7 @@ public class FollowSubjectControllerTests {
         }
 
         @Test
-        public void Should_Follow_A_Subject_On_Valid_Request() {
+        public void Should_Follow_A_Subject_When_Request_Valid() {
                 String userId = "User 2";
                 String subjectName = "Subject 3";
 
