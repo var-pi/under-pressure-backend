@@ -3,15 +3,15 @@ package com.underpressure.backend.controllers.classes.request.data;
 import java.sql.Date;
 
 public class EntryData {
-    private Date createdAt;
+    private Date creationDate;
     private Integer stressLevel;
 
-    public Date getCreatedAt() {
-        return createdAt;
+    public Date getCreationDate() {
+        return creationDate;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 
     public Integer getStressLevel() {

@@ -1,5 +1,7 @@
-CREATE TABLE "users" (
-  "id" varchar(255) PRIMARY KEY
+CREATE TABLE "users" ( 
+  "id" SERIAL PRIMARY KEY,
+  "google_sub" varchar(255),
+  "given_name" varchar(255)
 );
 
 CREATE TABLE "subjects" (
@@ -9,16 +11,15 @@ CREATE TABLE "subjects" (
 
 CREATE TABLE "subject_instances" (
   "id" SERIAL PRIMARY KEY,
-  "user_id" varchar(255),
+  "user_id" integer,
   "subject_id" integer,
   "if_followed" boolean
-
 );
 
 CREATE TABLE "entries" (
   "id" SERIAL PRIMARY KEY,
   "subject_instance_id" integer,
-  "created_at" date,
+  "creation_date" date,
   "stress_level" integer
 );
 

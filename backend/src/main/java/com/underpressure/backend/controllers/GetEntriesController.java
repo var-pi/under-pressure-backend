@@ -24,7 +24,7 @@ public class GetEntriesController extends PostController<List<EntryData>, GetEnt
     public ResponseEntity<ApiResponse<List<EntryData>>> handle(@RequestBody GetEntriesRequestBody requestData) {
 
         try {
-            String userId = requestData.getUserId();
+            Integer userId = requestData.getUserId();
             String subjectName = requestData.getSubjectName();
 
             Validate.userId(userId, jdbcTemplate);

@@ -47,7 +47,7 @@ public class FollowedSubjectsControllerTests {
     @Test
     public void Should_Result_In_Not_Found_exception_When_User_Not_Found() {
         ResponseEntity<ApiResponse<List<String>>> responseEntity = controller
-                .handle(new FollowedSubjectsRequestBody("NaN"));
+                .handle(new FollowedSubjectsRequestBody(-1));
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
         assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");
@@ -57,7 +57,7 @@ public class FollowedSubjectsControllerTests {
     @Test
     public void Should_Return_Followed_Subjects_When_Request_Valid() {
         ResponseEntity<ApiResponse<List<String>>> responseEntity = controller
-                .handle(new FollowedSubjectsRequestBody("User 1"));
+                .handle(new FollowedSubjectsRequestBody(1));
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(responseEntity.getBody().getStatus()).isEqualTo("success");

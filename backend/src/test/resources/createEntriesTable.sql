@@ -1,6 +1,6 @@
 CREATE TABLE entries (
   id int AUTO_INCREMENT PRIMARY KEY,
   subject_instance_id integer,
-  created_at date,
+  creation_date date,
   stress_level integer
 );

@@ -23,7 +23,7 @@ public class FollowedSubjectsController extends PostController<List<String>, Fol
     public ResponseEntity<ApiResponse<List<String>>> handle(@RequestBody FollowedSubjectsRequestBody requestBody) {
 
         try {
-            String userId = requestBody.getUserId();
+            Integer userId = requestBody.getUserId();
 
             Validate.userId(userId, jdbcTemplate);
 

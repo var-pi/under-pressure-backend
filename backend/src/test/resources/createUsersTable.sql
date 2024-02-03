@@ -1,3 +1,5 @@
 CREATE TABLE users (
-  id varchar(255) PRIMARY KEY
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  google_sub varchar(255),
+  given_name varchar(255)
 );

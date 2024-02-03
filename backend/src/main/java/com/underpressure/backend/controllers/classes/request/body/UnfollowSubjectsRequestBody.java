@@ -1,19 +1,19 @@
 package com.underpressure.backend.controllers.classes.request.body;
 
 public class UnfollowSubjectsRequestBody {
-    private String userId;
+    private Integer userId;
     private String subjectName;
 
-    public UnfollowSubjectsRequestBody(String userId, String subjectName) {
+    public UnfollowSubjectsRequestBody(Integer userId, String subjectName) {
         this.userId = userId;
         this.subjectName = subjectName;
     }
 
-    public String getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 

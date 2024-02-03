@@ -21,7 +21,7 @@ public class UnfollowSubjectController extends PostController<String, UnfollowSu
     public ResponseEntity<ApiResponse<String>> handle(UnfollowSubjectsRequestBody requestData) {
 
         try {
-            String userId = requestData.getUserId();
+            Integer userId = requestData.getUserId();
             String subjectName = requestData.getSubjectName();
 
             Validate.userId(userId, jdbcTemplate);
