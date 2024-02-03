@@ -1,5 +1,7 @@
-CREATE TABLE "users" (
-  "id" varchar(255) PRIMARY KEY
+CREATE TABLE "users" ( 
+  "id" SERIAL PRIMARY KEY, -- TODO Changed from varchar to int
+  "given_name" varchar(255),
+  "google_sub" integer
 );
 
 CREATE TABLE "subjects" (
@@ -18,7 +20,7 @@ CREATE TABLE "subject_instances" (
 CREATE TABLE "entries" (
   "id" SERIAL PRIMARY KEY,
   "subject_instance_id" integer,
-  "created_at" date,
+  "creation_date" date, -- TODO Changed from 'created_at' to 'creation_date'
   "stress_level" integer
 );
 
