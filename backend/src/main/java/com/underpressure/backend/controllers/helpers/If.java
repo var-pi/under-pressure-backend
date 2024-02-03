@@ -21,7 +21,7 @@ public class If {
     }
 
     public static boolean entryExists(Integer subjectInstanceId, JdbcTemplate jdbcTemplate) {
-        String sql = "SELECT COUNT(*) FROM entries WHERE subject_instance_id=? AND created_at=CURRENT_DATE";
+        String sql = "SELECT COUNT(*) FROM entries WHERE subject_instance_id=? AND creation_date=CURRENT_DATE";
 
         Integer rowCount = jdbcTemplate.queryForObject(sql, Integer.class, subjectInstanceId);
 

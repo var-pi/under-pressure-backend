@@ -22,7 +22,7 @@ public class Add {
         public static void entry(Integer subjectInstanceId, Integer stressLevel, JdbcTemplate jdbcTemplate)
                         throws RequestException {
 
-                String sql = "INSERT INTO entries (subject_instance_id, created_at, stress_level) VALUES (?,CURRENT_DATE,?)";
+                String sql = "INSERT INTO entries (subject_instance_id, creation_date, stress_level) VALUES (?,CURRENT_DATE,?)";
 
                 int numOfRowsAffected = jdbcTemplate.update(sql, subjectInstanceId, stressLevel);
 

@@ -11,7 +11,7 @@ public class EntryDataRowMapper implements RowMapper<EntryData> {
     public EntryData mapRow(ResultSet rs, int rowNum) throws SQLException {
 
         EntryData entryData = new EntryData();
-        entryData.setCreatedAt(rs.getDate("created_at"));
+        entryData.setCreationDate(rs.getDate("creation_date"));
         entryData.setStressLevel(rs.getInt("stress_level"));
 
         return entryData;

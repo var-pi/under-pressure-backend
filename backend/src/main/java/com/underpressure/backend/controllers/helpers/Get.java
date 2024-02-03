@@ -49,7 +49,7 @@ public class Get {
     }
 
     public static Integer todaysEntryId(Integer subjectInstanceId, JdbcTemplate jdbcTemplate) throws RequestException {
-        String sql = "SELECT id FROM entries WHERE subject_instance_id=? AND created_at=CURRENT_DATE";
+        String sql = "SELECT id FROM entries WHERE subject_instance_id=? AND creation_date=CURRENT_DATE";
 
         try {
             return jdbcTemplate.queryForObject(sql, Integer.class, subjectInstanceId);
