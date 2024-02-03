@@ -24,7 +24,7 @@ public class FollowSubjectController extends PostController<String, FollowSubjec
     public ResponseEntity<ApiResponse<String>> handle(@RequestBody FollowSubjectRequestBody requestData) {
 
         try {
-            String userId = requestData.getUserId();
+            Integer userId = requestData.getUserId();
             String subjectName = requestData.getSubjectName();
 
             Validate.userId(userId, jdbcTemplate);

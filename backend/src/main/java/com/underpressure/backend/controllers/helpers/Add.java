@@ -8,7 +8,7 @@ import com.underpressure.backend.exceptions.unexpected.not_added.SubjectNotAdded
 import com.underpressure.backend.exceptions.unexpected.not_added.UserNotAddedException;
 
 public class Add {
-        public static void subjectInstance(String userId, Integer subjectId, JdbcTemplate jdbcTemplate)
+        public static void subjectInstance(Integer userId, Integer subjectId, JdbcTemplate jdbcTemplate)
                         throws RequestException {
 
                 String sql = "INSERT INTO subject_instances (user_id, subject_id, if_followed) VALUES (?,?,true)";
@@ -31,7 +31,7 @@ public class Add {
 
         }
 
-        public static void user(String userId, JdbcTemplate jdbcTemplate) throws RequestException {
+        public static void user(Integer userId, JdbcTemplate jdbcTemplate) throws RequestException {
                 String sql = "INSERT INTO users(id) VALUES (?)";
 
                 Integer rowsAffected = jdbcTemplate.update(sql, userId);

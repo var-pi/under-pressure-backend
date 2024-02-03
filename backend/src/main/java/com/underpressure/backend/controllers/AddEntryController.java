@@ -24,7 +24,7 @@ public class AddEntryController extends PostController<String, AddEntryRequestBo
     public ResponseEntity<ApiResponse<String>> handle(@RequestBody AddEntryRequestBody requestData) {
 
         try {
-            String userId = requestData.getUserId();
+            Integer userId = requestData.getUserId();
             String subjectName = requestData.getSubjectName();
             Integer stressLevel = requestData.getStressLevel();
 

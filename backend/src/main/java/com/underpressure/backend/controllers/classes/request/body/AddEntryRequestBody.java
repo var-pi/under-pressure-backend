@@ -1,21 +1,21 @@
 package com.underpressure.backend.controllers.classes.request.body;
 
 public class AddEntryRequestBody {
-    String userId;
+    Integer userId;
     String subjectName;
     Integer stressLevel;
 
-    public AddEntryRequestBody(String userId, String subjectName, Integer stressLevel) {
+    public AddEntryRequestBody(Integer userId, String subjectName, Integer stressLevel) {
         this.userId = userId;
         this.subjectName = subjectName;
         this.stressLevel = stressLevel;
     }
 
-    public String getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 

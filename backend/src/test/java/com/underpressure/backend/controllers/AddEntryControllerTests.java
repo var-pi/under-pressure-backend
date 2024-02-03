@@ -47,7 +47,7 @@ public class AddEntryControllerTests {
         @Test
         public void Should_Result_In_Bad_Request_When_SubjectName_Null() {
                 ResponseEntity<ApiResponse<String>> responseEntity = controller
-                                .handle(new AddEntryRequestBody("User 1", null, 0));
+                                .handle(new AddEntryRequestBody(1, null, 0));
 
                 assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
                 assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");
@@ -57,7 +57,7 @@ public class AddEntryControllerTests {
         @Test
         public void Should_Result_In_Bad_Request_When_StressLevel_Null() {
                 ResponseEntity<ApiResponse<String>> responseEntity = controller
-                                .handle(new AddEntryRequestBody("User 1", "Subject 1", null));
+                                .handle(new AddEntryRequestBody(1, "Subject 1", null));
 
                 assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
                 assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");
@@ -67,7 +67,7 @@ public class AddEntryControllerTests {
         @Test
         public void Should_Result_In_Not_Found_Exception_When_User_Not_Found() {
                 ResponseEntity<ApiResponse<String>> responseEntity = controller
-                                .handle(new AddEntryRequestBody("NaN", "Subject 1", 0));
+                                .handle(new AddEntryRequestBody(-1, "Subject 1", 0));
 
                 assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
                 assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");
@@ -77,7 +77,7 @@ public class AddEntryControllerTests {
         @Test
         public void Should_Result_In_Not_Found_Exception_When_Subject_Not_Found() {
                 ResponseEntity<ApiResponse<String>> responseEntity = controller
-                                .handle(new AddEntryRequestBody("User 1", "NaN", 0));
+                                .handle(new AddEntryRequestBody(1, "NaN", 0));
 
                 assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
                 assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");
@@ -87,7 +87,7 @@ public class AddEntryControllerTests {
         @Test
         public void Should_Result_In_Not_Found_Exception_When_Stress_Level_Out_Of_Range() {
                 ResponseEntity<ApiResponse<String>> responseEntity = controller
-                                .handle(new AddEntryRequestBody("User 1", "Subject 1", 101));
+                                .handle(new AddEntryRequestBody(1, "Subject 1", 101));
 
                 assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.REQUESTED_RANGE_NOT_SATISFIABLE);
                 assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");
@@ -97,7 +97,7 @@ public class AddEntryControllerTests {
         @Test
         public void Should_Result_In_Bad_Request_When_Not_Followed() {
                 ResponseEntity<ApiResponse<String>> responseEntity = controller
-                                .handle(new AddEntryRequestBody("User 2", "Subject 3", 0));
+                                .handle(new AddEntryRequestBody(2, "Subject 3", 0));
 
                 assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
                 assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");
@@ -107,7 +107,7 @@ public class AddEntryControllerTests {
         @Test
         public void Should_Add_Entry_When_Request_Valid() {
                 ResponseEntity<ApiResponse<String>> responseEntity = controller
-                                .handle(new AddEntryRequestBody("User 1", "Subject 2", 40));
+                                .handle(new AddEntryRequestBody(1, "Subject 2", 40));
 
                 assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 
@@ -116,10 +116,10 @@ public class AddEntryControllerTests {
         @Test
         public void Should_Update_Entry_When_Request_Valid() {
                 controller
-                                .handle(new AddEntryRequestBody("User 1", "Subject 1", 40));
+                                .handle(new AddEntryRequestBody(1, "Subject 1", 40));
 
                 ResponseEntity<ApiResponse<String>> responseEntity = controller
-                                .handle(new AddEntryRequestBody("User 1", "Subject 1", 50));
+                                .handle(new AddEntryRequestBody(1, "Subject 1", 50));
 
                 assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
         }

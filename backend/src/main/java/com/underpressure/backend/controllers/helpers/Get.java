@@ -30,13 +30,13 @@ public class Get {
         }
     }
 
-    public static List<String> followedSubjects(String userId, JdbcTemplate jdbcTemplate) {
+    public static List<String> followedSubjects(Integer userId, JdbcTemplate jdbcTemplate) {
         String sql = "SELECT subjects.name FROM subject_instances INNER JOIN subjects ON subject_instances.subject_id=subjects.id WHERE subject_instances.user_id=? AND if_followed=true";
 
         return jdbcTemplate.queryForList(sql, String.class, userId);
     }
 
-    public static Integer subjectInstanceId(String userId, Integer subjectId, JdbcTemplate jdbcTemplate)
+    public static Integer subjectInstanceId(Integer userId, Integer subjectId, JdbcTemplate jdbcTemplate)
             throws RequestException {
         String sql = "SELECT id FROM subject_instances WHERE user_id=? AND subject_id=?";
 

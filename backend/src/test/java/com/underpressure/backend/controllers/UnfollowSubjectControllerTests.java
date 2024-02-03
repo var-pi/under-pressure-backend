@@ -44,7 +44,7 @@ public class UnfollowSubjectControllerTests {
         @Test
         public void Should_Result_In_Bad_Request_When_SubjectName_Null() {
                 ResponseEntity<ApiResponse<String>> responseEntity = controller
-                                .handle(new UnfollowSubjectsRequestBody("User 1", null));
+                                .handle(new UnfollowSubjectsRequestBody(1, null));
 
                 assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
                 assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");
@@ -54,7 +54,7 @@ public class UnfollowSubjectControllerTests {
         @Test
         public void Should_Result_In_Not_Found_Exception_When_User_Not_Found() {
                 ResponseEntity<ApiResponse<String>> responseEntity = controller
-                                .handle(new UnfollowSubjectsRequestBody("NaN", "Subject 1"));
+                                .handle(new UnfollowSubjectsRequestBody(-1, "Subject 1"));
 
                 assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
                 assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");
@@ -64,7 +64,7 @@ public class UnfollowSubjectControllerTests {
         @Test
         public void Should_Result_In_Not_Found_Exception_When_Subject_Not_Found() {
                 ResponseEntity<ApiResponse<String>> responseEntity = controller
-                                .handle(new UnfollowSubjectsRequestBody("User 1", "NaN"));
+                                .handle(new UnfollowSubjectsRequestBody(1, "NaN"));
 
                 assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
                 assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");
@@ -74,7 +74,7 @@ public class UnfollowSubjectControllerTests {
         @Test
         public void Should_Result_In_Bad_Request_When_Request_To_Unfollow_Having_Never_Followed() {
                 ResponseEntity<ApiResponse<String>> responseEntity = controller
-                                .handle(new UnfollowSubjectsRequestBody("User 1", "Subject 3"));
+                                .handle(new UnfollowSubjectsRequestBody(1, "Subject 3"));
 
                 assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
                 assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");
@@ -84,7 +84,7 @@ public class UnfollowSubjectControllerTests {
         @Test
         public void Should_Result_In_Bad_Request_When_Requested_To_Unfollow_Already_Unfollowed() {
                 ResponseEntity<ApiResponse<String>> responseEntity = controller
-                                .handle(new UnfollowSubjectsRequestBody("User 2", "Subject 3"));
+                                .handle(new UnfollowSubjectsRequestBody(2, "Subject 3"));
 
                 assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
                 assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");
@@ -93,7 +93,7 @@ public class UnfollowSubjectControllerTests {
 
         @Test
         public void Should_Unfollow_A_Subject_When_Request_Valid() {
-                String userId = "User 1";
+                Integer userId = 1;
                 String subjectName = "Subject 1";
 
                 ResponseEntity<ApiResponse<String>> responseEntity = controller

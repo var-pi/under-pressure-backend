@@ -3,7 +3,7 @@ package com.underpressure.backend.controllers.helpers;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 public class If {
-    public static boolean subjectInstanceExists(String userId, Integer subjectId,
+    public static boolean subjectInstanceExists(Integer userId, Integer subjectId,
             JdbcTemplate jdbcTemplate) {
         String sql = "SELECT COUNT(*) from subject_instances WHERE user_id=? AND subject_id=?";
 
@@ -28,7 +28,7 @@ public class If {
         return rowCount > 0;
     }
 
-    public static boolean userExists(String userId, JdbcTemplate jdbcTemplate) {
+    public static boolean userExists(Integer userId, JdbcTemplate jdbcTemplate) {
         String sql = "SELECT COUNT(*) FROM users WHERE id=?";
 
         int rowCount = jdbcTemplate.queryForObject(sql, Integer.class, userId);

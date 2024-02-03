@@ -50,7 +50,7 @@ public class GetEntriesControllerTests {
     @Test
     public void Should_Result_In_Bad_Request_When_SubjectName_Null() {
         ResponseEntity<ApiResponse<List<EntryData>>> responseEntity = controller
-                .handle(new GetEntriesRequestBody("User 1", null));
+                .handle(new GetEntriesRequestBody(1, null));
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
         assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");
@@ -60,7 +60,7 @@ public class GetEntriesControllerTests {
     @Test
     public void Should_Result_In_Not_Found_Exception_When_User_Not_Found() {
         ResponseEntity<ApiResponse<List<EntryData>>> responseEntity = controller
-                .handle(new GetEntriesRequestBody("NaN", "Subject 1"));
+                .handle(new GetEntriesRequestBody(-1, "Subject 1"));
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
         assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");
@@ -70,7 +70,7 @@ public class GetEntriesControllerTests {
     @Test
     public void Should_Result_In_Not_Found_Exception_When_Subject_Not_Found() {
         ResponseEntity<ApiResponse<List<EntryData>>> responseEntity = controller
-                .handle(new GetEntriesRequestBody("User 1", "NaN"));
+                .handle(new GetEntriesRequestBody(1, "NaN"));
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
         assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");
@@ -80,7 +80,7 @@ public class GetEntriesControllerTests {
     @Test
     public void Should_Return_Entries_When_Request_Valid() {
         ResponseEntity<ApiResponse<List<EntryData>>> responseEntity = controller
-                .handle(new GetEntriesRequestBody("User 1", "Subject 1"));
+                .handle(new GetEntriesRequestBody(1, "Subject 1"));
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(responseEntity.getBody().getStatus()).isEqualTo("success");

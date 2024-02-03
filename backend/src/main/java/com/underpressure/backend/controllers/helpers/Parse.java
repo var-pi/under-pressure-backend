@@ -8,9 +8,9 @@ import com.underpressure.backend.exceptions.RequestException;
 
 public class Parse {
 
-    public static String userId(Map<String, Object> requestData, JdbcTemplate jdbcTemplate, Boolean validate)
+    public static Integer userId(Map<String, Object> requestData, JdbcTemplate jdbcTemplate, Boolean validate)
             throws RequestException {
-        String userId = (String) requestData.get("userId");
+        Integer userId = (int) requestData.get("userId");
 
         if (validate)
             Validate.userId(userId, jdbcTemplate);
@@ -18,7 +18,7 @@ public class Parse {
         return userId;
     }
 
-    public static String userId(Map<String, Object> requestData, JdbcTemplate jdbcTemplate) throws RequestException {
+    public static Integer userId(Map<String, Object> requestData, JdbcTemplate jdbcTemplate) throws RequestException {
         return userId(requestData, jdbcTemplate, true);
     }
 
