@@ -4,16 +4,6 @@ Request URL: `http://<url><endpoint>`
 
 ## Endpoints
 
-### POST `/users/create`
-
-If no such user exists then a new one is created. Otherwise the request results in a failure.
-
-```
-data = {
-    string userId: <userId>
-}
-```
-
 ### GET `/subjects`
 
 Returns all of the subjects available.
