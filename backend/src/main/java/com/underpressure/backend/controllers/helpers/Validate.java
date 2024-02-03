@@ -9,6 +9,7 @@ import com.underpressure.backend.exceptions.already_exists.SubjectAlreadyUnfollo
 import com.underpressure.backend.exceptions.already_exists.UserAlreadyExistsException;
 import com.underpressure.backend.exceptions.does_not_exist.SubjectDoesNotExist;
 import com.underpressure.backend.exceptions.does_not_exist.UserDoesNotExistException;
+import com.underpressure.backend.exceptions.parameter.CodeParameterException;
 import com.underpressure.backend.exceptions.parameter.StressLevelParameterException;
 import com.underpressure.backend.exceptions.parameter.SubjectNameParameterException;
 import com.underpressure.backend.exceptions.parameter.UserIdParameterException;
@@ -69,5 +70,10 @@ public class Validate {
     public static void userDoesNotExists(Integer userId, JdbcTemplate jdbcTemplate) throws RequestException {
         if (If.userExists(userId, jdbcTemplate))
             throw new UserAlreadyExistsException();
+    }
+
+    public static void code(String code) throws RequestException {
+        if (code == null)
+            throw new CodeParameterException();
     }
 }

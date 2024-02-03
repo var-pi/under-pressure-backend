@@ -32,6 +32,7 @@ import com.underpressure.backend.controllers.classes.request.body.Authentication
 import com.underpressure.backend.controllers.classes.request.data.OAuthTokenResponse;
 import com.underpressure.backend.controllers.helpers.Add;
 import com.underpressure.backend.controllers.helpers.If;
+import com.underpressure.backend.controllers.helpers.Validate;
 import com.underpressure.backend.exceptions.RequestException;
 import com.underpressure.backend.exceptions.unexpected.AuthenticationFailedException;
 import com.underpressure.backend.exceptions.unexpected.InternalServerError;
@@ -60,6 +61,7 @@ public class AuthenticationController extends PostController<String, Authenticat
 
         try {
             String code = entity.getCode(); // Authorisation code from frontend
+            Validate.code(code);
 
             // User granted us some permissions and now we can request an access token from
             // the authorisation/resource server.
@@ -69,12 +71,16 @@ public class AuthenticationController extends PostController<String, Authenticat
             String idTokenString = oAuthTokenResponse.getIdToken();
 
             // Verify the JWT (ex. not expired) and get the decoded OpenID Connect id.
-
             Payload userInfo = getVerifiedUserInfo(idTokenString);
 
             String googleSub = userInfo.getSubject();
-            if (!If.userWithGoogleSubExists(googleSub, jdbcTemplate))
+            if (!If.userWithGoogleSubExists(googleSub, jdbcTemplate)) {
                 Add.user(userInfo, jdbcTemplate);
+
+                return new ResponseEntity<>(
+                        new ApiResponse<>(true, idTokenString, null),
+                        HttpStatus.CREATED);
+            }
 
             return new ResponseEntity<>(
                     new ApiResponse<>(true, idTokenString, null),
@@ -97,7 +103,7 @@ public class AuthenticationController extends PostController<String, Authenticat
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
         headers.add("Authorization", "Basic " + encodedCredentials); // Add credentials
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-        HttpEntity<String> requestEntity = new HttpEntity<String>(headers);
+        HttpEntity<String> requestEntity = new HttpEntity<>(headers);
 
         // The non-credential parameters are in the URL.
         String url = tokenUri
@@ -108,6 +114,8 @@ public class AuthenticationController extends PostController<String, Authenticat
 
         ResponseEntity<String> responseEntity = restTemplate
                 .exchange(url, HttpMethod.POST, requestEntity, String.class);
+
+        System.out.println(responseEntity.getBody());
 
         if (!responseEntity.getStatusCode().equals(HttpStatus.OK))
             throw new AuthenticationFailedException();
