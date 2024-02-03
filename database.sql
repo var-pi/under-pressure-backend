@@ -11,10 +11,9 @@ CREATE TABLE "subjects" (
 
 CREATE TABLE "subject_instances" (
   "id" SERIAL PRIMARY KEY,
-  "user_id" varchar(255),
+  "user_id" integer, -- TODO Changed from varchar to integer
   "subject_id" integer,
   "if_followed" boolean
-
 );
 
 CREATE TABLE "entries" (
