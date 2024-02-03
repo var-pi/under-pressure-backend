@@ -2,6 +2,7 @@ package com.underpressure.backend.controllers.helpers;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import com.google.api.client.auth.openidconnect.IdToken.Payload;
 import com.underpressure.backend.exceptions.RequestException;
 import com.underpressure.backend.exceptions.unexpected.not_added.EntryNotAddedException;
 import com.underpressure.backend.exceptions.unexpected.not_added.SubjectNotAddedException;
@@ -31,10 +32,10 @@ public class Add {
 
         }
 
-        public static void user(Integer userId, JdbcTemplate jdbcTemplate) throws RequestException {
-                String sql = "INSERT INTO users(id) VALUES (?)";
+        public static void user(Payload userInfo, JdbcTemplate jdbcTemplate) throws RequestException {
+                String sql = "INSERT INTO users (google_sub, given_name) VALUES (?,?)";
 
-                Integer rowsAffected = jdbcTemplate.update(sql, userId);
+                Integer rowsAffected = jdbcTemplate.update(sql, userInfo.getSubject(), userInfo.get("given_name"));
 
                 if (rowsAffected == 0)
                         throw new UserNotAddedException();

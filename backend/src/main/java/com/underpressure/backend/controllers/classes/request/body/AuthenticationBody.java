@@ -1,9 +1,9 @@
 package com.underpressure.backend.controllers.classes.request.body;
 
-public class AuthenticateBody {
+public class AuthenticationBody {
     private String code;
 
-    public AuthenticateBody() {
+    public AuthenticationBody() {
     }
 
     public String getCode() {

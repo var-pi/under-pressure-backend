@@ -35,4 +35,13 @@ public class If {
 
         return rowCount > 0;
     }
+
+    public static boolean userWithGoogleSubExists(String googleSub, JdbcTemplate jdbcTemplate) {
+        String sql = "SELECT COUNT(*) FROM users WHERE google_sub=?";
+
+        int rowCount = jdbcTemplate.queryForObject(sql, Integer.class, googleSub);
+
+        return rowCount > 0;
+    }
+
 }
