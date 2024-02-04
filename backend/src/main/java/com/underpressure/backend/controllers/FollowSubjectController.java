@@ -14,6 +14,7 @@ import com.underpressure.backend.controllers.classes.abstracts.PostControllerNew
 import com.underpressure.backend.controllers.classes.request.body.FollowSubjectRequestBody;
 import com.underpressure.backend.controllers.helpers.Add;
 import com.underpressure.backend.controllers.helpers.Check;
+import com.underpressure.backend.controllers.helpers.Extract;
 import com.underpressure.backend.controllers.helpers.Fetch;
 import com.underpressure.backend.controllers.helpers.Set;
 import com.underpressure.backend.controllers.helpers.Validate;
@@ -43,16 +44,8 @@ public class FollowSubjectController extends PostControllerNew<String, FollowSub
     @Autowired
     Set set;
 
-    private String extractToken(String bearerToken) {
-        String[] tokenParts = bearerToken.split("\\s+");
-
-        if (tokenParts.length == 2 && "Bearer".equals(tokenParts[0])) {
-            return tokenParts[1];
-        } else {
-            // Handle invalid or unexpected Authorization header format
-            throw new IllegalArgumentException("Invalid Authorization header format");
-        }
-    }
+    @Autowired
+    Extract extract;
 
     @Override
     @PostMapping("/personal/subjects/follow")
@@ -60,7 +53,7 @@ public class FollowSubjectController extends PostControllerNew<String, FollowSub
             @RequestHeader("Authorization") String bearerToken,
             @RequestBody FollowSubjectRequestBody requestData) {
         try {
-            String idTokenString = extractToken(bearerToken);
+            String idTokenString = extract.token(bearerToken);
             String subjectName = requestData.getSubjectName();
 
             validate.idTokenString(idTokenString);
