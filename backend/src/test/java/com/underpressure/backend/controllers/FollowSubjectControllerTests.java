@@ -61,7 +61,8 @@ public class FollowSubjectControllerTests {
 
         @BeforeEach
         public void setUp() throws UserVerificationException {
-                doReturn("10001").when(fetchGoogleMock).sub(any(), any());
+                doReturn("10001").when(fetchGoogleMock).sub(eq("user_1_id_token"), any());
+                doReturn("10002").when(fetchGoogleMock).sub(eq("user_2_id_token"), any());
         }
 
         @Test
@@ -104,42 +105,42 @@ public class FollowSubjectControllerTests {
                 assertThat(responseEntity.getBody().getMessage()).isNotBlank();
         }
 
-        // @Test
-        // public void Should_Create_A_Subject_When_Request_Valid() {
-        // String idTokenString = "";
-        // String subjectName = "Subject 3";
+        @Test
+        public void Should_Create_A_Subject_When_Request_Valid() {
+                String idTokenString = "user_1_id_token";
+                String subjectName = "Subject 3";
 
-        // ResponseEntity<ApiResponse<String>> responseEntity = controller
-        // .handle(new FollowSubjectRequestBody(userId, subjectName));
+                ResponseEntity<ApiResponse<String>> responseEntity = controller
+                                .handle(new FollowSubjectRequestBody(idTokenString, subjectName));
 
-        // assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.CREATED);
-        // assertThat(responseEntity.getBody().getStatus()).isEqualTo("success");
+                assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.CREATED);
+                assertThat(responseEntity.getBody().getStatus()).isEqualTo("success");
 
-        // responseEntity = controller.handle(new FollowSubjectRequestBody(userId,
-        // subjectName));
+                responseEntity = controller.handle(new FollowSubjectRequestBody(idTokenString,
+                                subjectName));
 
-        // assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
-        // assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");
-        // assertThat(responseEntity.getBody().getMessage()).isNotBlank();
-        // }
+                assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+                assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");
+                assertThat(responseEntity.getBody().getMessage()).isNotBlank();
+        }
 
-        // @Test
-        // public void Should_Follow_A_Subject_When_Request_Valid() {
-        // Integer userId = 2;
-        // String subjectName = "Subject 3";
+        @Test
+        public void Should_Follow_A_Subject_When_Request_Valid() {
+                String idTokenString = "user_2_id_token";
+                String subjectName = "Subject 3";
 
-        // ResponseEntity<ApiResponse<String>> responseEntity = controller
-        // .handle(new FollowSubjectRequestBody(userId, subjectName));
+                ResponseEntity<ApiResponse<String>> responseEntity = controller
+                                .handle(new FollowSubjectRequestBody(idTokenString, subjectName));
 
-        // assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
-        // assertThat(responseEntity.getBody().getStatus()).isEqualTo("success");
+                assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
+                assertThat(responseEntity.getBody().getStatus()).isEqualTo("success");
 
-        // responseEntity = controller.handle(new FollowSubjectRequestBody(userId,
-        // subjectName));
+                responseEntity = controller.handle(new FollowSubjectRequestBody(idTokenString,
+                                subjectName));
 
-        // assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
-        // assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");
-        // assertThat(responseEntity.getBody().getMessage()).isNotBlank();
-        // }
+                assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+                assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");
+                assertThat(responseEntity.getBody().getMessage()).isNotBlank();
+        }
 
 }
