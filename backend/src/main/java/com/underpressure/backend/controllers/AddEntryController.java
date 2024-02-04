@@ -23,6 +23,9 @@ public class AddEntryController extends PostController<String, AddEntryRequestBo
     @Autowired
     Fetch.DB fetchDB;
 
+    @Autowired
+    Add add;
+
     @Override
     @PostMapping("/personal/entries/add")
     public ResponseEntity<ApiResponse<String>> handle(@RequestBody AddEntryRequestBody requestData) {
@@ -50,7 +53,7 @@ public class AddEntryController extends PostController<String, AddEntryRequestBo
                         new ApiResponse<>(true, null, null),
                         HttpStatus.NO_CONTENT);
             } else {
-                Add.entry(subjectInstanceId, stressLevel, jdbcTemplate);
+                add.entry(subjectInstanceId, stressLevel, jdbcTemplate);
 
                 return new ResponseEntity<>(
                         new ApiResponse<>(true, null, null),

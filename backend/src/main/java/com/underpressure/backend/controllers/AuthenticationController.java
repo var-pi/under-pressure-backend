@@ -37,6 +37,9 @@ public class AuthenticationController extends PostController<String, Authenticat
     @Autowired
     Fetch.Google fetchGoogle;
 
+    @Autowired
+    Add add;
+
     RestTemplate restTemplate = new RestTemplate();
 
     @Value("${spring.security.oauth2.client.provider.google.token-uri}")
@@ -70,7 +73,7 @@ public class AuthenticationController extends PostController<String, Authenticat
 
             String googleSub = userInfo.getSubject();
             if (!If.userWithGoogleSubExists(googleSub, jdbcTemplate)) {
-                Add.user(userInfo, jdbcTemplate);
+                add.user(userInfo, jdbcTemplate);
 
                 return new ResponseEntity<>(
                         new ApiResponse<>(true, idTokenString, null),

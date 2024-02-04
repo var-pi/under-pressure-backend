@@ -18,12 +18,13 @@ import org.springframework.test.context.jdbc.Sql;
 
 import com.underpressure.backend.controllers.classes.ApiResponse;
 import com.underpressure.backend.controllers.classes.request.body.FollowSubjectRequestBody;
+import com.underpressure.backend.controllers.helpers.Add;
 import com.underpressure.backend.controllers.helpers.Fetch;
 import com.underpressure.backend.exceptions.unexpected.UserVerificationException;
 
 @JdbcTest
 @AutoConfigureTestDatabase
-@Import({ FollowSubjectController.class, Fetch.class })
+@Import({ FollowSubjectController.class, Fetch.class, Add.class })
 @Sql({
                 "classpath:createSubjectsTable.sql",
                 "classpath:fillSubjectsTable.sql",

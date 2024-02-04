@@ -30,6 +30,9 @@ public class FollowSubjectController extends PostController<String, FollowSubjec
     @Autowired
     Fetch.DB fetchDB;
 
+    @Autowired
+    Add add;
+
     @Override
     @PostMapping("/personal/subjects/follow")
     public ResponseEntity<ApiResponse<String>> handle(@RequestBody FollowSubjectRequestBody requestData) {
@@ -57,7 +60,7 @@ public class FollowSubjectController extends PostController<String, FollowSubjec
                         new ApiResponse<>(true, null, null),
                         HttpStatus.NO_CONTENT);
             } else {
-                Add.subjectInstance(userId, subjectId, jdbcTemplate);
+                add.subjectInstance(userId, subjectId, jdbcTemplate);
 
                 return new ResponseEntity<>(
                         new ApiResponse<>(true, null, null),
