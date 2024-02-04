@@ -1,23 +1,15 @@
 package com.underpressure.backend.controllers;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.*;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
-import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.jdbc.Sql;
 
 import com.underpressure.backend.controllers.classes.ApiResponse;
+import com.underpressure.backend.controllers.classes.AuthorizedControllerTests;
 import com.underpressure.backend.controllers.classes.request.body.FollowSubjectRequestBody;
 import com.underpressure.backend.controllers.helpers.Add;
 import com.underpressure.backend.controllers.helpers.Check;
@@ -25,10 +17,7 @@ import com.underpressure.backend.controllers.helpers.Extract;
 import com.underpressure.backend.controllers.helpers.Fetch;
 import com.underpressure.backend.controllers.helpers.Set;
 import com.underpressure.backend.controllers.helpers.Validate;
-import com.underpressure.backend.exceptions.unexpected.UserVerificationException;
 
-@JdbcTest
-@AutoConfigureTestDatabase
 @Import({
                 FollowSubjectController.class,
                 Fetch.class,
@@ -46,21 +35,7 @@ import com.underpressure.backend.exceptions.unexpected.UserVerificationException
                 "classpath:createSubjectInstancesTable.sql",
                 "classpath:fillSubjectInstancesTable.sql"
 })
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-public class FollowSubjectControllerTests {
-
-        @SpyBean
-        Fetch.Google fetchGoogleMock;
-
-        @Autowired
-        FollowSubjectController controller;
-
-        @BeforeEach
-        public void setUp() throws UserVerificationException {
-                doReturn("10001").when(fetchGoogleMock).sub(eq("user_1_id_token"), anyString());
-                doReturn("10002").when(fetchGoogleMock).sub(eq("user_2_id_token"), anyString());
-                doReturn("10004").when(fetchGoogleMock).sub(eq("user_4_id_token"), anyString());
-        }
+public class FollowSubjectControllerTests extends AuthorizedControllerTests<FollowSubjectController> {
 
         @Test
         public void Should_Result_In_Bad_Request_When_IdToeknString_Null() {

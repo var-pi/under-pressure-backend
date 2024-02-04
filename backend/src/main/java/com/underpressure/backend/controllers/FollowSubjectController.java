@@ -1,7 +1,6 @@
 package com.underpressure.backend.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,14 +22,11 @@ import com.underpressure.backend.exceptions.RequestException;
 @RestController
 public class FollowSubjectController extends AuthenticatedPostController<String, FollowSubjectRequestBody> {
 
-    @Value("${spring.security.oauth2.client.registration.google.client-id}")
-    private String clientId;
+    @Autowired
+    Fetch.DB fetchDB;
 
     @Autowired
     Fetch.Google fetchGoogle;
-
-    @Autowired
-    Fetch.DB fetchDB;
 
     @Autowired
     Add add;

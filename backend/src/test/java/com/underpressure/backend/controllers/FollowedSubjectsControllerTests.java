@@ -3,26 +3,30 @@ package com.underpressure.backend.controllers;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.jdbc.Sql;
 
 import com.underpressure.backend.controllers.classes.ApiResponse;
+import com.underpressure.backend.controllers.classes.AuthorizedControllerTests;
 import com.underpressure.backend.controllers.classes.request.body.FollowedSubjectsRequestBody;
 import com.underpressure.backend.controllers.helpers.Check;
+import com.underpressure.backend.controllers.helpers.Extract;
 import com.underpressure.backend.controllers.helpers.Fetch;
 import com.underpressure.backend.controllers.helpers.Validate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@JdbcTest
-@AutoConfigureTestDatabase
-@Import({ FollowedSubjectsController.class, Fetch.DB.class, Validate.class, Check.class })
+@Import({
+        FollowedSubjectsController.class,
+        Fetch.DB.class,
+        Fetch.Google.class,
+        Validate.class,
+        Check.class,
+        Extract.class
+})
+
 @Sql({
         "classpath:createSubjectsTable.sql",
         "classpath:fillSubjectsTable.sql",
@@ -31,16 +35,12 @@ import static org.assertj.core.api.Assertions.assertThat;
         "classpath:createSubjectInstancesTable.sql",
         "classpath:fillSubjectInstancesTable.sql"
 })
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-public class FollowedSubjectsControllerTests {
-
-    @Autowired
-    FollowedSubjectsController controller;
+public class FollowedSubjectsControllerTests extends AuthorizedControllerTests<FollowedSubjectsController> {
 
     @Test
     public void Should_Result_In_Bad_Request_When_UserId_Null() {
         ResponseEntity<ApiResponse<List<String>>> responseEntity = controller
-                .handle(new FollowedSubjectsRequestBody(null));
+                .handle(null, new FollowedSubjectsRequestBody());
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
         assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");
@@ -50,7 +50,7 @@ public class FollowedSubjectsControllerTests {
     @Test
     public void Should_Result_In_Not_Found_exception_When_User_Not_Found() {
         ResponseEntity<ApiResponse<List<String>>> responseEntity = controller
-                .handle(new FollowedSubjectsRequestBody(-1));
+                .handle("Bearer user_4_id_token", new FollowedSubjectsRequestBody());
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
         assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");
@@ -60,7 +60,7 @@ public class FollowedSubjectsControllerTests {
     @Test
     public void Should_Return_Followed_Subjects_When_Request_Valid() {
         ResponseEntity<ApiResponse<List<String>>> responseEntity = controller
-                .handle(new FollowedSubjectsRequestBody(1));
+                .handle("Bearer user_1_id_token", new FollowedSubjectsRequestBody());
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(responseEntity.getBody().getStatus()).isEqualTo("success");
