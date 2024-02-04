@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.underpressure.backend.controllers.classes.ApiResponse;
 import com.underpressure.backend.controllers.classes.abstracts.AuthenticatedPostController;
-import com.underpressure.backend.controllers.classes.request.body.UnfollowSubjectsRequestBody;
+import com.underpressure.backend.controllers.classes.request.body.UnfollowSubjectRequestBody;
 import com.underpressure.backend.controllers.helpers.Extract;
 import com.underpressure.backend.controllers.helpers.Fetch;
 import com.underpressure.backend.controllers.helpers.Set;
@@ -18,7 +18,7 @@ import com.underpressure.backend.controllers.helpers.Validate;
 import com.underpressure.backend.exceptions.RequestException;
 
 @RestController
-public class UnfollowSubjectController extends AuthenticatedPostController<String, UnfollowSubjectsRequestBody> {
+public class UnfollowSubjectController extends AuthenticatedPostController<String, UnfollowSubjectRequestBody> {
 
     @Autowired
     Fetch.DB fetchDB;
@@ -39,7 +39,7 @@ public class UnfollowSubjectController extends AuthenticatedPostController<Strin
     @PostMapping("/personal/subjects/unfollow")
     public ResponseEntity<ApiResponse<String>> handle(
             @RequestHeader("Authorization") String bearerToken,
-            @RequestBody UnfollowSubjectsRequestBody requestData) {
+            @RequestBody UnfollowSubjectRequestBody requestData) {
 
         try {
             validate.bearerToken(bearerToken);

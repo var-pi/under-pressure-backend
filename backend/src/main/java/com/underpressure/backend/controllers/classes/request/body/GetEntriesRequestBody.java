@@ -3,6 +3,9 @@ package com.underpressure.backend.controllers.classes.request.body;
 public class GetEntriesRequestBody {
     String subjectName;
 
+    public GetEntriesRequestBody() {
+    }
+
     public GetEntriesRequestBody(String subjectName) {
         this.subjectName = subjectName;
     }

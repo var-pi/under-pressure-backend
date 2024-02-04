@@ -4,6 +4,9 @@ public class AddEntryRequestBody {
     String subjectName;
     Integer stressLevel;
 
+    public AddEntryRequestBody() {
+    }
+
     public AddEntryRequestBody(String subjectName, Integer stressLevel) {
         this.subjectName = subjectName;
         this.stressLevel = stressLevel;
