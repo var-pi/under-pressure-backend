@@ -39,6 +39,9 @@ public class FollowSubjectController extends PostController<String, FollowSubjec
     @Autowired
     Validate validate;
 
+    @Autowired
+    Set set;
+
     @Override
     @PostMapping("/personal/subjects/follow")
     public ResponseEntity<ApiResponse<String>> handle(@RequestBody FollowSubjectRequestBody requestData) {
@@ -60,7 +63,7 @@ public class FollowSubjectController extends PostController<String, FollowSubjec
 
                 validate.isUnfollowed(subjectInstanceId, jdbcTemplate);
 
-                Set.toFollow(subjectInstanceId, jdbcTemplate);
+                set.toFollow(subjectInstanceId, jdbcTemplate);
 
                 return new ResponseEntity<>(
                         new ApiResponse<>(true, null, null),

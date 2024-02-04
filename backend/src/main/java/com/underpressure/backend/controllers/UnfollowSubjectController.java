@@ -23,6 +23,9 @@ public class UnfollowSubjectController extends PostController<String, UnfollowSu
     @Autowired
     Validate validate;
 
+    @Autowired
+    Set set;
+
     @Override
     @PostMapping("/personal/subjects/unfollow")
     public ResponseEntity<ApiResponse<String>> handle(UnfollowSubjectsRequestBody requestData) {
@@ -39,7 +42,7 @@ public class UnfollowSubjectController extends PostController<String, UnfollowSu
 
             validate.isFollowed(subjectInstanceId, jdbcTemplate);
 
-            Set.toNotFollow(subjectInstanceId, jdbcTemplate);
+            set.toNotFollow(subjectInstanceId, jdbcTemplate);
 
             return new ResponseEntity<>(
                     new ApiResponse<>(true, null, null),
