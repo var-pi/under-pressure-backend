@@ -10,7 +10,7 @@ import com.underpressure.backend.controllers.classes.ApiResponse;
 import com.underpressure.backend.controllers.classes.abstracts.PostController;
 import com.underpressure.backend.controllers.classes.request.body.AddEntryRequestBody;
 import com.underpressure.backend.controllers.helpers.Add;
-import com.underpressure.backend.controllers.helpers.Get;
+import com.underpressure.backend.controllers.helpers.FetchStatic;
 import com.underpressure.backend.controllers.helpers.If;
 import com.underpressure.backend.controllers.helpers.Update;
 import com.underpressure.backend.controllers.helpers.Validate;
@@ -32,13 +32,13 @@ public class AddEntryController extends PostController<String, AddEntryRequestBo
             Validate.subjectName(subjectName, jdbcTemplate);
             Validate.stressLevel(stressLevel);
 
-            Integer subjectId = Get.subjectId(subjectName, jdbcTemplate);
-            Integer subjectInstanceId = Get.subjectInstanceId(userId, subjectId, jdbcTemplate);
+            Integer subjectId = FetchStatic.subjectId(subjectName, jdbcTemplate);
+            Integer subjectInstanceId = FetchStatic.subjectInstanceId(userId, subjectId, jdbcTemplate);
 
             Validate.isFollowed(subjectInstanceId, jdbcTemplate);
 
             if (If.entryExists(subjectInstanceId, jdbcTemplate)) {
-                Integer entryId = Get.todaysEntryId(subjectInstanceId, jdbcTemplate);
+                Integer entryId = FetchStatic.todaysEntryId(subjectInstanceId, jdbcTemplate);
 
                 Update.entry(entryId, stressLevel, jdbcTemplate);
 

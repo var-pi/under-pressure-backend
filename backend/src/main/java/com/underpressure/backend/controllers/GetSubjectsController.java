@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.underpressure.backend.controllers.classes.ApiResponse;
 import com.underpressure.backend.controllers.classes.abstracts.GetController;
 import com.underpressure.backend.controllers.classes.request.params.GetSubjectsParams;
-import com.underpressure.backend.controllers.helpers.Get;
+import com.underpressure.backend.controllers.helpers.FetchStatic;
 
 @RestController
 public class GetSubjectsController extends GetController<List<String>, GetSubjectsParams> {
@@ -21,7 +21,7 @@ public class GetSubjectsController extends GetController<List<String>, GetSubjec
     public ResponseEntity<ApiResponse<List<String>>> handle(@ModelAttribute GetSubjectsParams params) {
 
         return new ResponseEntity<>(
-                new ApiResponse<>(true, Get.subjects(jdbcTemplate), null),
+                new ApiResponse<>(true, FetchStatic.subjects(jdbcTemplate), null),
                 HttpStatus.OK);
 
     }

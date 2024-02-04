@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.underpressure.backend.controllers.classes.ApiResponse;
 import com.underpressure.backend.controllers.classes.abstracts.PostController;
 import com.underpressure.backend.controllers.classes.request.body.FollowedSubjectsRequestBody;
-import com.underpressure.backend.controllers.helpers.Get;
+import com.underpressure.backend.controllers.helpers.FetchStatic;
 import com.underpressure.backend.controllers.helpers.Validate;
 import com.underpressure.backend.exceptions.RequestException;
 
@@ -27,7 +27,7 @@ public class FollowedSubjectsController extends PostController<List<String>, Fol
 
             Validate.userId(userId, jdbcTemplate);
 
-            List<String> followedSubjects = Get.followedSubjects(userId, jdbcTemplate);
+            List<String> followedSubjects = FetchStatic.followedSubjects(userId, jdbcTemplate);
             return new ResponseEntity<>(
                     new ApiResponse<>(true, followedSubjects, null),
                     HttpStatus.OK);

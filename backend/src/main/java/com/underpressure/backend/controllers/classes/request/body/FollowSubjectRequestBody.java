@@ -1,20 +1,15 @@
 package com.underpressure.backend.controllers.classes.request.body;
 
 public class FollowSubjectRequestBody {
-    private Integer userId;
+    private String idTokenString;
     private String subjectName;
 
-    public FollowSubjectRequestBody(Integer userId, String subjectName) {
-        this.userId = userId;
+    public FollowSubjectRequestBody() {
+    }
+
+    public FollowSubjectRequestBody(String idTokenString, String subjectName) {
+        this.idTokenString = idTokenString;
         this.subjectName = subjectName;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
     }
 
     public String getSubjectName() {
@@ -23,6 +18,14 @@ public class FollowSubjectRequestBody {
 
     public void setSubjectName(String subjectName) {
         this.subjectName = subjectName;
+    }
+
+    public String getIdTokenString() {
+        return idTokenString;
+    }
+
+    public void setIdTokenString(String idToken) {
+        this.idTokenString = idToken;
     }
 
 }

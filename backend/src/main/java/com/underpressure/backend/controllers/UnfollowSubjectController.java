@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.underpressure.backend.controllers.classes.ApiResponse;
 import com.underpressure.backend.controllers.classes.abstracts.PostController;
 import com.underpressure.backend.controllers.classes.request.body.UnfollowSubjectsRequestBody;
-import com.underpressure.backend.controllers.helpers.Get;
+import com.underpressure.backend.controllers.helpers.FetchStatic;
 import com.underpressure.backend.controllers.helpers.Set;
 import com.underpressure.backend.controllers.helpers.Validate;
 import com.underpressure.backend.exceptions.RequestException;
@@ -27,8 +27,8 @@ public class UnfollowSubjectController extends PostController<String, UnfollowSu
             Validate.userId(userId, jdbcTemplate);
             Validate.subjectName(subjectName, jdbcTemplate);
 
-            Integer subjectId = Get.subjectId(subjectName, jdbcTemplate);
-            Integer subjectInstanceId = Get.subjectInstanceId(userId, subjectId, jdbcTemplate);
+            Integer subjectId = FetchStatic.subjectId(subjectName, jdbcTemplate);
+            Integer subjectInstanceId = FetchStatic.subjectInstanceId(userId, subjectId, jdbcTemplate);
 
             Validate.isFollowed(subjectInstanceId, jdbcTemplate);
 

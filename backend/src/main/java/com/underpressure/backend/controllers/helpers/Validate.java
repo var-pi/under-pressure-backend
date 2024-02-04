@@ -10,6 +10,7 @@ import com.underpressure.backend.exceptions.already_exists.UserAlreadyExistsExce
 import com.underpressure.backend.exceptions.does_not_exist.SubjectDoesNotExist;
 import com.underpressure.backend.exceptions.does_not_exist.UserDoesNotExistException;
 import com.underpressure.backend.exceptions.parameter.CodeParameterException;
+import com.underpressure.backend.exceptions.parameter.IdTokenStringParameterException;
 import com.underpressure.backend.exceptions.parameter.StressLevelParameterException;
 import com.underpressure.backend.exceptions.parameter.SubjectNameParameterException;
 import com.underpressure.backend.exceptions.parameter.UserIdParameterException;
@@ -75,5 +76,10 @@ public class Validate {
     public static void code(String code) throws RequestException {
         if (code == null)
             throw new CodeParameterException();
+    }
+
+    public static void idTokenString(String idTokenString) throws RequestException {
+        if (idTokenString == null)
+            throw new IdTokenStringParameterException();
     }
 }
