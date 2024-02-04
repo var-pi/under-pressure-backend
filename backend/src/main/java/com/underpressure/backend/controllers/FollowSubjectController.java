@@ -12,8 +12,8 @@ import com.underpressure.backend.controllers.classes.ApiResponse;
 import com.underpressure.backend.controllers.classes.abstracts.PostController;
 import com.underpressure.backend.controllers.classes.request.body.FollowSubjectRequestBody;
 import com.underpressure.backend.controllers.helpers.Add;
+import com.underpressure.backend.controllers.helpers.Check;
 import com.underpressure.backend.controllers.helpers.Fetch;
-import com.underpressure.backend.controllers.helpers.If;
 import com.underpressure.backend.controllers.helpers.Set;
 import com.underpressure.backend.controllers.helpers.Validate;
 import com.underpressure.backend.exceptions.RequestException;
@@ -33,6 +33,9 @@ public class FollowSubjectController extends PostController<String, FollowSubjec
     @Autowired
     Add add;
 
+    @Autowired
+    Check check;
+
     @Override
     @PostMapping("/personal/subjects/follow")
     public ResponseEntity<ApiResponse<String>> handle(@RequestBody FollowSubjectRequestBody requestData) {
@@ -48,7 +51,7 @@ public class FollowSubjectController extends PostController<String, FollowSubjec
             Validate.userId(userId, jdbcTemplate);
 
             Integer subjectId = fetchDB.subjectId(subjectName, jdbcTemplate);
-            if (If.subjectInstanceExists(userId, subjectId, jdbcTemplate)) {
+            if (check.subjectInstanceExists(userId, subjectId, jdbcTemplate)) {
                 Integer subjectInstanceId = fetchDB.subjectInstanceId(userId, subjectId,
                         jdbcTemplate);
 

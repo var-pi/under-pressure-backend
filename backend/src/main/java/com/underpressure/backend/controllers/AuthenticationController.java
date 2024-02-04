@@ -24,8 +24,8 @@ import com.underpressure.backend.controllers.classes.abstracts.PostController;
 import com.underpressure.backend.controllers.classes.request.body.AuthenticationBody;
 import com.underpressure.backend.controllers.classes.request.data.OAuthTokenResponse;
 import com.underpressure.backend.controllers.helpers.Add;
+import com.underpressure.backend.controllers.helpers.Check;
 import com.underpressure.backend.controllers.helpers.Fetch;
-import com.underpressure.backend.controllers.helpers.If;
 import com.underpressure.backend.controllers.helpers.Validate;
 import com.underpressure.backend.exceptions.RequestException;
 import com.underpressure.backend.exceptions.unexpected.AuthenticationFailedException;
@@ -39,6 +39,9 @@ public class AuthenticationController extends PostController<String, Authenticat
 
     @Autowired
     Add add;
+
+    @Autowired
+    Check check;
 
     RestTemplate restTemplate = new RestTemplate();
 
@@ -72,7 +75,7 @@ public class AuthenticationController extends PostController<String, Authenticat
             Payload userInfo = fetchGoogle.userInfo(idTokenString, clientId);
 
             String googleSub = userInfo.getSubject();
-            if (!If.userWithGoogleSubExists(googleSub, jdbcTemplate)) {
+            if (!check.userWithGoogleSubExists(googleSub, jdbcTemplate)) {
                 add.user(userInfo, jdbcTemplate);
 
                 return new ResponseEntity<>(

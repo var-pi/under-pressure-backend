@@ -1,5 +1,6 @@
 package com.underpressure.backend.controllers.helpers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -17,6 +18,9 @@ import com.underpressure.backend.exceptions.parameter.UserIdParameterException;
 import com.underpressure.backend.exceptions.range.StressLevelRangeException;
 
 public class Validate {
+
+    // @Autowired
+    // Check check;
 
     public static void userId(Integer userId, JdbcTemplate jdbcTemplate, boolean hasToExist) throws RequestException {
         if (userId == null)
@@ -59,17 +63,17 @@ public class Validate {
     }
 
     public static void isFollowed(Integer subjectInstanceId, JdbcTemplate jdbcTemplate) throws RequestException {
-        if (!If.subjectInstanceFollowed(subjectInstanceId, jdbcTemplate))
+        if (!IfStatic.subjectInstanceFollowed(subjectInstanceId, jdbcTemplate))
             throw new SubjectAlreadyUnfollowedException();
     }
 
     public static void isUnfollowed(Integer subjectInstanceId, JdbcTemplate jdbcTemplate) throws RequestException {
-        if (If.subjectInstanceFollowed(subjectInstanceId, jdbcTemplate))
+        if (IfStatic.subjectInstanceFollowed(subjectInstanceId, jdbcTemplate))
             throw new SubjectAlreadyFollowedException();
     }
 
     public static void userDoesNotExists(Integer userId, JdbcTemplate jdbcTemplate) throws RequestException {
-        if (If.userExists(userId, jdbcTemplate))
+        if (IfStatic.userExists(userId, jdbcTemplate))
             throw new UserAlreadyExistsException();
     }
 

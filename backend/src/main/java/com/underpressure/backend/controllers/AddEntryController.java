@@ -12,7 +12,7 @@ import com.underpressure.backend.controllers.classes.abstracts.PostController;
 import com.underpressure.backend.controllers.classes.request.body.AddEntryRequestBody;
 import com.underpressure.backend.controllers.helpers.Add;
 import com.underpressure.backend.controllers.helpers.Fetch;
-import com.underpressure.backend.controllers.helpers.If;
+import com.underpressure.backend.controllers.helpers.Check;
 import com.underpressure.backend.controllers.helpers.Update;
 import com.underpressure.backend.controllers.helpers.Validate;
 import com.underpressure.backend.exceptions.RequestException;
@@ -25,6 +25,9 @@ public class AddEntryController extends PostController<String, AddEntryRequestBo
 
     @Autowired
     Add add;
+
+    @Autowired
+    Check check;
 
     @Override
     @PostMapping("/personal/entries/add")
@@ -44,7 +47,7 @@ public class AddEntryController extends PostController<String, AddEntryRequestBo
 
             Validate.isFollowed(subjectInstanceId, jdbcTemplate);
 
-            if (If.entryExists(subjectInstanceId, jdbcTemplate)) {
+            if (check.entryExists(subjectInstanceId, jdbcTemplate)) {
                 Integer entryId = fetchDB.todaysEntryId(subjectInstanceId, jdbcTemplate);
 
                 Update.entry(entryId, stressLevel, jdbcTemplate);
