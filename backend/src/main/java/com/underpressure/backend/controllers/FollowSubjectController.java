@@ -47,34 +47,29 @@ public class FollowSubjectController extends PostController<String, FollowSubjec
             Validate.userId(userId, jdbcTemplate);
 
             Integer subjectId = fetchDB.subjectId(subjectName, jdbcTemplate);
-            throw new Exception(Integer.toString(subjectId));
-            // if (If.subjectInstanceExists(userId, subjectId, jdbcTemplate)) {
-            // Integer subjectInstanceId = fetchGoogle.subjectInstanceId(userId, subjectId,
-            // jdbcTemplate);
+            if (If.subjectInstanceExists(userId, subjectId, jdbcTemplate)) {
+                Integer subjectInstanceId = fetchDB.subjectInstanceId(userId, subjectId,
+                        jdbcTemplate);
 
-            // Validate.isUnfollowed(subjectInstanceId, jdbcTemplate);
+                Validate.isUnfollowed(subjectInstanceId, jdbcTemplate);
 
-            // Set.toFollow(subjectInstanceId, jdbcTemplate);
+                Set.toFollow(subjectInstanceId, jdbcTemplate);
 
-            // return new ResponseEntity<>(
-            // new ApiResponse<>(true, null, null),
-            // HttpStatus.NO_CONTENT);
-            // } else {
-            // Add.subjectInstance(userId, subjectId, jdbcTemplate);
+                return new ResponseEntity<>(
+                        new ApiResponse<>(true, null, null),
+                        HttpStatus.NO_CONTENT);
+            } else {
+                Add.subjectInstance(userId, subjectId, jdbcTemplate);
 
-            // return new ResponseEntity<>(
-            // new ApiResponse<>(true, null, null),
-            // HttpStatus.CREATED);
-            // }
+                return new ResponseEntity<>(
+                        new ApiResponse<>(true, null, null),
+                        HttpStatus.CREATED);
+            }
 
         } catch (RequestException e) {
             return new ResponseEntity<>(
                     new ApiResponse<>(false, null, e.getMessage()),
                     e.getHttpStatus());
-        } catch (Exception e) {
-            return new ResponseEntity<>(
-                    new ApiResponse<>(false, null, e.getMessage()),
-                    HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

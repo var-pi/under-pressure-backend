@@ -22,9 +22,10 @@ import com.underpressure.backend.exceptions.does_not_exist.SubjectInstanceDoesNo
 import com.underpressure.backend.exceptions.does_not_exist.TodaysEntryDoesNotExistException;
 import com.underpressure.backend.exceptions.unexpected.UserVerificationException;
 
+@Component
 public class Fetch {
     @Component
-    public class DB {
+    public static class DB {
         public List<String> subjects(JdbcTemplate jdbcTemplate) {
             String sql = "SELECT name FROM subjects";
 
@@ -77,7 +78,7 @@ public class Fetch {
     }
 
     @Component
-    public class Google {
+    public static class Google {
         public Payload userInfo(String idTokenString, String clientId) throws UserVerificationException {
 
             // https://developers.google.com/identity/gsi/web/guides/verify-google-id-token
@@ -103,20 +104,18 @@ public class Fetch {
 
         }
 
-        public String googleSub(String idTokenString, String clientId)
+        public String sub(String idTokenString, String clientId)
                 throws UserVerificationException {
             return this.userInfo(idTokenString, clientId).getSubject();
         }
 
         public Integer userId(String idTokenString, JdbcTemplate jdbcTemplate, String clientId)
                 throws UserVerificationException {
-            // String googleSub = this.googleSub(idTokenString, clientId);
+            String googleSub = this.sub(idTokenString, clientId);
 
-            return 1;
+            String sql = "SELECT id FROM users WHERE google_sub=?";
 
-            // String sql = "SELECT id FROM users WHERE google_sub=?";
-
-            // return jdbcTemplate.queryForObject(sql, Integer.class, googleSub);
+            return jdbcTemplate.queryForObject(sql, Integer.class, googleSub);
         }
     }
 

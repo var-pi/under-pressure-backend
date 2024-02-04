@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,7 +41,7 @@ import static org.mockito.Mockito.*;
 
 @JdbcTest
 @AutoConfigureTestDatabase
-@Import(FollowSubjectController.class)
+@Import({ FollowSubjectController.class, Fetch.class })
 @Sql({
                 "classpath:createSubjectsTable.sql",
                 "classpath:fillSubjectsTable.sql",
@@ -52,7 +53,7 @@ import static org.mockito.Mockito.*;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class FollowSubjectControllerTests {
 
-        @MockBean
+        @SpyBean
         Fetch.Google fetchGoogleMock;
 
         @Autowired
@@ -60,8 +61,7 @@ public class FollowSubjectControllerTests {
 
         @BeforeEach
         public void setUp() throws UserVerificationException {
-                when(fetchGoogleMock.googleSub(any(), any())).thenReturn("10001");
-                when(fetchGoogleMock.userId(any(), any(), any())).thenReturn(1);
+                doReturn("10001").when(fetchGoogleMock).sub(any(), any());
         }
 
         @Test
@@ -99,7 +99,6 @@ public class FollowSubjectControllerTests {
                 ResponseEntity<ApiResponse<String>> responseEntity = controller
                                 .handle(new FollowSubjectRequestBody("id_token", "Subject 1"));
 
-                assertThat(responseEntity.getBody().getMessage()).isBlank();
                 assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
                 assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");
                 assertThat(responseEntity.getBody().getMessage()).isNotBlank();
