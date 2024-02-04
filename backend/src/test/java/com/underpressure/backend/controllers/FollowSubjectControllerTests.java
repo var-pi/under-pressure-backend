@@ -13,19 +13,15 @@ import com.underpressure.backend.controllers.classes.AuthorizedControllerTests;
 import com.underpressure.backend.controllers.classes.request.body.FollowSubjectRequestBody;
 import com.underpressure.backend.controllers.helpers.Add;
 import com.underpressure.backend.controllers.helpers.Check;
-import com.underpressure.backend.controllers.helpers.Extract;
-import com.underpressure.backend.controllers.helpers.Fetch;
 import com.underpressure.backend.controllers.helpers.Set;
 import com.underpressure.backend.controllers.helpers.Validate;
 
 @Import({
                 FollowSubjectController.class,
-                Fetch.class,
                 Add.class,
                 Check.class,
                 Validate.class,
-                Set.class,
-                Extract.class
+                Set.class
 })
 @Sql({
                 "classpath:createSubjectsTable.sql",

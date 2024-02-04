@@ -12,19 +12,14 @@ import com.underpressure.backend.controllers.classes.ApiResponse;
 import com.underpressure.backend.controllers.classes.AuthorizedControllerTests;
 import com.underpressure.backend.controllers.classes.request.body.UnfollowSubjectsRequestBody;
 import com.underpressure.backend.controllers.helpers.Check;
-import com.underpressure.backend.controllers.helpers.Extract;
-import com.underpressure.backend.controllers.helpers.Fetch;
 import com.underpressure.backend.controllers.helpers.Set;
 import com.underpressure.backend.controllers.helpers.Validate;
 
 @Import({
                 UnfollowSubjectController.class,
-                Fetch.DB.class,
-                Fetch.Google.class,
                 Validate.class,
                 Check.class,
-                Set.class,
-                Extract.class
+                Set.class
 })
 @Sql({
                 "classpath:createSubjectsTable.sql",

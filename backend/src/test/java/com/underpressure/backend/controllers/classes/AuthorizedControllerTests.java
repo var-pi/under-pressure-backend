@@ -8,10 +8,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.context.annotation.Import;
 
+import com.underpressure.backend.controllers.helpers.Extract;
 import com.underpressure.backend.controllers.helpers.Fetch;
 import com.underpressure.backend.exceptions.unexpected.UserVerificationException;
 
-@Import({ Fetch.Google.class })
+@Import({ Fetch.Google.class, Extract.class })
 public class AuthorizedControllerTests<T> extends ControllerTests<T> {
 
     @SpyBean
