@@ -1,5 +1,6 @@
 package com.underpressure.backend.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,7 +11,7 @@ import com.underpressure.backend.controllers.classes.ApiResponse;
 import com.underpressure.backend.controllers.classes.abstracts.PostController;
 import com.underpressure.backend.controllers.classes.request.body.AddEntryRequestBody;
 import com.underpressure.backend.controllers.helpers.Add;
-import com.underpressure.backend.controllers.helpers.FetchStatic;
+import com.underpressure.backend.controllers.helpers.Fetch;
 import com.underpressure.backend.controllers.helpers.If;
 import com.underpressure.backend.controllers.helpers.Update;
 import com.underpressure.backend.controllers.helpers.Validate;
@@ -18,6 +19,9 @@ import com.underpressure.backend.exceptions.RequestException;
 
 @RestController
 public class AddEntryController extends PostController<String, AddEntryRequestBody> {
+
+    @Autowired
+    Fetch.DB fetchDB;
 
     @Override
     @PostMapping("/personal/entries/add")
@@ -32,13 +36,13 @@ public class AddEntryController extends PostController<String, AddEntryRequestBo
             Validate.subjectName(subjectName, jdbcTemplate);
             Validate.stressLevel(stressLevel);
 
-            Integer subjectId = FetchStatic.subjectId(subjectName, jdbcTemplate);
-            Integer subjectInstanceId = FetchStatic.subjectInstanceId(userId, subjectId, jdbcTemplate);
+            Integer subjectId = fetchDB.subjectId(subjectName, jdbcTemplate);
+            Integer subjectInstanceId = fetchDB.subjectInstanceId(userId, subjectId, jdbcTemplate);
 
             Validate.isFollowed(subjectInstanceId, jdbcTemplate);
 
             if (If.entryExists(subjectInstanceId, jdbcTemplate)) {
-                Integer entryId = FetchStatic.todaysEntryId(subjectInstanceId, jdbcTemplate);
+                Integer entryId = fetchDB.todaysEntryId(subjectInstanceId, jdbcTemplate);
 
                 Update.entry(entryId, stressLevel, jdbcTemplate);
 

@@ -4,6 +4,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Base64;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -23,7 +24,7 @@ import com.underpressure.backend.controllers.classes.abstracts.PostController;
 import com.underpressure.backend.controllers.classes.request.body.AuthenticationBody;
 import com.underpressure.backend.controllers.classes.request.data.OAuthTokenResponse;
 import com.underpressure.backend.controllers.helpers.Add;
-import com.underpressure.backend.controllers.helpers.FetchStatic;
+import com.underpressure.backend.controllers.helpers.Fetch;
 import com.underpressure.backend.controllers.helpers.If;
 import com.underpressure.backend.controllers.helpers.Validate;
 import com.underpressure.backend.exceptions.RequestException;
@@ -32,6 +33,9 @@ import com.underpressure.backend.exceptions.unexpected.InternalServerError;
 
 @RestController
 public class AuthenticationController extends PostController<String, AuthenticationBody> {
+
+    @Autowired
+    Fetch.Google fetchGoogle;
 
     RestTemplate restTemplate = new RestTemplate();
 
@@ -62,7 +66,7 @@ public class AuthenticationController extends PostController<String, Authenticat
             String idTokenString = oAuthTokenResponse.getIdToken();
 
             // Verify the JWT (ex. not expired) and get the decoded OpenID Connect id.
-            Payload userInfo = FetchStatic.userInfo(idTokenString, clientId);
+            Payload userInfo = fetchGoogle.userInfo(idTokenString, clientId);
 
             String googleSub = userInfo.getSubject();
             if (!If.userWithGoogleSubExists(googleSub, jdbcTemplate)) {

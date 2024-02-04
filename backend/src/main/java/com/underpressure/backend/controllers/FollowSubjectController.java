@@ -11,14 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.underpressure.backend.controllers.classes.ApiResponse;
 import com.underpressure.backend.controllers.classes.abstracts.PostController;
 import com.underpressure.backend.controllers.classes.request.body.FollowSubjectRequestBody;
-import com.underpressure.backend.controllers.exceptions.NotFoundException;
 import com.underpressure.backend.controllers.helpers.Add;
 import com.underpressure.backend.controllers.helpers.Fetch;
 import com.underpressure.backend.controllers.helpers.If;
 import com.underpressure.backend.controllers.helpers.Set;
 import com.underpressure.backend.controllers.helpers.Validate;
 import com.underpressure.backend.exceptions.RequestException;
-import com.underpressure.backend.exceptions.unexpected.not_added.UserNotAddedException;
 
 @RestController
 public class FollowSubjectController extends PostController<String, FollowSubjectRequestBody> {

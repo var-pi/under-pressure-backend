@@ -14,10 +14,11 @@ import org.springframework.test.context.jdbc.Sql;
 
 import com.underpressure.backend.controllers.classes.ApiResponse;
 import com.underpressure.backend.controllers.classes.request.body.AuthenticationBody;
+import com.underpressure.backend.controllers.helpers.Fetch;
 
 @JdbcTest
 @AutoConfigureTestDatabase
-@Import(AuthenticationController.class)
+@Import({ AuthenticationController.class, Fetch.Google.class })
 @Sql({
         "classpath:createUsersTable.sql",
         "classpath:fillUsersTable.sql"

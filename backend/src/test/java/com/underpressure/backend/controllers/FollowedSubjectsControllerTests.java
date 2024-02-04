@@ -14,12 +14,13 @@ import org.springframework.test.context.jdbc.Sql;
 
 import com.underpressure.backend.controllers.classes.ApiResponse;
 import com.underpressure.backend.controllers.classes.request.body.FollowedSubjectsRequestBody;
+import com.underpressure.backend.controllers.helpers.Fetch;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @JdbcTest
 @AutoConfigureTestDatabase
-@Import(FollowedSubjectsController.class)
+@Import({ FollowedSubjectsController.class, Fetch.DB.class })
 @Sql({
         "classpath:createSubjectsTable.sql",
         "classpath:fillSubjectsTable.sql",
