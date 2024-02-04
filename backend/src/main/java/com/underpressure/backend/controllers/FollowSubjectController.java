@@ -54,13 +54,12 @@ public class FollowSubjectController extends PostControllerNew<String, FollowSub
             @RequestBody FollowSubjectRequestBody requestData) {
         try {
             String idTokenString = extract.token(bearerToken);
-            String subjectName = requestData.getSubjectName();
+            validate.bearerToken(idTokenString);
 
-            validate.idTokenString(idTokenString);
+            String subjectName = requestData.getSubjectName();
             validate.subjectName(subjectName, jdbcTemplate);
 
             Integer userId = fetchGoogle.userId(idTokenString, jdbcTemplate, clientId);
-            validate.userId(userId, jdbcTemplate);
 
             Integer subjectId = fetchDB.subjectId(subjectName, jdbcTemplate);
             if (check.subjectInstanceExists(userId, subjectId, jdbcTemplate)) {

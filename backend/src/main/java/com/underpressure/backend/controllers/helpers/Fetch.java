@@ -20,6 +20,7 @@ import com.underpressure.backend.exceptions.RequestException;
 import com.underpressure.backend.exceptions.does_not_exist.SubjectDoesNotExist;
 import com.underpressure.backend.exceptions.does_not_exist.SubjectInstanceDoesNotExistsException;
 import com.underpressure.backend.exceptions.does_not_exist.TodaysEntryDoesNotExistException;
+import com.underpressure.backend.exceptions.does_not_exist.UserDoesNotExistException;
 import com.underpressure.backend.exceptions.unexpected.UserVerificationException;
 
 @Component
@@ -116,12 +117,17 @@ public class Fetch {
         }
 
         public Integer userId(String idTokenString, JdbcTemplate jdbcTemplate, String clientId)
-                throws UserVerificationException {
+                throws UserVerificationException, UserDoesNotExistException {
             String googleSub = this.sub(idTokenString, clientId);
 
             String sql = "SELECT id FROM users WHERE google_sub=?";
 
-            return jdbcTemplate.queryForObject(sql, Integer.class, googleSub);
+            try {
+                return jdbcTemplate.queryForObject(sql, Integer.class, googleSub);
+            } catch (EmptyResultDataAccessException ex) {
+                throw new UserDoesNotExistException();
+            }
+
         }
     }
 

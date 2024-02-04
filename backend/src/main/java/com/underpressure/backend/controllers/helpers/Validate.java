@@ -12,7 +12,7 @@ import com.underpressure.backend.exceptions.already_exists.UserAlreadyExistsExce
 import com.underpressure.backend.exceptions.does_not_exist.SubjectDoesNotExist;
 import com.underpressure.backend.exceptions.does_not_exist.UserDoesNotExistException;
 import com.underpressure.backend.exceptions.parameter.CodeParameterException;
-import com.underpressure.backend.exceptions.parameter.IdTokenStringParameterException;
+import com.underpressure.backend.exceptions.parameter.BearerTokenParameterException;
 import com.underpressure.backend.exceptions.parameter.StressLevelParameterException;
 import com.underpressure.backend.exceptions.parameter.SubjectNameParameterException;
 import com.underpressure.backend.exceptions.parameter.UserIdParameterException;
@@ -25,6 +25,9 @@ public class Validate {
     Check check;
 
     public void userId(Integer userId, JdbcTemplate jdbcTemplate, boolean hasToExist) throws RequestException {
+
+        // TODO Is this method needed?
+
         if (userId == null)
             throw new UserIdParameterException();
 
@@ -39,6 +42,9 @@ public class Validate {
     }
 
     public void userId(Integer userId, JdbcTemplate jdbcTemplate) throws RequestException {
+
+        // TODO Is this method needed?
+
         userId(userId, jdbcTemplate, true);
     }
 
@@ -84,8 +90,9 @@ public class Validate {
             throw new CodeParameterException();
     }
 
-    public void idTokenString(String idTokenString) throws RequestException {
-        if (idTokenString == null)
-            throw new IdTokenStringParameterException();
+    public void bearerToken(String bearerToken) throws RequestException {
+        if (bearerToken == null)
+            throw new BearerTokenParameterException();
     }
+
 }
