@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.underpressure.backend.controllers.classes.ApiResponse;
-import com.underpressure.backend.controllers.classes.abstracts.PostController;
 import com.underpressure.backend.controllers.classes.abstracts.PostControllerNew;
 import com.underpressure.backend.controllers.classes.request.body.UnfollowSubjectsRequestBody;
 import com.underpressure.backend.controllers.helpers.Extract;
