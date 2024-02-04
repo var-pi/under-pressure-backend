@@ -17,11 +17,12 @@ import com.underpressure.backend.controllers.classes.request.body.AddEntryReques
 import com.underpressure.backend.controllers.helpers.Add;
 import com.underpressure.backend.controllers.helpers.Check;
 import com.underpressure.backend.controllers.helpers.Fetch;
+import com.underpressure.backend.controllers.helpers.Update;
 import com.underpressure.backend.controllers.helpers.Validate;
 
 @JdbcTest
 @AutoConfigureTestDatabase
-@Import({ AddEntryController.class, Fetch.DB.class, Add.class, Check.class, Validate.class })
+@Import({ AddEntryController.class, Fetch.DB.class, Add.class, Check.class, Validate.class, Update.class })
 @Sql({
                 "classpath:createSubjectsTable.sql",
                 "classpath:fillSubjectsTable.sql",
