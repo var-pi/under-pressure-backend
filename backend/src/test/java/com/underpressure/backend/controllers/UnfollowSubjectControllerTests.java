@@ -14,11 +14,13 @@ import org.springframework.test.context.jdbc.Sql;
 
 import com.underpressure.backend.controllers.classes.ApiResponse;
 import com.underpressure.backend.controllers.classes.request.body.UnfollowSubjectsRequestBody;
+import com.underpressure.backend.controllers.helpers.Check;
 import com.underpressure.backend.controllers.helpers.Fetch;
+import com.underpressure.backend.controllers.helpers.Validate;
 
 @JdbcTest
 @AutoConfigureTestDatabase
-@Import({ UnfollowSubjectController.class, Fetch.DB.class })
+@Import({ UnfollowSubjectController.class, Fetch.DB.class, Validate.class, Check.class })
 @Sql({
                 "classpath:createSubjectsTable.sql",
                 "classpath:fillSubjectsTable.sql",

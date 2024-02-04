@@ -13,7 +13,7 @@ public class Parse {
         Integer userId = (int) requestData.get("userId");
 
         if (validate)
-            Validate.userId(userId, jdbcTemplate);
+            ValidateStatic.userId(userId, jdbcTemplate);
 
         return userId;
     }
@@ -26,7 +26,7 @@ public class Parse {
             throws RequestException {
         String subjectName = (String) requestData.get("subjectName");
 
-        Validate.subjectName(subjectName, jdbcTemplate);
+        ValidateStatic.subjectName(subjectName, jdbcTemplate);
 
         return subjectName;
     }
@@ -35,7 +35,7 @@ public class Parse {
             throws RequestException {
         Integer stressLevel = (Integer) requestData.get("stressLevel");
 
-        Validate.stressLevel(stressLevel);
+        ValidateStatic.stressLevel(stressLevel);
 
         return stressLevel;
     }

@@ -17,11 +17,13 @@ import org.springframework.test.context.jdbc.Sql;
 import com.underpressure.backend.controllers.classes.ApiResponse;
 import com.underpressure.backend.controllers.classes.request.body.GetEntriesRequestBody;
 import com.underpressure.backend.controllers.classes.request.data.EntryData;
+import com.underpressure.backend.controllers.helpers.Check;
 import com.underpressure.backend.controllers.helpers.Fetch;
+import com.underpressure.backend.controllers.helpers.Validate;
 
 @JdbcTest
 @AutoConfigureTestDatabase
-@Import({ GetEntriesController.class, Fetch.DB.class })
+@Import({ GetEntriesController.class, Fetch.DB.class, Validate.class, Check.class })
 @Sql({
         "classpath:createSubjectsTable.sql",
         "classpath:fillSubjectsTable.sql",

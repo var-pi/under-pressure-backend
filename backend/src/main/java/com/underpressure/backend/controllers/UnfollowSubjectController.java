@@ -20,6 +20,9 @@ public class UnfollowSubjectController extends PostController<String, UnfollowSu
     @Autowired
     Fetch.DB fetchDB;
 
+    @Autowired
+    Validate validate;
+
     @Override
     @PostMapping("/personal/subjects/unfollow")
     public ResponseEntity<ApiResponse<String>> handle(UnfollowSubjectsRequestBody requestData) {
@@ -28,13 +31,13 @@ public class UnfollowSubjectController extends PostController<String, UnfollowSu
             Integer userId = requestData.getUserId();
             String subjectName = requestData.getSubjectName();
 
-            Validate.userId(userId, jdbcTemplate);
-            Validate.subjectName(subjectName, jdbcTemplate);
+            validate.userId(userId, jdbcTemplate);
+            validate.subjectName(subjectName, jdbcTemplate);
 
             Integer subjectId = fetchDB.subjectId(subjectName, jdbcTemplate);
             Integer subjectInstanceId = fetchDB.subjectInstanceId(userId, subjectId, jdbcTemplate);
 
-            Validate.isFollowed(subjectInstanceId, jdbcTemplate);
+            validate.isFollowed(subjectInstanceId, jdbcTemplate);
 
             Set.toNotFollow(subjectInstanceId, jdbcTemplate);
 

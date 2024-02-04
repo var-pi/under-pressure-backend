@@ -43,6 +43,9 @@ public class AuthenticationController extends PostController<String, Authenticat
     @Autowired
     Check check;
 
+    @Autowired
+    Validate validate;
+
     RestTemplate restTemplate = new RestTemplate();
 
     @Value("${spring.security.oauth2.client.provider.google.token-uri}")
@@ -62,7 +65,7 @@ public class AuthenticationController extends PostController<String, Authenticat
 
         try {
             String code = entity.getCode(); // Authorisation code from frontend
-            Validate.code(code);
+            validate.code(code);
 
             // User granted us some permissions and now we can request an access token from
             // the authorisation/resource server.

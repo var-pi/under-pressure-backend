@@ -29,6 +29,9 @@ public class AddEntryController extends PostController<String, AddEntryRequestBo
     @Autowired
     Check check;
 
+    @Autowired
+    Validate validate;
+
     @Override
     @PostMapping("/personal/entries/add")
     public ResponseEntity<ApiResponse<String>> handle(@RequestBody AddEntryRequestBody requestData) {
@@ -38,14 +41,14 @@ public class AddEntryController extends PostController<String, AddEntryRequestBo
             String subjectName = requestData.getSubjectName();
             Integer stressLevel = requestData.getStressLevel();
 
-            Validate.userId(userId, jdbcTemplate);
-            Validate.subjectName(subjectName, jdbcTemplate);
-            Validate.stressLevel(stressLevel);
+            validate.userId(userId, jdbcTemplate);
+            validate.subjectName(subjectName, jdbcTemplate);
+            validate.stressLevel(stressLevel);
 
             Integer subjectId = fetchDB.subjectId(subjectName, jdbcTemplate);
             Integer subjectInstanceId = fetchDB.subjectInstanceId(userId, subjectId, jdbcTemplate);
 
-            Validate.isFollowed(subjectInstanceId, jdbcTemplate);
+            validate.isFollowed(subjectInstanceId, jdbcTemplate);
 
             if (check.entryExists(subjectInstanceId, jdbcTemplate)) {
                 Integer entryId = fetchDB.todaysEntryId(subjectInstanceId, jdbcTemplate);

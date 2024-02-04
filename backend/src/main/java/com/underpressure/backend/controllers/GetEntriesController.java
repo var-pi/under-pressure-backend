@@ -23,6 +23,9 @@ public class GetEntriesController extends PostController<List<EntryData>, GetEnt
     @Autowired
     Fetch.DB fetchDB;
 
+    @Autowired
+    Validate validate;
+
     @Override
     @PostMapping("/personal/entries")
     public ResponseEntity<ApiResponse<List<EntryData>>> handle(@RequestBody GetEntriesRequestBody requestData) {
@@ -31,8 +34,8 @@ public class GetEntriesController extends PostController<List<EntryData>, GetEnt
             Integer userId = requestData.getUserId();
             String subjectName = requestData.getSubjectName();
 
-            Validate.userId(userId, jdbcTemplate);
-            Validate.subjectName(subjectName, jdbcTemplate);
+            validate.userId(userId, jdbcTemplate);
+            validate.subjectName(subjectName, jdbcTemplate);
 
             Integer subjectId = fetchDB.subjectId(subjectName, jdbcTemplate);
             Integer subjectInstanceId = fetchDB.subjectInstanceId(userId, subjectId, jdbcTemplate);

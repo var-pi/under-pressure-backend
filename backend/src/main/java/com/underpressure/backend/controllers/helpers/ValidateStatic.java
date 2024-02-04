@@ -3,7 +3,6 @@ package com.underpressure.backend.controllers.helpers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
 
 import com.underpressure.backend.exceptions.RequestException;
 import com.underpressure.backend.exceptions.already_exists.SubjectAlreadyFollowedException;
@@ -18,13 +17,13 @@ import com.underpressure.backend.exceptions.parameter.SubjectNameParameterExcept
 import com.underpressure.backend.exceptions.parameter.UserIdParameterException;
 import com.underpressure.backend.exceptions.range.StressLevelRangeException;
 
-@Component
-public class Validate {
+public class ValidateStatic {
 
-    @Autowired
-    Check check;
+    // TODO convert from using static to using a bean.
+    // @Autowired
+    // Check check;
 
-    public void userId(Integer userId, JdbcTemplate jdbcTemplate, boolean hasToExist) throws RequestException {
+    public static void userId(Integer userId, JdbcTemplate jdbcTemplate, boolean hasToExist) throws RequestException {
         if (userId == null)
             throw new UserIdParameterException();
 
@@ -38,11 +37,11 @@ public class Validate {
             }
     }
 
-    public void userId(Integer userId, JdbcTemplate jdbcTemplate) throws RequestException {
+    public static void userId(Integer userId, JdbcTemplate jdbcTemplate) throws RequestException {
         userId(userId, jdbcTemplate, true);
     }
 
-    public void subjectName(String subjectName, JdbcTemplate jdbcTemplate) throws RequestException {
+    public static void subjectName(String subjectName, JdbcTemplate jdbcTemplate) throws RequestException {
 
         if (subjectName == null)
             throw new SubjectNameParameterException();
@@ -56,7 +55,7 @@ public class Validate {
         }
     }
 
-    public void stressLevel(Integer stressLevel) throws RequestException {
+    public static void stressLevel(Integer stressLevel) throws RequestException {
         if (stressLevel == null)
             throw new StressLevelParameterException();
 
@@ -64,27 +63,27 @@ public class Validate {
             throw new StressLevelRangeException();
     }
 
-    public void isFollowed(Integer subjectInstanceId, JdbcTemplate jdbcTemplate) throws RequestException {
-        if (!check.subjectInstanceFollowed(subjectInstanceId, jdbcTemplate))
+    public static void isFollowed(Integer subjectInstanceId, JdbcTemplate jdbcTemplate) throws RequestException {
+        if (!IfStatic.subjectInstanceFollowed(subjectInstanceId, jdbcTemplate))
             throw new SubjectAlreadyUnfollowedException();
     }
 
-    public void isUnfollowed(Integer subjectInstanceId, JdbcTemplate jdbcTemplate) throws RequestException {
-        if (check.subjectInstanceFollowed(subjectInstanceId, jdbcTemplate))
+    public static void isUnfollowed(Integer subjectInstanceId, JdbcTemplate jdbcTemplate) throws RequestException {
+        if (IfStatic.subjectInstanceFollowed(subjectInstanceId, jdbcTemplate))
             throw new SubjectAlreadyFollowedException();
     }
 
-    public void userDoesNotExists(Integer userId, JdbcTemplate jdbcTemplate) throws RequestException {
-        if (check.userExists(userId, jdbcTemplate))
+    public static void userDoesNotExists(Integer userId, JdbcTemplate jdbcTemplate) throws RequestException {
+        if (IfStatic.userExists(userId, jdbcTemplate))
             throw new UserAlreadyExistsException();
     }
 
-    public void code(String code) throws RequestException {
+    public static void code(String code) throws RequestException {
         if (code == null)
             throw new CodeParameterException();
     }
 
-    public void idTokenString(String idTokenString) throws RequestException {
+    public static void idTokenString(String idTokenString) throws RequestException {
         if (idTokenString == null)
             throw new IdTokenStringParameterException();
     }

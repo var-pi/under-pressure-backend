@@ -36,6 +36,9 @@ public class FollowSubjectController extends PostController<String, FollowSubjec
     @Autowired
     Check check;
 
+    @Autowired
+    Validate validate;
+
     @Override
     @PostMapping("/personal/subjects/follow")
     public ResponseEntity<ApiResponse<String>> handle(@RequestBody FollowSubjectRequestBody requestData) {
@@ -44,18 +47,18 @@ public class FollowSubjectController extends PostController<String, FollowSubjec
             String idTokenString = requestData.getIdTokenString();
             String subjectName = requestData.getSubjectName();
 
-            Validate.idTokenString(idTokenString);
-            Validate.subjectName(subjectName, jdbcTemplate);
+            validate.idTokenString(idTokenString);
+            validate.subjectName(subjectName, jdbcTemplate);
 
             Integer userId = fetchGoogle.userId(idTokenString, jdbcTemplate, clientId);
-            Validate.userId(userId, jdbcTemplate);
+            validate.userId(userId, jdbcTemplate);
 
             Integer subjectId = fetchDB.subjectId(subjectName, jdbcTemplate);
             if (check.subjectInstanceExists(userId, subjectId, jdbcTemplate)) {
                 Integer subjectInstanceId = fetchDB.subjectInstanceId(userId, subjectId,
                         jdbcTemplate);
 
-                Validate.isUnfollowed(subjectInstanceId, jdbcTemplate);
+                validate.isUnfollowed(subjectInstanceId, jdbcTemplate);
 
                 Set.toFollow(subjectInstanceId, jdbcTemplate);
 

@@ -22,6 +22,9 @@ public class FollowedSubjectsController extends PostController<List<String>, Fol
     @Autowired
     Fetch.DB fetchDB;
 
+    @Autowired
+    Validate validate;
+
     @Override
     @PostMapping("/personal/subjects")
     public ResponseEntity<ApiResponse<List<String>>> handle(@RequestBody FollowedSubjectsRequestBody requestBody) {
@@ -29,7 +32,7 @@ public class FollowedSubjectsController extends PostController<List<String>, Fol
         try {
             Integer userId = requestBody.getUserId();
 
-            Validate.userId(userId, jdbcTemplate);
+            validate.userId(userId, jdbcTemplate);
 
             List<String> followedSubjects = fetchDB.followedSubjects(userId, jdbcTemplate);
             return new ResponseEntity<>(
