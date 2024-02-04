@@ -80,9 +80,9 @@ public class Fetch {
     @Component
     public static class Google {
 
-        // * This method is not covered with tests!
-
         public Payload userInfo(String idTokenString, String clientId) throws UserVerificationException {
+
+            // * This method is not a part of integration tests.
 
             // https://developers.google.com/identity/gsi/web/guides/verify-google-id-token
 
@@ -109,6 +109,9 @@ public class Fetch {
 
         public String sub(String idTokenString, String clientId)
                 throws UserVerificationException {
+
+            // * This method is mocked in integration tests.
+
             return this.userInfo(idTokenString, clientId).getSubject();
         }
 
