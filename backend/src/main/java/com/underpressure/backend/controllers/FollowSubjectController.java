@@ -6,10 +6,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.underpressure.backend.controllers.classes.ApiResponse;
-import com.underpressure.backend.controllers.classes.abstracts.PostController;
+import com.underpressure.backend.controllers.classes.abstracts.PostControllerNew;
 import com.underpressure.backend.controllers.classes.request.body.FollowSubjectRequestBody;
 import com.underpressure.backend.controllers.helpers.Add;
 import com.underpressure.backend.controllers.helpers.Check;
@@ -19,7 +20,7 @@ import com.underpressure.backend.controllers.helpers.Validate;
 import com.underpressure.backend.exceptions.RequestException;
 
 @RestController
-public class FollowSubjectController extends PostController<String, FollowSubjectRequestBody> {
+public class FollowSubjectController extends PostControllerNew<String, FollowSubjectRequestBody> {
 
     @Value("${spring.security.oauth2.client.registration.google.client-id}")
     private String clientId;
@@ -42,12 +43,24 @@ public class FollowSubjectController extends PostController<String, FollowSubjec
     @Autowired
     Set set;
 
+    private String extractToken(String bearerToken) {
+        String[] tokenParts = bearerToken.split("\\s+");
+
+        if (tokenParts.length == 2 && "Bearer".equals(tokenParts[0])) {
+            return tokenParts[1];
+        } else {
+            // Handle invalid or unexpected Authorization header format
+            throw new IllegalArgumentException("Invalid Authorization header format");
+        }
+    }
+
     @Override
     @PostMapping("/personal/subjects/follow")
-    public ResponseEntity<ApiResponse<String>> handle(@RequestBody FollowSubjectRequestBody requestData) {
-
+    public ResponseEntity<ApiResponse<String>> handle(
+            @RequestHeader("Authorization") String bearerToken,
+            @RequestBody FollowSubjectRequestBody requestData) {
         try {
-            String idTokenString = requestData.getIdTokenString();
+            String idTokenString = extractToken(bearerToken);
             String subjectName = requestData.getSubjectName();
 
             validate.idTokenString(idTokenString);
