@@ -5,23 +5,28 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.underpressure.backend.controllers.classes.ApiResponse;
-import com.underpressure.backend.controllers.classes.abstracts.PostController;
+import com.underpressure.backend.controllers.classes.abstracts.AuthenticatedPostController;
 import com.underpressure.backend.controllers.classes.request.body.AddEntryRequestBody;
 import com.underpressure.backend.controllers.helpers.Add;
 import com.underpressure.backend.controllers.helpers.Fetch;
 import com.underpressure.backend.controllers.helpers.Update;
 import com.underpressure.backend.controllers.helpers.Check;
+import com.underpressure.backend.controllers.helpers.Extract;
 import com.underpressure.backend.controllers.helpers.Validate;
 import com.underpressure.backend.exceptions.RequestException;
 
 @RestController
-public class AddEntryController extends PostController<String, AddEntryRequestBody> {
+public class AddEntryController extends AuthenticatedPostController<String, AddEntryRequestBody> {
 
     @Autowired
     Fetch.DB fetchDB;
+
+    @Autowired
+    Fetch.Google fetchGoogle;
 
     @Autowired
     Add add;
@@ -35,18 +40,26 @@ public class AddEntryController extends PostController<String, AddEntryRequestBo
     @Autowired
     Update update;
 
+    @Autowired
+    Extract extract;
+
     @Override
     @PostMapping("/personal/entries/add")
-    public ResponseEntity<ApiResponse<String>> handle(@RequestBody AddEntryRequestBody requestData) {
+    public ResponseEntity<ApiResponse<String>> handle(
+            @RequestHeader("Authorization") String bearerToken,
+            @RequestBody AddEntryRequestBody requestData) {
 
         try {
-            Integer userId = requestData.getUserId();
-            String subjectName = requestData.getSubjectName();
-            Integer stressLevel = requestData.getStressLevel();
+            validate.bearerToken(bearerToken);
+            String idTokenString = extract.token(bearerToken);
 
-            validate.userId(userId, jdbcTemplate);
+            String subjectName = requestData.getSubjectName();
             validate.subjectName(subjectName, jdbcTemplate);
+
+            Integer stressLevel = requestData.getStressLevel();
             validate.stressLevel(stressLevel);
+
+            Integer userId = fetchGoogle.userId(idTokenString, jdbcTemplate, clientId);
 
             Integer subjectId = fetchDB.subjectId(subjectName, jdbcTemplate);
             Integer subjectInstanceId = fetchDB.subjectInstanceId(userId, subjectId, jdbcTemplate);

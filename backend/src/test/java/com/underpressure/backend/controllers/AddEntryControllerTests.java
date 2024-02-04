@@ -13,16 +13,25 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.jdbc.Sql;
 
 import com.underpressure.backend.controllers.classes.ApiResponse;
+import com.underpressure.backend.controllers.classes.AuthorizedControllerTests;
 import com.underpressure.backend.controllers.classes.request.body.AddEntryRequestBody;
 import com.underpressure.backend.controllers.helpers.Add;
 import com.underpressure.backend.controllers.helpers.Check;
+import com.underpressure.backend.controllers.helpers.Extract;
 import com.underpressure.backend.controllers.helpers.Fetch;
 import com.underpressure.backend.controllers.helpers.Update;
 import com.underpressure.backend.controllers.helpers.Validate;
 
-@JdbcTest
-@AutoConfigureTestDatabase
-@Import({ AddEntryController.class, Fetch.DB.class, Add.class, Check.class, Validate.class, Update.class })
+@Import({
+                AddEntryController.class,
+                Fetch.DB.class,
+                Fetch.Google.class,
+                Add.class,
+                Check.class,
+                Validate.class,
+                Update.class,
+                Extract.class
+})
 @Sql({
                 "classpath:createSubjectsTable.sql",
                 "classpath:fillSubjectsTable.sql",
@@ -33,16 +42,12 @@ import com.underpressure.backend.controllers.helpers.Validate;
                 "classpath:createEntriesTable.sql",
                 "classpath:fillEntriesTable.sql"
 })
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-public class AddEntryControllerTests {
-
-        @Autowired
-        AddEntryController controller;
+public class AddEntryControllerTests extends AuthorizedControllerTests<AddEntryController> {
 
         @Test
-        public void Should_Result_In_Bad_Request_When_UserId_Null() {
+        public void Should_Result_In_Bad_Request_When_IdToeknString_Null() {
                 ResponseEntity<ApiResponse<String>> responseEntity = controller
-                                .handle(new AddEntryRequestBody(null, "Subject 1", 0));
+                                .handle(null, new AddEntryRequestBody("Subject 1", 0));
 
                 assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
                 assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");
@@ -52,7 +57,7 @@ public class AddEntryControllerTests {
         @Test
         public void Should_Result_In_Bad_Request_When_SubjectName_Null() {
                 ResponseEntity<ApiResponse<String>> responseEntity = controller
-                                .handle(new AddEntryRequestBody(1, null, 0));
+                                .handle("Bearer user_1_id_token", new AddEntryRequestBody(null, 0));
 
                 assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
                 assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");
@@ -62,7 +67,7 @@ public class AddEntryControllerTests {
         @Test
         public void Should_Result_In_Bad_Request_When_StressLevel_Null() {
                 ResponseEntity<ApiResponse<String>> responseEntity = controller
-                                .handle(new AddEntryRequestBody(1, "Subject 1", null));
+                                .handle("Bearer user_1_id_token", new AddEntryRequestBody("Subject 1", null));
 
                 assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
                 assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");
@@ -72,7 +77,7 @@ public class AddEntryControllerTests {
         @Test
         public void Should_Result_In_Not_Found_Exception_When_User_Not_Found() {
                 ResponseEntity<ApiResponse<String>> responseEntity = controller
-                                .handle(new AddEntryRequestBody(-1, "Subject 1", 0));
+                                .handle("Bearer user_4_id_token", new AddEntryRequestBody("Subject 1", 0));
 
                 assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
                 assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");
@@ -82,7 +87,7 @@ public class AddEntryControllerTests {
         @Test
         public void Should_Result_In_Not_Found_Exception_When_Subject_Not_Found() {
                 ResponseEntity<ApiResponse<String>> responseEntity = controller
-                                .handle(new AddEntryRequestBody(1, "NaN", 0));
+                                .handle("Bearer user_1_id_token", new AddEntryRequestBody("NaN", 0));
 
                 assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
                 assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");
@@ -92,7 +97,7 @@ public class AddEntryControllerTests {
         @Test
         public void Should_Result_In_Not_Found_Exception_When_Stress_Level_Out_Of_Range() {
                 ResponseEntity<ApiResponse<String>> responseEntity = controller
-                                .handle(new AddEntryRequestBody(1, "Subject 1", 101));
+                                .handle("Bearer user_1_id_token", new AddEntryRequestBody("Subject 1", 101));
 
                 assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.REQUESTED_RANGE_NOT_SATISFIABLE);
                 assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");
@@ -102,7 +107,7 @@ public class AddEntryControllerTests {
         @Test
         public void Should_Result_In_Bad_Request_When_Not_Followed() {
                 ResponseEntity<ApiResponse<String>> responseEntity = controller
-                                .handle(new AddEntryRequestBody(2, "Subject 3", 0));
+                                .handle("Bearer user_2_id_token", new AddEntryRequestBody("Subject 3", 0));
 
                 assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
                 assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");
@@ -112,7 +117,7 @@ public class AddEntryControllerTests {
         @Test
         public void Should_Add_Entry_When_Request_Valid() {
                 ResponseEntity<ApiResponse<String>> responseEntity = controller
-                                .handle(new AddEntryRequestBody(1, "Subject 2", 40));
+                                .handle("Bearer user_1_id_token", new AddEntryRequestBody("Subject 2", 40));
 
                 assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 
@@ -120,11 +125,12 @@ public class AddEntryControllerTests {
 
         @Test
         public void Should_Update_Entry_When_Request_Valid() {
+                String bearerToken = "Bearer user_1_id_token";
                 controller
-                                .handle(new AddEntryRequestBody(1, "Subject 1", 40));
+                                .handle(bearerToken, new AddEntryRequestBody("Subject 1", 40));
 
                 ResponseEntity<ApiResponse<String>> responseEntity = controller
-                                .handle(new AddEntryRequestBody(1, "Subject 1", 50));
+                                .handle(bearerToken, new AddEntryRequestBody("Subject 1", 50));
 
                 assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
         }
