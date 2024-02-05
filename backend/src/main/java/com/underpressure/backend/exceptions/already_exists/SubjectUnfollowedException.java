@@ -1,8 +1,8 @@
 package com.underpressure.backend.exceptions.already_exists;
 
-public class SubjectAlreadyUnfollowedException extends AlreadyException {
+public class SubjectUnfollowedException extends AlreadyException {
 
-    public SubjectAlreadyUnfollowedException() {
+    public SubjectUnfollowedException() {
         super("Seda ainet juba pole su ainete nimekirjas.");
     }
 

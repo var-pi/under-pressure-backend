@@ -14,7 +14,7 @@ import com.underpressure.backend.controllers.classes.request.body.UnfollowSubjec
 import com.underpressure.backend.controllers.helpers.Check;
 import com.underpressure.backend.controllers.helpers.Set;
 import com.underpressure.backend.controllers.helpers.Validate;
-import com.underpressure.backend.exceptions.already_exists.SubjectAlreadyUnfollowedException;
+import com.underpressure.backend.exceptions.already_exists.SubjectUnfollowedException;
 import com.underpressure.backend.exceptions.auth.BearerTokenNullException;
 import com.underpressure.backend.exceptions.does_not_exist.SubjectDoesNotExist;
 import com.underpressure.backend.exceptions.does_not_exist.SubjectInstanceDoesNotExistsException;
@@ -101,7 +101,7 @@ public class UnfollowSubjectControllerTests extends AuthorizedControllerTests<Un
         @Test
         public void Should_Result_In_BAD_REQUEST_When_Requested_To_Unfollow_Already_Unfollowed() {
 
-                SubjectAlreadyUnfollowedException ex = assertThrows(SubjectAlreadyUnfollowedException.class,
+                SubjectUnfollowedException ex = assertThrows(SubjectUnfollowedException.class,
                                 () -> controller
                                                 .handle("Bearer user_2_id_token",
                                                                 new UnfollowSubjectRequestBody("Subject 3")));
@@ -122,7 +122,7 @@ public class UnfollowSubjectControllerTests extends AuthorizedControllerTests<Un
 
                 assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
 
-                SubjectAlreadyUnfollowedException ex = assertThrows(SubjectAlreadyUnfollowedException.class,
+                SubjectUnfollowedException ex = assertThrows(SubjectUnfollowedException.class,
                                 () -> controller.handle(bearerToken, new UnfollowSubjectRequestBody(subjectName)));
 
                 assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.BAD_REQUEST);

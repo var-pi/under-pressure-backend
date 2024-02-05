@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.underpressure.backend.exceptions.RequestException;
 import com.underpressure.backend.exceptions.already_exists.SubjectAlreadyFollowedException;
-import com.underpressure.backend.exceptions.already_exists.SubjectAlreadyUnfollowedException;
+import com.underpressure.backend.exceptions.already_exists.SubjectUnfollowedException;
 import com.underpressure.backend.exceptions.already_exists.UserAlreadyExistsException;
 import com.underpressure.backend.exceptions.auth.BearerTokenNullException;
 import com.underpressure.backend.exceptions.does_not_exist.SubjectDoesNotExist;
@@ -72,7 +72,7 @@ public class Validate {
 
     public void isFollowed(Integer subjectInstanceId, JdbcTemplate jdbcTemplate) throws RequestException {
         if (!check.subjectInstanceFollowed(subjectInstanceId, jdbcTemplate))
-            throw new SubjectAlreadyUnfollowedException();
+            throw new SubjectUnfollowedException();
     }
 
     public void isUnfollowed(Integer subjectInstanceId, JdbcTemplate jdbcTemplate) throws RequestException {
