@@ -1,11 +1,10 @@
-package com.underpressure.backend.controllers.helpers;
+package com.underpressure.backend.controllers.services.database;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import com.underpressure.backend.controllers.services.database.DatabaseService;
 import com.underpressure.backend.exceptions.RequestException;
 import com.underpressure.backend.exceptions.already_exists.SubjectAlreadyFollowedException;
 import com.underpressure.backend.exceptions.already_exists.SubjectUnfollowedException;
@@ -20,14 +19,17 @@ import com.underpressure.backend.exceptions.parameter.UserIdParameterException;
 import com.underpressure.backend.exceptions.range.StressLevelRangeException;
 
 @Component
-public class Validate {
+class ValidateImpl implements Validate {
 
-    @Autowired
     JdbcTemplate jdbcTemplate;
-
-    @Autowired
     DatabaseService databaseService;
 
+    public ValidateImpl(DatabaseService databaseService, JdbcTemplate jdbcTemplate) {
+        this.databaseService = databaseService;
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
+    @Override
     public void userId(Integer userId, boolean hasToExist) throws RequestException {
 
         // TODO Is this method needed?
@@ -45,6 +47,7 @@ public class Validate {
             }
     }
 
+    @Override
     public void userId(Integer userId) throws RequestException {
 
         // TODO Is this method needed?
@@ -52,6 +55,7 @@ public class Validate {
         userId(userId, true);
     }
 
+    @Override
     public void subjectName(String subjectName) throws RequestException {
 
         if (subjectName == null)
@@ -66,6 +70,7 @@ public class Validate {
         }
     }
 
+    @Override
     public void stressLevel(Integer stressLevel) throws RequestException {
         if (stressLevel == null)
             throw new StressLevelParameterException();
@@ -74,26 +79,31 @@ public class Validate {
             throw new StressLevelRangeException();
     }
 
+    @Override
     public void isFollowed(Integer subjectInstanceId) throws RequestException {
         if (!databaseService.check().subjectInstanceFollowed(subjectInstanceId))
             throw new SubjectUnfollowedException();
     }
 
+    @Override
     public void isUnfollowed(Integer subjectInstanceId) throws RequestException {
         if (databaseService.check().subjectInstanceFollowed(subjectInstanceId))
             throw new SubjectAlreadyFollowedException();
     }
 
+    @Override
     public void userDoesNotExists(Integer userId) throws RequestException {
         if (databaseService.check().userExists(userId))
             throw new UserAlreadyExistsException();
     }
 
+    @Override
     public void code(String code) throws RequestException {
         if (code == null)
             throw new CodeParameterException();
     }
 
+    @Override
     public void bearerToken(String bearerToken) throws RequestException {
         if (bearerToken == null)
             throw new BearerTokenNullException();

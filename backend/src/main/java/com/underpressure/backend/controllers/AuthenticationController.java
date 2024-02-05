@@ -23,7 +23,6 @@ import com.underpressure.backend.controllers.classes.abstracts.PostController;
 import com.underpressure.backend.controllers.classes.request.body.AuthenticationBody;
 import com.underpressure.backend.controllers.classes.request.data.OAuthTokenResponse;
 import com.underpressure.backend.controllers.helpers.Fetch;
-import com.underpressure.backend.controllers.helpers.Validate;
 import com.underpressure.backend.controllers.services.database.DatabaseService;
 import com.underpressure.backend.exceptions.RequestException;
 import com.underpressure.backend.exceptions.unexpected.AuthenticationFailedException;
@@ -34,9 +33,6 @@ public class AuthenticationController extends PostController<String, Authenticat
 
     @Autowired
     Fetch.Google fetchGoogle;
-
-    @Autowired
-    Validate validate;
 
     @Autowired
     DatabaseService databaseService;
@@ -59,7 +55,7 @@ public class AuthenticationController extends PostController<String, Authenticat
     public ResponseEntity<String> handle(@RequestBody AuthenticationBody entity) {
 
         String code = entity.getCode(); // Authorisation code from frontend
-        validate.code(code);
+        databaseService.validate().code(code);
 
         // User granted us some permissions and now we can request an access token from
         // the authorisation/resource server.

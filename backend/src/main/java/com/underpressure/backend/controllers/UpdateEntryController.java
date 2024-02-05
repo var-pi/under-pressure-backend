@@ -12,7 +12,6 @@ import com.underpressure.backend.controllers.classes.abstracts.AuthenticatedPost
 import com.underpressure.backend.controllers.classes.request.body.AddEntryRequestBody;
 import com.underpressure.backend.controllers.helpers.Fetch;
 import com.underpressure.backend.controllers.helpers.Extract;
-import com.underpressure.backend.controllers.helpers.Validate;
 import com.underpressure.backend.controllers.services.database.DatabaseService;
 
 @RestController
@@ -23,9 +22,6 @@ public class UpdateEntryController extends AuthenticatedPostController<String, A
 
     @Autowired
     Fetch.Google fetchGoogle;
-
-    @Autowired
-    Validate validate;
 
     @Autowired
     Extract extract;
@@ -39,21 +35,21 @@ public class UpdateEntryController extends AuthenticatedPostController<String, A
             @RequestHeader(value = "Authorization", required = false) String bearerToken,
             @RequestBody AddEntryRequestBody requestData) {
 
-        validate.bearerToken(bearerToken);
+        databaseService.validate().bearerToken(bearerToken);
         String idTokenString = extract.token(bearerToken);
 
         String subjectName = requestData.getSubjectName();
-        validate.subjectName(subjectName);
+        databaseService.validate().subjectName(subjectName);
 
         Integer stressLevel = requestData.getStressLevel();
-        validate.stressLevel(stressLevel);
+        databaseService.validate().stressLevel(stressLevel);
 
         Integer userId = fetchGoogle.userId(idTokenString, clientId);
 
         Integer subjectId = fetchDB.subjectId(subjectName);
         Integer subjectInstanceId = fetchDB.subjectInstanceId(userId, subjectId);
 
-        validate.isFollowed(subjectInstanceId);
+        databaseService.validate().isFollowed(subjectInstanceId);
 
         if (databaseService.check().entryExists(subjectInstanceId)) {
             Integer entryId = fetchDB.todaysEntryId(subjectInstanceId);

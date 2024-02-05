@@ -12,17 +12,15 @@ import org.springframework.test.context.jdbc.Sql;
 import com.underpressure.backend.controllers.classes.AuthorizedControllerTests;
 import com.underpressure.backend.controllers.classes.request.body.FollowSubjectRequestBody;
 import com.underpressure.backend.controllers.helpers.Set;
-import com.underpressure.backend.controllers.helpers.Validate;
-import com.underpressure.backend.controllers.services.database.DatabaseService;
 import com.underpressure.backend.exceptions.already_exists.SubjectAlreadyFollowedException;
 import com.underpressure.backend.exceptions.auth.BearerTokenNullException;
 import com.underpressure.backend.exceptions.does_not_exist.SubjectDoesNotExist;
 import com.underpressure.backend.exceptions.does_not_exist.UserDoesNotExistException;
 import com.underpressure.backend.exceptions.parameter.SubjectNameParameterException;
+import com.underpressure.backend.controllers.services.database.DatabaseService;
 
 @Import({
                 FollowSubjectController.class,
-                Validate.class,
                 Set.class,
                 DatabaseService.class
 })

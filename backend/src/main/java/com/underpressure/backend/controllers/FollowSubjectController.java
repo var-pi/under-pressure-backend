@@ -13,7 +13,6 @@ import com.underpressure.backend.controllers.classes.request.body.FollowSubjectR
 import com.underpressure.backend.controllers.helpers.Extract;
 import com.underpressure.backend.controllers.helpers.Fetch;
 import com.underpressure.backend.controllers.helpers.Set;
-import com.underpressure.backend.controllers.helpers.Validate;
 import com.underpressure.backend.controllers.services.database.DatabaseService;
 
 @RestController
@@ -24,9 +23,6 @@ public class FollowSubjectController extends AuthenticatedPostController<String,
 
     @Autowired
     Fetch.Google fetchGoogle;
-
-    @Autowired
-    Validate validate;
 
     @Autowired
     Set set;
@@ -43,11 +39,11 @@ public class FollowSubjectController extends AuthenticatedPostController<String,
             @RequestHeader(value = "Authorization", required = false) String bearerToken,
             @RequestBody FollowSubjectRequestBody requestData) {
 
-        validate.bearerToken(bearerToken);
+        databaseService.validate().bearerToken(bearerToken);
         String idTokenString = extract.token(bearerToken);
 
         String subjectName = requestData.getSubjectName();
-        validate.subjectName(subjectName);
+        databaseService.validate().subjectName(subjectName);
 
         Integer userId = fetchGoogle.userId(idTokenString, clientId);
 
@@ -55,7 +51,7 @@ public class FollowSubjectController extends AuthenticatedPostController<String,
         if (databaseService.check().subjectInstanceExists(userId, subjectId)) {
             Integer subjectInstanceId = fetchDB.subjectInstanceId(userId, subjectId);
 
-            validate.isUnfollowed(subjectInstanceId);
+            databaseService.validate().isUnfollowed(subjectInstanceId);
 
             set.toFollow(subjectInstanceId);
 

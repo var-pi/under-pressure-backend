@@ -14,39 +14,37 @@ import org.springframework.test.context.jdbc.Sql;
 
 import com.underpressure.backend.controllers.classes.request.body.AuthenticationBody;
 import com.underpressure.backend.controllers.helpers.Fetch;
-import com.underpressure.backend.controllers.helpers.Validate;
 import com.underpressure.backend.controllers.services.database.DatabaseService;
 import com.underpressure.backend.exceptions.parameter.CodeParameterException;
 
 @JdbcTest
 @AutoConfigureTestDatabase
 @Import({
-        AuthenticationController.class,
-        Fetch.Google.class,
-        Validate.class,
-        DatabaseService.class
+                AuthenticationController.class,
+                Fetch.Google.class,
+                DatabaseService.class
 })
 @Sql({
-        "classpath:createUsersTable.sql",
-        "classpath:fillUsersTable.sql"
+                "classpath:createUsersTable.sql",
+                "classpath:fillUsersTable.sql"
 })
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class AuthenticationControllerTests {
 
-    @Autowired
-    AuthenticationController controller;
+        @Autowired
+        AuthenticationController controller;
 
-    @Test
-    public void Should_Result_In_Bad_Request_When_Code_Null() {
+        @Test
+        public void Should_Result_In_Bad_Request_When_Code_Null() {
 
-        CodeParameterException ex = assertThrows(CodeParameterException.class, () -> controller
-                .handle(new AuthenticationBody(null)));
+                CodeParameterException ex = assertThrows(CodeParameterException.class, () -> controller
+                                .handle(new AuthenticationBody(null)));
 
-        assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.BAD_REQUEST);
-        assertThat(ex.getMessage()).isNotBlank();
+                assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.BAD_REQUEST);
+                assertThat(ex.getMessage()).isNotBlank();
 
-    }
+        }
 
-    // TODO Poorly tested.
+        // TODO Poorly tested.
 
 }

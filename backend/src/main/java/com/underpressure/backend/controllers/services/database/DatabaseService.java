@@ -22,4 +22,8 @@ public class DatabaseService {
         return new UpdateImpl(jdbcTemplate);
     }
 
+    public Validate validate() {
+        return new ValidateImpl(this, jdbcTemplate);
+    }
+
 }

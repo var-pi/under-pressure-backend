@@ -14,7 +14,6 @@ import org.springframework.test.context.jdbc.Sql;
 import com.underpressure.backend.controllers.classes.AuthorizedControllerTests;
 import com.underpressure.backend.controllers.classes.request.body.GetEntriesRequestBody;
 import com.underpressure.backend.controllers.classes.request.data.EntryData;
-import com.underpressure.backend.controllers.helpers.Validate;
 import com.underpressure.backend.controllers.services.database.DatabaseService;
 import com.underpressure.backend.exceptions.auth.BearerTokenNullException;
 import com.underpressure.backend.exceptions.does_not_exist.SubjectDoesNotExist;
@@ -23,7 +22,6 @@ import com.underpressure.backend.exceptions.parameter.SubjectNameParameterExcept
 
 @Import({
                 FetchEntriesController.class,
-                Validate.class,
                 DatabaseService.class
 })
 @Sql({
