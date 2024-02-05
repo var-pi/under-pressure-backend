@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.underpressure.backend.controllers.classes.abstracts.AuthenticatedPostController;
 import com.underpressure.backend.controllers.classes.request.body.FollowedSubjectsRequestBody;
-import com.underpressure.backend.controllers.helpers.Extract;
 import com.underpressure.backend.controllers.services.database.DatabaseService;
 import com.underpressure.backend.controllers.services.google.GoogleService;
+import com.underpressure.backend.controllers.services.utility.UtilityService;
 import com.underpressure.backend.exceptions.RequestException;
 
 @RestController
@@ -22,7 +22,7 @@ public class FetchFollowedSubjectsController
         extends AuthenticatedPostController<List<String>, FollowedSubjectsRequestBody> {
 
     @Autowired
-    Extract extract;
+    UtilityService utilityService;
 
     @Autowired
     DatabaseService databaseService;
@@ -37,7 +37,7 @@ public class FetchFollowedSubjectsController
             @RequestBody FollowedSubjectsRequestBody requestBody) throws RequestException {
 
         databaseService.validate().bearerToken(bearerToken);
-        String idTokenString = extract.token(bearerToken);
+        String idTokenString = utilityService.extract().token(bearerToken);
 
         Integer userId = googleService.fetch().userId(idTokenString, clientId);
 

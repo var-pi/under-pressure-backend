@@ -15,7 +15,7 @@ import com.google.api.client.json.gson.GsonFactory;
 import com.underpressure.backend.exceptions.does_not_exist.UserDoesNotExistException;
 import com.underpressure.backend.exceptions.unexpected.UserVerificationException;
 
-public class FetchGoogleImpl implements FetchGoogle {
+class FetchGoogleImpl implements FetchGoogle {
 
     JdbcTemplate jdbcTemplate;
 

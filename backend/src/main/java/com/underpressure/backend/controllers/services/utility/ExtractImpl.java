@@ -1,10 +1,11 @@
-package com.underpressure.backend.controllers.helpers;
+package com.underpressure.backend.controllers.services.utility;
 
 import org.springframework.stereotype.Component;
 
 @Component
-public class Extract {
+class ExtractImpl implements Extract {
 
+    @Override
     public String token(String bearerToken) {
         String[] tokenParts = bearerToken.split("\\s+");
 
