@@ -17,7 +17,7 @@ import com.underpressure.backend.controllers.helpers.Validate;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Import({
-                FollowedSubjectsController.class,
+                FetchFollowedSubjectsController.class,
                 Validate.class,
                 Check.class
 })
@@ -29,7 +29,7 @@ import static org.assertj.core.api.Assertions.assertThat;
                 "classpath:createSubjectInstancesTable.sql",
                 "classpath:fillSubjectInstancesTable.sql"
 })
-public class FollowedSubjectsControllerTests extends AuthorizedControllerTests<FollowedSubjectsController> {
+public class FetchFollowedSubjectsControllerTests extends AuthorizedControllerTests<FetchFollowedSubjectsController> {
 
         @Test
         public void Should_Result_In_Bad_Request_When_UserId_Null() {

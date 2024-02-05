@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.underpressure.backend.controllers.classes.ApiResponse;
 import com.underpressure.backend.controllers.classes.abstracts.AuthenticatedPostController;
-import com.underpressure.backend.controllers.classes.request.body.GetEntriesRequestBody;
-import com.underpressure.backend.controllers.classes.request.data.EntryData;
+import com.underpressure.backend.controllers.classes.request.body.FollowedSubjectsRequestBody;
 import com.underpressure.backend.controllers.helpers.Extract;
 import com.underpressure.backend.controllers.helpers.Fetch;
 import com.underpressure.backend.controllers.helpers.Validate;
 import com.underpressure.backend.exceptions.RequestException;
 
 @RestController
-public class GetEntriesController extends AuthenticatedPostController<List<EntryData>, GetEntriesRequestBody> {
+public class FetchFollowedSubjectsController
+        extends AuthenticatedPostController<List<String>, FollowedSubjectsRequestBody> {
 
     @Autowired
     Fetch.DB fetchDB;
@@ -35,29 +35,21 @@ public class GetEntriesController extends AuthenticatedPostController<List<Entry
     Extract extract;
 
     @Override
-    @PostMapping("/personal/entries")
-    public ResponseEntity<ApiResponse<List<EntryData>>> handle(
+    @PostMapping("/personal/subjects")
+    public ResponseEntity<ApiResponse<List<String>>> handle(
             @RequestHeader("Authorization") String bearerToken,
-            @RequestBody GetEntriesRequestBody requestData) {
+            @RequestBody FollowedSubjectsRequestBody requestBody) {
 
         try {
             validate.bearerToken(bearerToken);
             String idTokenString = extract.token(bearerToken);
 
-            String subjectName = requestData.getSubjectName();
-            validate.subjectName(subjectName, jdbcTemplate);
-
             Integer userId = fetchGoogle.userId(idTokenString, jdbcTemplate, clientId);
 
-            Integer subjectId = fetchDB.subjectId(subjectName, jdbcTemplate);
-            Integer subjectInstanceId = fetchDB.subjectInstanceId(userId, subjectId, jdbcTemplate);
-
-            List<EntryData> entries = fetchDB.entries(subjectInstanceId, jdbcTemplate);
-
+            List<String> followedSubjects = fetchDB.followedSubjects(userId, jdbcTemplate);
             return new ResponseEntity<>(
-                    new ApiResponse<>(true, entries, null),
+                    new ApiResponse<>(true, followedSubjects, null),
                     HttpStatus.OK);
-
         } catch (RequestException e) {
             return new ResponseEntity<>(
                     new ApiResponse<>(false, null, e.getMessage()),

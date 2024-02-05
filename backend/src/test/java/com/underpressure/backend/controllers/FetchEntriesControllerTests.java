@@ -17,7 +17,7 @@ import com.underpressure.backend.controllers.classes.request.data.EntryData;
 import com.underpressure.backend.controllers.helpers.Check;
 import com.underpressure.backend.controllers.helpers.Validate;
 
-@Import({ GetEntriesController.class, Validate.class, Check.class })
+@Import({ FetchEntriesController.class, Validate.class, Check.class })
 @Sql({
         "classpath:createSubjectsTable.sql",
         "classpath:fillSubjectsTable.sql",
@@ -28,7 +28,7 @@ import com.underpressure.backend.controllers.helpers.Validate;
         "classpath:createEntriesTable.sql",
         "classpath:fillEntriesTable.sql"
 })
-public class GetEntriesControllerTests extends AuthorizedControllerTests<GetEntriesController> {
+public class FetchEntriesControllerTests extends AuthorizedControllerTests<FetchEntriesController> {
 
     @Test
     public void Should_Result_In_Bad_Request_When_UserId_Null() {

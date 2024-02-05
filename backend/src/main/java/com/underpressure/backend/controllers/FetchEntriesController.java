@@ -1,5 +1,7 @@
 package com.underpressure.backend.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,17 +12,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.underpressure.backend.controllers.classes.ApiResponse;
 import com.underpressure.backend.controllers.classes.abstracts.AuthenticatedPostController;
-import com.underpressure.backend.controllers.classes.request.body.AddEntryRequestBody;
-import com.underpressure.backend.controllers.helpers.Add;
-import com.underpressure.backend.controllers.helpers.Fetch;
-import com.underpressure.backend.controllers.helpers.Update;
-import com.underpressure.backend.controllers.helpers.Check;
+import com.underpressure.backend.controllers.classes.request.body.GetEntriesRequestBody;
+import com.underpressure.backend.controllers.classes.request.data.EntryData;
 import com.underpressure.backend.controllers.helpers.Extract;
+import com.underpressure.backend.controllers.helpers.Fetch;
 import com.underpressure.backend.controllers.helpers.Validate;
 import com.underpressure.backend.exceptions.RequestException;
 
 @RestController
-public class AddEntryController extends AuthenticatedPostController<String, AddEntryRequestBody> {
+public class FetchEntriesController extends AuthenticatedPostController<List<EntryData>, GetEntriesRequestBody> {
 
     @Autowired
     Fetch.DB fetchDB;
@@ -29,25 +29,16 @@ public class AddEntryController extends AuthenticatedPostController<String, AddE
     Fetch.Google fetchGoogle;
 
     @Autowired
-    Add add;
-
-    @Autowired
-    Check check;
-
-    @Autowired
     Validate validate;
-
-    @Autowired
-    Update update;
 
     @Autowired
     Extract extract;
 
     @Override
-    @PostMapping("/personal/entries/add")
-    public ResponseEntity<ApiResponse<String>> handle(
+    @PostMapping("/personal/entries")
+    public ResponseEntity<ApiResponse<List<EntryData>>> handle(
             @RequestHeader("Authorization") String bearerToken,
-            @RequestBody AddEntryRequestBody requestData) {
+            @RequestBody GetEntriesRequestBody requestData) {
 
         try {
             validate.bearerToken(bearerToken);
@@ -56,31 +47,16 @@ public class AddEntryController extends AuthenticatedPostController<String, AddE
             String subjectName = requestData.getSubjectName();
             validate.subjectName(subjectName, jdbcTemplate);
 
-            Integer stressLevel = requestData.getStressLevel();
-            validate.stressLevel(stressLevel);
-
             Integer userId = fetchGoogle.userId(idTokenString, jdbcTemplate, clientId);
 
             Integer subjectId = fetchDB.subjectId(subjectName, jdbcTemplate);
             Integer subjectInstanceId = fetchDB.subjectInstanceId(userId, subjectId, jdbcTemplate);
 
-            validate.isFollowed(subjectInstanceId, jdbcTemplate);
+            List<EntryData> entries = fetchDB.entries(subjectInstanceId, jdbcTemplate);
 
-            if (check.entryExists(subjectInstanceId, jdbcTemplate)) {
-                Integer entryId = fetchDB.todaysEntryId(subjectInstanceId, jdbcTemplate);
-
-                update.entry(entryId, stressLevel, jdbcTemplate);
-
-                return new ResponseEntity<>(
-                        new ApiResponse<>(true, null, null),
-                        HttpStatus.NO_CONTENT);
-            } else {
-                add.entry(subjectInstanceId, stressLevel, jdbcTemplate);
-
-                return new ResponseEntity<>(
-                        new ApiResponse<>(true, null, null),
-                        HttpStatus.CREATED);
-            }
+            return new ResponseEntity<>(
+                    new ApiResponse<>(true, entries, null),
+                    HttpStatus.OK);
 
         } catch (RequestException e) {
             return new ResponseEntity<>(

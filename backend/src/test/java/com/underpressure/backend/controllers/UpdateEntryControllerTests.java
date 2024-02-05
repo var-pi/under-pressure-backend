@@ -17,7 +17,7 @@ import com.underpressure.backend.controllers.helpers.Update;
 import com.underpressure.backend.controllers.helpers.Validate;
 
 @Import({
-                AddEntryController.class,
+                UpdateEntryController.class,
                 Add.class,
                 Check.class,
                 Validate.class,
@@ -33,7 +33,7 @@ import com.underpressure.backend.controllers.helpers.Validate;
                 "classpath:createEntriesTable.sql",
                 "classpath:fillEntriesTable.sql"
 })
-public class AddEntryControllerTests extends AuthorizedControllerTests<AddEntryController> {
+public class UpdateEntryControllerTests extends AuthorizedControllerTests<UpdateEntryController> {
 
         @Test
         public void Should_Result_In_Bad_Request_When_IdToeknString_Null() {

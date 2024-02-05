@@ -15,9 +15,9 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Import({ GetSubjectsController.class })
+@Import({ FetchSubjectsController.class })
 @Sql({ "classpath:createSubjectsTable.sql", "classpath:fillSubjectsTable.sql" })
-public class GetSubjectsControllerTests extends ControllerTests<GetSubjectsController> {
+public class FetchSubjectsControllerTests extends ControllerTests<FetchSubjectsController> {
 
     @Test
     public void Should_Succeed_When_Request_Valid() {

@@ -15,7 +15,7 @@ import com.underpressure.backend.controllers.classes.request.params.GetSubjectsP
 import com.underpressure.backend.controllers.helpers.Fetch;
 
 @RestController
-public class GetSubjectsController extends GetController<List<String>, GetSubjectsParams> {
+public class FetchSubjectsController extends GetController<List<String>, GetSubjectsParams> {
 
     @Autowired
     Fetch.DB fetchDB;
