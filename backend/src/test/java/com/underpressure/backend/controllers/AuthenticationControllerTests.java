@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.jdbc.Sql;
 
-import com.underpressure.backend.controllers.classes.ApiResponse;
 import com.underpressure.backend.controllers.classes.request.body.AuthenticationBody;
 import com.underpressure.backend.controllers.helpers.Add;
 import com.underpressure.backend.controllers.helpers.Check;
@@ -34,12 +33,12 @@ public class AuthenticationControllerTests {
 
     @Test
     public void Should_Result_In_Bad_Request_When_Code_Null() {
-        ResponseEntity<ApiResponse<String>> responseEntity = controller
+
+        ResponseEntity<String> responseEntity = controller
                 .handle(new AuthenticationBody(null));
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
-        assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");
-        assertThat(responseEntity.getBody().getMessage()).isNotBlank();
+
     }
 
     // TODO Poorly tested.

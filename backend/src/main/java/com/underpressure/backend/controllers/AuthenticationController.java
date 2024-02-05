@@ -19,7 +19,6 @@ import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
-import com.underpressure.backend.controllers.classes.ApiResponse;
 import com.underpressure.backend.controllers.classes.abstracts.PostController;
 import com.underpressure.backend.controllers.classes.request.body.AuthenticationBody;
 import com.underpressure.backend.controllers.classes.request.data.OAuthTokenResponse;
@@ -61,39 +60,30 @@ public class AuthenticationController extends PostController<String, Authenticat
 
     @Override
     @PostMapping("/auth")
-    public ResponseEntity<ApiResponse<String>> handle(@RequestBody AuthenticationBody entity) {
+    public ResponseEntity<String> handle(@RequestBody AuthenticationBody entity) {
 
-        try {
-            String code = entity.getCode(); // Authorisation code from frontend
-            validate.code(code);
+        String code = entity.getCode(); // Authorisation code from frontend
+        validate.code(code);
 
-            // User granted us some permissions and now we can request an access token from
-            // the authorisation/resource server.
-            OAuthTokenResponse oAuthTokenResponse = exchangeAuthCodeForAccessToken(code);
+        // User granted us some permissions and now we can request an access token from
+        // the authorisation/resource server.
+        OAuthTokenResponse oAuthTokenResponse = exchangeAuthCodeForAccessToken(code);
 
-            // Get encoded JWT (OpenID Connect)
-            String idTokenString = oAuthTokenResponse.getIdToken();
+        // Get encoded JWT (OpenID Connect)
+        String idTokenString = oAuthTokenResponse.getIdToken();
 
-            // Verify the JWT (ex. not expired) and get the decoded OpenID Connect id.
-            Payload userInfo = fetchGoogle.userInfo(idTokenString, clientId);
+        // Verify the JWT (ex. not expired) and get the decoded OpenID Connect id.
+        Payload userInfo = fetchGoogle.userInfo(idTokenString, clientId);
 
-            String googleSub = userInfo.getSubject();
-            if (!check.userWithGoogleSubExists(googleSub, jdbcTemplate)) {
-                add.user(userInfo, jdbcTemplate);
+        String googleSub = userInfo.getSubject();
+        if (!check.userWithGoogleSubExists(googleSub, jdbcTemplate)) {
+            add.user(userInfo, jdbcTemplate);
 
-                return new ResponseEntity<>(
-                        new ApiResponse<>(true, idTokenString, null),
-                        HttpStatus.CREATED);
-            }
-
-            return new ResponseEntity<>(
-                    new ApiResponse<>(true, idTokenString, null),
-                    HttpStatus.OK);
-        } catch (RequestException e) {
-            return new ResponseEntity<>(
-                    new ApiResponse<>(false, null, e.getMessage()),
-                    e.getHttpStatus());
+            return new ResponseEntity<>(idTokenString, HttpStatus.CREATED);
         }
+
+        return new ResponseEntity<>(idTokenString, HttpStatus.OK);
+
     }
 
     private OAuthTokenResponse exchangeAuthCodeForAccessToken(String code) throws RequestException {
