@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import com.underpressure.backend.controllers.helpers.SetImpl;
+
 @Service
 public class DatabaseService {
 
@@ -24,6 +26,10 @@ public class DatabaseService {
 
     public Validate validate() {
         return new ValidateImpl(this, jdbcTemplate);
+    }
+
+    public Set set() {
+        return new SetImpl(jdbcTemplate);
     }
 
 }

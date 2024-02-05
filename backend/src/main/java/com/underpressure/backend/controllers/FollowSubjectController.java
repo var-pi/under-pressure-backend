@@ -12,7 +12,6 @@ import com.underpressure.backend.controllers.classes.abstracts.AuthenticatedPost
 import com.underpressure.backend.controllers.classes.request.body.FollowSubjectRequestBody;
 import com.underpressure.backend.controllers.helpers.Extract;
 import com.underpressure.backend.controllers.helpers.Fetch;
-import com.underpressure.backend.controllers.helpers.Set;
 import com.underpressure.backend.controllers.services.database.DatabaseService;
 
 @RestController
@@ -23,9 +22,6 @@ public class FollowSubjectController extends AuthenticatedPostController<String,
 
     @Autowired
     Fetch.Google fetchGoogle;
-
-    @Autowired
-    Set set;
 
     @Autowired
     Extract extract;
@@ -53,7 +49,7 @@ public class FollowSubjectController extends AuthenticatedPostController<String,
 
             databaseService.validate().isUnfollowed(subjectInstanceId);
 
-            set.toFollow(subjectInstanceId);
+            databaseService.set().toFollow(subjectInstanceId);
 
             return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
         } else {

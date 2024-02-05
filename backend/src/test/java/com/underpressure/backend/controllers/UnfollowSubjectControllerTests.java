@@ -11,7 +11,6 @@ import org.springframework.test.context.jdbc.Sql;
 
 import com.underpressure.backend.controllers.classes.AuthorizedControllerTests;
 import com.underpressure.backend.controllers.classes.request.body.UnfollowSubjectRequestBody;
-import com.underpressure.backend.controllers.helpers.Set;
 import com.underpressure.backend.controllers.services.database.DatabaseService;
 import com.underpressure.backend.exceptions.already_exists.SubjectUnfollowedException;
 import com.underpressure.backend.exceptions.auth.BearerTokenNullException;
@@ -22,7 +21,6 @@ import com.underpressure.backend.exceptions.parameter.SubjectNameParameterExcept
 
 @Import({
                 UnfollowSubjectController.class,
-                Set.class,
                 DatabaseService.class
 })
 @Sql({

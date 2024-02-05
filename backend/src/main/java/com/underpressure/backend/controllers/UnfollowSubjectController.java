@@ -12,7 +12,6 @@ import com.underpressure.backend.controllers.classes.abstracts.AuthenticatedPost
 import com.underpressure.backend.controllers.classes.request.body.UnfollowSubjectRequestBody;
 import com.underpressure.backend.controllers.helpers.Extract;
 import com.underpressure.backend.controllers.helpers.Fetch;
-import com.underpressure.backend.controllers.helpers.Set;
 import com.underpressure.backend.controllers.services.database.DatabaseService;
 
 @RestController
@@ -23,9 +22,6 @@ public class UnfollowSubjectController extends AuthenticatedPostController<Strin
 
     @Autowired
     Fetch.Google fetchGoogle;
-
-    @Autowired
-    Set set;
 
     @Autowired
     Extract extract;
@@ -52,7 +48,7 @@ public class UnfollowSubjectController extends AuthenticatedPostController<Strin
 
         databaseService.validate().isFollowed(subjectInstanceId);
 
-        set.toNotFollow(subjectInstanceId);
+        databaseService.set().toNotFollow(subjectInstanceId);
 
         return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
 
