@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.underpressure.backend.controllers.classes.abstracts.AuthenticatedPostController;
 import com.underpressure.backend.controllers.classes.request.body.FollowSubjectRequestBody;
-import com.underpressure.backend.controllers.helpers.Add;
 import com.underpressure.backend.controllers.helpers.Check;
 import com.underpressure.backend.controllers.helpers.Extract;
 import com.underpressure.backend.controllers.helpers.Fetch;
 import com.underpressure.backend.controllers.helpers.Set;
 import com.underpressure.backend.controllers.helpers.Validate;
+import com.underpressure.backend.controllers.services.database.DatabaseService;
 
 @RestController
 public class FollowSubjectController extends AuthenticatedPostController<String, FollowSubjectRequestBody> {
@@ -25,9 +25,6 @@ public class FollowSubjectController extends AuthenticatedPostController<String,
 
     @Autowired
     Fetch.Google fetchGoogle;
-
-    @Autowired
-    Add add;
 
     @Autowired
     Check check;
@@ -40,6 +37,9 @@ public class FollowSubjectController extends AuthenticatedPostController<String,
 
     @Autowired
     Extract extract;
+
+    @Autowired
+    DatabaseService databaseService;
 
     @Override
     @PostMapping("/personal/subjects/follow")
@@ -65,7 +65,7 @@ public class FollowSubjectController extends AuthenticatedPostController<String,
 
             return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
         } else {
-            add.subjectInstance(userId, subjectId);
+            databaseService.add().subjectInstance(userId, subjectId);
 
             return new ResponseEntity<>(null, HttpStatus.CREATED);
         }

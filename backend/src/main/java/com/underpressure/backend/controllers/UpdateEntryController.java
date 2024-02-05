@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.underpressure.backend.controllers.classes.abstracts.AuthenticatedPostController;
 import com.underpressure.backend.controllers.classes.request.body.AddEntryRequestBody;
-import com.underpressure.backend.controllers.helpers.Add;
 import com.underpressure.backend.controllers.helpers.Fetch;
 import com.underpressure.backend.controllers.helpers.Update;
 import com.underpressure.backend.controllers.helpers.Check;
 import com.underpressure.backend.controllers.helpers.Extract;
 import com.underpressure.backend.controllers.helpers.Validate;
+import com.underpressure.backend.controllers.services.database.DatabaseService;
 
 @RestController
 public class UpdateEntryController extends AuthenticatedPostController<String, AddEntryRequestBody> {
@@ -25,9 +25,6 @@ public class UpdateEntryController extends AuthenticatedPostController<String, A
 
     @Autowired
     Fetch.Google fetchGoogle;
-
-    @Autowired
-    Add add;
 
     @Autowired
     Check check;
@@ -40,6 +37,9 @@ public class UpdateEntryController extends AuthenticatedPostController<String, A
 
     @Autowired
     Extract extract;
+
+    @Autowired
+    DatabaseService databaseService;
 
     @Override
     @PostMapping("/personal/entries/add")
@@ -70,7 +70,7 @@ public class UpdateEntryController extends AuthenticatedPostController<String, A
 
             return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
         } else {
-            add.entry(subjectInstanceId, stressLevel);
+            databaseService.add().entry(subjectInstanceId, stressLevel);
 
             return new ResponseEntity<>(null, HttpStatus.CREATED);
         }

@@ -1,6 +1,5 @@
-package com.underpressure.backend.controllers.helpers;
+package com.underpressure.backend.controllers.services.database;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -11,10 +10,13 @@ import com.underpressure.backend.exceptions.unexpected.not_added.SubjectNotAdded
 import com.underpressure.backend.exceptions.unexpected.not_added.UserNotAddedException;
 
 @Component
-public class Add {
+class AddImpl implements Add {
 
-        @Autowired
         JdbcTemplate jdbcTemplate;
+
+        public AddImpl(JdbcTemplate jdbcTemplate) {
+                this.jdbcTemplate = jdbcTemplate;
+        }
 
         public void subjectInstance(Integer userId, Integer subjectId)
                         throws RequestException {

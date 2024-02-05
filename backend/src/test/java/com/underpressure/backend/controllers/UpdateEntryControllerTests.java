@@ -11,10 +11,11 @@ import org.springframework.test.context.jdbc.Sql;
 
 import com.underpressure.backend.controllers.classes.AuthorizedControllerTests;
 import com.underpressure.backend.controllers.classes.request.body.AddEntryRequestBody;
-import com.underpressure.backend.controllers.helpers.Add;
 import com.underpressure.backend.controllers.helpers.Check;
 import com.underpressure.backend.controllers.helpers.Update;
 import com.underpressure.backend.controllers.helpers.Validate;
+import com.underpressure.backend.controllers.services.database.Add;
+import com.underpressure.backend.controllers.services.database.DatabaseService;
 import com.underpressure.backend.exceptions.already_exists.SubjectUnfollowedException;
 import com.underpressure.backend.exceptions.auth.BearerTokenNullException;
 import com.underpressure.backend.exceptions.does_not_exist.SubjectDoesNotExist;
@@ -26,10 +27,10 @@ import com.underpressure.backend.exceptions.range.StressLevelRangeException;
 
 @Import({
                 UpdateEntryController.class,
-                Add.class,
                 Check.class,
                 Validate.class,
-                Update.class
+                Update.class,
+                DatabaseService.class
 })
 @Sql({
                 "classpath:createSubjectsTable.sql",
