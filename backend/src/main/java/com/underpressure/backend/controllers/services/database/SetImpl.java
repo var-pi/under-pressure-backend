@@ -1,14 +1,13 @@
-package com.underpressure.backend.controllers.helpers;
+package com.underpressure.backend.controllers.services.database;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import com.underpressure.backend.controllers.services.database.Set;
 import com.underpressure.backend.exceptions.RequestException;
 import com.underpressure.backend.exceptions.unexpected.NoRowsUpdatedUnexpectedException;
 
 @Component
-public class SetImpl implements Set {
+class SetImpl implements Set {
 
     JdbcTemplate jdbcTemplate;
 
