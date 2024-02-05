@@ -51,26 +51,26 @@ public class UpdateEntryController extends AuthenticatedPostController<String, A
         String idTokenString = extract.token(bearerToken);
 
         String subjectName = requestData.getSubjectName();
-        validate.subjectName(subjectName, jdbcTemplate);
+        validate.subjectName(subjectName);
 
         Integer stressLevel = requestData.getStressLevel();
         validate.stressLevel(stressLevel);
 
-        Integer userId = fetchGoogle.userId(idTokenString, jdbcTemplate, clientId);
+        Integer userId = fetchGoogle.userId(idTokenString, clientId);
 
-        Integer subjectId = fetchDB.subjectId(subjectName, jdbcTemplate);
-        Integer subjectInstanceId = fetchDB.subjectInstanceId(userId, subjectId, jdbcTemplate);
+        Integer subjectId = fetchDB.subjectId(subjectName);
+        Integer subjectInstanceId = fetchDB.subjectInstanceId(userId, subjectId);
 
-        validate.isFollowed(subjectInstanceId, jdbcTemplate);
+        validate.isFollowed(subjectInstanceId);
 
-        if (check.entryExists(subjectInstanceId, jdbcTemplate)) {
-            Integer entryId = fetchDB.todaysEntryId(subjectInstanceId, jdbcTemplate);
+        if (check.entryExists(subjectInstanceId)) {
+            Integer entryId = fetchDB.todaysEntryId(subjectInstanceId);
 
-            update.entry(entryId, stressLevel, jdbcTemplate);
+            update.entry(entryId, stressLevel);
 
             return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
         } else {
-            add.entry(subjectInstanceId, stressLevel, jdbcTemplate);
+            add.entry(subjectInstanceId, stressLevel);
 
             return new ResponseEntity<>(null, HttpStatus.CREATED);
         }

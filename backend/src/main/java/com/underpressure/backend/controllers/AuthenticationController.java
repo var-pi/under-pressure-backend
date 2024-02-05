@@ -76,8 +76,8 @@ public class AuthenticationController extends PostController<String, Authenticat
         Payload userInfo = fetchGoogle.userInfo(idTokenString, clientId);
 
         String googleSub = userInfo.getSubject();
-        if (!check.userWithGoogleSubExists(googleSub, jdbcTemplate)) {
-            add.user(userInfo, jdbcTemplate);
+        if (!check.userWithGoogleSubExists(googleSub)) {
+            add.user(userInfo);
 
             return new ResponseEntity<>(idTokenString, HttpStatus.CREATED);
         }

@@ -23,7 +23,7 @@ public class FetchSubjectsController extends GetController<List<String>, GetSubj
     @GetMapping("/subjects")
     public ResponseEntity<List<String>> handle(@ModelAttribute GetSubjectsParams params) {
 
-        return new ResponseEntity<>(fetchDB.subjects(jdbcTemplate), HttpStatus.OK);
+        return new ResponseEntity<>(fetchDB.subjects(), HttpStatus.OK);
 
     }
 

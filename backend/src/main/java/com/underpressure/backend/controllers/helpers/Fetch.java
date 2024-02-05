@@ -3,6 +3,7 @@ package com.underpressure.backend.controllers.helpers;
 import java.util.Collections;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -25,15 +26,20 @@ import com.underpressure.backend.exceptions.unexpected.UserVerificationException
 
 @Component
 public class Fetch {
+
     @Component
     public static class DB {
-        public List<String> subjects(JdbcTemplate jdbcTemplate) {
+
+        @Autowired
+        JdbcTemplate jdbcTemplate;
+
+        public List<String> subjects() {
             String sql = "SELECT name FROM subjects";
 
             return jdbcTemplate.queryForList(sql, String.class);
         }
 
-        public Integer subjectId(String subjectName, JdbcTemplate jdbcTemplate) throws RequestException {
+        public Integer subjectId(String subjectName) throws RequestException {
             String requestForSubjectId = "SELECT id FROM subjects WHERE name=?";
 
             try {
@@ -43,13 +49,13 @@ public class Fetch {
             }
         }
 
-        public List<String> followedSubjects(Integer userId, JdbcTemplate jdbcTemplate) {
+        public List<String> followedSubjects(Integer userId) {
             String sql = "SELECT subjects.name FROM subject_instances INNER JOIN subjects ON subject_instances.subject_id=subjects.id WHERE subject_instances.user_id=? AND if_followed=true";
 
             return jdbcTemplate.queryForList(sql, String.class, userId);
         }
 
-        public Integer subjectInstanceId(Integer userId, Integer subjectId, JdbcTemplate jdbcTemplate)
+        public Integer subjectInstanceId(Integer userId, Integer subjectId)
                 throws RequestException {
             String sql = "SELECT id FROM subject_instances WHERE user_id=? AND subject_id=?";
 
@@ -61,7 +67,7 @@ public class Fetch {
 
         }
 
-        public Integer todaysEntryId(Integer subjectInstanceId, JdbcTemplate jdbcTemplate) throws RequestException {
+        public Integer todaysEntryId(Integer subjectInstanceId) throws RequestException {
             String sql = "SELECT id FROM entries WHERE subject_instance_id=? AND creation_date=CURRENT_DATE";
 
             try {
@@ -71,7 +77,7 @@ public class Fetch {
             }
         }
 
-        public List<EntryData> entries(Integer subjectInstanceId, JdbcTemplate jdbcTemplate) {
+        public List<EntryData> entries(Integer subjectInstanceId) {
             String sql = "SELECT * FROM entries WHERE subject_instance_id=?";
 
             return jdbcTemplate.query(sql, new EntryDataRowMapper(), subjectInstanceId);
@@ -80,6 +86,9 @@ public class Fetch {
 
     @Component
     public static class Google {
+
+        @Autowired
+        JdbcTemplate jdbcTemplate;
 
         public Payload userInfo(String idTokenString, String clientId) throws UserVerificationException {
 
@@ -116,7 +125,7 @@ public class Fetch {
             return this.userInfo(idTokenString, clientId).getSubject();
         }
 
-        public Integer userId(String idTokenString, JdbcTemplate jdbcTemplate, String clientId)
+        public Integer userId(String idTokenString, String clientId)
                 throws UserVerificationException, UserDoesNotExistException {
             String googleSub = this.sub(idTokenString, clientId);
 

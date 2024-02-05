@@ -1,5 +1,6 @@
 package com.underpressure.backend.controllers.helpers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -11,7 +12,11 @@ import com.underpressure.backend.exceptions.unexpected.not_added.UserNotAddedExc
 
 @Component
 public class Add {
-        public void subjectInstance(Integer userId, Integer subjectId, JdbcTemplate jdbcTemplate)
+
+        @Autowired
+        JdbcTemplate jdbcTemplate;
+
+        public void subjectInstance(Integer userId, Integer subjectId)
                         throws RequestException {
 
                 String sql = "INSERT INTO subject_instances (user_id, subject_id, if_followed) VALUES (?,?,true)";
@@ -22,7 +27,7 @@ public class Add {
                         throw new SubjectNotAddedException();
         }
 
-        public void entry(Integer subjectInstanceId, Integer stressLevel, JdbcTemplate jdbcTemplate)
+        public void entry(Integer subjectInstanceId, Integer stressLevel)
                         throws RequestException {
 
                 String sql = "INSERT INTO entries (subject_instance_id, creation_date, stress_level) VALUES (?,CURRENT_DATE,?)";
@@ -34,7 +39,7 @@ public class Add {
 
         }
 
-        public void user(Payload userInfo, JdbcTemplate jdbcTemplate) throws RequestException {
+        public void user(Payload userInfo) throws RequestException {
                 String sql = "INSERT INTO users (google_sub, given_name) VALUES (?,?)";
 
                 Integer rowsAffected = jdbcTemplate.update(sql, userInfo.getSubject(), userInfo.get("given_name"));

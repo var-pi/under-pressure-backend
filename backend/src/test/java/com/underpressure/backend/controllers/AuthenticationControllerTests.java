@@ -1,6 +1,7 @@
 package com.underpressure.backend.controllers;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,6 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.jdbc.Sql;
 
@@ -17,6 +17,7 @@ import com.underpressure.backend.controllers.helpers.Add;
 import com.underpressure.backend.controllers.helpers.Check;
 import com.underpressure.backend.controllers.helpers.Fetch;
 import com.underpressure.backend.controllers.helpers.Validate;
+import com.underpressure.backend.exceptions.parameter.CodeParameterException;
 
 @JdbcTest
 @AutoConfigureTestDatabase
@@ -34,10 +35,11 @@ public class AuthenticationControllerTests {
     @Test
     public void Should_Result_In_Bad_Request_When_Code_Null() {
 
-        ResponseEntity<String> responseEntity = controller
-                .handle(new AuthenticationBody(null));
+        CodeParameterException ex = assertThrows(CodeParameterException.class, () -> controller
+                .handle(new AuthenticationBody(null)));
 
-        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+        assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.BAD_REQUEST);
+        assertThat(ex.getMessage()).isNotBlank();
 
     }
 

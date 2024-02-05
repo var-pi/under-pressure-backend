@@ -51,22 +51,21 @@ public class FollowSubjectController extends AuthenticatedPostController<String,
         String idTokenString = extract.token(bearerToken);
 
         String subjectName = requestData.getSubjectName();
-        validate.subjectName(subjectName, jdbcTemplate);
+        validate.subjectName(subjectName);
 
-        Integer userId = fetchGoogle.userId(idTokenString, jdbcTemplate, clientId);
+        Integer userId = fetchGoogle.userId(idTokenString, clientId);
 
-        Integer subjectId = fetchDB.subjectId(subjectName, jdbcTemplate);
-        if (check.subjectInstanceExists(userId, subjectId, jdbcTemplate)) {
-            Integer subjectInstanceId = fetchDB.subjectInstanceId(userId, subjectId,
-                    jdbcTemplate);
+        Integer subjectId = fetchDB.subjectId(subjectName);
+        if (check.subjectInstanceExists(userId, subjectId)) {
+            Integer subjectInstanceId = fetchDB.subjectInstanceId(userId, subjectId);
 
-            validate.isUnfollowed(subjectInstanceId, jdbcTemplate);
+            validate.isUnfollowed(subjectInstanceId);
 
-            set.toFollow(subjectInstanceId, jdbcTemplate);
+            set.toFollow(subjectInstanceId);
 
             return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
         } else {
-            add.subjectInstance(userId, subjectId, jdbcTemplate);
+            add.subjectInstance(userId, subjectId);
 
             return new ResponseEntity<>(null, HttpStatus.CREATED);
         }

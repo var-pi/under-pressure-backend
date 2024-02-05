@@ -42,9 +42,9 @@ public class FetchFollowedSubjectsController
         validate.bearerToken(bearerToken);
         String idTokenString = extract.token(bearerToken);
 
-        Integer userId = fetchGoogle.userId(idTokenString, jdbcTemplate, clientId);
+        Integer userId = fetchGoogle.userId(idTokenString, clientId);
 
-        List<String> followedSubjects = fetchDB.followedSubjects(userId, jdbcTemplate);
+        List<String> followedSubjects = fetchDB.followedSubjects(userId);
         return new ResponseEntity<>(followedSubjects, HttpStatus.OK);
 
     }

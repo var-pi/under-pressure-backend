@@ -43,16 +43,16 @@ public class UnfollowSubjectController extends AuthenticatedPostController<Strin
         String idTokenString = extract.token(bearerToken);
 
         String subjectName = requestData.getSubjectName();
-        validate.subjectName(subjectName, jdbcTemplate);
+        validate.subjectName(subjectName);
 
-        Integer userId = fetchGoogle.userId(idTokenString, jdbcTemplate, clientId);
+        Integer userId = fetchGoogle.userId(idTokenString, clientId);
 
-        Integer subjectId = fetchDB.subjectId(subjectName, jdbcTemplate);
-        Integer subjectInstanceId = fetchDB.subjectInstanceId(userId, subjectId, jdbcTemplate);
+        Integer subjectId = fetchDB.subjectId(subjectName);
+        Integer subjectInstanceId = fetchDB.subjectInstanceId(userId, subjectId);
 
-        validate.isFollowed(subjectInstanceId, jdbcTemplate);
+        validate.isFollowed(subjectInstanceId);
 
-        set.toNotFollow(subjectInstanceId, jdbcTemplate);
+        set.toNotFollow(subjectInstanceId);
 
         return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
 

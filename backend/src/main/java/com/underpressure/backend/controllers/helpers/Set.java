@@ -1,5 +1,6 @@
 package com.underpressure.backend.controllers.helpers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -8,7 +9,11 @@ import com.underpressure.backend.exceptions.unexpected.NoRowsUpdatedUnexpectedEx
 
 @Component
 public class Set {
-    public void toFollow(Integer subjectInstanceId, JdbcTemplate jdbcTemplate) throws RequestException {
+
+    @Autowired
+    JdbcTemplate jdbcTemplate;
+
+    public void toFollow(Integer subjectInstanceId) throws RequestException {
         String sql = "UPDATE subject_instances SET if_followed=true WHERE id=?";
 
         Integer numOfRowsAffected = jdbcTemplate.update(sql, subjectInstanceId);
@@ -17,7 +22,7 @@ public class Set {
             throw new NoRowsUpdatedUnexpectedException();
     }
 
-    public void toNotFollow(Integer subjectInstanceId, JdbcTemplate jdbcTemplate) throws RequestException {
+    public void toNotFollow(Integer subjectInstanceId) throws RequestException {
         String sql = "UPDATE subject_instances SET if_followed=false WHERE id=?";
 
         Integer numOfRowsAffected = jdbcTemplate.update(sql, subjectInstanceId);

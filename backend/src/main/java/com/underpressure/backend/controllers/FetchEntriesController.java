@@ -42,14 +42,14 @@ public class FetchEntriesController extends AuthenticatedPostController<List<Ent
         String idTokenString = extract.token(bearerToken);
 
         String subjectName = requestData.getSubjectName();
-        validate.subjectName(subjectName, jdbcTemplate);
+        validate.subjectName(subjectName);
 
-        Integer userId = fetchGoogle.userId(idTokenString, jdbcTemplate, clientId);
+        Integer userId = fetchGoogle.userId(idTokenString, clientId);
 
-        Integer subjectId = fetchDB.subjectId(subjectName, jdbcTemplate);
-        Integer subjectInstanceId = fetchDB.subjectInstanceId(userId, subjectId, jdbcTemplate);
+        Integer subjectId = fetchDB.subjectId(subjectName);
+        Integer subjectInstanceId = fetchDB.subjectInstanceId(userId, subjectId);
 
-        List<EntryData> entries = fetchDB.entries(subjectInstanceId, jdbcTemplate);
+        List<EntryData> entries = fetchDB.entries(subjectInstanceId);
 
         return new ResponseEntity<>(entries, HttpStatus.OK);
 

@@ -24,7 +24,10 @@ public class Validate {
     @Autowired
     Check check;
 
-    public void userId(Integer userId, JdbcTemplate jdbcTemplate, boolean hasToExist) throws RequestException {
+    @Autowired
+    JdbcTemplate jdbcTemplate;
+
+    public void userId(Integer userId, boolean hasToExist) throws RequestException {
 
         // TODO Is this method needed?
 
@@ -41,14 +44,14 @@ public class Validate {
             }
     }
 
-    public void userId(Integer userId, JdbcTemplate jdbcTemplate) throws RequestException {
+    public void userId(Integer userId) throws RequestException {
 
         // TODO Is this method needed?
 
-        userId(userId, jdbcTemplate, true);
+        userId(userId, true);
     }
 
-    public void subjectName(String subjectName, JdbcTemplate jdbcTemplate) throws RequestException {
+    public void subjectName(String subjectName) throws RequestException {
 
         if (subjectName == null)
             throw new SubjectNameParameterException();
@@ -70,18 +73,18 @@ public class Validate {
             throw new StressLevelRangeException();
     }
 
-    public void isFollowed(Integer subjectInstanceId, JdbcTemplate jdbcTemplate) throws RequestException {
-        if (!check.subjectInstanceFollowed(subjectInstanceId, jdbcTemplate))
+    public void isFollowed(Integer subjectInstanceId) throws RequestException {
+        if (!check.subjectInstanceFollowed(subjectInstanceId))
             throw new SubjectUnfollowedException();
     }
 
-    public void isUnfollowed(Integer subjectInstanceId, JdbcTemplate jdbcTemplate) throws RequestException {
-        if (check.subjectInstanceFollowed(subjectInstanceId, jdbcTemplate))
+    public void isUnfollowed(Integer subjectInstanceId) throws RequestException {
+        if (check.subjectInstanceFollowed(subjectInstanceId))
             throw new SubjectAlreadyFollowedException();
     }
 
-    public void userDoesNotExists(Integer userId, JdbcTemplate jdbcTemplate) throws RequestException {
-        if (check.userExists(userId, jdbcTemplate))
+    public void userDoesNotExists(Integer userId) throws RequestException {
+        if (check.userExists(userId))
             throw new UserAlreadyExistsException();
     }
 

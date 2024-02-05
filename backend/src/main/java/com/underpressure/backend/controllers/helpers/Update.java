@@ -1,5 +1,6 @@
 package com.underpressure.backend.controllers.helpers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -9,7 +10,10 @@ import com.underpressure.backend.exceptions.unexpected.NoRowsUpdatedUnexpectedEx
 @Component
 public class Update {
 
-    public void entry(Integer entryId, Integer stressLevel, JdbcTemplate jdbcTemplate)
+    @Autowired
+    JdbcTemplate jdbcTemplate;
+
+    public void entry(Integer entryId, Integer stressLevel)
             throws RequestException {
 
         String sql = "UPDATE entries SET stress_level=? WHERE id=?";
