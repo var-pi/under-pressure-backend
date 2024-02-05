@@ -9,10 +9,10 @@ import com.underpressure.backend.exceptions.RequestException;
 import com.underpressure.backend.exceptions.already_exists.SubjectAlreadyFollowedException;
 import com.underpressure.backend.exceptions.already_exists.SubjectAlreadyUnfollowedException;
 import com.underpressure.backend.exceptions.already_exists.UserAlreadyExistsException;
+import com.underpressure.backend.exceptions.auth.BearerTokenNullException;
 import com.underpressure.backend.exceptions.does_not_exist.SubjectDoesNotExist;
 import com.underpressure.backend.exceptions.does_not_exist.UserDoesNotExistException;
 import com.underpressure.backend.exceptions.parameter.CodeParameterException;
-import com.underpressure.backend.exceptions.parameter.BearerTokenParameterException;
 import com.underpressure.backend.exceptions.parameter.StressLevelParameterException;
 import com.underpressure.backend.exceptions.parameter.SubjectNameParameterException;
 import com.underpressure.backend.exceptions.parameter.UserIdParameterException;
@@ -92,7 +92,7 @@ public class Validate {
 
     public void bearerToken(String bearerToken) throws RequestException {
         if (bearerToken == null)
-            throw new BearerTokenParameterException();
+            throw new BearerTokenNullException();
     }
 
 }
