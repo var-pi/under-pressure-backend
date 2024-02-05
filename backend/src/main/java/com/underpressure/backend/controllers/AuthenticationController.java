@@ -121,7 +121,7 @@ public class AuthenticationController extends PostController<String, Authenticat
         }
     }
 
-    private static String encodeCredentials(String credentials) {
+    private String encodeCredentials(String credentials) {
         byte[] credentialsBytes = credentials.getBytes(StandardCharsets.UTF_8);
         byte[] encodedBytes = Base64.getEncoder().encode(credentialsBytes);
         return new String(encodedBytes, StandardCharsets.UTF_8);
