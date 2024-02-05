@@ -115,8 +115,6 @@ public class AuthenticationController extends PostController<String, Authenticat
         ResponseEntity<String> responseEntity = restTemplate
                 .exchange(url, HttpMethod.POST, requestEntity, String.class);
 
-        System.out.println(responseEntity.getBody());
-
         if (!responseEntity.getStatusCode().equals(HttpStatus.OK))
             throw new AuthenticationFailedException();
 
