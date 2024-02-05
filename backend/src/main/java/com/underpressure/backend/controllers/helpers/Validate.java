@@ -1,7 +1,9 @@
 package com.underpressure.backend.controllers.helpers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
 
 import com.underpressure.backend.exceptions.RequestException;
 import com.underpressure.backend.exceptions.already_exists.SubjectAlreadyFollowedException;
@@ -10,14 +12,22 @@ import com.underpressure.backend.exceptions.already_exists.UserAlreadyExistsExce
 import com.underpressure.backend.exceptions.does_not_exist.SubjectDoesNotExist;
 import com.underpressure.backend.exceptions.does_not_exist.UserDoesNotExistException;
 import com.underpressure.backend.exceptions.parameter.CodeParameterException;
+import com.underpressure.backend.exceptions.parameter.BearerTokenParameterException;
 import com.underpressure.backend.exceptions.parameter.StressLevelParameterException;
 import com.underpressure.backend.exceptions.parameter.SubjectNameParameterException;
 import com.underpressure.backend.exceptions.parameter.UserIdParameterException;
 import com.underpressure.backend.exceptions.range.StressLevelRangeException;
 
+@Component
 public class Validate {
 
-    public static void userId(Integer userId, JdbcTemplate jdbcTemplate, boolean hasToExist) throws RequestException {
+    @Autowired
+    Check check;
+
+    public void userId(Integer userId, JdbcTemplate jdbcTemplate, boolean hasToExist) throws RequestException {
+
+        // TODO Is this method needed?
+
         if (userId == null)
             throw new UserIdParameterException();
 
@@ -31,11 +41,14 @@ public class Validate {
             }
     }
 
-    public static void userId(Integer userId, JdbcTemplate jdbcTemplate) throws RequestException {
+    public void userId(Integer userId, JdbcTemplate jdbcTemplate) throws RequestException {
+
+        // TODO Is this method needed?
+
         userId(userId, jdbcTemplate, true);
     }
 
-    public static void subjectName(String subjectName, JdbcTemplate jdbcTemplate) throws RequestException {
+    public void subjectName(String subjectName, JdbcTemplate jdbcTemplate) throws RequestException {
 
         if (subjectName == null)
             throw new SubjectNameParameterException();
@@ -49,7 +62,7 @@ public class Validate {
         }
     }
 
-    public static void stressLevel(Integer stressLevel) throws RequestException {
+    public void stressLevel(Integer stressLevel) throws RequestException {
         if (stressLevel == null)
             throw new StressLevelParameterException();
 
@@ -57,23 +70,29 @@ public class Validate {
             throw new StressLevelRangeException();
     }
 
-    public static void isFollowed(Integer subjectInstanceId, JdbcTemplate jdbcTemplate) throws RequestException {
-        if (!If.subjectInstanceFollowed(subjectInstanceId, jdbcTemplate))
+    public void isFollowed(Integer subjectInstanceId, JdbcTemplate jdbcTemplate) throws RequestException {
+        if (!check.subjectInstanceFollowed(subjectInstanceId, jdbcTemplate))
             throw new SubjectAlreadyUnfollowedException();
     }
 
-    public static void isUnfollowed(Integer subjectInstanceId, JdbcTemplate jdbcTemplate) throws RequestException {
-        if (If.subjectInstanceFollowed(subjectInstanceId, jdbcTemplate))
+    public void isUnfollowed(Integer subjectInstanceId, JdbcTemplate jdbcTemplate) throws RequestException {
+        if (check.subjectInstanceFollowed(subjectInstanceId, jdbcTemplate))
             throw new SubjectAlreadyFollowedException();
     }
 
-    public static void userDoesNotExists(Integer userId, JdbcTemplate jdbcTemplate) throws RequestException {
-        if (If.userExists(userId, jdbcTemplate))
+    public void userDoesNotExists(Integer userId, JdbcTemplate jdbcTemplate) throws RequestException {
+        if (check.userExists(userId, jdbcTemplate))
             throw new UserAlreadyExistsException();
     }
 
-    public static void code(String code) throws RequestException {
+    public void code(String code) throws RequestException {
         if (code == null)
             throw new CodeParameterException();
     }
+
+    public void bearerToken(String bearerToken) throws RequestException {
+        if (bearerToken == null)
+            throw new BearerTokenParameterException();
+    }
+
 }

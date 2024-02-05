@@ -10,15 +10,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.underpressure.backend.controllers.classes.ApiResponse;
 import com.underpressure.backend.controllers.classes.abstracts.AuthenticatedPostController;
-import com.underpressure.backend.controllers.classes.request.body.UnfollowSubjectRequestBody;
-import com.underpressure.backend.controllers.helpers.Extract;
+import com.underpressure.backend.controllers.classes.request.body.AddEntryRequestBody;
+import com.underpressure.backend.controllers.helpers.Add;
 import com.underpressure.backend.controllers.helpers.Fetch;
-import com.underpressure.backend.controllers.helpers.Set;
+import com.underpressure.backend.controllers.helpers.Update;
+import com.underpressure.backend.controllers.helpers.Check;
+import com.underpressure.backend.controllers.helpers.Extract;
 import com.underpressure.backend.controllers.helpers.Validate;
 import com.underpressure.backend.exceptions.RequestException;
 
 @RestController
-public class UnfollowSubjectController extends AuthenticatedPostController<String, UnfollowSubjectRequestBody> {
+public class UpdateEntryController extends AuthenticatedPostController<String, AddEntryRequestBody> {
 
     @Autowired
     Fetch.DB fetchDB;
@@ -27,19 +29,25 @@ public class UnfollowSubjectController extends AuthenticatedPostController<Strin
     Fetch.Google fetchGoogle;
 
     @Autowired
+    Add add;
+
+    @Autowired
+    Check check;
+
+    @Autowired
     Validate validate;
 
     @Autowired
-    Set set;
+    Update update;
 
     @Autowired
     Extract extract;
 
     @Override
-    @PostMapping("/personal/subjects/unfollow")
+    @PostMapping("/personal/entries/add")
     public ResponseEntity<ApiResponse<String>> handle(
             @RequestHeader("Authorization") String bearerToken,
-            @RequestBody UnfollowSubjectRequestBody requestData) {
+            @RequestBody AddEntryRequestBody requestData) {
 
         try {
             validate.bearerToken(bearerToken);
@@ -48,6 +56,9 @@ public class UnfollowSubjectController extends AuthenticatedPostController<Strin
             String subjectName = requestData.getSubjectName();
             validate.subjectName(subjectName, jdbcTemplate);
 
+            Integer stressLevel = requestData.getStressLevel();
+            validate.stressLevel(stressLevel);
+
             Integer userId = fetchGoogle.userId(idTokenString, jdbcTemplate, clientId);
 
             Integer subjectId = fetchDB.subjectId(subjectName, jdbcTemplate);
@@ -55,11 +66,21 @@ public class UnfollowSubjectController extends AuthenticatedPostController<Strin
 
             validate.isFollowed(subjectInstanceId, jdbcTemplate);
 
-            set.toNotFollow(subjectInstanceId, jdbcTemplate);
+            if (check.entryExists(subjectInstanceId, jdbcTemplate)) {
+                Integer entryId = fetchDB.todaysEntryId(subjectInstanceId, jdbcTemplate);
 
-            return new ResponseEntity<>(
-                    new ApiResponse<>(true, null, null),
-                    HttpStatus.NO_CONTENT);
+                update.entry(entryId, stressLevel, jdbcTemplate);
+
+                return new ResponseEntity<>(
+                        new ApiResponse<>(true, null, null),
+                        HttpStatus.NO_CONTENT);
+            } else {
+                add.entry(subjectInstanceId, stressLevel, jdbcTemplate);
+
+                return new ResponseEntity<>(
+                        new ApiResponse<>(true, null, null),
+                        HttpStatus.CREATED);
+            }
 
         } catch (RequestException e) {
             return new ResponseEntity<>(

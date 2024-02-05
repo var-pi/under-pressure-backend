@@ -1,12 +1,14 @@
 package com.underpressure.backend.controllers.helpers;
 
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
 
 import com.underpressure.backend.exceptions.RequestException;
 import com.underpressure.backend.exceptions.unexpected.NoRowsUpdatedUnexpectedException;
 
+@Component
 public class Set {
-    public static void toFollow(Integer subjectInstanceId, JdbcTemplate jdbcTemplate) throws RequestException {
+    public void toFollow(Integer subjectInstanceId, JdbcTemplate jdbcTemplate) throws RequestException {
         String sql = "UPDATE subject_instances SET if_followed=true WHERE id=?";
 
         Integer numOfRowsAffected = jdbcTemplate.update(sql, subjectInstanceId);
@@ -15,7 +17,7 @@ public class Set {
             throw new NoRowsUpdatedUnexpectedException();
     }
 
-    public static void toNotFollow(Integer subjectInstanceId, JdbcTemplate jdbcTemplate) throws RequestException {
+    public void toNotFollow(Integer subjectInstanceId, JdbcTemplate jdbcTemplate) throws RequestException {
         String sql = "UPDATE subject_instances SET if_followed=false WHERE id=?";
 
         Integer numOfRowsAffected = jdbcTemplate.update(sql, subjectInstanceId);

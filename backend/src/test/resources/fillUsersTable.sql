@@ -1,3 +1,3 @@
-INSERT INTO users (given_name, google_sub) VALUES ('Hjalmar', 10001);
-INSERT INTO users (given_name, google_sub) VALUES ('Stefan', 10002);
-INSERT INTO users (given_name, google_sub) VALUES ('Stella', 10003);
+INSERT INTO users (google_sub, given_name) VALUES ('10001', 'Hjalmar');
+INSERT INTO users (google_sub, given_name) VALUES ('10002', 'Stefan');
+INSERT INTO users (google_sub, given_name) VALUES ('10003', 'Stella');

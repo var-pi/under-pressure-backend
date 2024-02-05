@@ -3,11 +3,11 @@ package com.underpressure.backend.controllers.classes.request.body;
 public class AuthenticationBody {
     private String code;
 
-    public AuthenticationBody(String code) {
-        this.code = code;
+    public AuthenticationBody() {
     }
 
-    public AuthenticationBody() {
+    public AuthenticationBody(String code) {
+        this.code = code;
     }
 
     public String getCode() {
