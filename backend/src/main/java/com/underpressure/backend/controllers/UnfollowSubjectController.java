@@ -8,15 +8,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.underpressure.backend.controllers.classes.ApiResponse;
-import com.underpressure.backend.controllers.classes.abstracts.AuthenticatedPostController;
 import com.underpressure.backend.controllers.classes.abstracts.AuthenticatedPostControllerUpdated;
 import com.underpressure.backend.controllers.classes.request.body.UnfollowSubjectRequestBody;
 import com.underpressure.backend.controllers.helpers.Extract;
 import com.underpressure.backend.controllers.helpers.Fetch;
 import com.underpressure.backend.controllers.helpers.Set;
 import com.underpressure.backend.controllers.helpers.Validate;
-import com.underpressure.backend.exceptions.RequestException;
 
 @RestController
 public class UnfollowSubjectController extends AuthenticatedPostControllerUpdated<String, UnfollowSubjectRequestBody> {

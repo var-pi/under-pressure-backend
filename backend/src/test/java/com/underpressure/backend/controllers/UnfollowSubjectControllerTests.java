@@ -9,9 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.jdbc.Sql;
 
-import com.underpressure.backend.controllers.classes.ApiResponse;
 import com.underpressure.backend.controllers.classes.AuthorizedControllerTests;
-import com.underpressure.backend.controllers.classes.request.body.FollowSubjectRequestBody;
 import com.underpressure.backend.controllers.classes.request.body.UnfollowSubjectRequestBody;
 import com.underpressure.backend.controllers.helpers.Check;
 import com.underpressure.backend.controllers.helpers.Set;
