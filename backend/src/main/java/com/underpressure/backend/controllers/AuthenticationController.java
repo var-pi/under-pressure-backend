@@ -55,7 +55,7 @@ public class AuthenticationController extends PostController<String, Authenticat
     private String grantType = "authorization_code";
 
     @CrossOrigin(origins = "*")
-    @PostMapping("/authenticate")
+    @PostMapping("/auth")
     @Override
     public ResponseEntity<ApiResponse<String>> handle(@RequestBody AuthenticationBody entity) {
 
