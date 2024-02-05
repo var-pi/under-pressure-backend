@@ -34,18 +34,25 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class FetchFollowedSubjectsControllerTests extends AuthorizedControllerTests<FetchFollowedSubjectsController> {
 
         @Test
-        public void Should_Fail_When_BearerToken_Null() {
+        public void Should_Result_In_UNAUTHORIZED_When_BearerToken_Null() {
 
-                assertThrows(BearerTokenNullException.class,
+                BearerTokenNullException ex = assertThrows(BearerTokenNullException.class,
                                 () -> controller.handle(null, new FollowedSubjectsRequestBody()));
+
+                assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.UNAUTHORIZED);
+                assertThat(ex.getMessage()).isNotBlank();
 
         }
 
         @Test
-        public void Should_Fail_When_User_Does_Not_Exist() {
+        public void Should_Result_In_NOT_FOUND_When_User_Does_Not_Exist() {
 
-                assertThrows(UserDoesNotExistException.class,
+                UserDoesNotExistException ex = assertThrows(UserDoesNotExistException.class,
                                 () -> controller.handle("Bearer user_4_id_token", new FollowedSubjectsRequestBody()));
+
+                assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.NOT_FOUND);
+                assertThat(ex.getMessage()).isNotBlank();
+
         }
 
         @Test

@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.underpressure.backend.controllers.classes.ApiResponse;
-import com.underpressure.backend.controllers.classes.abstracts.AuthenticatedPostController;
+import com.underpressure.backend.controllers.classes.abstracts.AuthenticatedPostControllerUpdated;
 import com.underpressure.backend.controllers.classes.request.body.FollowSubjectRequestBody;
 import com.underpressure.backend.controllers.helpers.Add;
 import com.underpressure.backend.controllers.helpers.Check;
@@ -17,10 +16,9 @@ import com.underpressure.backend.controllers.helpers.Extract;
 import com.underpressure.backend.controllers.helpers.Fetch;
 import com.underpressure.backend.controllers.helpers.Set;
 import com.underpressure.backend.controllers.helpers.Validate;
-import com.underpressure.backend.exceptions.RequestException;
 
 @RestController
-public class FollowSubjectController extends AuthenticatedPostController<String, FollowSubjectRequestBody> {
+public class FollowSubjectController extends AuthenticatedPostControllerUpdated<String, FollowSubjectRequestBody> {
 
     @Autowired
     Fetch.DB fetchDB;
@@ -45,43 +43,34 @@ public class FollowSubjectController extends AuthenticatedPostController<String,
 
     @Override
     @PostMapping("/personal/subjects/follow")
-    public ResponseEntity<ApiResponse<String>> handle(
-            @RequestHeader("Authorization") String bearerToken,
+    public ResponseEntity<String> handle(
+            @RequestHeader(value = "Authorization", required = false) String bearerToken,
             @RequestBody FollowSubjectRequestBody requestData) {
-        try {
-            String idTokenString = extract.token(bearerToken);
-            validate.bearerToken(idTokenString);
 
-            String subjectName = requestData.getSubjectName();
-            validate.subjectName(subjectName, jdbcTemplate);
+        validate.bearerToken(bearerToken);
+        String idTokenString = extract.token(bearerToken);
 
-            Integer userId = fetchGoogle.userId(idTokenString, jdbcTemplate, clientId);
+        String subjectName = requestData.getSubjectName();
+        validate.subjectName(subjectName, jdbcTemplate);
 
-            Integer subjectId = fetchDB.subjectId(subjectName, jdbcTemplate);
-            if (check.subjectInstanceExists(userId, subjectId, jdbcTemplate)) {
-                Integer subjectInstanceId = fetchDB.subjectInstanceId(userId, subjectId,
-                        jdbcTemplate);
+        Integer userId = fetchGoogle.userId(idTokenString, jdbcTemplate, clientId);
 
-                validate.isUnfollowed(subjectInstanceId, jdbcTemplate);
+        Integer subjectId = fetchDB.subjectId(subjectName, jdbcTemplate);
+        if (check.subjectInstanceExists(userId, subjectId, jdbcTemplate)) {
+            Integer subjectInstanceId = fetchDB.subjectInstanceId(userId, subjectId,
+                    jdbcTemplate);
 
-                set.toFollow(subjectInstanceId, jdbcTemplate);
+            validate.isUnfollowed(subjectInstanceId, jdbcTemplate);
 
-                return new ResponseEntity<>(
-                        new ApiResponse<>(true, null, null),
-                        HttpStatus.NO_CONTENT);
-            } else {
-                add.subjectInstance(userId, subjectId, jdbcTemplate);
+            set.toFollow(subjectInstanceId, jdbcTemplate);
 
-                return new ResponseEntity<>(
-                        new ApiResponse<>(true, null, null),
-                        HttpStatus.CREATED);
-            }
+            return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+        } else {
+            add.subjectInstance(userId, subjectId, jdbcTemplate);
 
-        } catch (RequestException e) {
-            return new ResponseEntity<>(
-                    new ApiResponse<>(false, null, e.getMessage()),
-                    e.getHttpStatus());
+            return new ResponseEntity<>(null, HttpStatus.CREATED);
         }
+
     }
 
 }
