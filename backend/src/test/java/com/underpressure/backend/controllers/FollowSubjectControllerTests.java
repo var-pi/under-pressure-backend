@@ -11,7 +11,6 @@ import org.springframework.test.context.jdbc.Sql;
 
 import com.underpressure.backend.controllers.classes.AuthorizedControllerTests;
 import com.underpressure.backend.controllers.classes.request.body.FollowSubjectRequestBody;
-import com.underpressure.backend.controllers.helpers.Check;
 import com.underpressure.backend.controllers.helpers.Set;
 import com.underpressure.backend.controllers.helpers.Validate;
 import com.underpressure.backend.controllers.services.database.DatabaseService;
@@ -23,7 +22,6 @@ import com.underpressure.backend.exceptions.parameter.SubjectNameParameterExcept
 
 @Import({
                 FollowSubjectController.class,
-                Check.class,
                 Validate.class,
                 Set.class,
                 DatabaseService.class

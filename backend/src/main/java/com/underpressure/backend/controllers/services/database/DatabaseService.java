@@ -14,4 +14,8 @@ public class DatabaseService {
         return new AddImpl(jdbcTemplate);
     }
 
+    public Check check() {
+        return new CheckImpl(jdbcTemplate);
+    }
+
 }

@@ -12,7 +12,6 @@ import com.underpressure.backend.controllers.classes.abstracts.AuthenticatedPost
 import com.underpressure.backend.controllers.classes.request.body.AddEntryRequestBody;
 import com.underpressure.backend.controllers.helpers.Fetch;
 import com.underpressure.backend.controllers.helpers.Update;
-import com.underpressure.backend.controllers.helpers.Check;
 import com.underpressure.backend.controllers.helpers.Extract;
 import com.underpressure.backend.controllers.helpers.Validate;
 import com.underpressure.backend.controllers.services.database.DatabaseService;
@@ -25,9 +24,6 @@ public class UpdateEntryController extends AuthenticatedPostController<String, A
 
     @Autowired
     Fetch.Google fetchGoogle;
-
-    @Autowired
-    Check check;
 
     @Autowired
     Validate validate;
@@ -63,7 +59,7 @@ public class UpdateEntryController extends AuthenticatedPostController<String, A
 
         validate.isFollowed(subjectInstanceId);
 
-        if (check.entryExists(subjectInstanceId)) {
+        if (databaseService.check().entryExists(subjectInstanceId)) {
             Integer entryId = fetchDB.todaysEntryId(subjectInstanceId);
 
             update.entry(entryId, stressLevel);

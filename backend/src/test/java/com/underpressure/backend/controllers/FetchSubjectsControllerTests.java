@@ -14,8 +14,13 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Import({ FetchSubjectsController.class })
-@Sql({ "classpath:createSubjectsTable.sql", "classpath:fillSubjectsTable.sql" })
+@Import({
+        FetchSubjectsController.class
+})
+@Sql({
+        "classpath:createSubjectsTable.sql",
+        "classpath:fillSubjectsTable.sql"
+})
 public class FetchSubjectsControllerTests extends ControllerTests<FetchSubjectsController> {
 
     @Test

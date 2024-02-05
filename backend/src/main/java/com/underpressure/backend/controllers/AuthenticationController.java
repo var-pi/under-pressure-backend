@@ -22,8 +22,6 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
 import com.underpressure.backend.controllers.classes.abstracts.PostController;
 import com.underpressure.backend.controllers.classes.request.body.AuthenticationBody;
 import com.underpressure.backend.controllers.classes.request.data.OAuthTokenResponse;
-// import com.underpressure.backend.controllers.helpers.Add;
-import com.underpressure.backend.controllers.helpers.Check;
 import com.underpressure.backend.controllers.helpers.Fetch;
 import com.underpressure.backend.controllers.helpers.Validate;
 import com.underpressure.backend.controllers.services.database.DatabaseService;
@@ -36,12 +34,6 @@ public class AuthenticationController extends PostController<String, Authenticat
 
     @Autowired
     Fetch.Google fetchGoogle;
-
-    // @Autowired
-    // Add add;
-
-    @Autowired
-    Check check;
 
     @Autowired
     Validate validate;
@@ -80,7 +72,7 @@ public class AuthenticationController extends PostController<String, Authenticat
         Payload userInfo = fetchGoogle.userInfo(idTokenString, clientId);
 
         String googleSub = userInfo.getSubject();
-        if (!check.userWithGoogleSubExists(googleSub)) {
+        if (!databaseService.check().userWithGoogleSubExists(googleSub)) {
             databaseService.add().user(userInfo);
 
             return new ResponseEntity<>(idTokenString, HttpStatus.CREATED);

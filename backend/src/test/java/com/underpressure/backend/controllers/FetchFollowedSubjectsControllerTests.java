@@ -10,8 +10,8 @@ import org.springframework.test.context.jdbc.Sql;
 
 import com.underpressure.backend.controllers.classes.AuthorizedControllerTests;
 import com.underpressure.backend.controllers.classes.request.body.FollowedSubjectsRequestBody;
-import com.underpressure.backend.controllers.helpers.Check;
 import com.underpressure.backend.controllers.helpers.Validate;
+import com.underpressure.backend.controllers.services.database.DatabaseService;
 import com.underpressure.backend.exceptions.auth.BearerTokenNullException;
 import com.underpressure.backend.exceptions.does_not_exist.UserDoesNotExistException;
 
@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @Import({
                 FetchFollowedSubjectsController.class,
                 Validate.class,
-                Check.class
+                DatabaseService.class
 })
 @Sql({
                 "classpath:createSubjectsTable.sql",

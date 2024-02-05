@@ -1,15 +1,18 @@
-package com.underpressure.backend.controllers.helpers;
+package com.underpressure.backend.controllers.services.database;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Check {
+class CheckImpl implements Check {
 
-    @Autowired
     JdbcTemplate jdbcTemplate;
 
+    public CheckImpl(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
+    @Override
     public boolean subjectInstanceExists(Integer userId, Integer subjectId) {
         String sql = "SELECT COUNT(*) from subject_instances WHERE user_id=? AND subject_id=?";
 
@@ -18,6 +21,7 @@ public class Check {
         return rowCount > 0;
     }
 
+    @Override
     public boolean subjectInstanceFollowed(Integer subjectInstanceId) {
         String sql = "SELECT COUNT(*) FROM subject_instances WHERE id=? AND if_followed=true";
 
@@ -26,6 +30,7 @@ public class Check {
         return rowCount > 0;
     }
 
+    @Override
     public boolean entryExists(Integer subjectInstanceId) {
         String sql = "SELECT COUNT(*) FROM entries WHERE subject_instance_id=? AND creation_date=CURRENT_DATE";
 
@@ -34,6 +39,7 @@ public class Check {
         return rowCount > 0;
     }
 
+    @Override
     public boolean userExists(Integer userId) {
         String sql = "SELECT COUNT(*) FROM users WHERE id=?";
 
@@ -42,6 +48,7 @@ public class Check {
         return rowCount > 0;
     }
 
+    @Override
     public boolean userWithGoogleSubExists(String googleSub) {
         String sql = "SELECT COUNT(*) FROM users WHERE google_sub=?";
 
