@@ -10,21 +10,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.underpressure.backend.controllers.classes.abstracts.AuthenticatedPostController;
 import com.underpressure.backend.controllers.classes.request.body.AddEntryRequestBody;
-import com.underpressure.backend.controllers.helpers.FetchOld;
 import com.underpressure.backend.controllers.helpers.Extract;
 import com.underpressure.backend.controllers.services.database.DatabaseService;
+import com.underpressure.backend.controllers.services.google.GoogleService;
 
 @RestController
 public class UpdateEntryController extends AuthenticatedPostController<String, AddEntryRequestBody> {
-
-    @Autowired
-    FetchOld.Google fetchGoogle;
 
     @Autowired
     Extract extract;
 
     @Autowired
     DatabaseService databaseService;
+
+    @Autowired
+    GoogleService googleService;
 
     @Override
     @PostMapping("/personal/entries/add")
@@ -41,7 +41,7 @@ public class UpdateEntryController extends AuthenticatedPostController<String, A
         Integer stressLevel = requestData.getStressLevel();
         databaseService.validate().stressLevel(stressLevel);
 
-        Integer userId = fetchGoogle.userId(idTokenString, clientId);
+        Integer userId = googleService.fetch().userId(idTokenString, clientId);
 
         Integer subjectId = databaseService.fetch().subjectId(subjectName);
         Integer subjectInstanceId = databaseService.fetch().subjectInstanceId(userId, subjectId);

@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.underpressure.backend.controllers.classes.abstracts.AuthenticatedPostController;
 import com.underpressure.backend.controllers.classes.request.body.FollowedSubjectsRequestBody;
 import com.underpressure.backend.controllers.helpers.Extract;
-import com.underpressure.backend.controllers.helpers.FetchOld;
 import com.underpressure.backend.controllers.services.database.DatabaseService;
+import com.underpressure.backend.controllers.services.google.GoogleService;
 import com.underpressure.backend.exceptions.RequestException;
 
 @RestController
@@ -22,13 +22,13 @@ public class FetchFollowedSubjectsController
         extends AuthenticatedPostController<List<String>, FollowedSubjectsRequestBody> {
 
     @Autowired
-    FetchOld.Google fetchGoogle;
-
-    @Autowired
     Extract extract;
 
     @Autowired
     DatabaseService databaseService;
+
+    @Autowired
+    GoogleService googleService;
 
     @Override
     @PostMapping("/personal/subjects")
@@ -39,7 +39,7 @@ public class FetchFollowedSubjectsController
         databaseService.validate().bearerToken(bearerToken);
         String idTokenString = extract.token(bearerToken);
 
-        Integer userId = fetchGoogle.userId(idTokenString, clientId);
+        Integer userId = googleService.fetch().userId(idTokenString, clientId);
 
         List<String> followedSubjects = databaseService.fetch().followedSubjects(userId);
         return new ResponseEntity<>(followedSubjects, HttpStatus.OK);

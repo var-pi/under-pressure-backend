@@ -13,16 +13,16 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.jdbc.Sql;
 
 import com.underpressure.backend.controllers.classes.request.body.AuthenticationBody;
-import com.underpressure.backend.controllers.helpers.FetchOld;
 import com.underpressure.backend.controllers.services.database.DatabaseService;
+import com.underpressure.backend.controllers.services.google.GoogleService;
 import com.underpressure.backend.exceptions.parameter.CodeParameterException;
 
 @JdbcTest
 @AutoConfigureTestDatabase
 @Import({
                 AuthenticationController.class,
-                FetchOld.Google.class,
-                DatabaseService.class
+                DatabaseService.class,
+                GoogleService.class
 })
 @Sql({
                 "classpath:createUsersTable.sql",

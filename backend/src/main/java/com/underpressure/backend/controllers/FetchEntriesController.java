@@ -14,20 +14,20 @@ import com.underpressure.backend.controllers.classes.abstracts.AuthenticatedPost
 import com.underpressure.backend.controllers.classes.request.body.GetEntriesRequestBody;
 import com.underpressure.backend.controllers.classes.request.data.EntryData;
 import com.underpressure.backend.controllers.helpers.Extract;
-import com.underpressure.backend.controllers.helpers.FetchOld;
 import com.underpressure.backend.controllers.services.database.DatabaseService;
+import com.underpressure.backend.controllers.services.google.GoogleService;
 
 @RestController
 public class FetchEntriesController extends AuthenticatedPostController<List<EntryData>, GetEntriesRequestBody> {
-
-    @Autowired
-    FetchOld.Google fetchGoogle;
 
     @Autowired
     Extract extract;
 
     @Autowired
     DatabaseService databaseService;
+
+    @Autowired
+    GoogleService googleService;
 
     @Override
     @PostMapping("/personal/entries")
@@ -41,7 +41,7 @@ public class FetchEntriesController extends AuthenticatedPostController<List<Ent
         String subjectName = requestData.getSubjectName();
         databaseService.validate().subjectName(subjectName);
 
-        Integer userId = fetchGoogle.userId(idTokenString, clientId);
+        Integer userId = googleService.fetch().userId(idTokenString, clientId);
 
         Integer subjectId = databaseService.fetch().subjectId(subjectName);
         Integer subjectInstanceId = databaseService.fetch().subjectInstanceId(userId, subjectId);

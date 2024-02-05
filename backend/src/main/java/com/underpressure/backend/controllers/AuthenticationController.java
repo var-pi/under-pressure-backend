@@ -22,8 +22,8 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
 import com.underpressure.backend.controllers.classes.abstracts.PostController;
 import com.underpressure.backend.controllers.classes.request.body.AuthenticationBody;
 import com.underpressure.backend.controllers.classes.request.data.OAuthTokenResponse;
-import com.underpressure.backend.controllers.helpers.FetchOld;
 import com.underpressure.backend.controllers.services.database.DatabaseService;
+import com.underpressure.backend.controllers.services.google.GoogleService;
 import com.underpressure.backend.exceptions.RequestException;
 import com.underpressure.backend.exceptions.unexpected.AuthenticationFailedException;
 import com.underpressure.backend.exceptions.unexpected.InternalServerError;
@@ -32,10 +32,10 @@ import com.underpressure.backend.exceptions.unexpected.InternalServerError;
 public class AuthenticationController extends PostController<String, AuthenticationBody> {
 
     @Autowired
-    FetchOld.Google fetchGoogle;
+    DatabaseService databaseService;
 
     @Autowired
-    DatabaseService databaseService;
+    GoogleService googleService;
 
     RestTemplate restTemplate = new RestTemplate();
 
@@ -65,7 +65,7 @@ public class AuthenticationController extends PostController<String, Authenticat
         String idTokenString = oAuthTokenResponse.getIdToken();
 
         // Verify the JWT (ex. not expired) and get the decoded OpenID Connect id.
-        Payload userInfo = fetchGoogle.userInfo(idTokenString, clientId);
+        Payload userInfo = googleService.fetch().userInfo(idTokenString, clientId);
 
         String googleSub = userInfo.getSubject();
         if (!databaseService.check().userWithGoogleSubExists(googleSub)) {
