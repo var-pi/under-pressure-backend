@@ -1,6 +1,5 @@
-package com.underpressure.backend.controllers.helpers;
+package com.underpressure.backend.controllers.services.database;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -8,11 +7,15 @@ import com.underpressure.backend.exceptions.RequestException;
 import com.underpressure.backend.exceptions.unexpected.NoRowsUpdatedUnexpectedException;
 
 @Component
-public class Update {
+class UpdateImpl implements Update {
 
-    @Autowired
     JdbcTemplate jdbcTemplate;
 
+    public UpdateImpl(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
+    @Override
     public void entry(Integer entryId, Integer stressLevel)
             throws RequestException {
 

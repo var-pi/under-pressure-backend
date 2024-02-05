@@ -18,4 +18,8 @@ public class DatabaseService {
         return new CheckImpl(jdbcTemplate);
     }
 
+    public Update update() {
+        return new UpdateImpl(jdbcTemplate);
+    }
+
 }

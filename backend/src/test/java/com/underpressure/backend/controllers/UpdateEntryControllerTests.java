@@ -11,7 +11,6 @@ import org.springframework.test.context.jdbc.Sql;
 
 import com.underpressure.backend.controllers.classes.AuthorizedControllerTests;
 import com.underpressure.backend.controllers.classes.request.body.AddEntryRequestBody;
-import com.underpressure.backend.controllers.helpers.Update;
 import com.underpressure.backend.controllers.helpers.Validate;
 import com.underpressure.backend.controllers.services.database.DatabaseService;
 import com.underpressure.backend.exceptions.already_exists.SubjectUnfollowedException;
@@ -26,7 +25,6 @@ import com.underpressure.backend.exceptions.range.StressLevelRangeException;
 @Import({
                 UpdateEntryController.class,
                 Validate.class,
-                Update.class,
                 DatabaseService.class
 })
 @Sql({

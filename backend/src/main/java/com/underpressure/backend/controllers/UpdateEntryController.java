@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.underpressure.backend.controllers.classes.abstracts.AuthenticatedPostController;
 import com.underpressure.backend.controllers.classes.request.body.AddEntryRequestBody;
 import com.underpressure.backend.controllers.helpers.Fetch;
-import com.underpressure.backend.controllers.helpers.Update;
 import com.underpressure.backend.controllers.helpers.Extract;
 import com.underpressure.backend.controllers.helpers.Validate;
 import com.underpressure.backend.controllers.services.database.DatabaseService;
@@ -27,9 +26,6 @@ public class UpdateEntryController extends AuthenticatedPostController<String, A
 
     @Autowired
     Validate validate;
-
-    @Autowired
-    Update update;
 
     @Autowired
     Extract extract;
@@ -62,7 +58,7 @@ public class UpdateEntryController extends AuthenticatedPostController<String, A
         if (databaseService.check().entryExists(subjectInstanceId)) {
             Integer entryId = fetchDB.todaysEntryId(subjectInstanceId);
 
-            update.entry(entryId, stressLevel);
+            databaseService.update().entry(entryId, stressLevel);
 
             return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
         } else {
