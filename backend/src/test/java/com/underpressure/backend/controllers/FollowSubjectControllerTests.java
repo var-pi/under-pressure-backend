@@ -51,6 +51,7 @@ public class FollowSubjectControllerTests extends AuthorizedControllerTests<Foll
 
         @Test
         public void Should_Result_In_BAD_REQUEST_When_SubjectName_Null() {
+
                 SubjectNameParameterException ex = assertThrows(SubjectNameParameterException.class,
                                 () -> controller
                                                 .handle("Bearer user_1_id_token", new FollowSubjectRequestBody(null)));
@@ -62,6 +63,7 @@ public class FollowSubjectControllerTests extends AuthorizedControllerTests<Foll
 
         @Test
         public void Should_Result_In_NOT_FOUND_Exception_When_User_Not_Found() {
+
                 UserDoesNotExistException ex = assertThrows(UserDoesNotExistException.class,
                                 () -> controller
                                                 .handle("Bearer user_4_id_token",
@@ -74,15 +76,18 @@ public class FollowSubjectControllerTests extends AuthorizedControllerTests<Foll
 
         @Test
         public void Should_Result_In_NOT_FOUND_Exception_When_Subject_Not_Found() {
+
                 SubjectDoesNotExist ex = assertThrows(SubjectDoesNotExist.class, () -> controller
                                 .handle("Bearer user_1_id_token", new FollowSubjectRequestBody("NaN")));
 
                 assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.NOT_FOUND);
                 assertThat(ex.getMessage()).isNotBlank();
+
         }
 
         @Test
         public void Should_Result_In_BAD_REQUEST_When_Requested_To_Follow_Already_Followed() {
+
                 SubjectAlreadyFollowedException ex = assertThrows(SubjectAlreadyFollowedException.class,
                                 () -> controller
                                                 .handle("Bearer user_1_id_token",
@@ -90,10 +95,12 @@ public class FollowSubjectControllerTests extends AuthorizedControllerTests<Foll
 
                 assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.BAD_REQUEST);
                 assertThat(ex.getMessage()).isNotBlank();
+
         }
 
         @Test
         public void Should_Create_A_Subject_When_Request_Valid() {
+
                 String bearerToken = "Bearer user_1_id_token";
                 String subjectName = "Subject 3";
 
@@ -109,10 +116,12 @@ public class FollowSubjectControllerTests extends AuthorizedControllerTests<Foll
 
                 assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.BAD_REQUEST);
                 assertThat(ex.getMessage()).isNotBlank();
+
         }
 
         @Test
         public void Should_Follow_A_Subject_When_Request_Valid() {
+
                 String bearerToken = "Bearer user_2_id_token";
                 String subjectName = "Subject 3";
 
@@ -128,6 +137,7 @@ public class FollowSubjectControllerTests extends AuthorizedControllerTests<Foll
 
                 assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.BAD_REQUEST);
                 assertThat(ex.getMessage()).isNotBlank();
+
         }
 
 }

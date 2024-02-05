@@ -1,6 +1,7 @@
 package com.underpressure.backend.controllers;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.Import;
@@ -10,10 +11,17 @@ import org.springframework.test.context.jdbc.Sql;
 
 import com.underpressure.backend.controllers.classes.ApiResponse;
 import com.underpressure.backend.controllers.classes.AuthorizedControllerTests;
+import com.underpressure.backend.controllers.classes.request.body.FollowSubjectRequestBody;
 import com.underpressure.backend.controllers.classes.request.body.UnfollowSubjectRequestBody;
 import com.underpressure.backend.controllers.helpers.Check;
 import com.underpressure.backend.controllers.helpers.Set;
 import com.underpressure.backend.controllers.helpers.Validate;
+import com.underpressure.backend.exceptions.already_exists.SubjectAlreadyUnfollowedException;
+import com.underpressure.backend.exceptions.auth.BearerTokenNullException;
+import com.underpressure.backend.exceptions.does_not_exist.SubjectDoesNotExist;
+import com.underpressure.backend.exceptions.does_not_exist.SubjectInstanceDoesNotExistsException;
+import com.underpressure.backend.exceptions.does_not_exist.UserDoesNotExistException;
+import com.underpressure.backend.exceptions.parameter.SubjectNameParameterException;
 
 @Import({
                 UnfollowSubjectController.class,
@@ -31,82 +39,97 @@ import com.underpressure.backend.controllers.helpers.Validate;
 public class UnfollowSubjectControllerTests extends AuthorizedControllerTests<UnfollowSubjectController> {
 
         @Test
-        public void Should_Result_In_Bad_Request_When_BearerToken_Null() {
-                ResponseEntity<ApiResponse<String>> responseEntity = controller
-                                .handle(null, new UnfollowSubjectRequestBody("Subject 1"));
+        public void Should_Result_In_UNAUTHORIZED_When_BearerToken_Null() {
 
-                assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
-                assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");
-                assertThat(responseEntity.getBody().getMessage()).isNotBlank();
+                BearerTokenNullException ex = assertThrows(BearerTokenNullException.class,
+                                () -> controller
+                                                .handle(null, new UnfollowSubjectRequestBody("Subject 1")));
+
+                assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.UNAUTHORIZED);
+                assertThat(ex.getMessage()).isNotBlank();
+
         }
 
         @Test
-        public void Should_Result_In_Bad_Request_When_SubjectName_Null() {
-                ResponseEntity<ApiResponse<String>> responseEntity = controller
-                                .handle("Bearer user_1_id_token", new UnfollowSubjectRequestBody(null));
+        public void Should_Result_In_BAD_REQUEST_When_SubjectName_Null() {
 
-                assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
-                assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");
-                assertThat(responseEntity.getBody().getMessage()).isNotBlank();
+                SubjectNameParameterException ex = assertThrows(SubjectNameParameterException.class,
+                                () -> controller
+                                                .handle("Bearer user_1_id_token",
+                                                                new UnfollowSubjectRequestBody(null)));
+
+                assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.BAD_REQUEST);
+                assertThat(ex.getMessage()).isNotBlank();
+
         }
 
         @Test
-        public void Should_Result_In_Not_Found_Exception_When_User_Not_Found() {
-                ResponseEntity<ApiResponse<String>> responseEntity = controller
-                                .handle("Bearer user_4_id_token", new UnfollowSubjectRequestBody("Subject 1"));
+        public void Should_Result_In_NOT_FOUND_Exception_When_User_Not_Found() {
 
-                assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
-                assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");
-                assertThat(responseEntity.getBody().getMessage()).isNotBlank();
+                UserDoesNotExistException ex = assertThrows(UserDoesNotExistException.class,
+                                () -> controller
+                                                .handle("Bearer user_4_id_token",
+                                                                new UnfollowSubjectRequestBody("Subject 1")));
+
+                assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.NOT_FOUND);
+                assertThat(ex.getMessage()).isNotBlank();
+
         }
 
         @Test
-        public void Should_Result_In_Not_Found_Exception_When_Subject_Not_Found() {
-                ResponseEntity<ApiResponse<String>> responseEntity = controller
-                                .handle("Bearer user_1_id_token", new UnfollowSubjectRequestBody("NaN"));
+        public void Should_Result_In_NOT_FOUND_Exception_When_Subject_Not_Found() {
 
-                assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
-                assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");
-                assertThat(responseEntity.getBody().getMessage()).isNotBlank();
+                SubjectDoesNotExist ex = assertThrows(SubjectDoesNotExist.class, () -> controller
+                                .handle("Bearer user_1_id_token", new UnfollowSubjectRequestBody("NaN")));
+
+                assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.NOT_FOUND);
+                assertThat(ex.getMessage()).isNotBlank();
+
         }
 
         @Test
-        public void Should_Result_In_Bad_Request_When_Request_To_Unfollow_Having_Never_Followed() {
-                ResponseEntity<ApiResponse<String>> responseEntity = controller
-                                .handle("Bearer user_1_id_token", new UnfollowSubjectRequestBody("Subject 3"));
+        public void Should_Result_In_NOT_FOUND_When_Request_To_Unfollow_Having_Never_Followed() {
 
-                assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
-                assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");
-                assertThat(responseEntity.getBody().getMessage()).isNotBlank();
+                SubjectInstanceDoesNotExistsException ex = assertThrows(SubjectInstanceDoesNotExistsException.class,
+                                () -> controller
+                                                .handle("Bearer user_1_id_token",
+                                                                new UnfollowSubjectRequestBody("Subject 3")));
+
+                assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.NOT_FOUND);
+                assertThat(ex.getMessage()).isNotBlank();
+
         }
 
         @Test
-        public void Should_Result_In_Bad_Request_When_Requested_To_Unfollow_Already_Unfollowed() {
-                ResponseEntity<ApiResponse<String>> responseEntity = controller
-                                .handle("Bearer user_2_id_token", new UnfollowSubjectRequestBody("Subject 3"));
+        public void Should_Result_In_BAD_REQUEST_When_Requested_To_Unfollow_Already_Unfollowed() {
 
-                assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
-                assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");
-                assertThat(responseEntity.getBody().getMessage()).isNotBlank();
+                SubjectAlreadyUnfollowedException ex = assertThrows(SubjectAlreadyUnfollowedException.class,
+                                () -> controller
+                                                .handle("Bearer user_2_id_token",
+                                                                new UnfollowSubjectRequestBody("Subject 3")));
+
+                assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.BAD_REQUEST);
+                assertThat(ex.getMessage()).isNotBlank();
+
         }
 
         @Test
         public void Should_Unfollow_A_Subject_When_Request_Valid() {
+
                 String bearerToken = "Bearer user_1_id_token";
                 String subjectName = "Subject 1";
 
-                ResponseEntity<ApiResponse<String>> responseEntity = controller
+                ResponseEntity<String> responseEntity = controller
                                 .handle(bearerToken, new UnfollowSubjectRequestBody(subjectName));
 
                 assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
-                assertThat(responseEntity.getBody().getStatus()).isEqualTo("success");
 
-                responseEntity = controller
-                                .handle(bearerToken, new UnfollowSubjectRequestBody(subjectName));
+                SubjectAlreadyUnfollowedException ex = assertThrows(SubjectAlreadyUnfollowedException.class,
+                                () -> controller.handle(bearerToken, new UnfollowSubjectRequestBody(subjectName)));
 
-                assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
-                assertThat(responseEntity.getBody().getStatus()).isEqualTo("fail");
-                assertThat(responseEntity.getBody().getMessage()).isNotBlank();
+                assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.BAD_REQUEST);
+                assertThat(ex.getMessage()).isNotBlank();
+
         }
 
 }

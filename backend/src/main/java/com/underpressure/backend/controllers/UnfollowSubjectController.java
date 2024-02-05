@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.underpressure.backend.controllers.classes.ApiResponse;
 import com.underpressure.backend.controllers.classes.abstracts.AuthenticatedPostController;
+import com.underpressure.backend.controllers.classes.abstracts.AuthenticatedPostControllerUpdated;
 import com.underpressure.backend.controllers.classes.request.body.UnfollowSubjectRequestBody;
 import com.underpressure.backend.controllers.helpers.Extract;
 import com.underpressure.backend.controllers.helpers.Fetch;
@@ -18,7 +19,7 @@ import com.underpressure.backend.controllers.helpers.Validate;
 import com.underpressure.backend.exceptions.RequestException;
 
 @RestController
-public class UnfollowSubjectController extends AuthenticatedPostController<String, UnfollowSubjectRequestBody> {
+public class UnfollowSubjectController extends AuthenticatedPostControllerUpdated<String, UnfollowSubjectRequestBody> {
 
     @Autowired
     Fetch.DB fetchDB;
@@ -37,35 +38,27 @@ public class UnfollowSubjectController extends AuthenticatedPostController<Strin
 
     @Override
     @PostMapping("/personal/subjects/unfollow")
-    public ResponseEntity<ApiResponse<String>> handle(
-            @RequestHeader("Authorization") String bearerToken,
+    public ResponseEntity<String> handle(
+            @RequestHeader(value = "Authorization", required = false) String bearerToken,
             @RequestBody UnfollowSubjectRequestBody requestData) {
 
-        try {
-            validate.bearerToken(bearerToken);
-            String idTokenString = extract.token(bearerToken);
+        validate.bearerToken(bearerToken);
+        String idTokenString = extract.token(bearerToken);
 
-            String subjectName = requestData.getSubjectName();
-            validate.subjectName(subjectName, jdbcTemplate);
+        String subjectName = requestData.getSubjectName();
+        validate.subjectName(subjectName, jdbcTemplate);
 
-            Integer userId = fetchGoogle.userId(idTokenString, jdbcTemplate, clientId);
+        Integer userId = fetchGoogle.userId(idTokenString, jdbcTemplate, clientId);
 
-            Integer subjectId = fetchDB.subjectId(subjectName, jdbcTemplate);
-            Integer subjectInstanceId = fetchDB.subjectInstanceId(userId, subjectId, jdbcTemplate);
+        Integer subjectId = fetchDB.subjectId(subjectName, jdbcTemplate);
+        Integer subjectInstanceId = fetchDB.subjectInstanceId(userId, subjectId, jdbcTemplate);
 
-            validate.isFollowed(subjectInstanceId, jdbcTemplate);
+        validate.isFollowed(subjectInstanceId, jdbcTemplate);
 
-            set.toNotFollow(subjectInstanceId, jdbcTemplate);
+        set.toNotFollow(subjectInstanceId, jdbcTemplate);
 
-            return new ResponseEntity<>(
-                    new ApiResponse<>(true, null, null),
-                    HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
 
-        } catch (RequestException e) {
-            return new ResponseEntity<>(
-                    new ApiResponse<>(false, null, e.getMessage()),
-                    e.getHttpStatus());
-        }
     }
 
 }
