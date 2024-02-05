@@ -22,7 +22,7 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
 import com.underpressure.backend.controllers.classes.abstracts.PostController;
 import com.underpressure.backend.controllers.classes.request.body.AuthenticationBody;
 import com.underpressure.backend.controllers.classes.request.data.OAuthTokenResponse;
-import com.underpressure.backend.controllers.helpers.Fetch;
+import com.underpressure.backend.controllers.helpers.FetchOld;
 import com.underpressure.backend.controllers.services.database.DatabaseService;
 import com.underpressure.backend.exceptions.RequestException;
 import com.underpressure.backend.exceptions.unexpected.AuthenticationFailedException;
@@ -32,7 +32,7 @@ import com.underpressure.backend.exceptions.unexpected.InternalServerError;
 public class AuthenticationController extends PostController<String, AuthenticationBody> {
 
     @Autowired
-    Fetch.Google fetchGoogle;
+    FetchOld.Google fetchGoogle;
 
     @Autowired
     DatabaseService databaseService;

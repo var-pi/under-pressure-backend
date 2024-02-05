@@ -25,64 +25,70 @@ import com.underpressure.backend.exceptions.does_not_exist.UserDoesNotExistExcep
 import com.underpressure.backend.exceptions.unexpected.UserVerificationException;
 
 @Component
-public class Fetch {
+public class FetchOld {
 
-    @Component
-    public static class DB {
+    // @Component
+    // public static class DB {
 
-        @Autowired
-        JdbcTemplate jdbcTemplate;
+    // @Autowired
+    // JdbcTemplate jdbcTemplate;
 
-        public List<String> subjects() {
-            String sql = "SELECT name FROM subjects";
+    // public List<String> subjects() {
+    // String sql = "SELECT name FROM subjects";
 
-            return jdbcTemplate.queryForList(sql, String.class);
-        }
+    // return jdbcTemplate.queryForList(sql, String.class);
+    // }
 
-        public Integer subjectId(String subjectName) throws RequestException {
-            String requestForSubjectId = "SELECT id FROM subjects WHERE name=?";
+    // public Integer subjectId(String subjectName) throws RequestException {
+    // String requestForSubjectId = "SELECT id FROM subjects WHERE name=?";
 
-            try {
-                return jdbcTemplate.queryForObject(requestForSubjectId, Integer.class, subjectName);
-            } catch (EmptyResultDataAccessException e) {
-                throw new SubjectDoesNotExist();
-            }
-        }
+    // try {
+    // return jdbcTemplate.queryForObject(requestForSubjectId, Integer.class,
+    // subjectName);
+    // } catch (EmptyResultDataAccessException e) {
+    // throw new SubjectDoesNotExist();
+    // }
+    // }
 
-        public List<String> followedSubjects(Integer userId) {
-            String sql = "SELECT subjects.name FROM subject_instances INNER JOIN subjects ON subject_instances.subject_id=subjects.id WHERE subject_instances.user_id=? AND if_followed=true";
+    // public List<String> followedSubjects(Integer userId) {
+    // String sql = "SELECT subjects.name FROM subject_instances INNER JOIN subjects
+    // ON subject_instances.subject_id=subjects.id WHERE subject_instances.user_id=?
+    // AND if_followed=true";
 
-            return jdbcTemplate.queryForList(sql, String.class, userId);
-        }
+    // return jdbcTemplate.queryForList(sql, String.class, userId);
+    // }
 
-        public Integer subjectInstanceId(Integer userId, Integer subjectId)
-                throws RequestException {
-            String sql = "SELECT id FROM subject_instances WHERE user_id=? AND subject_id=?";
+    // public Integer subjectInstanceId(Integer userId, Integer subjectId)
+    // throws RequestException {
+    // String sql = "SELECT id FROM subject_instances WHERE user_id=? AND
+    // subject_id=?";
 
-            try {
-                return jdbcTemplate.queryForObject(sql, Integer.class, userId, subjectId);
-            } catch (EmptyResultDataAccessException e) {
-                throw new SubjectInstanceDoesNotExistsException();
-            }
+    // try {
+    // return jdbcTemplate.queryForObject(sql, Integer.class, userId, subjectId);
+    // } catch (EmptyResultDataAccessException e) {
+    // throw new SubjectInstanceDoesNotExistsException();
+    // }
 
-        }
+    // }
 
-        public Integer todaysEntryId(Integer subjectInstanceId) throws RequestException {
-            String sql = "SELECT id FROM entries WHERE subject_instance_id=? AND creation_date=CURRENT_DATE";
+    // public Integer todaysEntryId(Integer subjectInstanceId) throws
+    // RequestException {
+    // String sql = "SELECT id FROM entries WHERE subject_instance_id=? AND
+    // creation_date=CURRENT_DATE";
 
-            try {
-                return jdbcTemplate.queryForObject(sql, Integer.class, subjectInstanceId);
-            } catch (EmptyResultDataAccessException e) {
-                throw new TodaysEntryDoesNotExistException(sql);
-            }
-        }
+    // try {
+    // return jdbcTemplate.queryForObject(sql, Integer.class, subjectInstanceId);
+    // } catch (EmptyResultDataAccessException e) {
+    // throw new TodaysEntryDoesNotExistException(sql);
+    // }
+    // }
 
-        public List<EntryData> entries(Integer subjectInstanceId) {
-            String sql = "SELECT * FROM entries WHERE subject_instance_id=?";
+    // public List<EntryData> entries(Integer subjectInstanceId) {
+    // String sql = "SELECT * FROM entries WHERE subject_instance_id=?";
 
-            return jdbcTemplate.query(sql, new EntryDataRowMapper(), subjectInstanceId);
-        }
-    }
+    // return jdbcTemplate.query(sql, new EntryDataRowMapper(), subjectInstanceId);
+    // }
+    // }
 
     @Component
     public static class Google {

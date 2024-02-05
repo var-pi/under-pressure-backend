@@ -11,17 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.underpressure.backend.controllers.classes.abstracts.AuthenticatedPostController;
 import com.underpressure.backend.controllers.classes.request.body.UnfollowSubjectRequestBody;
 import com.underpressure.backend.controllers.helpers.Extract;
-import com.underpressure.backend.controllers.helpers.Fetch;
+import com.underpressure.backend.controllers.helpers.FetchOld;
 import com.underpressure.backend.controllers.services.database.DatabaseService;
 
 @RestController
 public class UnfollowSubjectController extends AuthenticatedPostController<String, UnfollowSubjectRequestBody> {
 
     @Autowired
-    Fetch.DB fetchDB;
-
-    @Autowired
-    Fetch.Google fetchGoogle;
+    FetchOld.Google fetchGoogle;
 
     @Autowired
     Extract extract;
@@ -43,8 +40,8 @@ public class UnfollowSubjectController extends AuthenticatedPostController<Strin
 
         Integer userId = fetchGoogle.userId(idTokenString, clientId);
 
-        Integer subjectId = fetchDB.subjectId(subjectName);
-        Integer subjectInstanceId = fetchDB.subjectInstanceId(userId, subjectId);
+        Integer subjectId = databaseService.fetch().subjectId(subjectName);
+        Integer subjectInstanceId = databaseService.fetch().subjectInstanceId(userId, subjectId);
 
         databaseService.validate().isFollowed(subjectInstanceId);
 

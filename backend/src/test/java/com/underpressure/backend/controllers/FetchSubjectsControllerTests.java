@@ -9,13 +9,15 @@ import org.springframework.test.context.jdbc.Sql;
 
 import com.underpressure.backend.controllers.classes.ControllerTests;
 import com.underpressure.backend.controllers.classes.request.params.GetSubjectsParams;
+import com.underpressure.backend.controllers.services.database.DatabaseService;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Import({
-        FetchSubjectsController.class
+        FetchSubjectsController.class,
+        DatabaseService.class
 })
 @Sql({
         "classpath:createSubjectsTable.sql",

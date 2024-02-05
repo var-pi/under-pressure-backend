@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.underpressure.backend.controllers.classes.abstracts.AuthenticatedPostController;
 import com.underpressure.backend.controllers.classes.request.body.AddEntryRequestBody;
-import com.underpressure.backend.controllers.helpers.Fetch;
+import com.underpressure.backend.controllers.helpers.FetchOld;
 import com.underpressure.backend.controllers.helpers.Extract;
 import com.underpressure.backend.controllers.services.database.DatabaseService;
 
@@ -18,10 +18,7 @@ import com.underpressure.backend.controllers.services.database.DatabaseService;
 public class UpdateEntryController extends AuthenticatedPostController<String, AddEntryRequestBody> {
 
     @Autowired
-    Fetch.DB fetchDB;
-
-    @Autowired
-    Fetch.Google fetchGoogle;
+    FetchOld.Google fetchGoogle;
 
     @Autowired
     Extract extract;
@@ -46,13 +43,13 @@ public class UpdateEntryController extends AuthenticatedPostController<String, A
 
         Integer userId = fetchGoogle.userId(idTokenString, clientId);
 
-        Integer subjectId = fetchDB.subjectId(subjectName);
-        Integer subjectInstanceId = fetchDB.subjectInstanceId(userId, subjectId);
+        Integer subjectId = databaseService.fetch().subjectId(subjectName);
+        Integer subjectInstanceId = databaseService.fetch().subjectInstanceId(userId, subjectId);
 
         databaseService.validate().isFollowed(subjectInstanceId);
 
         if (databaseService.check().entryExists(subjectInstanceId)) {
-            Integer entryId = fetchDB.todaysEntryId(subjectInstanceId);
+            Integer entryId = databaseService.fetch().todaysEntryId(subjectInstanceId);
 
             databaseService.update().entry(entryId, stressLevel);
 

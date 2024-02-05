@@ -13,7 +13,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.jdbc.Sql;
 
 import com.underpressure.backend.controllers.classes.request.body.AuthenticationBody;
-import com.underpressure.backend.controllers.helpers.Fetch;
+import com.underpressure.backend.controllers.helpers.FetchOld;
 import com.underpressure.backend.controllers.services.database.DatabaseService;
 import com.underpressure.backend.exceptions.parameter.CodeParameterException;
 
@@ -21,7 +21,7 @@ import com.underpressure.backend.exceptions.parameter.CodeParameterException;
 @AutoConfigureTestDatabase
 @Import({
                 AuthenticationController.class,
-                Fetch.Google.class,
+                FetchOld.Google.class,
                 DatabaseService.class
 })
 @Sql({

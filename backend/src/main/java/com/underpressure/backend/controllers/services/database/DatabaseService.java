@@ -30,4 +30,8 @@ public class DatabaseService {
         return new SetImpl(jdbcTemplate);
     }
 
+    public FetchDatabase fetch() {
+        return new FetchDatabaseImpl(jdbcTemplate);
+    }
+
 }

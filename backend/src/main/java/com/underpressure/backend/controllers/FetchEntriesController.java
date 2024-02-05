@@ -14,17 +14,14 @@ import com.underpressure.backend.controllers.classes.abstracts.AuthenticatedPost
 import com.underpressure.backend.controllers.classes.request.body.GetEntriesRequestBody;
 import com.underpressure.backend.controllers.classes.request.data.EntryData;
 import com.underpressure.backend.controllers.helpers.Extract;
-import com.underpressure.backend.controllers.helpers.Fetch;
+import com.underpressure.backend.controllers.helpers.FetchOld;
 import com.underpressure.backend.controllers.services.database.DatabaseService;
 
 @RestController
 public class FetchEntriesController extends AuthenticatedPostController<List<EntryData>, GetEntriesRequestBody> {
 
     @Autowired
-    Fetch.DB fetchDB;
-
-    @Autowired
-    Fetch.Google fetchGoogle;
+    FetchOld.Google fetchGoogle;
 
     @Autowired
     Extract extract;
@@ -46,10 +43,10 @@ public class FetchEntriesController extends AuthenticatedPostController<List<Ent
 
         Integer userId = fetchGoogle.userId(idTokenString, clientId);
 
-        Integer subjectId = fetchDB.subjectId(subjectName);
-        Integer subjectInstanceId = fetchDB.subjectInstanceId(userId, subjectId);
+        Integer subjectId = databaseService.fetch().subjectId(subjectName);
+        Integer subjectInstanceId = databaseService.fetch().subjectInstanceId(userId, subjectId);
 
-        List<EntryData> entries = fetchDB.entries(subjectInstanceId);
+        List<EntryData> entries = databaseService.fetch().entries(subjectInstanceId);
 
         return new ResponseEntity<>(entries, HttpStatus.OK);
 

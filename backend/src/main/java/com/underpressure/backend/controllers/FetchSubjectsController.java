@@ -11,19 +11,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.underpressure.backend.controllers.classes.abstracts.GetController;
 import com.underpressure.backend.controllers.classes.request.params.GetSubjectsParams;
-import com.underpressure.backend.controllers.helpers.Fetch;
+import com.underpressure.backend.controllers.services.database.DatabaseService;
 
 @RestController
 public class FetchSubjectsController extends GetController<List<String>, GetSubjectsParams> {
 
     @Autowired
-    Fetch.DB fetchDB;
+    DatabaseService databaseService;
 
     @Override
     @GetMapping("/subjects")
     public ResponseEntity<List<String>> handle(@ModelAttribute GetSubjectsParams params) {
 
-        return new ResponseEntity<>(fetchDB.subjects(), HttpStatus.OK);
+        return new ResponseEntity<>(databaseService.fetch().subjects(), HttpStatus.OK);
 
     }
 
