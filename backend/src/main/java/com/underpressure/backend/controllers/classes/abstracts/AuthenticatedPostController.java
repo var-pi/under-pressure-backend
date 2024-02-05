@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
-import com.underpressure.backend.controllers.classes.ApiResponse;
+import com.underpressure.backend.exceptions.RequestException;
 
 public abstract class AuthenticatedPostController<S, T> extends Controller {
 
@@ -14,8 +14,8 @@ public abstract class AuthenticatedPostController<S, T> extends Controller {
     protected String clientId;
 
     @CrossOrigin(origins = "*") // TODO Change to an appropriate url
-    public abstract ResponseEntity<ApiResponse<S>> handle(
+    public abstract ResponseEntity<S> handle(
             @RequestHeader("Authorization") String bearerToken,
-            @RequestBody T requestData);
+            @RequestBody T requestData) throws RequestException;
 
 }

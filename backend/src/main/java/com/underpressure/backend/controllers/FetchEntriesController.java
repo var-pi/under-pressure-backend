@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.underpressure.backend.controllers.classes.abstracts.AuthenticatedPostControllerUpdated;
+import com.underpressure.backend.controllers.classes.abstracts.AuthenticatedPostController;
 import com.underpressure.backend.controllers.classes.request.body.GetEntriesRequestBody;
 import com.underpressure.backend.controllers.classes.request.data.EntryData;
 import com.underpressure.backend.controllers.helpers.Extract;
@@ -18,7 +18,7 @@ import com.underpressure.backend.controllers.helpers.Fetch;
 import com.underpressure.backend.controllers.helpers.Validate;
 
 @RestController
-public class FetchEntriesController extends AuthenticatedPostControllerUpdated<List<EntryData>, GetEntriesRequestBody> {
+public class FetchEntriesController extends AuthenticatedPostController<List<EntryData>, GetEntriesRequestBody> {
 
     @Autowired
     Fetch.DB fetchDB;

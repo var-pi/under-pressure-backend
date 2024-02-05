@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.underpressure.backend.controllers.classes.abstracts.AuthenticatedPostControllerUpdated;
+import com.underpressure.backend.controllers.classes.abstracts.AuthenticatedPostController;
 import com.underpressure.backend.controllers.classes.request.body.FollowSubjectRequestBody;
 import com.underpressure.backend.controllers.helpers.Add;
 import com.underpressure.backend.controllers.helpers.Check;
@@ -18,7 +18,7 @@ import com.underpressure.backend.controllers.helpers.Set;
 import com.underpressure.backend.controllers.helpers.Validate;
 
 @RestController
-public class FollowSubjectController extends AuthenticatedPostControllerUpdated<String, FollowSubjectRequestBody> {
+public class FollowSubjectController extends AuthenticatedPostController<String, FollowSubjectRequestBody> {
 
     @Autowired
     Fetch.DB fetchDB;
