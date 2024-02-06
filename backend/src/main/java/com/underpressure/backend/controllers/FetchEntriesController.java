@@ -8,15 +8,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.underpressure.backend.controllers.classes.abstracts.AuthenticatedPostController;
+import com.underpressure.backend.controllers.classes.dto.EntryDataDto;
 import com.underpressure.backend.controllers.classes.request.body.GetEntriesRequestBody;
-import com.underpressure.backend.controllers.classes.request.data.EntryData;
 import com.underpressure.backend.controllers.services.database.DatabaseService;
 import com.underpressure.backend.controllers.services.google.GoogleService;
 import com.underpressure.backend.controllers.services.utility.UtilityService;
 
-public class FetchEntriesController extends AuthenticatedPostController<List<EntryData>, GetEntriesRequestBody> {
+@RestController
+public class FetchEntriesController extends AuthenticatedPostController<List<EntryDataDto>, GetEntriesRequestBody> {
 
     @Autowired
     UtilityService utilityService;
@@ -29,7 +31,7 @@ public class FetchEntriesController extends AuthenticatedPostController<List<Ent
 
     @Override
     @PostMapping("/personal/entries")
-    public ResponseEntity<List<EntryData>> handle(
+    public ResponseEntity<List<EntryDataDto>> handle(
             @RequestHeader(value = "Authorization", required = false) String bearerToken,
             @RequestBody GetEntriesRequestBody requestData) {
 
@@ -44,7 +46,7 @@ public class FetchEntriesController extends AuthenticatedPostController<List<Ent
         Integer subjectId = databaseService.fetch().subjectId(subjectName);
         Integer subjectInstanceId = databaseService.fetch().subjectInstanceId(userId, subjectId);
 
-        List<EntryData> entries = databaseService.fetch().entries(subjectInstanceId);
+        List<EntryDataDto> entries = databaseService.fetch().entries(subjectInstanceId);
 
         return new ResponseEntity<>(entries, HttpStatus.OK);
 

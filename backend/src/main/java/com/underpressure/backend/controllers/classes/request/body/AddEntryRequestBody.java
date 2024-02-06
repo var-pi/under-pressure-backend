@@ -1,8 +1,8 @@
 package com.underpressure.backend.controllers.classes.request.body;
 
 public class AddEntryRequestBody {
-    String subjectName;
-    Integer stressLevel;
+    private String subjectName;
+    private Integer stressLevel;
 
     public AddEntryRequestBody() {
     }

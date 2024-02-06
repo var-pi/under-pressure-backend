@@ -9,7 +9,7 @@ import com.underpressure.backend.exceptions.RequestException;
 import com.underpressure.backend.exceptions.RequestExceptionDto;
 
 @ControllerAdvice
-public class CointrollerExceptionHandler {
+public class ControllerExceptionHandler {
 
     @ExceptionHandler(RequestException.class)
     public ResponseEntity<RequestExceptionDto> handleAuthenticationException(RequestException ex)

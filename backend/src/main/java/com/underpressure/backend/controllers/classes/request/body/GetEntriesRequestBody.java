@@ -1,7 +1,7 @@
 package com.underpressure.backend.controllers.classes.request.body;
 
 public class GetEntriesRequestBody {
-    String subjectName;
+    private String subjectName;
 
     public GetEntriesRequestBody() {
     }

@@ -1,19 +1,11 @@
-package com.underpressure.backend.controllers.classes.request.data;
+package com.underpressure.backend.controllers.classes.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-public class OAuthTokenResponse {
-    @JsonProperty("access_token")
+public class OAuthTokenDto {
     private String accessToken;
-    @JsonProperty("id_token")
     private String idToken;
-    @JsonProperty("expires_in")
     private int expiresIn;
-    @JsonProperty("token_type")
     private String tokenType;
-    @JsonProperty("scope")
     private String scope;
-    @JsonProperty("refresh_token")
     private String refreshToken;
 
     public String getAccessToken() {

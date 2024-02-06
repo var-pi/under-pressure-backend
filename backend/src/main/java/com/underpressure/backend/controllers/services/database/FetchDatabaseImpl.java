@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import com.underpressure.backend.controllers.classes.request.data.EntryData;
-import com.underpressure.backend.controllers.classes.request.data.EntryDataRowMapper;
+import com.underpressure.backend.controllers.classes.dto.EntryDataDto;
+import com.underpressure.backend.controllers.classes.rowMappers.EntryDataRowMapper;
 import com.underpressure.backend.exceptions.RequestException;
 import com.underpressure.backend.exceptions.does_not_exist.SubjectDoesNotExist;
 import com.underpressure.backend.exceptions.does_not_exist.SubjectInstanceDoesNotExistsException;
@@ -64,7 +64,7 @@ public class FetchDatabaseImpl implements FetchDatabase {
         }
     }
 
-    public List<EntryData> entries(Integer subjectInstanceId) {
+    public List<EntryDataDto> entries(Integer subjectInstanceId) {
         String sql = "SELECT * FROM entries WHERE subject_instance_id=?";
 
         return jdbcTemplate.query(sql, new EntryDataRowMapper(), subjectInstanceId);

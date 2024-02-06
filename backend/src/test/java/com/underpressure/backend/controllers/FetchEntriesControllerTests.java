@@ -12,8 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.jdbc.Sql;
 
 import com.underpressure.backend.controllers.classes.AuthorizedControllerTests;
+import com.underpressure.backend.controllers.classes.dto.EntryDataDto;
 import com.underpressure.backend.controllers.classes.request.body.GetEntriesRequestBody;
-import com.underpressure.backend.controllers.classes.request.data.EntryData;
 import com.underpressure.backend.controllers.services.database.DatabaseService;
 import com.underpressure.backend.exceptions.auth.BearerTokenNullException;
 import com.underpressure.backend.exceptions.does_not_exist.SubjectDoesNotExist;
@@ -88,7 +88,7 @@ public class FetchEntriesControllerTests extends AuthorizedControllerTests<Fetch
         @Test
         public void Should_Return_Entries_When_Request_Valid() {
 
-                ResponseEntity<List<EntryData>> responseEntity = controller
+                ResponseEntity<List<EntryDataDto>> responseEntity = controller
                                 .handle("Bearer user_1_id_token", new GetEntriesRequestBody("Subject 1"));
 
                 assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);

@@ -14,19 +14,22 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
 import com.underpressure.backend.controllers.classes.abstracts.PostController;
+import com.underpressure.backend.controllers.classes.dto.OAuthTokenDto;
 import com.underpressure.backend.controllers.classes.request.body.AuthenticationBody;
-import com.underpressure.backend.controllers.classes.request.data.OAuthTokenResponse;
 import com.underpressure.backend.controllers.services.database.DatabaseService;
 import com.underpressure.backend.controllers.services.google.GoogleService;
 import com.underpressure.backend.exceptions.RequestException;
 import com.underpressure.backend.exceptions.unexpected.AuthenticationFailedException;
 import com.underpressure.backend.exceptions.unexpected.InternalServerError;
 
+@RestController
 public class AuthenticationController extends PostController<String, AuthenticationBody> {
 
     @Autowired
@@ -57,7 +60,7 @@ public class AuthenticationController extends PostController<String, Authenticat
 
         // User granted us some permissions and now we can request an access token from
         // the authorisation/resource server.
-        OAuthTokenResponse oAuthTokenResponse = exchangeAuthCodeForAccessToken(code);
+        OAuthTokenDto oAuthTokenResponse = exchangeAuthCodeForAccessToken(code);
 
         // Get encoded JWT (OpenID Connect)
         String idTokenString = oAuthTokenResponse.getIdToken();
@@ -76,7 +79,7 @@ public class AuthenticationController extends PostController<String, Authenticat
 
     }
 
-    private OAuthTokenResponse exchangeAuthCodeForAccessToken(String code) throws RequestException {
+    private OAuthTokenDto exchangeAuthCodeForAccessToken(String code) throws RequestException {
 
         // https://www.javainuse.com/spring/spring-boot-oauth-access-token
 
@@ -103,9 +106,11 @@ public class AuthenticationController extends PostController<String, Authenticat
             throw new AuthenticationFailedException();
 
         // Parse the response entity body into the Java object.
+        ObjectMapper objectMapper = new ObjectMapper();
+        // Convert from 'snake_case' to 'camelCase'.
+        objectMapper.setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
         try {
-            return (new ObjectMapper())
-                    .readValue(responseEntity.getBody(), OAuthTokenResponse.class);
+            return objectMapper.readValue(responseEntity.getBody(), OAuthTokenDto.class);
         } catch (Exception e) {
             throw new InternalServerError();
         }

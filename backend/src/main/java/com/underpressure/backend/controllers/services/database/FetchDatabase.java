@@ -2,7 +2,7 @@ package com.underpressure.backend.controllers.services.database;
 
 import java.util.List;
 
-import com.underpressure.backend.controllers.classes.request.data.EntryData;
+import com.underpressure.backend.controllers.classes.dto.EntryDataDto;
 import com.underpressure.backend.exceptions.RequestException;
 
 public interface FetchDatabase {
@@ -17,6 +17,6 @@ public interface FetchDatabase {
 
     public Integer todaysEntryId(Integer subjectInstanceId) throws RequestException;
 
-    public List<EntryData> entries(Integer subjectInstanceId);
+    public List<EntryDataDto> entries(Integer subjectInstanceId);
 
 }

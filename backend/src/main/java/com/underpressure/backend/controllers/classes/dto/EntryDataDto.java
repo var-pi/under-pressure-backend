@@ -1,8 +1,8 @@
-package com.underpressure.backend.controllers.classes.request.data;
+package com.underpressure.backend.controllers.classes.dto;
 
 import java.sql.Date;
 
-public class EntryData {
+public class EntryDataDto {
     private Date creationDate;
     private Integer stressLevel;
 
