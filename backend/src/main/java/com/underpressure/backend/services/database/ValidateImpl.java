@@ -2,7 +2,6 @@ package com.underpressure.backend.services.database;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
 
 import com.underpressure.backend.exceptions.RequestException;
 import com.underpressure.backend.exceptions.already_exists.SubjectAlreadyFollowedException;
@@ -17,7 +16,6 @@ import com.underpressure.backend.exceptions.parameter.SubjectNameParameterExcept
 import com.underpressure.backend.exceptions.parameter.UserIdParameterException;
 import com.underpressure.backend.exceptions.range.StressLevelRangeException;
 
-@Component
 class ValidateImpl implements Validate {
 
     JdbcTemplate jdbcTemplate;

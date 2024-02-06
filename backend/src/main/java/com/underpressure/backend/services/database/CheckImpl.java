@@ -1,9 +1,7 @@
 package com.underpressure.backend.services.database;
 
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
 
-@Component
 class CheckImpl implements Check {
 
     JdbcTemplate jdbcTemplate;

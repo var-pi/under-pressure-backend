@@ -1,7 +1,6 @@
 package com.underpressure.backend.services.database;
 
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
 
 import com.google.api.client.auth.openidconnect.IdToken.Payload;
 import com.underpressure.backend.exceptions.RequestException;
@@ -9,7 +8,6 @@ import com.underpressure.backend.exceptions.unexpected.not_added.EntryNotAddedEx
 import com.underpressure.backend.exceptions.unexpected.not_added.SubjectNotAddedException;
 import com.underpressure.backend.exceptions.unexpected.not_added.UserNotAddedException;
 
-@Component
 class AddImpl implements Add {
 
         JdbcTemplate jdbcTemplate;

@@ -13,13 +13,8 @@ import com.underpressure.backend.services.utility.UtilityService;
 public class ApplicationService {
 
     private UtilityService utilityService;
-
     private GoogleService googleService;
-
     private DatabaseService databaseService;
-
-    @Value("${spring.security.oauth2.client.registration.google.client-id}")
-    private String clientId;
 
     public ApplicationService(UtilityService utilityService, GoogleService googleService,
             DatabaseService databaseService) {
@@ -27,6 +22,9 @@ public class ApplicationService {
         this.googleService = googleService;
         this.databaseService = databaseService;
     }
+
+    @Value("${spring.security.oauth2.client.registration.google.client-id}")
+    private String clientId;
 
     public List<String> fetchSubjects() {
         return (new FetchSubjects(databaseService)).handle();
