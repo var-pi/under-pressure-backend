@@ -15,7 +15,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.underpressure.backend.controllers.FetchFollowedSubjectsController;
 import com.underpressure.backend.controllers.web.abstracts.ControllerTests;
 import com.underpressure.backend.requests.body.FetchFollowedSubjectsRequestBody;
@@ -24,6 +23,8 @@ import com.underpressure.backend.requests.body.FetchFollowedSubjectsRequestBody;
 public class FetchFollowedSubjectsControllerTests extends ControllerTests {
 
     private List<String> subjectsMock = Arrays.asList("Subject 1", "Subject 2");
+
+    private FetchFollowedSubjectsRequestBody requestBody = new FetchFollowedSubjectsRequestBody();
 
     @BeforeEach
     void setUp() {
@@ -38,9 +39,9 @@ public class FetchFollowedSubjectsControllerTests extends ControllerTests {
         mockMvc.perform(MockMvcRequestBuilders.post("/personal/subjects")
                 .header("Authorization", "Bearer id_token")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(new FetchFollowedSubjectsRequestBody())))
+                .content(objectMapper.writeValueAsString(requestBody)))
                 .andExpect(status().isOk())
-                .andExpect(content().json(new ObjectMapper().writeValueAsString(subjectsMock)));
+                .andExpect(content().json(objectMapper.writeValueAsString(subjectsMock)));
 
     }
 

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.underpressure.backend.requests.body.AuthenticationRequestBody;
 import com.underpressure.backend.requests.body.FetchEntriesRequestBody;
 import com.underpressure.backend.requests.body.FetchFollowedSubjectsRequestBody;
 import com.underpressure.backend.requests.body.FollowSubjectRequestBody;
@@ -29,8 +30,14 @@ public class ApplicationService {
         this.databaseService = databaseService;
     }
 
+    @Value("${spring.security.oauth2.client.provider.google.token-uri}")
+    private String tokenUri;
+    @Value("${spring.security.oauth2.client.registration.google.redirect-uri}")
+    private String redirectUri;
     @Value("${spring.security.oauth2.client.registration.google.client-id}")
     private String clientId;
+    @Value("${spring.security.oauth2.client.registration.google.client-secret}")
+    private String clientSecret;
 
     public List<String> fetchSubjects() {
         return new FetchSubjects(databaseService)
@@ -60,6 +67,11 @@ public class ApplicationService {
     public void updateEntry(String bearerToken, UpdateEntryRequestBody requestData) {
         new UpdateEntry(utilityService, databaseService, googleService, clientId)
                 .handle(bearerToken, requestData);
+    }
+
+    public String authenticate(AuthenticationRequestBody requestData) {
+        return new Authentication(googleService, databaseService, tokenUri, redirectUri, clientId, clientSecret)
+                .handle(requestData);
     }
 
 }

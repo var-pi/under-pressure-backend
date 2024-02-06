@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.context.annotation.Import;
@@ -13,6 +12,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.jdbc.Sql;
 
 import com.underpressure.backend.controllers.AuthenticationController;
+import com.underpressure.backend.controllers.data.abstracts.ControllerTests;
 import com.underpressure.backend.exceptions.parameter.CodeParameterException;
 import com.underpressure.backend.requests.body.AuthenticationRequestBody;
 import com.underpressure.backend.services.database.DatabaseService;
@@ -30,10 +30,7 @@ import com.underpressure.backend.services.google.GoogleService;
                 "classpath:fillUsersTable.sql"
 })
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-public class AuthenticationControllerTests {
-
-        @Autowired
-        AuthenticationController controller;
+public class AuthenticationControllerTests extends ControllerTests<AuthenticationController> {
 
         @Test
         public void Should_Result_In_Bad_Request_When_Code_Null() {
