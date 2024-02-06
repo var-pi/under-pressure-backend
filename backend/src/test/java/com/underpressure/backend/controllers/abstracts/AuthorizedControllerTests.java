@@ -1,4 +1,4 @@
-package com.underpressure.backend.controllers.classes;
+package com.underpressure.backend.controllers.abstracts;
 
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
@@ -18,7 +18,7 @@ import com.underpressure.backend.services.utility.UtilityService;
         GoogleService.class,
         UtilityService.class
 })
-public class AuthorizedControllerTests<T> extends ControllerTests<T> {
+public abstract class AuthorizedControllerTests<T> extends ControllerTests<T> {
 
     @SpyBean
     GoogleService googleServiceSpy;

@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.underpressure.backend.classes.abstracts.AuthenticatedPostController;
-import com.underpressure.backend.classes.request.body.UnfollowSubjectRequestBody;
+import com.underpressure.backend.abstracts.AuthenticatedPostController;
+import com.underpressure.backend.request.body.UnfollowSubjectRequestBody;
 import com.underpressure.backend.services.database.DatabaseService;
 import com.underpressure.backend.services.google.GoogleService;
 import com.underpressure.backend.services.utility.UtilityService;

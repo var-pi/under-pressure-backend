@@ -8,10 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.jdbc.Sql;
 
-import com.underpressure.backend.classes.request.body.FollowedSubjectsRequestBody;
-import com.underpressure.backend.controllers.classes.AuthorizedControllerTests;
+import com.underpressure.backend.controllers.abstracts.AuthorizedControllerTests;
 import com.underpressure.backend.exceptions.auth.BearerTokenNullException;
 import com.underpressure.backend.exceptions.does_not_exist.UserDoesNotExistException;
+import com.underpressure.backend.request.body.FollowedSubjectsRequestBody;
 import com.underpressure.backend.services.database.DatabaseService;
 
 import static org.assertj.core.api.Assertions.assertThat;

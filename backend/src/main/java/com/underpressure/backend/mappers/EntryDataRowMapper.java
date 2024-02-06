@@ -1,11 +1,11 @@
-package com.underpressure.backend.classes.rowMappers;
+package com.underpressure.backend.mappers;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.underpressure.backend.classes.dto.EntryDataDto;
+import com.underpressure.backend.dto.EntryDataDto;
 
 public class EntryDataRowMapper implements RowMapper<EntryDataDto> {
 

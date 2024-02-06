@@ -1,4 +1,4 @@
-package com.underpressure.backend.classes.request.body;
+package com.underpressure.backend.request.body;
 
 public class AuthenticationBody {
     private String code;

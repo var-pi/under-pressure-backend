@@ -1,12 +1,12 @@
-package com.underpressure.backend.classes.request.body;
+package com.underpressure.backend.request.body;
 
-public class GetEntriesRequestBody {
+public class UnfollowSubjectRequestBody {
     private String subjectName;
 
-    public GetEntriesRequestBody() {
+    public UnfollowSubjectRequestBody() {
     }
 
-    public GetEntriesRequestBody(String subjectName) {
+    public UnfollowSubjectRequestBody(String subjectName) {
         this.subjectName = subjectName;
     }
 

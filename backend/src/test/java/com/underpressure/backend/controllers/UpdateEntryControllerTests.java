@@ -9,8 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.jdbc.Sql;
 
-import com.underpressure.backend.classes.request.body.AddEntryRequestBody;
-import com.underpressure.backend.controllers.classes.AuthorizedControllerTests;
+import com.underpressure.backend.controllers.abstracts.AuthorizedControllerTests;
 import com.underpressure.backend.exceptions.already_exists.SubjectUnfollowedException;
 import com.underpressure.backend.exceptions.auth.BearerTokenNullException;
 import com.underpressure.backend.exceptions.does_not_exist.SubjectDoesNotExist;
@@ -19,6 +18,7 @@ import com.underpressure.backend.exceptions.does_not_exist.UserDoesNotExistExcep
 import com.underpressure.backend.exceptions.parameter.StressLevelParameterException;
 import com.underpressure.backend.exceptions.parameter.SubjectNameParameterException;
 import com.underpressure.backend.exceptions.range.StressLevelRangeException;
+import com.underpressure.backend.request.body.AddEntryRequestBody;
 import com.underpressure.backend.services.database.DatabaseService;
 
 @Import({

@@ -1,4 +1,4 @@
-package com.underpressure.backend.classes.abstracts;
+package com.underpressure.backend.abstracts;
 
 import org.springframework.beans.factory.annotation.Value;
 

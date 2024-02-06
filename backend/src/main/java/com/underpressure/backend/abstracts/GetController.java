@@ -1,4 +1,4 @@
-package com.underpressure.backend.classes.abstracts;
+package com.underpressure.backend.abstracts;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
