@@ -1,7 +1,10 @@
 package com.underpressure.backend.controllers.web;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,9 +20,6 @@ import com.underpressure.backend.controllers.FetchFollowedSubjectsController;
 import com.underpressure.backend.controllers.web.abstracts.ControllerTests;
 import com.underpressure.backend.requests.body.FetchFollowedSubjectsRequestBody;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-
 @WebMvcTest(FetchFollowedSubjectsController.class)
 public class FetchFollowedSubjectsControllerTests extends ControllerTests {
 
@@ -28,7 +28,7 @@ public class FetchFollowedSubjectsControllerTests extends ControllerTests {
     @BeforeEach
     void setUp() {
 
-        when(applicationServiceMock.fetchFollowedSubjects(anyString())).thenReturn(subjectsMock);
+        when(applicationServiceMock.fetchFollowedSubjects(anyString(), any())).thenReturn(subjectsMock);
 
     }
 
