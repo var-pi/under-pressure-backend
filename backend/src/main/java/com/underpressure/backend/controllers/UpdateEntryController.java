@@ -9,22 +9,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.underpressure.backend.abstracts.AuthenticatedPostController;
 import com.underpressure.backend.requests.body.UpdateEntryRequestBody;
-import com.underpressure.backend.services.database.DatabaseService;
-import com.underpressure.backend.services.google.GoogleService;
-import com.underpressure.backend.services.utility.UtilityService;
+import com.underpressure.backend.services.application.ApplicationService;
 
 @RestController
 public class UpdateEntryController extends AuthenticatedPostController<String, UpdateEntryRequestBody> {
 
-    UtilityService utilityService;
-    DatabaseService databaseService;
-    GoogleService googleService;
+    ApplicationService applicationService;
 
-    public UpdateEntryController(UtilityService utilityService, DatabaseService databaseService,
-            GoogleService googleService) {
-        this.utilityService = utilityService;
-        this.databaseService = databaseService;
-        this.googleService = googleService;
+    public UpdateEntryController(ApplicationService applicationService) {
+        this.applicationService = applicationService;
     }
 
     @Override
@@ -33,33 +26,9 @@ public class UpdateEntryController extends AuthenticatedPostController<String, U
             @RequestHeader(value = "Authorization", required = false) String bearerToken,
             @RequestBody UpdateEntryRequestBody requestData) {
 
-        databaseService.validate().bearerToken(bearerToken);
-        String idTokenString = utilityService.extract().token(bearerToken);
+        applicationService.updateEntry(bearerToken, requestData);
 
-        String subjectName = requestData.getSubjectName();
-        databaseService.validate().subjectName(subjectName);
-
-        Integer stressLevel = requestData.getStressLevel();
-        databaseService.validate().stressLevel(stressLevel);
-
-        Integer userId = googleService.fetch().userId(idTokenString, clientId);
-
-        Integer subjectId = databaseService.fetch().subjectId(subjectName);
-        Integer subjectInstanceId = databaseService.fetch().subjectInstanceId(userId, subjectId);
-
-        databaseService.validate().isFollowed(subjectInstanceId);
-
-        if (databaseService.check().entryExists(subjectInstanceId)) {
-            Integer entryId = databaseService.fetch().todaysEntryId(subjectInstanceId);
-
-            databaseService.update().entry(entryId, stressLevel);
-
-            return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
-        } else {
-            databaseService.add().entry(subjectInstanceId, stressLevel);
-
-            return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
-        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
     }
 

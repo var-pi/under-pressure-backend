@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.underpressure.backend.requests.body.FetchEntriesRequestBody;
 import com.underpressure.backend.requests.body.FollowSubjectRequestBody;
 import com.underpressure.backend.requests.body.UnfollowSubjectRequestBody;
+import com.underpressure.backend.requests.body.UpdateEntryRequestBody;
 import com.underpressure.backend.responses.EntryDataDto;
 import com.underpressure.backend.services.database.DatabaseService;
 import com.underpressure.backend.services.google.GoogleService;
@@ -52,6 +53,11 @@ public class ApplicationService {
 
     public List<EntryDataDto> fetchEntries(String bearerToken, FetchEntriesRequestBody requestData) {
         return new FetchEntries(utilityService, googleService, databaseService, clientId)
+                .handle(bearerToken, requestData);
+    }
+
+    public void updateEntry(String bearerToken, UpdateEntryRequestBody requestData) {
+        new UpdateEntry(utilityService, databaseService, googleService, clientId)
                 .handle(bearerToken, requestData);
     }
 
