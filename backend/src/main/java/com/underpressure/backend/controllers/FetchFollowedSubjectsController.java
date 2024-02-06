@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.underpressure.backend.controllers.classes.abstracts.AuthenticatedPostController;
 import com.underpressure.backend.controllers.classes.request.body.FollowedSubjectsRequestBody;
@@ -17,7 +16,6 @@ import com.underpressure.backend.controllers.services.google.GoogleService;
 import com.underpressure.backend.controllers.services.utility.UtilityService;
 import com.underpressure.backend.exceptions.RequestException;
 
-@RestController
 public class FetchFollowedSubjectsController
         extends AuthenticatedPostController<List<String>, FollowedSubjectsRequestBody> {
 
