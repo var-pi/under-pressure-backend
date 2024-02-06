@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.underpressure.backend.requests.body.FollowSubjectRequestBody;
+import com.underpressure.backend.requests.body.UnfollowSubjectRequestBody;
 import com.underpressure.backend.services.database.DatabaseService;
 import com.underpressure.backend.services.google.GoogleService;
 import com.underpressure.backend.services.utility.UtilityService;
@@ -37,6 +38,10 @@ public class ApplicationService {
 
     public void followSubject(String bearerToken, FollowSubjectRequestBody requestData) {
         new FollowSubject(utilityService, databaseService, googleService, clientId).handle(bearerToken, requestData);
+    }
+
+    public void unfollowSubject(String bearerToken, UnfollowSubjectRequestBody requestData) {
+        new UnfollowSubject(utilityService, databaseService, googleService, clientId).handle(bearerToken, requestData);
     }
 
 }

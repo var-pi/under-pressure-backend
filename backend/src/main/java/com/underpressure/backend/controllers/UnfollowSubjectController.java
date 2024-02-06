@@ -9,22 +9,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.underpressure.backend.abstracts.AuthenticatedPostController;
 import com.underpressure.backend.requests.body.UnfollowSubjectRequestBody;
-import com.underpressure.backend.services.database.DatabaseService;
-import com.underpressure.backend.services.google.GoogleService;
-import com.underpressure.backend.services.utility.UtilityService;
+import com.underpressure.backend.services.application.ApplicationService;
 
 @RestController
 public class UnfollowSubjectController extends AuthenticatedPostController<String, UnfollowSubjectRequestBody> {
 
-    UtilityService utilityService;
-    DatabaseService databaseService;
-    GoogleService googleService;
+    ApplicationService applicationService;
 
-    public UnfollowSubjectController(UtilityService utilityService, DatabaseService databaseService,
-            GoogleService googleService) {
-        this.utilityService = utilityService;
-        this.databaseService = databaseService;
-        this.googleService = googleService;
+    public UnfollowSubjectController(ApplicationService applicationService) {
+        this.applicationService = applicationService;
     }
 
     @Override
@@ -33,22 +26,9 @@ public class UnfollowSubjectController extends AuthenticatedPostController<Strin
             @RequestHeader(value = "Authorization", required = false) String bearerToken,
             @RequestBody UnfollowSubjectRequestBody requestData) {
 
-        databaseService.validate().bearerToken(bearerToken);
-        String idTokenString = utilityService.extract().token(bearerToken);
+        applicationService.unfollowSubject(bearerToken, requestData);
 
-        String subjectName = requestData.getSubjectName();
-        databaseService.validate().subjectName(subjectName);
-
-        Integer userId = googleService.fetch().userId(idTokenString, clientId);
-
-        Integer subjectId = databaseService.fetch().subjectId(subjectName);
-        Integer subjectInstanceId = databaseService.fetch().subjectInstanceId(userId, subjectId);
-
-        databaseService.validate().isFollowed(subjectInstanceId);
-
-        databaseService.set().toNotFollow(subjectInstanceId);
-
-        return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
     }
 
