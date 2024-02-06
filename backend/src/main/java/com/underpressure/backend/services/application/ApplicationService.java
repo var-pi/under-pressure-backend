@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.underpressure.backend.requests.body.FetchEntriesRequestBody;
+import com.underpressure.backend.requests.body.FetchFollowedSubjectsRequestBody;
 import com.underpressure.backend.requests.body.FollowSubjectRequestBody;
 import com.underpressure.backend.requests.body.UnfollowSubjectRequestBody;
 import com.underpressure.backend.requests.body.UpdateEntryRequestBody;
@@ -36,9 +37,9 @@ public class ApplicationService {
                 .handle();
     }
 
-    public List<String> fetchFollowedSubjects(String bearerToken) {
+    public List<String> fetchFollowedSubjects(String bearerToken, FetchFollowedSubjectsRequestBody requestData) {
         return new FetchFollowedSubjects(utilityService, googleService, databaseService, clientId)
-                .handle(bearerToken);
+                .handle(bearerToken, requestData);
     }
 
     public void followSubject(String bearerToken, FollowSubjectRequestBody requestData) {

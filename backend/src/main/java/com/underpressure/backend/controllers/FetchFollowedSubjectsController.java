@@ -28,9 +28,11 @@ public class FetchFollowedSubjectsController
     @PostMapping("/personal/subjects")
     public ResponseEntity<List<String>> handle(
             @RequestHeader(value = "Authorization", required = false) String bearerToken,
-            @RequestBody FetchFollowedSubjectsRequestBody requestBody) throws RequestException {
+            @RequestBody FetchFollowedSubjectsRequestBody requestData) throws RequestException {
 
-        return new ResponseEntity<>(applicationService.fetchFollowedSubjects(bearerToken), HttpStatus.OK);
+        List<String> subjects = applicationService.fetchFollowedSubjects(bearerToken, requestData);
+
+        return new ResponseEntity<>(subjects, HttpStatus.OK);
 
     }
 
