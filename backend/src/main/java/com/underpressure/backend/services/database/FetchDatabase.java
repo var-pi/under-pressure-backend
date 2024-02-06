@@ -2,8 +2,8 @@ package com.underpressure.backend.services.database;
 
 import java.util.List;
 
-import com.underpressure.backend.dto.EntryDataDto;
 import com.underpressure.backend.exceptions.RequestException;
+import com.underpressure.backend.responses.EntryDataDto;
 
 public interface FetchDatabase {
 

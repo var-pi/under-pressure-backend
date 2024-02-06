@@ -5,12 +5,12 @@ import java.util.List;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import com.underpressure.backend.dto.EntryDataDto;
 import com.underpressure.backend.exceptions.RequestException;
 import com.underpressure.backend.exceptions.does_not_exist.SubjectDoesNotExist;
 import com.underpressure.backend.exceptions.does_not_exist.SubjectInstanceDoesNotExistsException;
 import com.underpressure.backend.exceptions.does_not_exist.TodaysEntryDoesNotExistException;
 import com.underpressure.backend.mappers.EntryDataRowMapper;
+import com.underpressure.backend.responses.EntryDataDto;
 
 public class FetchDatabaseImpl implements FetchDatabase {
 

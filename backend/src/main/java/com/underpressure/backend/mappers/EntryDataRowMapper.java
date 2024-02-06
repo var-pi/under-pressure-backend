@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.underpressure.backend.dto.EntryDataDto;
+import com.underpressure.backend.responses.EntryDataDto;
 
 public class EntryDataRowMapper implements RowMapper<EntryDataDto> {
 

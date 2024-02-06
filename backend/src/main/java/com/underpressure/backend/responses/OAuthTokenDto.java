@@ -1,4 +1,4 @@
-package com.underpressure.backend.dto;
+package com.underpressure.backend.responses;
 
 public class OAuthTokenDto {
     private String accessToken;

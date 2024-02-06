@@ -21,11 +21,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
 import com.underpressure.backend.abstracts.PostController;
-import com.underpressure.backend.dto.OAuthTokenDto;
 import com.underpressure.backend.exceptions.RequestException;
 import com.underpressure.backend.exceptions.unexpected.AuthenticationFailedException;
 import com.underpressure.backend.exceptions.unexpected.InternalServerError;
 import com.underpressure.backend.requests.body.AuthenticationBody;
+import com.underpressure.backend.responses.OAuthTokenDto;
 import com.underpressure.backend.services.database.DatabaseService;
 import com.underpressure.backend.services.google.GoogleService;
 

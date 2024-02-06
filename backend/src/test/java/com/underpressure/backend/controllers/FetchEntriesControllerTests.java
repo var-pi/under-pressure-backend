@@ -12,12 +12,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.jdbc.Sql;
 
 import com.underpressure.backend.controllers.abstracts.AuthorizedControllerTests;
-import com.underpressure.backend.dto.EntryDataDto;
 import com.underpressure.backend.exceptions.auth.BearerTokenNullException;
 import com.underpressure.backend.exceptions.does_not_exist.SubjectDoesNotExist;
 import com.underpressure.backend.exceptions.does_not_exist.UserDoesNotExistException;
 import com.underpressure.backend.exceptions.parameter.SubjectNameParameterException;
 import com.underpressure.backend.requests.body.GetEntriesRequestBody;
+import com.underpressure.backend.responses.EntryDataDto;
 import com.underpressure.backend.services.database.DatabaseService;
 
 @Import({

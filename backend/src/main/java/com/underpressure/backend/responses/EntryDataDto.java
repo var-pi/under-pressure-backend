@@ -1,4 +1,4 @@
-package com.underpressure.backend.dto;
+package com.underpressure.backend.responses;
 
 import java.sql.Date;
 
