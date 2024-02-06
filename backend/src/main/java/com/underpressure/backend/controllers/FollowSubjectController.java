@@ -21,7 +21,7 @@ public class FollowSubjectController extends AuthenticatedPostController<String,
     }
 
     @Override
-    @PostMapping("/personal/subjects/follow")
+    @PostMapping("/subjects")
     public ResponseEntity<String> handle(
             @RequestHeader(value = "Authorization", required = false) String bearerToken,
             @RequestBody FollowSubjectRequestBody requestData) {

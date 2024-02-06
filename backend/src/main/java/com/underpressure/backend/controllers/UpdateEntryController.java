@@ -21,7 +21,7 @@ public class UpdateEntryController extends AuthenticatedPostController<String, U
     }
 
     @Override
-    @PostMapping("/personal/entries")
+    @PostMapping("/entries")
     public ResponseEntity<String> handle(
             @RequestHeader(value = "Authorization", required = false) String bearerToken,
             @RequestBody UpdateEntryRequestBody requestData) {

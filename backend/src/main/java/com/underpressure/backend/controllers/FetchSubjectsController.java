@@ -22,7 +22,7 @@ public class FetchSubjectsController extends GetController<List<String>, GetSubj
     }
 
     @Override
-    @GetMapping("/subjects")
+    @GetMapping("/subjects/all")
     public ResponseEntity<List<String>> handle(@ModelAttribute GetSubjectsParams params) {
 
         return new ResponseEntity<>(applicationService.fetchSubjects(), HttpStatus.OK);

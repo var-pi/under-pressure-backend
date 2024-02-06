@@ -14,12 +14,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 
 import com.underpressure.backend.controllers.FetchEntriesController;
 import com.underpressure.backend.controllers.web.abstracts.ControllerTests;
-import com.underpressure.backend.requests.body.FetchEntriesRequestBody;
 import com.underpressure.backend.responses.EntryDataDto;
 
 @WebMvcTest(FetchEntriesController.class)
@@ -42,7 +39,7 @@ public class FetchEntriesControllerTests extends ControllerTests {
     @Test
     public void Should_Fetch_Entries() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/personal/entries")
+        mockMvc.perform(MockMvcRequestBuilders.get("/entries")
                 .header("Authorization", "Bearer id_token")
                 .param("ssubjectName", subjectName))
                 .andExpect(status().isOk())

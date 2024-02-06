@@ -21,7 +21,7 @@ public class UnfollowSubjectController extends AuthenticatedDeleteController<Str
     }
 
     @Override
-    @DeleteMapping("/personal/subjects/unfollow")
+    @DeleteMapping("/subjects")
     public ResponseEntity<String> handle(
             @RequestHeader(value = "Authorization", required = false) String bearerToken,
             @RequestBody UnfollowSubjectRequestBody requestData) {

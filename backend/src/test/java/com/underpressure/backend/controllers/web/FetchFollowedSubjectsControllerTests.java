@@ -32,7 +32,7 @@ public class FetchFollowedSubjectsControllerTests extends ControllerTests {
     @Test
     public void Should_Fetch_Personal_Subjects() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/personal/subjects")
+        mockMvc.perform(MockMvcRequestBuilders.get("/subjects")
                 .header("Authorization", "Bearer id_token"))
                 .andExpect(status().isOk())
                 .andExpect(content().json(objectMapper.writeValueAsString(subjectsMock)));

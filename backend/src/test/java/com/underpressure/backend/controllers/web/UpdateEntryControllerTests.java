@@ -32,7 +32,7 @@ public class UpdateEntryControllerTests extends ControllerTests {
     @Test
     public void Should_Update_Entry() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/personal/entries")
+        mockMvc.perform(MockMvcRequestBuilders.post("/entries")
                 .header("Authorization", "Bearer id_token")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(requestBody)))

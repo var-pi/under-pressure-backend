@@ -24,7 +24,7 @@ public class FetchEntriesController extends AuthenticatedGetController<List<Entr
     }
 
     @Override
-    @GetMapping("/personal/entries")
+    @GetMapping("/entries")
     public ResponseEntity<List<EntryDataDto>> handle(
             @RequestHeader(value = "Authorization", required = false) String bearerToken,
             @ModelAttribute FetchEntriesRequestBody requestData) {

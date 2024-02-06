@@ -31,7 +31,7 @@ public class FollowSubjectsControllerTests extends ControllerTests {
     @Test
     public void Should_Follow_Subject() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/personal/subjects/follow")
+        mockMvc.perform(MockMvcRequestBuilders.post("/subjects")
                 .header("Authorization", "Bearer id_token")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(new FollowSubjectRequestBody(subjectName))))

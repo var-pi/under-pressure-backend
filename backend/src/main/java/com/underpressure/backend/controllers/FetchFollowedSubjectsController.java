@@ -25,7 +25,7 @@ public class FetchFollowedSubjectsController
     }
 
     @Override
-    @GetMapping("/personal/subjects")
+    @GetMapping("/subjects")
     public ResponseEntity<List<String>> handle(
             @RequestHeader(value = "Authorization", required = false) String bearerToken,
             @ModelAttribute FetchFollowedSubjectsRequestBody requestData) throws RequestException {

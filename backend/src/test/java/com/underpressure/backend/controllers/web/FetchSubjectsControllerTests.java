@@ -32,7 +32,7 @@ public class FetchSubjectsControllerTests extends ControllerTests {
     @Test
     public void Should_Fetch_Subjects() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/subjects")
+        mockMvc.perform(MockMvcRequestBuilders.get("/subjects/all")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().json(objectMapper.writeValueAsString(subjectsMock)));

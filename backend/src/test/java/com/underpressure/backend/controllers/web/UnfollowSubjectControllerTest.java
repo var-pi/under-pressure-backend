@@ -30,7 +30,7 @@ public class UnfollowSubjectControllerTest extends ControllerTests {
     @Test
     public void Should_Unfollow_Subject() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.delete("/personal/subjects/unfollow")
+        mockMvc.perform(MockMvcRequestBuilders.delete("/subjects")
                 .header("Authorization", "Bearer id_token")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(new UnfollowSubjectRequestBody(subjectName))))
