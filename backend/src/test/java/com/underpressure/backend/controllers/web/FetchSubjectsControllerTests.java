@@ -1,6 +1,5 @@
 package com.underpressure.backend.controllers.web;
 
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
@@ -18,8 +17,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.underpressure.backend.controllers.FetchSubjectsController;
-import com.underpressure.backend.services.database.DatabaseService;
-import com.underpressure.backend.services.database.FetchDatabase;
+import com.underpressure.backend.services.application.ApplicationService;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -31,22 +29,16 @@ public class FetchSubjectsControllerTests {
     private MockMvc mockMvc;
 
     @MockBean
-    private DatabaseService databaseServiceMock;
+    private ApplicationService applicationService;
 
     @InjectMocks
     private FetchSubjectsController controller;
 
-    FetchDatabase fetchDatabaseMock;
-
-    List<String> subjectsMock;
+    List<String> subjectsMock = Arrays.asList("Subject 1", "Subject 2");
 
     @BeforeEach
     void setUp() {
-        fetchDatabaseMock = mock(FetchDatabase.class);
-        when(databaseServiceMock.fetch()).thenReturn(fetchDatabaseMock);
-
-        subjectsMock = Arrays.asList("Subject 1", "Subject 2");
-        when(fetchDatabaseMock.subjects()).thenReturn(subjectsMock);
+        when(applicationService.fetchSubjects()).thenReturn(subjectsMock);
     }
 
     @Test

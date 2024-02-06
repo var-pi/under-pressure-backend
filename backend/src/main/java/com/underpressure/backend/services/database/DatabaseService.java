@@ -10,7 +10,7 @@ public class DatabaseService {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    public Add add() {
+    public Add add() { // TODO Ca I use @Autowired here?
         return new AddImpl(jdbcTemplate);
     }
 
