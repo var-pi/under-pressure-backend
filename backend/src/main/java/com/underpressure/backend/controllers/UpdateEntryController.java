@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.underpressure.backend.abstracts.AuthenticatedPostController;
-import com.underpressure.backend.requests.body.AddEntryRequestBody;
+import com.underpressure.backend.requests.body.UpdateEntryRequestBody;
 import com.underpressure.backend.services.database.DatabaseService;
 import com.underpressure.backend.services.google.GoogleService;
 import com.underpressure.backend.services.utility.UtilityService;
 
 @RestController
-public class UpdateEntryController extends AuthenticatedPostController<String, AddEntryRequestBody> {
+public class UpdateEntryController extends AuthenticatedPostController<String, UpdateEntryRequestBody> {
 
     @Autowired
     UtilityService utilityService;
@@ -30,7 +30,7 @@ public class UpdateEntryController extends AuthenticatedPostController<String, A
     @PostMapping("/personal/entries/add")
     public ResponseEntity<String> handle(
             @RequestHeader(value = "Authorization", required = false) String bearerToken,
-            @RequestBody AddEntryRequestBody requestData) {
+            @RequestBody UpdateEntryRequestBody requestData) {
 
         databaseService.validate().bearerToken(bearerToken);
         String idTokenString = utilityService.extract().token(bearerToken);

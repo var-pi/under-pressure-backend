@@ -1,13 +1,13 @@
 package com.underpressure.backend.requests.body;
 
-public class AddEntryRequestBody {
+public class UpdateEntryRequestBody {
     private String subjectName;
     private Integer stressLevel;
 
-    public AddEntryRequestBody() {
+    public UpdateEntryRequestBody() {
     }
 
-    public AddEntryRequestBody(String subjectName, Integer stressLevel) {
+    public UpdateEntryRequestBody(String subjectName, Integer stressLevel) {
         this.subjectName = subjectName;
         this.stressLevel = stressLevel;
     }

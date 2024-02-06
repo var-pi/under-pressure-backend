@@ -7,8 +7,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class DatabaseService {
 
-    @Autowired
     JdbcTemplate jdbcTemplate;
+
+    public DatabaseService(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     public Add add() { // TODO Ca I use @Autowired here?
         return new AddImpl(jdbcTemplate);

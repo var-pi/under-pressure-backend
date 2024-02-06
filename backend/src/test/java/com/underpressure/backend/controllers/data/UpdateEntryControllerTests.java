@@ -19,7 +19,7 @@ import com.underpressure.backend.exceptions.does_not_exist.UserDoesNotExistExcep
 import com.underpressure.backend.exceptions.parameter.StressLevelParameterException;
 import com.underpressure.backend.exceptions.parameter.SubjectNameParameterException;
 import com.underpressure.backend.exceptions.range.StressLevelRangeException;
-import com.underpressure.backend.requests.body.AddEntryRequestBody;
+import com.underpressure.backend.requests.body.UpdateEntryRequestBody;
 import com.underpressure.backend.services.database.DatabaseService;
 
 @Import({
@@ -43,7 +43,7 @@ public class UpdateEntryControllerTests extends AuthorizedControllerTests<Update
 
                 BearerTokenNullException ex = assertThrows(BearerTokenNullException.class,
                                 () -> controller
-                                                .handle(null, new AddEntryRequestBody("Subject 1", 0)));
+                                                .handle(null, new UpdateEntryRequestBody("Subject 1", 0)));
 
                 assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.UNAUTHORIZED);
                 assertThat(ex.getMessage()).isNotBlank();
@@ -56,7 +56,7 @@ public class UpdateEntryControllerTests extends AuthorizedControllerTests<Update
                 SubjectNameParameterException ex = assertThrows(SubjectNameParameterException.class,
                                 () -> controller
                                                 .handle("Bearer user_1_id_token",
-                                                                new AddEntryRequestBody(null, 0)));
+                                                                new UpdateEntryRequestBody(null, 0)));
 
                 assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.BAD_REQUEST);
                 assertThat(ex.getMessage()).isNotBlank();
@@ -67,7 +67,7 @@ public class UpdateEntryControllerTests extends AuthorizedControllerTests<Update
         public void Should_Result_In_Bad_REQUEST_When_StressLevel_Null() {
 
                 StressLevelParameterException ex = assertThrows(StressLevelParameterException.class, () -> controller
-                                .handle("Bearer user_1_id_token", new AddEntryRequestBody("Subject 1",
+                                .handle("Bearer user_1_id_token", new UpdateEntryRequestBody("Subject 1",
                                                 null)));
 
                 assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.BAD_REQUEST);
@@ -81,7 +81,7 @@ public class UpdateEntryControllerTests extends AuthorizedControllerTests<Update
                 UserDoesNotExistException ex = assertThrows(UserDoesNotExistException.class,
                                 () -> controller
                                                 .handle("Bearer user_4_id_token",
-                                                                new AddEntryRequestBody("Subject 1", 0)));
+                                                                new UpdateEntryRequestBody("Subject 1", 0)));
 
                 assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.NOT_FOUND);
                 assertThat(ex.getMessage()).isNotBlank();
@@ -92,7 +92,7 @@ public class UpdateEntryControllerTests extends AuthorizedControllerTests<Update
         public void Should_Result_In_NOT_FOUND_Exception_When_Subject_Not_Found() {
 
                 SubjectDoesNotExist ex = assertThrows(SubjectDoesNotExist.class, () -> controller
-                                .handle("Bearer user_1_id_token", new AddEntryRequestBody("NaN", 0)));
+                                .handle("Bearer user_1_id_token", new UpdateEntryRequestBody("NaN", 0)));
 
                 assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.NOT_FOUND);
                 assertThat(ex.getMessage()).isNotBlank();
@@ -103,7 +103,7 @@ public class UpdateEntryControllerTests extends AuthorizedControllerTests<Update
         public void Should_Result_In_Not_Found_Exception_When_Stress_Level_Out_Of_Range() {
 
                 StressLevelRangeException ex = assertThrows(StressLevelRangeException.class, () -> controller
-                                .handle("Bearer user_1_id_token", new AddEntryRequestBody("Subject 1", -1)));
+                                .handle("Bearer user_1_id_token", new UpdateEntryRequestBody("Subject 1", -1)));
 
                 assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.REQUESTED_RANGE_NOT_SATISFIABLE);
                 assertThat(ex.getMessage()).isNotBlank();
@@ -114,7 +114,7 @@ public class UpdateEntryControllerTests extends AuthorizedControllerTests<Update
         public void Should_Result_In_Bad_Request_When_Unfollowed() {
 
                 SubjectUnfollowedException ex = assertThrows(SubjectUnfollowedException.class, () -> controller
-                                .handle("Bearer user_2_id_token", new AddEntryRequestBody("Subject 3", 0)));
+                                .handle("Bearer user_2_id_token", new UpdateEntryRequestBody("Subject 3", 0)));
 
                 assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.BAD_REQUEST);
                 assertThat(ex.getMessage()).isNotBlank();
@@ -127,7 +127,7 @@ public class UpdateEntryControllerTests extends AuthorizedControllerTests<Update
                 SubjectInstanceDoesNotExistsException ex = assertThrows(SubjectInstanceDoesNotExistsException.class,
                                 () -> controller
                                                 .handle("Bearer user_1_id_token",
-                                                                new AddEntryRequestBody("Subject 3", 0)));
+                                                                new UpdateEntryRequestBody("Subject 3", 0)));
 
                 assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.NOT_FOUND);
                 assertThat(ex.getMessage()).isNotBlank();
@@ -138,7 +138,7 @@ public class UpdateEntryControllerTests extends AuthorizedControllerTests<Update
         public void Should_Add_Entry_When_Request_Valid() {
 
                 ResponseEntity<String> responseEntity = controller
-                                .handle("Bearer user_1_id_token", new AddEntryRequestBody("Subject 2", 40));
+                                .handle("Bearer user_1_id_token", new UpdateEntryRequestBody("Subject 2", 40));
 
                 assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 
@@ -149,10 +149,10 @@ public class UpdateEntryControllerTests extends AuthorizedControllerTests<Update
 
                 String bearerToken = "Bearer user_1_id_token";
                 controller
-                                .handle(bearerToken, new AddEntryRequestBody("Subject 1", 40));
+                                .handle(bearerToken, new UpdateEntryRequestBody("Subject 1", 40));
 
                 ResponseEntity<String> responseEntity = controller
-                                .handle(bearerToken, new AddEntryRequestBody("Subject 1", 50));
+                                .handle(bearerToken, new UpdateEntryRequestBody("Subject 1", 50));
 
                 assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
 

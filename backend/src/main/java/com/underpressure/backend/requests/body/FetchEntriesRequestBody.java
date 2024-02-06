@@ -1,12 +1,12 @@
 package com.underpressure.backend.requests.body;
 
-public class GetEntriesRequestBody {
+public class FetchEntriesRequestBody {
     private String subjectName;
 
-    public GetEntriesRequestBody() {
+    public FetchEntriesRequestBody() {
     }
 
-    public GetEntriesRequestBody(String subjectName) {
+    public FetchEntriesRequestBody(String subjectName) {
         this.subjectName = subjectName;
     }
 

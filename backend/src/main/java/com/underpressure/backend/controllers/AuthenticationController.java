@@ -24,13 +24,13 @@ import com.underpressure.backend.abstracts.PostController;
 import com.underpressure.backend.exceptions.RequestException;
 import com.underpressure.backend.exceptions.unexpected.AuthenticationFailedException;
 import com.underpressure.backend.exceptions.unexpected.InternalServerError;
-import com.underpressure.backend.requests.body.AuthenticationBody;
+import com.underpressure.backend.requests.body.AuthenticationRequestBody;
 import com.underpressure.backend.responses.OAuthTokenDto;
 import com.underpressure.backend.services.database.DatabaseService;
 import com.underpressure.backend.services.google.GoogleService;
 
 @RestController
-public class AuthenticationController extends PostController<String, AuthenticationBody> {
+public class AuthenticationController extends PostController<String, AuthenticationRequestBody> {
 
     @Autowired
     DatabaseService databaseService;
@@ -53,7 +53,7 @@ public class AuthenticationController extends PostController<String, Authenticat
 
     @Override
     @PostMapping("/auth")
-    public ResponseEntity<String> handle(@RequestBody AuthenticationBody entity) {
+    public ResponseEntity<String> handle(@RequestBody AuthenticationRequestBody entity) {
 
         String code = entity.getCode(); // Authorisation code from frontend
         databaseService.validate().code(code);

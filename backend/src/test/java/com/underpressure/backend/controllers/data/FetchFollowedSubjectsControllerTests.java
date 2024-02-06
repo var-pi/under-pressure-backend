@@ -12,15 +12,13 @@ import com.underpressure.backend.controllers.FetchFollowedSubjectsController;
 import com.underpressure.backend.controllers.data.abstracts.AuthorizedControllerTests;
 import com.underpressure.backend.exceptions.auth.BearerTokenNullException;
 import com.underpressure.backend.exceptions.does_not_exist.UserDoesNotExistException;
-import com.underpressure.backend.requests.body.FollowedSubjectsRequestBody;
-import com.underpressure.backend.services.database.DatabaseService;
+import com.underpressure.backend.requests.body.FetchFollowedSubjectsRequestBody;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @Import({
-                FetchFollowedSubjectsController.class,
-                DatabaseService.class
+                FetchFollowedSubjectsController.class
 })
 @Sql({
                 "classpath:createSubjectsTable.sql",
@@ -36,7 +34,7 @@ public class FetchFollowedSubjectsControllerTests extends AuthorizedControllerTe
         public void Should_Result_In_UNAUTHORIZED_When_BearerToken_Null() {
 
                 BearerTokenNullException ex = assertThrows(BearerTokenNullException.class,
-                                () -> controller.handle(null, new FollowedSubjectsRequestBody()));
+                                () -> controller.handle(null, new FetchFollowedSubjectsRequestBody()));
 
                 assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.UNAUTHORIZED);
                 assertThat(ex.getMessage()).isNotBlank();
@@ -47,7 +45,8 @@ public class FetchFollowedSubjectsControllerTests extends AuthorizedControllerTe
         public void Should_Result_In_NOT_FOUND_When_User_Does_Not_Exist() {
 
                 UserDoesNotExistException ex = assertThrows(UserDoesNotExistException.class,
-                                () -> controller.handle("Bearer user_4_id_token", new FollowedSubjectsRequestBody()));
+                                () -> controller.handle("Bearer user_4_id_token",
+                                                new FetchFollowedSubjectsRequestBody()));
 
                 assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.NOT_FOUND);
                 assertThat(ex.getMessage()).isNotBlank();
@@ -58,7 +57,7 @@ public class FetchFollowedSubjectsControllerTests extends AuthorizedControllerTe
         public void Should_Return_Followed_Subjects_When_Request_Valid() {
 
                 ResponseEntity<List<String>> responseEntity = controller
-                                .handle("Bearer user_1_id_token", new FollowedSubjectsRequestBody());
+                                .handle("Bearer user_1_id_token", new FetchFollowedSubjectsRequestBody());
 
                 assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
                 assertThat(responseEntity.getBody().size()).isEqualTo(2);

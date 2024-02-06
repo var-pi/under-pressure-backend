@@ -7,8 +7,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class GoogleService {
 
-    @Autowired
     JdbcTemplate jdbcTemplate;
+
+    public GoogleService(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     public FetchGoogle fetch() {
         return new FetchGoogleImpl(jdbcTemplate);

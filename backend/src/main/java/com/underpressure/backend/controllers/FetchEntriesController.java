@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.underpressure.backend.abstracts.AuthenticatedPostController;
-import com.underpressure.backend.requests.body.GetEntriesRequestBody;
+import com.underpressure.backend.requests.body.FetchEntriesRequestBody;
 import com.underpressure.backend.responses.EntryDataDto;
 import com.underpressure.backend.services.database.DatabaseService;
 import com.underpressure.backend.services.google.GoogleService;
 import com.underpressure.backend.services.utility.UtilityService;
 
 @RestController
-public class FetchEntriesController extends AuthenticatedPostController<List<EntryDataDto>, GetEntriesRequestBody> {
+public class FetchEntriesController extends AuthenticatedPostController<List<EntryDataDto>, FetchEntriesRequestBody> {
 
     @Autowired
     UtilityService utilityService;
@@ -33,7 +33,7 @@ public class FetchEntriesController extends AuthenticatedPostController<List<Ent
     @PostMapping("/personal/entries")
     public ResponseEntity<List<EntryDataDto>> handle(
             @RequestHeader(value = "Authorization", required = false) String bearerToken,
-            @RequestBody GetEntriesRequestBody requestData) {
+            @RequestBody FetchEntriesRequestBody requestData) {
 
         databaseService.validate().bearerToken(bearerToken);
         String idTokenString = utilityService.extract().token(bearerToken);

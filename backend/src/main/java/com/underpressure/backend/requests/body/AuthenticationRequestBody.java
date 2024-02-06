@@ -1,12 +1,12 @@
 package com.underpressure.backend.requests.body;
 
-public class AuthenticationBody {
+public class AuthenticationRequestBody {
     private String code;
 
-    public AuthenticationBody() {
+    public AuthenticationRequestBody() {
     }
 
-    public AuthenticationBody(String code) {
+    public AuthenticationRequestBody(String code) {
         this.code = code;
     }
 

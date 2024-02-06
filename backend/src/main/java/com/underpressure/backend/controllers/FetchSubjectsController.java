@@ -16,8 +16,11 @@ import com.underpressure.backend.services.application.ApplicationService;
 @RestController
 public class FetchSubjectsController extends GetController<List<String>, GetSubjectsParams> {
 
-    @Autowired
     ApplicationService applicationService;
+
+    public FetchSubjectsController(ApplicationService applicationService) {
+        this.applicationService = applicationService;
+    }
 
     @Override
     @GetMapping("/subjects")
