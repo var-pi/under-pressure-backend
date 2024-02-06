@@ -140,7 +140,7 @@ public class UpdateEntryControllerTests extends AuthorizedControllerTests<Update
                 ResponseEntity<String> responseEntity = controller
                                 .handle("Bearer user_1_id_token", new UpdateEntryRequestBody("Subject 2", 40));
 
-                assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.CREATED);
+                assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
 
         }
 

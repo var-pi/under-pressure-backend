@@ -58,7 +58,7 @@ public class UpdateEntryController extends AuthenticatedPostController<String, U
         } else {
             databaseService.add().entry(subjectInstanceId, stressLevel);
 
-            return new ResponseEntity<>(null, HttpStatus.CREATED);
+            return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
         }
 
     }

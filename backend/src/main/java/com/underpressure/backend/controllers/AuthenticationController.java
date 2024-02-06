@@ -73,7 +73,7 @@ public class AuthenticationController extends PostController<String, Authenticat
         if (!databaseService.check().userWithGoogleSubExists(googleSub)) {
             databaseService.add().user(userInfo);
 
-            return new ResponseEntity<>(idTokenString, HttpStatus.CREATED);
+            return new ResponseEntity<>(idTokenString, HttpStatus.OK);
         }
 
         return new ResponseEntity<>(idTokenString, HttpStatus.OK);

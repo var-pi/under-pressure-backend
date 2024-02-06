@@ -102,7 +102,7 @@ public class FollowSubjectControllerTests extends AuthorizedControllerTests<Foll
                 ResponseEntity<String> responseEntity = controller
                                 .handle(bearerToken, new FollowSubjectRequestBody(subjectName));
 
-                assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.CREATED);
+                assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
 
                 SubjectAlreadyFollowedException ex = assertThrows(SubjectAlreadyFollowedException.class,
                                 () -> controller
