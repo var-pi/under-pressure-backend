@@ -12,22 +12,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.underpressure.backend.abstracts.AuthenticatedPostController;
 import com.underpressure.backend.requests.body.FetchEntriesRequestBody;
 import com.underpressure.backend.responses.EntryDataDto;
-import com.underpressure.backend.services.database.DatabaseService;
-import com.underpressure.backend.services.google.GoogleService;
-import com.underpressure.backend.services.utility.UtilityService;
+import com.underpressure.backend.services.application.ApplicationService;
 
 @RestController
 public class FetchEntriesController extends AuthenticatedPostController<List<EntryDataDto>, FetchEntriesRequestBody> {
 
-    UtilityService utilityService;
-    DatabaseService databaseService;
-    GoogleService googleService;
+    ApplicationService applicationService;
 
-    public FetchEntriesController(UtilityService utilityService, DatabaseService databaseService,
-            GoogleService googleService) {
-        this.utilityService = utilityService;
-        this.databaseService = databaseService;
-        this.googleService = googleService;
+    public FetchEntriesController(ApplicationService applicationService) {
+        this.applicationService = applicationService;
     }
 
     @Override
@@ -36,18 +29,7 @@ public class FetchEntriesController extends AuthenticatedPostController<List<Ent
             @RequestHeader(value = "Authorization", required = false) String bearerToken,
             @RequestBody FetchEntriesRequestBody requestData) {
 
-        databaseService.validate().bearerToken(bearerToken);
-        String idTokenString = utilityService.extract().token(bearerToken);
-
-        String subjectName = requestData.getSubjectName();
-        databaseService.validate().subjectName(subjectName);
-
-        Integer userId = googleService.fetch().userId(idTokenString, clientId);
-
-        Integer subjectId = databaseService.fetch().subjectId(subjectName);
-        Integer subjectInstanceId = databaseService.fetch().subjectInstanceId(userId, subjectId);
-
-        List<EntryDataDto> entries = databaseService.fetch().entries(subjectInstanceId);
+        List<EntryDataDto> entries = applicationService.fetchEntries(bearerToken, requestData);
 
         return new ResponseEntity<>(entries, HttpStatus.OK);
 
