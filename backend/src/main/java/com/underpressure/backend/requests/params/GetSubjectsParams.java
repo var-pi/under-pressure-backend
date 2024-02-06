@@ -1,4 +1,4 @@
-package com.underpressure.backend.request.params;
+package com.underpressure.backend.requests.params;
 
 public class GetSubjectsParams {
 

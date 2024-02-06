@@ -16,7 +16,7 @@ import com.underpressure.backend.exceptions.does_not_exist.SubjectDoesNotExist;
 import com.underpressure.backend.exceptions.does_not_exist.SubjectInstanceDoesNotExistsException;
 import com.underpressure.backend.exceptions.does_not_exist.UserDoesNotExistException;
 import com.underpressure.backend.exceptions.parameter.SubjectNameParameterException;
-import com.underpressure.backend.request.body.UnfollowSubjectRequestBody;
+import com.underpressure.backend.requests.body.UnfollowSubjectRequestBody;
 import com.underpressure.backend.services.database.DatabaseService;
 
 @Import({

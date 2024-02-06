@@ -15,7 +15,7 @@ import com.underpressure.backend.exceptions.auth.BearerTokenNullException;
 import com.underpressure.backend.exceptions.does_not_exist.SubjectDoesNotExist;
 import com.underpressure.backend.exceptions.does_not_exist.UserDoesNotExistException;
 import com.underpressure.backend.exceptions.parameter.SubjectNameParameterException;
-import com.underpressure.backend.request.body.FollowSubjectRequestBody;
+import com.underpressure.backend.requests.body.FollowSubjectRequestBody;
 import com.underpressure.backend.services.database.DatabaseService;
 
 @Import({

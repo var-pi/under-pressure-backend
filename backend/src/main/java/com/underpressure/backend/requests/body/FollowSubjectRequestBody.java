@@ -1,4 +1,4 @@
-package com.underpressure.backend.request.body;
+package com.underpressure.backend.requests.body;
 
 public class FollowSubjectRequestBody {
     private String subjectName;

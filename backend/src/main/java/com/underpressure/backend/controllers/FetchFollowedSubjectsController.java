@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.underpressure.backend.abstracts.AuthenticatedPostController;
 import com.underpressure.backend.exceptions.RequestException;
-import com.underpressure.backend.request.body.FollowedSubjectsRequestBody;
+import com.underpressure.backend.requests.body.FollowedSubjectsRequestBody;
 import com.underpressure.backend.services.database.DatabaseService;
 import com.underpressure.backend.services.google.GoogleService;
 import com.underpressure.backend.services.utility.UtilityService;

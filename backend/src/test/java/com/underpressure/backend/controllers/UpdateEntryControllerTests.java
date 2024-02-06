@@ -18,7 +18,7 @@ import com.underpressure.backend.exceptions.does_not_exist.UserDoesNotExistExcep
 import com.underpressure.backend.exceptions.parameter.StressLevelParameterException;
 import com.underpressure.backend.exceptions.parameter.SubjectNameParameterException;
 import com.underpressure.backend.exceptions.range.StressLevelRangeException;
-import com.underpressure.backend.request.body.AddEntryRequestBody;
+import com.underpressure.backend.requests.body.AddEntryRequestBody;
 import com.underpressure.backend.services.database.DatabaseService;
 
 @Import({

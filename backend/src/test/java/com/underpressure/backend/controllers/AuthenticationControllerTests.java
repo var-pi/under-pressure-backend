@@ -13,7 +13,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.jdbc.Sql;
 
 import com.underpressure.backend.exceptions.parameter.CodeParameterException;
-import com.underpressure.backend.request.body.AuthenticationBody;
+import com.underpressure.backend.requests.body.AuthenticationBody;
 import com.underpressure.backend.services.database.DatabaseService;
 import com.underpressure.backend.services.google.GoogleService;
 

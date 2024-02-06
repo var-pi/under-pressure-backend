@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.underpressure.backend.abstracts.GetController;
-import com.underpressure.backend.request.params.GetSubjectsParams;
+import com.underpressure.backend.requests.params.GetSubjectsParams;
 import com.underpressure.backend.services.database.DatabaseService;
 
 @RestController
