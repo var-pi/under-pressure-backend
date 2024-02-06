@@ -10,8 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
@@ -23,10 +22,9 @@ import com.underpressure.backend.services.database.DatabaseService;
 import com.underpressure.backend.services.database.FetchDatabase;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
-@SpringBootTest
-@AutoConfigureMockMvc
+@WebMvcTest(FetchSubjectsController.class)
 public class FetchSubjectsControllerTests {
 
     @Autowired
@@ -40,24 +38,24 @@ public class FetchSubjectsControllerTests {
 
     FetchDatabase fetchDatabaseMock;
 
-    List<String> expectedSubjects;
+    List<String> subjectsMock;
 
     @BeforeEach
     void setUp() {
         fetchDatabaseMock = mock(FetchDatabase.class);
         when(databaseServiceMock.fetch()).thenReturn(fetchDatabaseMock);
 
-        expectedSubjects = Arrays.asList("Subject 1", "Subject 2");
-        when(fetchDatabaseMock.subjects()).thenReturn(expectedSubjects);
+        subjectsMock = Arrays.asList("Subject 1", "Subject 2");
+        when(fetchDatabaseMock.subjects()).thenReturn(subjectsMock);
     }
 
     @Test
-    public void testHelloEndpoint() throws Exception {
+    public void Should_Fetch_Subjects() throws Exception {
 
         mockMvc.perform(MockMvcRequestBuilders.get("/subjects")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().json(new ObjectMapper().writeValueAsString(expectedSubjects)));
+                .andExpect(content().json(new ObjectMapper().writeValueAsString(subjectsMock)));
 
     }
 
