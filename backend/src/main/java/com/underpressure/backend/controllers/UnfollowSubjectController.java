@@ -1,6 +1,5 @@
 package com.underpressure.backend.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,14 +16,16 @@ import com.underpressure.backend.services.utility.UtilityService;
 @RestController
 public class UnfollowSubjectController extends AuthenticatedPostController<String, UnfollowSubjectRequestBody> {
 
-    @Autowired
     UtilityService utilityService;
-
-    @Autowired
     DatabaseService databaseService;
-
-    @Autowired
     GoogleService googleService;
+
+    public UnfollowSubjectController(UtilityService utilityService, DatabaseService databaseService,
+            GoogleService googleService) {
+        this.utilityService = utilityService;
+        this.databaseService = databaseService;
+        this.googleService = googleService;
+    }
 
     @Override
     @PostMapping("/personal/subjects/unfollow")
