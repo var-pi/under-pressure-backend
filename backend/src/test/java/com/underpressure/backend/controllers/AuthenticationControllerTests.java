@@ -12,10 +12,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.jdbc.Sql;
 
-import com.underpressure.backend.controllers.classes.request.body.AuthenticationBody;
-import com.underpressure.backend.controllers.services.database.DatabaseService;
-import com.underpressure.backend.controllers.services.google.GoogleService;
+import com.underpressure.backend.classes.request.body.AuthenticationBody;
 import com.underpressure.backend.exceptions.parameter.CodeParameterException;
+import com.underpressure.backend.services.database.DatabaseService;
+import com.underpressure.backend.services.google.GoogleService;
 
 @JdbcTest
 @AutoConfigureTestDatabase

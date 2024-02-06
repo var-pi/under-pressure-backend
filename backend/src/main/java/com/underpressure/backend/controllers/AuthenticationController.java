@@ -20,14 +20,14 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
-import com.underpressure.backend.controllers.classes.abstracts.PostController;
-import com.underpressure.backend.controllers.classes.dto.OAuthTokenDto;
-import com.underpressure.backend.controllers.classes.request.body.AuthenticationBody;
-import com.underpressure.backend.controllers.services.database.DatabaseService;
-import com.underpressure.backend.controllers.services.google.GoogleService;
+import com.underpressure.backend.classes.abstracts.PostController;
+import com.underpressure.backend.classes.dto.OAuthTokenDto;
+import com.underpressure.backend.classes.request.body.AuthenticationBody;
 import com.underpressure.backend.exceptions.RequestException;
 import com.underpressure.backend.exceptions.unexpected.AuthenticationFailedException;
 import com.underpressure.backend.exceptions.unexpected.InternalServerError;
+import com.underpressure.backend.services.database.DatabaseService;
+import com.underpressure.backend.services.google.GoogleService;
 
 @RestController
 public class AuthenticationController extends PostController<String, AuthenticationBody> {

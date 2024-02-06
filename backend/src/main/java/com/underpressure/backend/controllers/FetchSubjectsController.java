@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.underpressure.backend.controllers.classes.abstracts.GetController;
-import com.underpressure.backend.controllers.classes.request.params.GetSubjectsParams;
-import com.underpressure.backend.controllers.services.database.DatabaseService;
+import com.underpressure.backend.classes.abstracts.GetController;
+import com.underpressure.backend.classes.request.params.GetSubjectsParams;
+import com.underpressure.backend.services.database.DatabaseService;
 
 @RestController
 public class FetchSubjectsController extends GetController<List<String>, GetSubjectsParams> {

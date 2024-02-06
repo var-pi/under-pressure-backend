@@ -7,9 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.jdbc.Sql;
 
+import com.underpressure.backend.classes.request.params.GetSubjectsParams;
 import com.underpressure.backend.controllers.classes.ControllerTests;
-import com.underpressure.backend.controllers.classes.request.params.GetSubjectsParams;
-import com.underpressure.backend.controllers.services.database.DatabaseService;
+import com.underpressure.backend.services.database.DatabaseService;
 
 import java.util.List;
 

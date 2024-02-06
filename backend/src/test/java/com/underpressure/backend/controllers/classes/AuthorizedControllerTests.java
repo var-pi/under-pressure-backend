@@ -9,10 +9,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.context.annotation.Import;
 
-import com.underpressure.backend.controllers.services.google.FetchGoogle;
-import com.underpressure.backend.controllers.services.google.GoogleService;
-import com.underpressure.backend.controllers.services.utility.UtilityService;
 import com.underpressure.backend.exceptions.unexpected.UserVerificationException;
+import com.underpressure.backend.services.google.FetchGoogle;
+import com.underpressure.backend.services.google.GoogleService;
+import com.underpressure.backend.services.utility.UtilityService;
 
 @Import({
         GoogleService.class,
