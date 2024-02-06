@@ -13,44 +13,27 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.underpressure.backend.controllers.FetchFollowedSubjectsController;
+import com.underpressure.backend.controllers.web.abstracts.ControllerTests;
 import com.underpressure.backend.requests.body.FetchFollowedSubjectsRequestBody;
-import com.underpressure.backend.services.application.ApplicationService;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
 @WebMvcTest(FetchFollowedSubjectsController.class)
-public class FetchFollowedSubjectsControllerTests {
-
-    @Autowired
-    private MockMvc mockMvc;
-
-    @MockBean
-    private ApplicationService applicationServiceMock;
+public class FetchFollowedSubjectsControllerTests extends ControllerTests {
 
     private List<String> subjectsMock = Arrays.asList("Subject 1", "Subject 2");
 
-    private ObjectMapper objectMapper;
-
     @BeforeEach
     void setUp() {
-        when(applicationServiceMock.fetchFollowedSubjects(anyString())).thenReturn(subjectsMock);
 
-        objectMapper = new ObjectMapper();
-        objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
+        when(applicationServiceMock.fetchFollowedSubjects(anyString())).thenReturn(subjectsMock);
 
     }
 
