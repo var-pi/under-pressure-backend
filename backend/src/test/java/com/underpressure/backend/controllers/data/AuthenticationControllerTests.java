@@ -1,4 +1,4 @@
-package com.underpressure.backend.controllers;
+package com.underpressure.backend.controllers.data;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.jdbc.Sql;
 
+import com.underpressure.backend.controllers.AuthenticationController;
 import com.underpressure.backend.exceptions.parameter.CodeParameterException;
 import com.underpressure.backend.requests.body.AuthenticationBody;
 import com.underpressure.backend.services.database.DatabaseService;

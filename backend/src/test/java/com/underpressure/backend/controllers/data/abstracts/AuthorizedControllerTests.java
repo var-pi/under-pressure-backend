@@ -1,4 +1,4 @@
-package com.underpressure.backend.controllers.abstracts;
+package com.underpressure.backend.controllers.data.abstracts;
 
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;

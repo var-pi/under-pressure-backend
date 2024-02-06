@@ -1,4 +1,4 @@
-package com.underpressure.backend.controllers.abstracts;
+package com.underpressure.backend.controllers.data.abstracts;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;

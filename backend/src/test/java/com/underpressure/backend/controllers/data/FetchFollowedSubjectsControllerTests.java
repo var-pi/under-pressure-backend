@@ -1,4 +1,4 @@
-package com.underpressure.backend.controllers;
+package com.underpressure.backend.controllers.data;
 
 import java.util.List;
 
@@ -8,7 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.jdbc.Sql;
 
-import com.underpressure.backend.controllers.abstracts.AuthorizedControllerTests;
+import com.underpressure.backend.controllers.FetchFollowedSubjectsController;
+import com.underpressure.backend.controllers.data.abstracts.AuthorizedControllerTests;
 import com.underpressure.backend.exceptions.auth.BearerTokenNullException;
 import com.underpressure.backend.exceptions.does_not_exist.UserDoesNotExistException;
 import com.underpressure.backend.requests.body.FollowedSubjectsRequestBody;

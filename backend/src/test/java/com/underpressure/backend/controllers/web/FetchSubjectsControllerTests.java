@@ -1,4 +1,4 @@
-package com.underpressure.backend.controllers;
+package com.underpressure.backend.controllers.web;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -18,6 +18,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.underpressure.backend.controllers.FetchSubjectsController;
 import com.underpressure.backend.services.database.DatabaseService;
 import com.underpressure.backend.services.database.FetchDatabase;
 
@@ -26,7 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class FetchSubjectsControllerWebLayerTests {
+public class FetchSubjectsControllerTests {
 
     @Autowired
     private MockMvc mockMvc;
