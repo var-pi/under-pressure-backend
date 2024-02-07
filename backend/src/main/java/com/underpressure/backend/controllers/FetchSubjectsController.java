@@ -5,15 +5,17 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.underpressure.backend.abstracts.GetController;
-import com.underpressure.backend.requests.params.GetSubjectsParams;
+import com.underpressure.backend.abstracts.AuthenticatedGetController;
+import com.underpressure.backend.exceptions.RequestException;
+import com.underpressure.backend.requests.body.FetchSubjectsPathVariables;
 import com.underpressure.backend.services.application.ApplicationService;
 
 @RestController
-public class FetchSubjectsController extends GetController<List<String>, GetSubjectsParams> {
+public class FetchSubjectsController
+        extends AuthenticatedGetController<List<String>, FetchSubjectsPathVariables> {
 
     ApplicationService applicationService;
 
@@ -22,10 +24,14 @@ public class FetchSubjectsController extends GetController<List<String>, GetSubj
     }
 
     @Override
-    @GetMapping("/subjects/all")
-    public ResponseEntity<List<String>> handle(@ModelAttribute GetSubjectsParams params) {
+    @GetMapping("/subjects")
+    public ResponseEntity<List<String>> handle(
+            @RequestHeader(value = "Authorization", required = false) String bearerToken,
+            FetchSubjectsPathVariables requestData) throws RequestException {
 
-        return new ResponseEntity<>(applicationService.fetchSubjects(), HttpStatus.OK);
+        List<String> subjects = applicationService.fetchSubjects(bearerToken, requestData);
+
+        return new ResponseEntity<>(subjects, HttpStatus.OK);
 
     }
 

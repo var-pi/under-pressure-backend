@@ -7,27 +7,27 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.jdbc.Sql;
 
-import com.underpressure.backend.controllers.FetchSubjectsController;
+import com.underpressure.backend.controllers.FetchSubjectsAllController;
 import com.underpressure.backend.controllers.data.abstracts.ControllerTests;
-import com.underpressure.backend.requests.params.GetSubjectsParams;
+import com.underpressure.backend.requests.params.FetchSubjectsAllPathVariables;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Import({
-        FetchSubjectsController.class
+        FetchSubjectsAllController.class
 })
 @Sql({
         "classpath:createSubjectsTable.sql",
         "classpath:fillSubjectsTable.sql"
 })
-public class FetchSubjectsControllerTests extends ControllerTests<FetchSubjectsController> {
+public class FetchSubjectsControllerTests extends ControllerTests<FetchSubjectsAllController> {
 
     @Test
     public void Should_Succeed_When_Request_Valid() {
 
-        ResponseEntity<List<String>> responseEntity = controller.handle(new GetSubjectsParams());
+        ResponseEntity<List<String>> responseEntity = controller.handle(new FetchSubjectsAllPathVariables());
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(responseEntity.getBody().size()).isEqualTo(3);

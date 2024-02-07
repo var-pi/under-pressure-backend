@@ -4,11 +4,11 @@ import java.util.List;
 
 import com.underpressure.backend.services.database.DatabaseService;
 
-class FetchSubjects {
+class FetchSubjectsAll {
 
     DatabaseService databaseService;
 
-    public FetchSubjects(DatabaseService databaseService) {
+    public FetchSubjectsAll(DatabaseService databaseService) {
         this.databaseService = databaseService;
     }
 

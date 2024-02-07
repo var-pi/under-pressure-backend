@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.underpressure.backend.requests.body.AuthenticationRequestBody;
-import com.underpressure.backend.requests.body.FetchEntriesRequestBody;
-import com.underpressure.backend.requests.body.FetchFollowedSubjectsRequestBody;
+import com.underpressure.backend.requests.body.FetchEntriesPathVariables;
+import com.underpressure.backend.requests.body.FetchSubjectsPathVariables;
 import com.underpressure.backend.requests.body.FollowSubjectRequestBody;
 import com.underpressure.backend.requests.body.UnfollowSubjectRequestBody;
 import com.underpressure.backend.requests.body.UpdateEntryRequestBody;
@@ -40,11 +40,11 @@ public class ApplicationService {
     private String clientSecret;
 
     public List<String> fetchSubjects() {
-        return new FetchSubjects(databaseService)
+        return new FetchSubjectsAll(databaseService)
                 .handle();
     }
 
-    public List<String> fetchFollowedSubjects(String bearerToken, FetchFollowedSubjectsRequestBody requestData) {
+    public List<String> fetchSubjects(String bearerToken, FetchSubjectsPathVariables requestData) {
         return new FetchFollowedSubjects(utilityService, googleService, databaseService, clientId)
                 .handle(bearerToken, requestData);
     }
@@ -59,7 +59,7 @@ public class ApplicationService {
                 .handle(bearerToken, requestData);
     }
 
-    public List<EntryDataDto> fetchEntries(String bearerToken, FetchEntriesRequestBody requestData) {
+    public List<EntryDataDto> fetchEntries(String bearerToken, FetchEntriesPathVariables requestData) {
         return new FetchEntries(utilityService, googleService, databaseService, clientId)
                 .handle(bearerToken, requestData);
     }

@@ -1,12 +1,12 @@
 package com.underpressure.backend.requests.body;
 
-public class FetchEntriesRequestBody {
+public class FetchEntriesPathVariables {
     private String subjectName;
 
-    public FetchEntriesRequestBody() {
+    public FetchEntriesPathVariables() {
     }
 
-    public FetchEntriesRequestBody(String subjectName) {
+    public FetchEntriesPathVariables(String subjectName) {
         this.subjectName = subjectName;
     }
 

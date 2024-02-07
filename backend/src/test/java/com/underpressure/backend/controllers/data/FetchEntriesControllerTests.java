@@ -17,7 +17,7 @@ import com.underpressure.backend.exceptions.auth.BearerTokenNullException;
 import com.underpressure.backend.exceptions.does_not_exist.SubjectDoesNotExist;
 import com.underpressure.backend.exceptions.does_not_exist.UserDoesNotExistException;
 import com.underpressure.backend.exceptions.parameter.SubjectNameParameterException;
-import com.underpressure.backend.requests.body.FetchEntriesRequestBody;
+import com.underpressure.backend.requests.body.FetchEntriesPathVariables;
 import com.underpressure.backend.responses.EntryDataDto;
 import com.underpressure.backend.services.database.DatabaseService;
 
@@ -42,7 +42,7 @@ public class FetchEntriesControllerTests extends AuthorizedControllerTests<Fetch
 
                 BearerTokenNullException ex = assertThrows(BearerTokenNullException.class,
                                 () -> controller
-                                                .handle(null, new FetchEntriesRequestBody("Subject 1")));
+                                                .handle(null, new FetchEntriesPathVariables("Subject 1")));
 
                 assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.UNAUTHORIZED);
                 assertThat(ex.getMessage()).isNotBlank();
@@ -55,7 +55,7 @@ public class FetchEntriesControllerTests extends AuthorizedControllerTests<Fetch
                 SubjectNameParameterException ex = assertThrows(SubjectNameParameterException.class,
                                 () -> controller
                                                 .handle("Bearer user_1_id_token",
-                                                                new FetchEntriesRequestBody(null)));
+                                                                new FetchEntriesPathVariables(null)));
 
                 assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.BAD_REQUEST);
                 assertThat(ex.getMessage()).isNotBlank();
@@ -68,7 +68,7 @@ public class FetchEntriesControllerTests extends AuthorizedControllerTests<Fetch
                 UserDoesNotExistException ex = assertThrows(UserDoesNotExistException.class,
                                 () -> controller
                                                 .handle("Bearer user_4_id_token",
-                                                                new FetchEntriesRequestBody("Subject 1")));
+                                                                new FetchEntriesPathVariables("Subject 1")));
 
                 assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.NOT_FOUND);
                 assertThat(ex.getMessage()).isNotBlank();
@@ -79,7 +79,7 @@ public class FetchEntriesControllerTests extends AuthorizedControllerTests<Fetch
         public void Should_Result_In_NOT_FOUND_Exception_When_Subject_Not_Found() {
 
                 SubjectDoesNotExist ex = assertThrows(SubjectDoesNotExist.class, () -> controller
-                                .handle("Bearer user_1_id_token", new FetchEntriesRequestBody("NaN")));
+                                .handle("Bearer user_1_id_token", new FetchEntriesPathVariables("NaN")));
 
                 assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.NOT_FOUND);
                 assertThat(ex.getMessage()).isNotBlank();
@@ -90,7 +90,7 @@ public class FetchEntriesControllerTests extends AuthorizedControllerTests<Fetch
         public void Should_Return_Entries_When_Request_Valid() {
 
                 ResponseEntity<List<EntryDataDto>> responseEntity = controller
-                                .handle("Bearer user_1_id_token", new FetchEntriesRequestBody("Subject 1"));
+                                .handle("Bearer user_1_id_token", new FetchEntriesPathVariables("Subject 1"));
 
                 assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
                 assertThat(responseEntity.getBody().size()).isEqualTo(2);
