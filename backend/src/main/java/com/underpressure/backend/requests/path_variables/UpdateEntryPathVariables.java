@@ -1,12 +1,12 @@
 package com.underpressure.backend.requests.path_variables;
 
-public class UnfollowSubjectRequestPathVariables {
-    private String subjectName;
+public class UpdateEntryPathVariables {
+    String subjectName;
 
-    public UnfollowSubjectRequestPathVariables() {
+    public UpdateEntryPathVariables() {
     }
 
-    public UnfollowSubjectRequestPathVariables(String subjectName) {
+    public UpdateEntryPathVariables(String subjectName) {
         this.subjectName = subjectName;
     }
 

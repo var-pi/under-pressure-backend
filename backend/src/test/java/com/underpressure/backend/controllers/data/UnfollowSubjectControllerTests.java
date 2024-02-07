@@ -17,7 +17,7 @@ import com.underpressure.backend.exceptions.does_not_exist.SubjectDoesNotExist;
 import com.underpressure.backend.exceptions.does_not_exist.SubjectInstanceDoesNotExistsException;
 import com.underpressure.backend.exceptions.does_not_exist.UserDoesNotExistException;
 import com.underpressure.backend.exceptions.parameter.SubjectNameParameterException;
-import com.underpressure.backend.requests.path_variables.UnfollowSubjectRequestPathVariables;
+import com.underpressure.backend.requests.path_variables.UnfollowSubjectPathVariables;
 import com.underpressure.backend.services.database.DatabaseService;
 
 @Import({
@@ -36,7 +36,7 @@ public class UnfollowSubjectControllerTests extends AuthorizedControllerTests<Un
         @Test
         public void Should_Result_In_UNAUTHORIZED_When_BearerToken_Null() {
 
-                UnfollowSubjectRequestPathVariables pathVariables = new UnfollowSubjectRequestPathVariables(
+                UnfollowSubjectPathVariables pathVariables = new UnfollowSubjectPathVariables(
                                 "Subject 1");
 
                 BearerTokenNullException ex = assertThrows(BearerTokenNullException.class,
@@ -50,7 +50,7 @@ public class UnfollowSubjectControllerTests extends AuthorizedControllerTests<Un
         @Test
         public void Should_Result_In_BAD_REQUEST_When_SubjectName_Null() {
 
-                UnfollowSubjectRequestPathVariables pathVariables = new UnfollowSubjectRequestPathVariables(
+                UnfollowSubjectPathVariables pathVariables = new UnfollowSubjectPathVariables(
                                 null);
 
                 SubjectNameParameterException ex = assertThrows(SubjectNameParameterException.class,
@@ -64,7 +64,7 @@ public class UnfollowSubjectControllerTests extends AuthorizedControllerTests<Un
         @Test
         public void Should_Result_In_NOT_FOUND_Exception_When_User_Not_Found() {
 
-                UnfollowSubjectRequestPathVariables pathVariables = new UnfollowSubjectRequestPathVariables(
+                UnfollowSubjectPathVariables pathVariables = new UnfollowSubjectPathVariables(
                                 "Subject 1");
 
                 UserDoesNotExistException ex = assertThrows(UserDoesNotExistException.class,
@@ -78,7 +78,7 @@ public class UnfollowSubjectControllerTests extends AuthorizedControllerTests<Un
         @Test
         public void Should_Result_In_NOT_FOUND_Exception_When_Subject_Not_Found() {
 
-                UnfollowSubjectRequestPathVariables pathVariables = new UnfollowSubjectRequestPathVariables(
+                UnfollowSubjectPathVariables pathVariables = new UnfollowSubjectPathVariables(
                                 "NaN");
 
                 SubjectDoesNotExist ex = assertThrows(SubjectDoesNotExist.class,
@@ -92,7 +92,7 @@ public class UnfollowSubjectControllerTests extends AuthorizedControllerTests<Un
         @Test
         public void Should_Result_In_NOT_FOUND_When_Request_To_Unfollow_Having_Never_Followed() {
 
-                UnfollowSubjectRequestPathVariables pathVariables = new UnfollowSubjectRequestPathVariables(
+                UnfollowSubjectPathVariables pathVariables = new UnfollowSubjectPathVariables(
                                 "Subject 3");
 
                 SubjectInstanceDoesNotExistsException ex = assertThrows(SubjectInstanceDoesNotExistsException.class,
@@ -106,7 +106,7 @@ public class UnfollowSubjectControllerTests extends AuthorizedControllerTests<Un
         @Test
         public void Should_Result_In_BAD_REQUEST_When_Requested_To_Unfollow_Already_Unfollowed() {
 
-                UnfollowSubjectRequestPathVariables pathVariables = new UnfollowSubjectRequestPathVariables(
+                UnfollowSubjectPathVariables pathVariables = new UnfollowSubjectPathVariables(
                                 "Subject 3");
 
                 SubjectUnfollowedException ex = assertThrows(SubjectUnfollowedException.class,
@@ -120,7 +120,7 @@ public class UnfollowSubjectControllerTests extends AuthorizedControllerTests<Un
         @Test
         public void Should_Unfollow_A_Subject_When_Request_Valid() {
 
-                UnfollowSubjectRequestPathVariables pathVariables = new UnfollowSubjectRequestPathVariables(
+                UnfollowSubjectPathVariables pathVariables = new UnfollowSubjectPathVariables(
                                 "Subject 1");
 
                 String bearerToken = "Bearer user_1_id_token";

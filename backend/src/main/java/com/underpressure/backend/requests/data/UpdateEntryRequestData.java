@@ -1,14 +1,14 @@
 package com.underpressure.backend.requests.data;
 
 import com.underpressure.backend.requests.body.UpdateEntryRequestBody;
-import com.underpressure.backend.requests.path_variables.UpdateEntryRequestPathVariables;
+import com.underpressure.backend.requests.path_variables.UpdateEntryPathVariables;
 
 public class UpdateEntryRequestData {
     private String subjectName;
     private Integer stressLevel;
 
     public UpdateEntryRequestData(UpdateEntryRequestBody requestBody,
-            UpdateEntryRequestPathVariables requestPathVariables) {
+            UpdateEntryPathVariables requestPathVariables) {
         this.subjectName = requestPathVariables.getSubjectName();
         this.stressLevel = requestBody.getStressLevel();
     }

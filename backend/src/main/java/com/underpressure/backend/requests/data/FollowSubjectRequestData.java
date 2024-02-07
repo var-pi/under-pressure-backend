@@ -1,17 +1,18 @@
 package com.underpressure.backend.requests.data;
 
 import com.underpressure.backend.requests.body.FollowSubjectRequestBody;
+import com.underpressure.backend.requests.path_variables.FollowSubjectPathVariables;
 
-public class FollowSubjectRequestData extends FollowSubjectRequestBody {
+public class FollowSubjectRequestData {
     private String subjectName;
 
     public FollowSubjectRequestData() {
-        super();
     }
 
-    public FollowSubjectRequestData(String subjectName) {
-        super();
-        this.subjectName = subjectName;
+    public FollowSubjectRequestData(
+            FollowSubjectRequestBody requestBody,
+            FollowSubjectPathVariables pathVariables) {
+        this.subjectName = pathVariables.getSubjectName();
     }
 
     public String getSubjectName() {

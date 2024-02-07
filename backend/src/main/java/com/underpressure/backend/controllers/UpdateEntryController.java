@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.underpressure.backend.abstracts.AuthenticatedPostControllerNew;
 import com.underpressure.backend.requests.body.UpdateEntryRequestBody;
 import com.underpressure.backend.requests.data.UpdateEntryRequestData;
-import com.underpressure.backend.requests.path_variables.UpdateEntryRequestPathVariables;
+import com.underpressure.backend.requests.path_variables.UpdateEntryPathVariables;
 import com.underpressure.backend.services.application.ApplicationService;
 
 @RestController
 public class UpdateEntryController
-        extends AuthenticatedPostControllerNew<String, UpdateEntryRequestBody, UpdateEntryRequestPathVariables> {
+        extends AuthenticatedPostControllerNew<String, UpdateEntryRequestBody, UpdateEntryPathVariables> {
 
     ApplicationService applicationService;
 
@@ -28,7 +28,7 @@ public class UpdateEntryController
     public ResponseEntity<String> handle(
             @RequestHeader(value = "Authorization", required = false) String bearerToken,
             @RequestBody UpdateEntryRequestBody requestBody,
-            UpdateEntryRequestPathVariables requestPathVariables) {
+            UpdateEntryPathVariables requestPathVariables) {
 
         applicationService.updateEntry(bearerToken, new UpdateEntryRequestData(requestBody, requestPathVariables));
 

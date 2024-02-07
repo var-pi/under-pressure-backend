@@ -12,12 +12,12 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.underpressure.backend.controllers.UnfollowSubjectController;
 import com.underpressure.backend.controllers.web.abstracts.ControllerTests;
-import com.underpressure.backend.requests.path_variables.UnfollowSubjectRequestPathVariables;
+import com.underpressure.backend.requests.path_variables.UnfollowSubjectPathVariables;
 
 @WebMvcTest(UnfollowSubjectController.class)
 public class UnfollowSubjectControllerTest extends ControllerTests {
 
-    UnfollowSubjectRequestPathVariables pathVariables = new UnfollowSubjectRequestPathVariables("Subject");
+    UnfollowSubjectPathVariables pathVariables = new UnfollowSubjectPathVariables("Subject");
 
     @BeforeEach
     private void setUp() {

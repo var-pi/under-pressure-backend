@@ -20,7 +20,7 @@ import com.underpressure.backend.exceptions.parameter.StressLevelParameterExcept
 import com.underpressure.backend.exceptions.parameter.SubjectNameParameterException;
 import com.underpressure.backend.exceptions.range.StressLevelRangeException;
 import com.underpressure.backend.requests.body.UpdateEntryRequestBody;
-import com.underpressure.backend.requests.path_variables.UpdateEntryRequestPathVariables;
+import com.underpressure.backend.requests.path_variables.UpdateEntryPathVariables;
 import com.underpressure.backend.services.database.DatabaseService;
 
 @Import({
@@ -43,7 +43,7 @@ public class UpdateEntryControllerTests extends AuthorizedControllerTests<Update
         public void Should_Result_In_UNAUTHORIZED_When_BearerToken_Null() {
 
                 UpdateEntryRequestBody requestBody = new UpdateEntryRequestBody(0);
-                UpdateEntryRequestPathVariables requestPathVariables = new UpdateEntryRequestPathVariables("Subject 1");
+                UpdateEntryPathVariables requestPathVariables = new UpdateEntryPathVariables("Subject 1");
 
                 BearerTokenNullException ex = assertThrows(BearerTokenNullException.class,
                                 () -> controller
@@ -58,7 +58,7 @@ public class UpdateEntryControllerTests extends AuthorizedControllerTests<Update
         public void Should_Result_In_BAD_REQUEST_When_SubjectName_Null() {
 
                 UpdateEntryRequestBody requestBody = new UpdateEntryRequestBody(0);
-                UpdateEntryRequestPathVariables requestPathVariables = new UpdateEntryRequestPathVariables(null);
+                UpdateEntryPathVariables requestPathVariables = new UpdateEntryPathVariables(null);
 
                 SubjectNameParameterException ex = assertThrows(SubjectNameParameterException.class,
                                 () -> controller
@@ -73,7 +73,7 @@ public class UpdateEntryControllerTests extends AuthorizedControllerTests<Update
         public void Should_Result_In_Bad_REQUEST_When_StressLevel_Null() {
 
                 UpdateEntryRequestBody requestBody = new UpdateEntryRequestBody((Integer) null);
-                UpdateEntryRequestPathVariables requestPathVariables = new UpdateEntryRequestPathVariables("Subject 1");
+                UpdateEntryPathVariables requestPathVariables = new UpdateEntryPathVariables("Subject 1");
 
                 StressLevelParameterException ex = assertThrows(StressLevelParameterException.class, () -> controller
                                 .handle("Bearer user_1_id_token", requestBody, requestPathVariables));
@@ -87,7 +87,7 @@ public class UpdateEntryControllerTests extends AuthorizedControllerTests<Update
         public void Should_Result_In_NOT_FOUND_Exception_When_User_Not_Found() {
 
                 UpdateEntryRequestBody requestBody = new UpdateEntryRequestBody(0);
-                UpdateEntryRequestPathVariables requestPathVariables = new UpdateEntryRequestPathVariables("Subject 1");
+                UpdateEntryPathVariables requestPathVariables = new UpdateEntryPathVariables("Subject 1");
 
                 UserDoesNotExistException ex = assertThrows(UserDoesNotExistException.class,
                                 () -> controller
@@ -102,7 +102,7 @@ public class UpdateEntryControllerTests extends AuthorizedControllerTests<Update
         public void Should_Result_In_NOT_FOUND_Exception_When_Subject_Not_Found() {
 
                 UpdateEntryRequestBody requestBody = new UpdateEntryRequestBody(0);
-                UpdateEntryRequestPathVariables requestPathVariables = new UpdateEntryRequestPathVariables("NaN");
+                UpdateEntryPathVariables requestPathVariables = new UpdateEntryPathVariables("NaN");
 
                 SubjectDoesNotExist ex = assertThrows(SubjectDoesNotExist.class, () -> controller
                                 .handle("Bearer user_1_id_token", requestBody, requestPathVariables));
@@ -116,7 +116,7 @@ public class UpdateEntryControllerTests extends AuthorizedControllerTests<Update
         public void Should_Result_In_Not_Found_Exception_When_Stress_Level_Out_Of_Range() {
 
                 UpdateEntryRequestBody requestBody = new UpdateEntryRequestBody(-1);
-                UpdateEntryRequestPathVariables requestPathVariables = new UpdateEntryRequestPathVariables("Subject 1");
+                UpdateEntryPathVariables requestPathVariables = new UpdateEntryPathVariables("Subject 1");
 
                 StressLevelRangeException ex = assertThrows(StressLevelRangeException.class,
                                 () -> controller
@@ -131,7 +131,7 @@ public class UpdateEntryControllerTests extends AuthorizedControllerTests<Update
         public void Should_Result_In_Bad_Request_When_Unfollowed() {
 
                 UpdateEntryRequestBody requestBody = new UpdateEntryRequestBody(0);
-                UpdateEntryRequestPathVariables requestPathVariables = new UpdateEntryRequestPathVariables("Subject 3");
+                UpdateEntryPathVariables requestPathVariables = new UpdateEntryPathVariables("Subject 3");
 
                 SubjectUnfollowedException ex = assertThrows(SubjectUnfollowedException.class, () -> controller
                                 .handle("Bearer user_2_id_token", requestBody, requestPathVariables));
@@ -145,7 +145,7 @@ public class UpdateEntryControllerTests extends AuthorizedControllerTests<Update
         public void Should_Result_In_Bad_Request_When_Not_Followed() {
 
                 UpdateEntryRequestBody requestBody = new UpdateEntryRequestBody(0);
-                UpdateEntryRequestPathVariables requestPathVariables = new UpdateEntryRequestPathVariables("Subject 3");
+                UpdateEntryPathVariables requestPathVariables = new UpdateEntryPathVariables("Subject 3");
 
                 SubjectInstanceDoesNotExistsException ex = assertThrows(SubjectInstanceDoesNotExistsException.class,
                                 () -> controller
@@ -160,7 +160,7 @@ public class UpdateEntryControllerTests extends AuthorizedControllerTests<Update
         public void Should_Add_Entry_When_Request_Valid() {
 
                 UpdateEntryRequestBody requestBody = new UpdateEntryRequestBody(0);
-                UpdateEntryRequestPathVariables requestPathVariables = new UpdateEntryRequestPathVariables("Subject 1");
+                UpdateEntryPathVariables requestPathVariables = new UpdateEntryPathVariables("Subject 1");
 
                 ResponseEntity<String> responseEntity = controller
                                 .handle("Bearer user_1_id_token", requestBody, requestPathVariables);
@@ -173,7 +173,7 @@ public class UpdateEntryControllerTests extends AuthorizedControllerTests<Update
         public void Should_Update_Entry_When_Request_Valid() {
 
                 UpdateEntryRequestBody requestBody = new UpdateEntryRequestBody(0);
-                UpdateEntryRequestPathVariables requestPathVariables = new UpdateEntryRequestPathVariables("Subject 1");
+                UpdateEntryPathVariables requestPathVariables = new UpdateEntryPathVariables("Subject 1");
 
                 String bearerToken = "Bearer user_1_id_token";
                 controller

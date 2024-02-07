@@ -14,12 +14,13 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import com.underpressure.backend.controllers.FollowSubjectController;
 import com.underpressure.backend.controllers.web.abstracts.ControllerTests;
 import com.underpressure.backend.requests.body.FollowSubjectRequestBody;
-import com.underpressure.backend.requests.data.FollowSubjectRequestData;
+import com.underpressure.backend.requests.path_variables.FollowSubjectPathVariables;
 
 @WebMvcTest(FollowSubjectController.class)
 public class FollowSubjectsControllerTests extends ControllerTests {
 
-    FollowSubjectRequestData requestData = new FollowSubjectRequestData("Subject");
+    FollowSubjectRequestBody requestBody = new FollowSubjectRequestBody();
+    FollowSubjectPathVariables pathVariables = new FollowSubjectPathVariables("Subject");
 
     @BeforeEach
     private void setUp() {
@@ -32,10 +33,10 @@ public class FollowSubjectsControllerTests extends ControllerTests {
     @Test
     public void Should_Follow_Subject() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/subjects/" + requestData.getSubjectName())
+        mockMvc.perform(MockMvcRequestBuilders.post("/subjects/" + pathVariables.getSubjectName())
                 .header("Authorization", "Bearer id_token")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(new FollowSubjectRequestBody(requestData))))
+                .content(objectMapper.writeValueAsString(requestBody)))
                 .andExpect(status().isNoContent());
 
     }

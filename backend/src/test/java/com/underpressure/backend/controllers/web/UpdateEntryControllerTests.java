@@ -14,13 +14,13 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import com.underpressure.backend.controllers.UpdateEntryController;
 import com.underpressure.backend.controllers.web.abstracts.ControllerTests;
 import com.underpressure.backend.requests.body.UpdateEntryRequestBody;
-import com.underpressure.backend.requests.path_variables.UpdateEntryRequestPathVariables;
+import com.underpressure.backend.requests.path_variables.UpdateEntryPathVariables;
 
 @WebMvcTest(UpdateEntryController.class)
 public class UpdateEntryControllerTests extends ControllerTests {
 
     private UpdateEntryRequestBody requestBody = new UpdateEntryRequestBody(0);
-    private UpdateEntryRequestPathVariables requestPathVariables = new UpdateEntryRequestPathVariables("Subject");
+    private UpdateEntryPathVariables requestPathVariables = new UpdateEntryPathVariables("Subject");
 
     @BeforeEach
     private void setUp() {

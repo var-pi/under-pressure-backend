@@ -1,11 +1,11 @@
 package com.underpressure.backend.requests.data;
 
-import com.underpressure.backend.requests.path_variables.UnfollowSubjectRequestPathVariables;
+import com.underpressure.backend.requests.path_variables.UnfollowSubjectPathVariables;
 
 public class UnfollowSubjectRequestData {
     private String subjectName;
 
-    public UnfollowSubjectRequestData(UnfollowSubjectRequestPathVariables pathVariables) {
+    public UnfollowSubjectRequestData(UnfollowSubjectPathVariables pathVariables) {
         this.subjectName = pathVariables.getSubjectName();
     }
 

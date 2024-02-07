@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.underpressure.backend.abstracts.AuthenticatedDeleteController;
 import com.underpressure.backend.requests.data.UnfollowSubjectRequestData;
-import com.underpressure.backend.requests.path_variables.UnfollowSubjectRequestPathVariables;
+import com.underpressure.backend.requests.path_variables.UnfollowSubjectPathVariables;
 import com.underpressure.backend.services.application.ApplicationService;
 
 @RestController
 public class UnfollowSubjectController
-        extends AuthenticatedDeleteController<String, UnfollowSubjectRequestPathVariables> {
+        extends AuthenticatedDeleteController<String, UnfollowSubjectPathVariables> {
 
     ApplicationService applicationService;
 
@@ -25,7 +25,7 @@ public class UnfollowSubjectController
     @DeleteMapping("/subjects/{subjectName}")
     public ResponseEntity<String> handle(
             @RequestHeader(value = "Authorization", required = false) String bearerToken,
-            UnfollowSubjectRequestPathVariables pathVariables) {
+            UnfollowSubjectPathVariables pathVariables) {
 
         applicationService.unfollowSubject(bearerToken, new UnfollowSubjectRequestData(pathVariables));
 
