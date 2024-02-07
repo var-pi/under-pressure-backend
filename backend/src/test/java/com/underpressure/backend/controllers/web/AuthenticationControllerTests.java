@@ -14,12 +14,11 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import com.underpressure.backend.controllers.AuthenticationController;
 import com.underpressure.backend.controllers.web.abstracts.ControllerTests;
 import com.underpressure.backend.requests.body.AuthenticationRequestBody;
-import com.underpressure.backend.requests.data.AuthenticationRequestData;
 
 @WebMvcTest(AuthenticationController.class)
 public class AuthenticationControllerTests extends ControllerTests {
 
-    private AuthenticationRequestData requestData = new AuthenticationRequestData("code");
+    private AuthenticationRequestBody requestBody = new AuthenticationRequestBody("code");
     private String idTokenString = "idToken";
 
     @BeforeEach
@@ -34,7 +33,7 @@ public class AuthenticationControllerTests extends ControllerTests {
 
         mockMvc.perform(MockMvcRequestBuilders.post("/auth")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(new AuthenticationRequestBody(requestData))))
+                .content(objectMapper.writeValueAsString(requestBody.getCode())))
                 .andExpect(status().isOk())
                 .andExpect(content().string(idTokenString));
 

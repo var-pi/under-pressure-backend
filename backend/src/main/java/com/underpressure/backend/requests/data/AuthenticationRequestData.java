@@ -1,15 +1,22 @@
 package com.underpressure.backend.requests.data;
 
 import com.underpressure.backend.requests.body.AuthenticationRequestBody;
+import com.underpressure.backend.requests.path_variables.AuthenticationPathVariables;
 
-public class AuthenticationRequestData extends AuthenticationRequestBody {
+public class AuthenticationRequestData {
 
-    public AuthenticationRequestData() {
-        super();
+    private String code;
+
+    public AuthenticationRequestData(AuthenticationRequestBody requestBody, AuthenticationPathVariables pathVariables) {
+        this.code = requestBody.getCode();
     }
 
-    public AuthenticationRequestData(String code) {
-        super(code);
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
 }

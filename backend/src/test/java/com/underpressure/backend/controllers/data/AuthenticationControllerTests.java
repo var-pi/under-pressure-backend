@@ -14,7 +14,8 @@ import org.springframework.test.context.jdbc.Sql;
 import com.underpressure.backend.controllers.AuthenticationController;
 import com.underpressure.backend.controllers.data.abstracts.ControllerTests;
 import com.underpressure.backend.exceptions.parameter.CodeParameterException;
-import com.underpressure.backend.requests.data.AuthenticationRequestData;
+import com.underpressure.backend.requests.body.AuthenticationRequestBody;
+import com.underpressure.backend.requests.path_variables.AuthenticationPathVariables;
 import com.underpressure.backend.services.database.DatabaseService;
 import com.underpressure.backend.services.google.GoogleService;
 
@@ -35,8 +36,11 @@ public class AuthenticationControllerTests extends ControllerTests<Authenticatio
         @Test
         public void Should_Result_In_Bad_Request_When_Code_Null() {
 
-                CodeParameterException ex = assertThrows(CodeParameterException.class, () -> controller
-                                .handle(new AuthenticationRequestData(null)));
+                AuthenticationRequestBody requestBody = new AuthenticationRequestBody(null);
+                AuthenticationPathVariables pathVariables = new AuthenticationPathVariables();
+
+                CodeParameterException ex = assertThrows(CodeParameterException.class,
+                                () -> controller.handle(requestBody, pathVariables));
 
                 assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.BAD_REQUEST);
                 assertThat(ex.getMessage()).isNotBlank();
