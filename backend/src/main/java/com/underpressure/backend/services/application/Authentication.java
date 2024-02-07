@@ -18,7 +18,7 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
 import com.underpressure.backend.exceptions.RequestException;
 import com.underpressure.backend.exceptions.unexpected.AuthenticationFailedException;
 import com.underpressure.backend.exceptions.unexpected.InternalServerError;
-import com.underpressure.backend.requests.body.AuthenticationRequestBody;
+import com.underpressure.backend.requests.data.AuthenticationRequestData;
 import com.underpressure.backend.responses.OAuthTokenDto;
 import com.underpressure.backend.services.database.DatabaseService;
 import com.underpressure.backend.services.google.GoogleService;
@@ -52,7 +52,7 @@ public class Authentication {
         this.clientSecret = clientSecret;
     }
 
-    String handle(AuthenticationRequestBody requestData) {
+    String handle(AuthenticationRequestData requestData) {
         String code = requestData.getCode(); // Authorisation code from frontend
         databaseService.validate().code(code);
 
