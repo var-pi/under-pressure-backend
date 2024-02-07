@@ -12,11 +12,12 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.underpressure.backend.controllers.UnfollowSubjectController;
 import com.underpressure.backend.controllers.web.abstracts.ControllerTests;
+import com.underpressure.backend.requests.data.UnfollowSubjectRequestData;
 
 @WebMvcTest(UnfollowSubjectController.class)
 public class UnfollowSubjectControllerTest extends ControllerTests {
 
-    private String subjectName = "Subject";
+    private UnfollowSubjectRequestData requestData = new UnfollowSubjectRequestData("Subject");
 
     @BeforeEach
     private void setUp() {
@@ -28,7 +29,7 @@ public class UnfollowSubjectControllerTest extends ControllerTests {
     @Test
     public void Should_Unfollow_Subject() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.delete("/subjects/" + subjectName)
+        mockMvc.perform(MockMvcRequestBuilders.delete("/subjects/" + requestData.getSubjectName())
                 .header("Authorization", "Bearer id_token"))
                 .andExpect(status().isNoContent());
 

@@ -1,6 +1,6 @@
 package com.underpressure.backend.services.application;
 
-import com.underpressure.backend.requests.body.UnfollowSubjectPathVariables;
+import com.underpressure.backend.requests.data.UnfollowSubjectRequestData;
 import com.underpressure.backend.services.database.DatabaseService;
 import com.underpressure.backend.services.google.GoogleService;
 import com.underpressure.backend.services.utility.UtilityService;
@@ -23,7 +23,7 @@ public class UnfollowSubject {
         this.clientId = clientId;
     }
 
-    void handle(String bearerToken, UnfollowSubjectPathVariables requestData) {
+    void handle(String bearerToken, UnfollowSubjectRequestData requestData) {
 
         databaseService.validate().bearerToken(bearerToken);
         String idTokenString = utilityService.extract().token(bearerToken);

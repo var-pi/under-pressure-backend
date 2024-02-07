@@ -17,7 +17,7 @@ import com.underpressure.backend.exceptions.does_not_exist.SubjectDoesNotExist;
 import com.underpressure.backend.exceptions.does_not_exist.SubjectInstanceDoesNotExistsException;
 import com.underpressure.backend.exceptions.does_not_exist.UserDoesNotExistException;
 import com.underpressure.backend.exceptions.parameter.SubjectNameParameterException;
-import com.underpressure.backend.requests.body.UnfollowSubjectPathVariables;
+import com.underpressure.backend.requests.data.UnfollowSubjectRequestData;
 import com.underpressure.backend.services.database.DatabaseService;
 
 @Import({
@@ -38,7 +38,7 @@ public class UnfollowSubjectControllerTests extends AuthorizedControllerTests<Un
 
                 BearerTokenNullException ex = assertThrows(BearerTokenNullException.class,
                                 () -> controller
-                                                .handle(null, new UnfollowSubjectPathVariables("Subject 1")));
+                                                .handle(null, new UnfollowSubjectRequestData("Subject 1")));
 
                 assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.UNAUTHORIZED);
                 assertThat(ex.getMessage()).isNotBlank();
@@ -51,7 +51,7 @@ public class UnfollowSubjectControllerTests extends AuthorizedControllerTests<Un
                 SubjectNameParameterException ex = assertThrows(SubjectNameParameterException.class,
                                 () -> controller
                                                 .handle("Bearer user_1_id_token",
-                                                                new UnfollowSubjectPathVariables(null)));
+                                                                new UnfollowSubjectRequestData(null)));
 
                 assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.BAD_REQUEST);
                 assertThat(ex.getMessage()).isNotBlank();
@@ -64,7 +64,7 @@ public class UnfollowSubjectControllerTests extends AuthorizedControllerTests<Un
                 UserDoesNotExistException ex = assertThrows(UserDoesNotExistException.class,
                                 () -> controller
                                                 .handle("Bearer user_4_id_token",
-                                                                new UnfollowSubjectPathVariables("Subject 1")));
+                                                                new UnfollowSubjectRequestData("Subject 1")));
 
                 assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.NOT_FOUND);
                 assertThat(ex.getMessage()).isNotBlank();
@@ -75,7 +75,7 @@ public class UnfollowSubjectControllerTests extends AuthorizedControllerTests<Un
         public void Should_Result_In_NOT_FOUND_Exception_When_Subject_Not_Found() {
 
                 SubjectDoesNotExist ex = assertThrows(SubjectDoesNotExist.class, () -> controller
-                                .handle("Bearer user_1_id_token", new UnfollowSubjectPathVariables("NaN")));
+                                .handle("Bearer user_1_id_token", new UnfollowSubjectRequestData("NaN")));
 
                 assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.NOT_FOUND);
                 assertThat(ex.getMessage()).isNotBlank();
@@ -88,7 +88,7 @@ public class UnfollowSubjectControllerTests extends AuthorizedControllerTests<Un
                 SubjectInstanceDoesNotExistsException ex = assertThrows(SubjectInstanceDoesNotExistsException.class,
                                 () -> controller
                                                 .handle("Bearer user_1_id_token",
-                                                                new UnfollowSubjectPathVariables("Subject 3")));
+                                                                new UnfollowSubjectRequestData("Subject 3")));
 
                 assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.NOT_FOUND);
                 assertThat(ex.getMessage()).isNotBlank();
@@ -101,7 +101,7 @@ public class UnfollowSubjectControllerTests extends AuthorizedControllerTests<Un
                 SubjectUnfollowedException ex = assertThrows(SubjectUnfollowedException.class,
                                 () -> controller
                                                 .handle("Bearer user_2_id_token",
-                                                                new UnfollowSubjectPathVariables("Subject 3")));
+                                                                new UnfollowSubjectRequestData("Subject 3")));
 
                 assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.BAD_REQUEST);
                 assertThat(ex.getMessage()).isNotBlank();
@@ -115,12 +115,12 @@ public class UnfollowSubjectControllerTests extends AuthorizedControllerTests<Un
                 String subjectName = "Subject 1";
 
                 ResponseEntity<String> responseEntity = controller
-                                .handle(bearerToken, new UnfollowSubjectPathVariables(subjectName));
+                                .handle(bearerToken, new UnfollowSubjectRequestData(subjectName));
 
                 assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
 
                 SubjectUnfollowedException ex = assertThrows(SubjectUnfollowedException.class,
-                                () -> controller.handle(bearerToken, new UnfollowSubjectPathVariables(subjectName)));
+                                () -> controller.handle(bearerToken, new UnfollowSubjectRequestData(subjectName)));
 
                 assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.BAD_REQUEST);
                 assertThat(ex.getMessage()).isNotBlank();
