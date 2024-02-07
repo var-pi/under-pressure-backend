@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.underpressure.backend.abstracts.GetController;
-import com.underpressure.backend.requests.params.FetchSubjectsAllPathVariables;
+import com.underpressure.backend.requests.params.FetchSubjectsAllRequestData;
 import com.underpressure.backend.services.application.ApplicationService;
 
 @RestController
-public class FetchSubjectsAllController extends GetController<List<String>, FetchSubjectsAllPathVariables> {
+public class FetchSubjectsAllController extends GetController<List<String>, FetchSubjectsAllRequestData> {
 
     ApplicationService applicationService;
 
@@ -22,7 +22,7 @@ public class FetchSubjectsAllController extends GetController<List<String>, Fetc
 
     @Override
     @GetMapping("/subjects/all")
-    public ResponseEntity<List<String>> handle(FetchSubjectsAllPathVariables params) {
+    public ResponseEntity<List<String>> handle(FetchSubjectsAllRequestData requestData) {
 
         return new ResponseEntity<>(applicationService.fetchSubjects(), HttpStatus.OK);
 

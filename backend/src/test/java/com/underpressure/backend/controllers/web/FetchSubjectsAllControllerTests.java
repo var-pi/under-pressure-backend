@@ -1,6 +1,8 @@
 package com.underpressure.backend.controllers.web;
 
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.Arrays;
 import java.util.List;
@@ -8,14 +10,10 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.underpressure.backend.controllers.FetchSubjectsAllController;
 import com.underpressure.backend.controllers.web.abstracts.ControllerTests;
-
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
 @WebMvcTest(FetchSubjectsAllController.class)
 public class FetchSubjectsAllControllerTests extends ControllerTests {
@@ -32,8 +30,7 @@ public class FetchSubjectsAllControllerTests extends ControllerTests {
     @Test
     public void Should_Fetch_Subjects() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/subjects/all")
-                .contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(MockMvcRequestBuilders.get("/subjects/all"))
                 .andExpect(status().isOk())
                 .andExpect(content().json(objectMapper.writeValueAsString(subjectsMock)));
 
