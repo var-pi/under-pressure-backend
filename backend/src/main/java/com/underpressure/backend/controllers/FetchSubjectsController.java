@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.underpressure.backend.abstracts.AuthenticatedGetController;
 import com.underpressure.backend.exceptions.RequestException;
-import com.underpressure.backend.requests.body.FetchSubjectsPathVariables;
+import com.underpressure.backend.requests.data.FetchSubjectsRequestData;
 import com.underpressure.backend.services.application.ApplicationService;
 
 @RestController
 public class FetchSubjectsController
-        extends AuthenticatedGetController<List<String>, FetchSubjectsPathVariables> {
+        extends AuthenticatedGetController<List<String>, FetchSubjectsRequestData> {
 
     ApplicationService applicationService;
 
@@ -27,7 +27,7 @@ public class FetchSubjectsController
     @GetMapping("/subjects")
     public ResponseEntity<List<String>> handle(
             @RequestHeader(value = "Authorization", required = false) String bearerToken,
-            FetchSubjectsPathVariables requestData) throws RequestException {
+            FetchSubjectsRequestData requestData) throws RequestException {
 
         List<String> subjects = applicationService.fetchSubjects(bearerToken, requestData);
 

@@ -12,7 +12,7 @@ import com.underpressure.backend.controllers.FetchSubjectsController;
 import com.underpressure.backend.controllers.data.abstracts.AuthorizedControllerTests;
 import com.underpressure.backend.exceptions.auth.BearerTokenNullException;
 import com.underpressure.backend.exceptions.does_not_exist.UserDoesNotExistException;
-import com.underpressure.backend.requests.body.FetchSubjectsPathVariables;
+import com.underpressure.backend.requests.data.FetchSubjectsRequestData;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -34,7 +34,7 @@ public class FetchSubjectsControllerTests extends AuthorizedControllerTests<Fetc
         public void Should_Result_In_UNAUTHORIZED_When_BearerToken_Null() {
 
                 BearerTokenNullException ex = assertThrows(BearerTokenNullException.class,
-                                () -> controller.handle(null, new FetchSubjectsPathVariables()));
+                                () -> controller.handle(null, new FetchSubjectsRequestData()));
 
                 assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.UNAUTHORIZED);
                 assertThat(ex.getMessage()).isNotBlank();
@@ -46,7 +46,7 @@ public class FetchSubjectsControllerTests extends AuthorizedControllerTests<Fetc
 
                 UserDoesNotExistException ex = assertThrows(UserDoesNotExistException.class,
                                 () -> controller.handle("Bearer user_4_id_token",
-                                                new FetchSubjectsPathVariables()));
+                                                new FetchSubjectsRequestData()));
 
                 assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.NOT_FOUND);
                 assertThat(ex.getMessage()).isNotBlank();
@@ -57,7 +57,7 @@ public class FetchSubjectsControllerTests extends AuthorizedControllerTests<Fetc
         public void Should_Return_Followed_Subjects_When_Request_Valid() {
 
                 ResponseEntity<List<String>> responseEntity = controller
-                                .handle("Bearer user_1_id_token", new FetchSubjectsPathVariables());
+                                .handle("Bearer user_1_id_token", new FetchSubjectsRequestData());
 
                 assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
                 assertThat(responseEntity.getBody().size()).isEqualTo(2);
