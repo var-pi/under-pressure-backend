@@ -8,7 +8,7 @@ import static org.mockito.Mockito.spy;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 
-import com.underpressure.backend.exceptions.unexpected.UserVerificationException;
+import com.underpressure.backend.exceptions.auth.UserVerificationException;
 import com.underpressure.backend.services.google.FetchGoogle;
 import com.underpressure.backend.services.google.GoogleService;
 

@@ -12,8 +12,8 @@ import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.gson.GsonFactory;
+import com.underpressure.backend.exceptions.auth.UserVerificationException;
 import com.underpressure.backend.exceptions.does_not_exist.UserDoesNotExistException;
-import com.underpressure.backend.exceptions.unexpected.UserVerificationException;
 
 class FetchGoogleImpl implements FetchGoogle {
 

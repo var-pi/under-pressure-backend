@@ -3,20 +3,30 @@ package com.underpressure.backend.exceptions;
 import org.springframework.http.HttpStatus;
 
 public class RequestExceptionDto {
-    private HttpStatus httpStatus;
+    private HttpStatus statusMessage;
+    private Integer statusCode;
     private String message;
 
     public RequestExceptionDto(RequestException ex) {
-        this.httpStatus = ex.getHttpStatus();
+        this.statusMessage = ex.getHttpStatus();
+        this.statusCode = ex.getHttpStatus().value();
         this.message = ex.getMessage();
     }
 
-    public HttpStatus getHttpStatus() {
-        return httpStatus;
+    public HttpStatus getStatusMessage() {
+        return statusMessage;
     }
 
-    public void setHttpStatus(HttpStatus httpStatus) {
-        this.httpStatus = httpStatus;
+    public void setStatusMessage(HttpStatus statusMessage) {
+        this.statusMessage = statusMessage;
+    }
+
+    public Integer getStatusCode() {
+        return statusCode;
+    }
+
+    public void setStatusCode(Integer statusCode) {
+        this.statusCode = statusCode;
     }
 
     public String getMessage() {
