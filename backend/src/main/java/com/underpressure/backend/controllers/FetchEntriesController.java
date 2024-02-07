@@ -2,67 +2,38 @@ package com.underpressure.backend.controllers;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.underpressure.backend.controllers.classes.ApiResponse;
-import com.underpressure.backend.controllers.classes.abstracts.AuthenticatedPostController;
-import com.underpressure.backend.controllers.classes.request.body.GetEntriesRequestBody;
-import com.underpressure.backend.controllers.classes.request.data.EntryData;
-import com.underpressure.backend.controllers.helpers.Extract;
-import com.underpressure.backend.controllers.helpers.Fetch;
-import com.underpressure.backend.controllers.helpers.Validate;
-import com.underpressure.backend.exceptions.RequestException;
+import com.underpressure.backend.abstracts.AuthenticatedGetController;
+import com.underpressure.backend.requests.data.FetchEntriesRequestData;
+import com.underpressure.backend.requests.path_variables.FetchEntriesPathVariables;
+import com.underpressure.backend.responses.EntryDataDto;
+import com.underpressure.backend.services.application.ApplicationService;
 
 @RestController
-public class FetchEntriesController extends AuthenticatedPostController<List<EntryData>, GetEntriesRequestBody> {
+public class FetchEntriesController extends AuthenticatedGetController<List<EntryDataDto>, FetchEntriesPathVariables> {
 
-    @Autowired
-    Fetch.DB fetchDB;
+    ApplicationService applicationService;
 
-    @Autowired
-    Fetch.Google fetchGoogle;
-
-    @Autowired
-    Validate validate;
-
-    @Autowired
-    Extract extract;
+    public FetchEntriesController(ApplicationService applicationService) {
+        this.applicationService = applicationService;
+    }
 
     @Override
-    @PostMapping("/personal/entries")
-    public ResponseEntity<ApiResponse<List<EntryData>>> handle(
-            @RequestHeader("Authorization") String bearerToken,
-            @RequestBody GetEntriesRequestBody requestData) {
+    @GetMapping("/subjects/{subjectName}/entries")
+    public ResponseEntity<List<EntryDataDto>> handle(
+            @RequestHeader(value = "Authorization", required = false) String bearerToken,
+            FetchEntriesPathVariables pathVariables) {
 
-        try {
-            validate.bearerToken(bearerToken);
-            String idTokenString = extract.token(bearerToken);
+        List<EntryDataDto> entries = applicationService.fetchEntries(bearerToken,
+                new FetchEntriesRequestData(pathVariables));
 
-            String subjectName = requestData.getSubjectName();
-            validate.subjectName(subjectName, jdbcTemplate);
+        return new ResponseEntity<>(entries, HttpStatus.OK);
 
-            Integer userId = fetchGoogle.userId(idTokenString, jdbcTemplate, clientId);
-
-            Integer subjectId = fetchDB.subjectId(subjectName, jdbcTemplate);
-            Integer subjectInstanceId = fetchDB.subjectInstanceId(userId, subjectId, jdbcTemplate);
-
-            List<EntryData> entries = fetchDB.entries(subjectInstanceId, jdbcTemplate);
-
-            return new ResponseEntity<>(
-                    new ApiResponse<>(true, entries, null),
-                    HttpStatus.OK);
-
-        } catch (RequestException e) {
-            return new ResponseEntity<>(
-                    new ApiResponse<>(false, null, e.getMessage()),
-                    e.getHttpStatus());
-        }
     }
 
 }

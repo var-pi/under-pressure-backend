@@ -1,6 +1,5 @@
 package com.underpressure.backend.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -8,80 +7,33 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.underpressure.backend.controllers.classes.ApiResponse;
-import com.underpressure.backend.controllers.classes.abstracts.AuthenticatedPostController;
-import com.underpressure.backend.controllers.classes.request.body.FollowSubjectRequestBody;
-import com.underpressure.backend.controllers.helpers.Add;
-import com.underpressure.backend.controllers.helpers.Check;
-import com.underpressure.backend.controllers.helpers.Extract;
-import com.underpressure.backend.controllers.helpers.Fetch;
-import com.underpressure.backend.controllers.helpers.Set;
-import com.underpressure.backend.controllers.helpers.Validate;
-import com.underpressure.backend.exceptions.RequestException;
+import com.underpressure.backend.abstracts.AuthenticatedPostController;
+import com.underpressure.backend.requests.body.FollowSubjectRequestBody;
+import com.underpressure.backend.requests.data.FollowSubjectRequestData;
+import com.underpressure.backend.requests.path_variables.FollowSubjectPathVariables;
+import com.underpressure.backend.services.application.ApplicationService;
 
 @RestController
-public class FollowSubjectController extends AuthenticatedPostController<String, FollowSubjectRequestBody> {
+public class FollowSubjectController
+        extends AuthenticatedPostController<String, FollowSubjectRequestBody, FollowSubjectPathVariables> {
 
-    @Autowired
-    Fetch.DB fetchDB;
+    private ApplicationService applicationService;
 
-    @Autowired
-    Fetch.Google fetchGoogle;
-
-    @Autowired
-    Add add;
-
-    @Autowired
-    Check check;
-
-    @Autowired
-    Validate validate;
-
-    @Autowired
-    Set set;
-
-    @Autowired
-    Extract extract;
+    public FollowSubjectController(ApplicationService applicationService) {
+        this.applicationService = applicationService;
+    }
 
     @Override
-    @PostMapping("/personal/subjects/follow")
-    public ResponseEntity<ApiResponse<String>> handle(
-            @RequestHeader("Authorization") String bearerToken,
-            @RequestBody FollowSubjectRequestBody requestData) {
-        try {
-            String idTokenString = extract.token(bearerToken);
-            validate.bearerToken(idTokenString);
+    @PostMapping("/subjects/{subjectName}")
+    public ResponseEntity<String> handle(
+            @RequestHeader(value = "Authorization", required = false) String bearerToken,
+            @RequestBody FollowSubjectRequestBody requestData,
+            FollowSubjectPathVariables pathVariables) {
 
-            String subjectName = requestData.getSubjectName();
-            validate.subjectName(subjectName, jdbcTemplate);
+        applicationService.followSubject(bearerToken, new FollowSubjectRequestData(requestData, pathVariables));
 
-            Integer userId = fetchGoogle.userId(idTokenString, jdbcTemplate, clientId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
-            Integer subjectId = fetchDB.subjectId(subjectName, jdbcTemplate);
-            if (check.subjectInstanceExists(userId, subjectId, jdbcTemplate)) {
-                Integer subjectInstanceId = fetchDB.subjectInstanceId(userId, subjectId,
-                        jdbcTemplate);
-
-                validate.isUnfollowed(subjectInstanceId, jdbcTemplate);
-
-                set.toFollow(subjectInstanceId, jdbcTemplate);
-
-                return new ResponseEntity<>(
-                        new ApiResponse<>(true, null, null),
-                        HttpStatus.NO_CONTENT);
-            } else {
-                add.subjectInstance(userId, subjectId, jdbcTemplate);
-
-                return new ResponseEntity<>(
-                        new ApiResponse<>(true, null, null),
-                        HttpStatus.CREATED);
-            }
-
-        } catch (RequestException e) {
-            return new ResponseEntity<>(
-                    new ApiResponse<>(false, null, e.getMessage()),
-                    e.getHttpStatus());
-        }
     }
 
 }

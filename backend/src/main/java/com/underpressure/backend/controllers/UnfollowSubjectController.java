@@ -1,71 +1,36 @@
 package com.underpressure.backend.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.underpressure.backend.controllers.classes.ApiResponse;
-import com.underpressure.backend.controllers.classes.abstracts.AuthenticatedPostController;
-import com.underpressure.backend.controllers.classes.request.body.UnfollowSubjectRequestBody;
-import com.underpressure.backend.controllers.helpers.Extract;
-import com.underpressure.backend.controllers.helpers.Fetch;
-import com.underpressure.backend.controllers.helpers.Set;
-import com.underpressure.backend.controllers.helpers.Validate;
-import com.underpressure.backend.exceptions.RequestException;
+import com.underpressure.backend.abstracts.AuthenticatedDeleteController;
+import com.underpressure.backend.requests.data.UnfollowSubjectRequestData;
+import com.underpressure.backend.requests.path_variables.UnfollowSubjectPathVariables;
+import com.underpressure.backend.services.application.ApplicationService;
 
 @RestController
-public class UnfollowSubjectController extends AuthenticatedPostController<String, UnfollowSubjectRequestBody> {
+public class UnfollowSubjectController
+        extends AuthenticatedDeleteController<String, UnfollowSubjectPathVariables> {
 
-    @Autowired
-    Fetch.DB fetchDB;
+    ApplicationService applicationService;
 
-    @Autowired
-    Fetch.Google fetchGoogle;
-
-    @Autowired
-    Validate validate;
-
-    @Autowired
-    Set set;
-
-    @Autowired
-    Extract extract;
+    public UnfollowSubjectController(ApplicationService applicationService) {
+        this.applicationService = applicationService;
+    }
 
     @Override
-    @PostMapping("/personal/subjects/unfollow")
-    public ResponseEntity<ApiResponse<String>> handle(
-            @RequestHeader("Authorization") String bearerToken,
-            @RequestBody UnfollowSubjectRequestBody requestData) {
+    @DeleteMapping("/subjects/{subjectName}")
+    public ResponseEntity<String> handle(
+            @RequestHeader(value = "Authorization", required = false) String bearerToken,
+            UnfollowSubjectPathVariables pathVariables) {
 
-        try {
-            validate.bearerToken(bearerToken);
-            String idTokenString = extract.token(bearerToken);
+        applicationService.unfollowSubject(bearerToken, new UnfollowSubjectRequestData(pathVariables));
 
-            String subjectName = requestData.getSubjectName();
-            validate.subjectName(subjectName, jdbcTemplate);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
-            Integer userId = fetchGoogle.userId(idTokenString, jdbcTemplate, clientId);
-
-            Integer subjectId = fetchDB.subjectId(subjectName, jdbcTemplate);
-            Integer subjectInstanceId = fetchDB.subjectInstanceId(userId, subjectId, jdbcTemplate);
-
-            validate.isFollowed(subjectInstanceId, jdbcTemplate);
-
-            set.toNotFollow(subjectInstanceId, jdbcTemplate);
-
-            return new ResponseEntity<>(
-                    new ApiResponse<>(true, null, null),
-                    HttpStatus.NO_CONTENT);
-
-        } catch (RequestException e) {
-            return new ResponseEntity<>(
-                    new ApiResponse<>(false, null, e.getMessage()),
-                    e.getHttpStatus());
-        }
     }
 
 }

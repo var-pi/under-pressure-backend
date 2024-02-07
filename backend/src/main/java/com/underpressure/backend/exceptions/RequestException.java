@@ -2,20 +2,22 @@ package com.underpressure.backend.exceptions;
 
 import org.springframework.http.HttpStatus;
 
-public class RequestException extends Exception {
-    private HttpStatus httpStatus;
+// ErrorResponseException
+public class RequestException extends RuntimeException {
+
+    private HttpStatus statusCode;
 
     public RequestException(String message, HttpStatus httpStatus) {
         super(message);
-        this.httpStatus = httpStatus;
+        this.statusCode = httpStatus;
     }
 
     public HttpStatus getHttpStatus() {
-        return httpStatus;
+        return statusCode;
     }
 
     public void setHttpStatus(HttpStatus httpStatus) {
-        this.httpStatus = httpStatus;
+        this.statusCode = httpStatus;
     }
 
 }

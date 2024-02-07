@@ -2,31 +2,38 @@ package com.underpressure.backend.controllers;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.underpressure.backend.controllers.classes.ApiResponse;
-import com.underpressure.backend.controllers.classes.abstracts.GetController;
-import com.underpressure.backend.controllers.classes.request.params.GetSubjectsParams;
-import com.underpressure.backend.controllers.helpers.Fetch;
+import com.underpressure.backend.abstracts.AuthenticatedGetController;
+import com.underpressure.backend.exceptions.RequestException;
+import com.underpressure.backend.requests.data.FetchSubjectsRequestData;
+import com.underpressure.backend.requests.path_variables.FetchSubjectsPathVariables;
+import com.underpressure.backend.services.application.ApplicationService;
 
 @RestController
-public class FetchSubjectsController extends GetController<List<String>, GetSubjectsParams> {
+public class FetchSubjectsController
+        extends AuthenticatedGetController<List<String>, FetchSubjectsPathVariables> {
 
-    @Autowired
-    Fetch.DB fetchDB;
+    ApplicationService applicationService;
+
+    public FetchSubjectsController(ApplicationService applicationService) {
+        this.applicationService = applicationService;
+    }
 
     @Override
     @GetMapping("/subjects")
-    public ResponseEntity<ApiResponse<List<String>>> handle(@ModelAttribute GetSubjectsParams params) {
+    public ResponseEntity<List<String>> handle(
+            @RequestHeader(value = "Authorization", required = false) String bearerToken,
+            FetchSubjectsPathVariables pathVariables) throws RequestException {
 
-        return new ResponseEntity<>(
-                new ApiResponse<>(true, fetchDB.subjects(jdbcTemplate), null),
-                HttpStatus.OK);
+        List<String> subjects = applicationService.fetchSubjects(bearerToken,
+                new FetchSubjectsRequestData(pathVariables));
+
+        return new ResponseEntity<>(subjects, HttpStatus.OK);
 
     }
 
