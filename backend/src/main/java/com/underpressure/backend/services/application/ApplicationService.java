@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.underpressure.backend.requests.data.AuthenticationRequestData;
 import com.underpressure.backend.requests.data.FetchEntriesRequestData;
+import com.underpressure.backend.requests.data.FetchSubjectsAllRequestData;
 import com.underpressure.backend.requests.data.FetchSubjectsRequestData;
 import com.underpressure.backend.requests.data.FollowSubjectRequestData;
 import com.underpressure.backend.requests.data.UnfollowSubjectRequestData;
@@ -39,9 +40,9 @@ public class ApplicationService {
     @Value("${spring.security.oauth2.client.registration.google.client-secret}")
     private String clientSecret;
 
-    public List<String> fetchSubjects() {
+    public List<String> fetchSubjectsAll(FetchSubjectsAllRequestData requestData) {
         return new FetchSubjectsAll(databaseService)
-                .handle();
+                .handle(requestData);
     }
 
     public List<String> fetchSubjects(String bearerToken, FetchSubjectsRequestData requestData) {

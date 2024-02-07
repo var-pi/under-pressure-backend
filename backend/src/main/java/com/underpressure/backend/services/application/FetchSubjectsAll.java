@@ -2,6 +2,7 @@ package com.underpressure.backend.services.application;
 
 import java.util.List;
 
+import com.underpressure.backend.requests.data.FetchSubjectsAllRequestData;
 import com.underpressure.backend.services.database.DatabaseService;
 
 class FetchSubjectsAll {
@@ -12,7 +13,7 @@ class FetchSubjectsAll {
         this.databaseService = databaseService;
     }
 
-    List<String> handle() {
+    List<String> handle(FetchSubjectsAllRequestData requestData) {
         return databaseService.fetch().subjects();
     }
 

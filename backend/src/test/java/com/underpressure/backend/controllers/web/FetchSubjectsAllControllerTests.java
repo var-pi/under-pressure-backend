@@ -1,5 +1,6 @@
 package com.underpressure.backend.controllers.web;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -23,7 +24,7 @@ public class FetchSubjectsAllControllerTests extends ControllerTests {
     @BeforeEach
     private void setUp() {
 
-        when(applicationServiceMock.fetchSubjects()).thenReturn(subjectsMock);
+        when(applicationServiceMock.fetchSubjectsAll(any())).thenReturn(subjectsMock);
 
     }
 

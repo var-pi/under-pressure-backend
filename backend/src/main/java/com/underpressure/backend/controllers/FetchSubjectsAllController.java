@@ -9,10 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.underpressure.backend.abstracts.GetController;
 import com.underpressure.backend.requests.data.FetchSubjectsAllRequestData;
+import com.underpressure.backend.requests.path_variables.FetchSubjectsAllPathVariables;
 import com.underpressure.backend.services.application.ApplicationService;
 
 @RestController
-public class FetchSubjectsAllController extends GetController<List<String>, FetchSubjectsAllRequestData> {
+public class FetchSubjectsAllController extends GetController<List<String>, FetchSubjectsAllPathVariables> {
 
     ApplicationService applicationService;
 
@@ -22,9 +23,11 @@ public class FetchSubjectsAllController extends GetController<List<String>, Fetc
 
     @Override
     @GetMapping("/subjects/all")
-    public ResponseEntity<List<String>> handle(FetchSubjectsAllRequestData requestData) {
+    public ResponseEntity<List<String>> handle(FetchSubjectsAllPathVariables pathVariables) {
 
-        return new ResponseEntity<>(applicationService.fetchSubjects(), HttpStatus.OK);
+        List<String> subjects = applicationService.fetchSubjectsAll(new FetchSubjectsAllRequestData(pathVariables));
+
+        return new ResponseEntity<>(subjects, HttpStatus.OK);
 
     }
 
