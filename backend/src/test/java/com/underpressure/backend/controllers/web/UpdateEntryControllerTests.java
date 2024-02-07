@@ -14,7 +14,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import com.underpressure.backend.controllers.UpdateEntryController;
 import com.underpressure.backend.controllers.web.abstracts.ControllerTests;
 import com.underpressure.backend.requests.body.UpdateEntryRequestBody;
-import com.underpressure.backend.requests.pathVariables.UpdateEntryRequestPathVariables;
+import com.underpressure.backend.requests.path_variables.UpdateEntryRequestPathVariables;
 
 @WebMvcTest(UpdateEntryController.class)
 public class UpdateEntryControllerTests extends ControllerTests {

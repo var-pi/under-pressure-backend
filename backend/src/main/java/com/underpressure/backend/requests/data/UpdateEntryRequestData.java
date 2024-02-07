@@ -1,7 +1,7 @@
 package com.underpressure.backend.requests.data;
 
 import com.underpressure.backend.requests.body.UpdateEntryRequestBody;
-import com.underpressure.backend.requests.pathVariables.UpdateEntryRequestPathVariables;
+import com.underpressure.backend.requests.path_variables.UpdateEntryRequestPathVariables;
 
 public class UpdateEntryRequestData {
     private String subjectName;

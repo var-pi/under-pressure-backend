@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.underpressure.backend.abstracts.AuthenticatedPostControllerNew;
 import com.underpressure.backend.requests.body.UpdateEntryRequestBody;
 import com.underpressure.backend.requests.data.UpdateEntryRequestData;
-import com.underpressure.backend.requests.pathVariables.UpdateEntryRequestPathVariables;
+import com.underpressure.backend.requests.path_variables.UpdateEntryRequestPathVariables;
 import com.underpressure.backend.services.application.ApplicationService;
 
 @RestController

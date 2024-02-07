@@ -1,4 +1,4 @@
-package com.underpressure.backend.requests.pathVariables;
+package com.underpressure.backend.requests.path_variables;
 
 public class UpdateEntryRequestPathVariables {
     String subjectName;

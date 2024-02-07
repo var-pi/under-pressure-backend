@@ -20,7 +20,7 @@ import com.underpressure.backend.exceptions.parameter.StressLevelParameterExcept
 import com.underpressure.backend.exceptions.parameter.SubjectNameParameterException;
 import com.underpressure.backend.exceptions.range.StressLevelRangeException;
 import com.underpressure.backend.requests.body.UpdateEntryRequestBody;
-import com.underpressure.backend.requests.pathVariables.UpdateEntryRequestPathVariables;
+import com.underpressure.backend.requests.path_variables.UpdateEntryRequestPathVariables;
 import com.underpressure.backend.services.database.DatabaseService;
 
 @Import({
