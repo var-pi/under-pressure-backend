@@ -1,16 +1,16 @@
 package com.underpressure.backend.requests.data;
 
 import com.underpressure.backend.requests.body.UpdateEntryRequestBody;
+import com.underpressure.backend.requests.pathVariables.UpdateEntryRequestPathVariables;
 
-public class UpdateEntryRequestData extends UpdateEntryRequestBody {
+public class UpdateEntryRequestData {
     private String subjectName;
+    private Integer stressLevel;
 
-    public UpdateEntryRequestData() {
-    }
-
-    public UpdateEntryRequestData(String subjectName, Integer stressLevel) {
-        super(stressLevel);
-        this.subjectName = subjectName;
+    public UpdateEntryRequestData(UpdateEntryRequestBody requestBody,
+            UpdateEntryRequestPathVariables requestPathVariables) {
+        this.subjectName = requestPathVariables.getSubjectName();
+        this.stressLevel = requestBody.getStressLevel();
     }
 
     public String getSubjectName() {
@@ -19,6 +19,14 @@ public class UpdateEntryRequestData extends UpdateEntryRequestBody {
 
     public void setSubjectName(String subjectName) {
         this.subjectName = subjectName;
+    }
+
+    public Integer getStressLevel() {
+        return stressLevel;
+    }
+
+    public void setStressLevel(Integer stressLevel) {
+        this.stressLevel = stressLevel;
     }
 
 }

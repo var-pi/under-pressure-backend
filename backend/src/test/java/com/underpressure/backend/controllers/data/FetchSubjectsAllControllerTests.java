@@ -9,7 +9,7 @@ import org.springframework.test.context.jdbc.Sql;
 
 import com.underpressure.backend.controllers.FetchSubjectsAllController;
 import com.underpressure.backend.controllers.data.abstracts.ControllerTests;
-import com.underpressure.backend.requests.params.FetchSubjectsAllRequestData;
+import com.underpressure.backend.requests.data.FetchSubjectsAllRequestData;
 
 import java.util.List;
 

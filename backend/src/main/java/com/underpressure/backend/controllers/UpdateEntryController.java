@@ -3,15 +3,19 @@ package com.underpressure.backend.controllers;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.underpressure.backend.abstracts.AuthenticatedPostController;
+import com.underpressure.backend.abstracts.AuthenticatedPostControllerNew;
+import com.underpressure.backend.requests.body.UpdateEntryRequestBody;
 import com.underpressure.backend.requests.data.UpdateEntryRequestData;
+import com.underpressure.backend.requests.pathVariables.UpdateEntryRequestPathVariables;
 import com.underpressure.backend.services.application.ApplicationService;
 
 @RestController
-public class UpdateEntryController extends AuthenticatedPostController<String, UpdateEntryRequestData> {
+public class UpdateEntryController
+        extends AuthenticatedPostControllerNew<String, UpdateEntryRequestBody, UpdateEntryRequestPathVariables> {
 
     ApplicationService applicationService;
 
@@ -23,9 +27,10 @@ public class UpdateEntryController extends AuthenticatedPostController<String, U
     @PostMapping("/subjects/{subjectName}/entries")
     public ResponseEntity<String> handle(
             @RequestHeader(value = "Authorization", required = false) String bearerToken,
-            UpdateEntryRequestData requestData) {
+            @RequestBody UpdateEntryRequestBody requestBody,
+            UpdateEntryRequestPathVariables requestPathVariables) {
 
-        applicationService.updateEntry(bearerToken, requestData);
+        applicationService.updateEntry(bearerToken, new UpdateEntryRequestData(requestBody, requestPathVariables));
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 

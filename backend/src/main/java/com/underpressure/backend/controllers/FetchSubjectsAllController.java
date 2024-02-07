@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.underpressure.backend.abstracts.GetController;
-import com.underpressure.backend.requests.params.FetchSubjectsAllRequestData;
+import com.underpressure.backend.requests.data.FetchSubjectsAllRequestData;
 import com.underpressure.backend.services.application.ApplicationService;
 
 @RestController
