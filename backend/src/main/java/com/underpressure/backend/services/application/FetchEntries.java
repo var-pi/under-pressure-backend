@@ -2,7 +2,7 @@ package com.underpressure.backend.services.application;
 
 import java.util.List;
 
-import com.underpressure.backend.requests.body.FetchEntriesPathVariables;
+import com.underpressure.backend.requests.data.FetchEntriesRequestData;
 import com.underpressure.backend.responses.EntryDataDto;
 import com.underpressure.backend.services.database.DatabaseService;
 import com.underpressure.backend.services.google.GoogleService;
@@ -26,7 +26,7 @@ public class FetchEntries {
         this.clientId = clientId;
     }
 
-    List<EntryDataDto> handle(String bearerToken, FetchEntriesPathVariables requestData) {
+    List<EntryDataDto> handle(String bearerToken, FetchEntriesRequestData requestData) {
 
         databaseService.validate().bearerToken(bearerToken);
         String idTokenString = utilityService.extract().token(bearerToken);

@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.underpressure.backend.abstracts.AuthenticatedGetController;
-import com.underpressure.backend.requests.body.FetchEntriesPathVariables;
+import com.underpressure.backend.requests.data.FetchEntriesRequestData;
 import com.underpressure.backend.responses.EntryDataDto;
 import com.underpressure.backend.services.application.ApplicationService;
 
 @RestController
-public class FetchEntriesController extends AuthenticatedGetController<List<EntryDataDto>, FetchEntriesPathVariables> {
+public class FetchEntriesController extends AuthenticatedGetController<List<EntryDataDto>, FetchEntriesRequestData> {
 
     ApplicationService applicationService;
 
@@ -26,7 +26,7 @@ public class FetchEntriesController extends AuthenticatedGetController<List<Entr
     @GetMapping("/subjects/{subjectName}/entries")
     public ResponseEntity<List<EntryDataDto>> handle(
             @RequestHeader(value = "Authorization", required = false) String bearerToken,
-            FetchEntriesPathVariables requestData) {
+            FetchEntriesRequestData requestData) {
 
         List<EntryDataDto> entries = applicationService.fetchEntries(bearerToken, requestData);
 

@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.underpressure.backend.controllers.UpdateEntryController;
 import com.underpressure.backend.controllers.web.abstracts.ControllerTests;
@@ -34,7 +33,8 @@ public class UpdateEntryControllerTests extends ControllerTests {
         mockMvc.perform(MockMvcRequestBuilders.post("/subjects/" + requestData.getSubjectName() + "/entries")
                 .header("Authorization", "Bearer id_token")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(new UpdateEntryRequestBody(requestData))));
+                .content(objectMapper.writeValueAsString(new UpdateEntryRequestBody(requestData))))
+                .andExpect(status().isNoContent());
 
     }
 
