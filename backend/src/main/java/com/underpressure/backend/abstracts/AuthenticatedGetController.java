@@ -11,6 +11,6 @@ public abstract class AuthenticatedGetController<S, T> extends AuthenticatedCont
     @CrossOrigin(origins = "*") // TODO Change to an appropriate url
     public abstract ResponseEntity<S> handle(
             @RequestHeader("Authorization") String bearerToken,
-            T requestData) throws RequestException;
+            T pathVariables) throws RequestException;
 
 }
