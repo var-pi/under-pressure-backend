@@ -1,21 +1,13 @@
 package com.underpressure.backend.requests.body;
 
+import com.underpressure.backend.requests.data.FollowSubjectRequestData;
+
 public class FollowSubjectRequestBody {
-    private String subjectName;
 
     public FollowSubjectRequestBody() {
     }
 
-    public FollowSubjectRequestBody(String subjectName) {
-        this.subjectName = subjectName;
-    }
-
-    public String getSubjectName() {
-        return subjectName;
-    }
-
-    public void setSubjectName(String subjectName) {
-        this.subjectName = subjectName;
+    public FollowSubjectRequestBody(FollowSubjectRequestData requestData) {
     }
 
 }

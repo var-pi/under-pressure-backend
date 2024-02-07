@@ -3,16 +3,15 @@ package com.underpressure.backend.controllers;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.underpressure.backend.abstracts.AuthenticatedPostController;
-import com.underpressure.backend.requests.body.FollowSubjectRequestBody;
+import com.underpressure.backend.requests.data.FollowSubjectRequestData;
 import com.underpressure.backend.services.application.ApplicationService;
 
 @RestController
-public class FollowSubjectController extends AuthenticatedPostController<String, FollowSubjectRequestBody> {
+public class FollowSubjectController extends AuthenticatedPostController<String, FollowSubjectRequestData> {
 
     private ApplicationService applicationService;
 
@@ -21,10 +20,10 @@ public class FollowSubjectController extends AuthenticatedPostController<String,
     }
 
     @Override
-    @PostMapping("/subjects")
+    @PostMapping("/subjects/{subjectName}")
     public ResponseEntity<String> handle(
             @RequestHeader(value = "Authorization", required = false) String bearerToken,
-            @RequestBody FollowSubjectRequestBody requestData) {
+            FollowSubjectRequestData requestData) {
 
         applicationService.followSubject(bearerToken, requestData);
 

@@ -16,7 +16,7 @@ import com.underpressure.backend.exceptions.auth.BearerTokenNullException;
 import com.underpressure.backend.exceptions.does_not_exist.SubjectDoesNotExist;
 import com.underpressure.backend.exceptions.does_not_exist.UserDoesNotExistException;
 import com.underpressure.backend.exceptions.parameter.SubjectNameParameterException;
-import com.underpressure.backend.requests.body.FollowSubjectRequestBody;
+import com.underpressure.backend.requests.data.FollowSubjectRequestData;
 import com.underpressure.backend.services.database.DatabaseService;
 
 @Import({
@@ -37,7 +37,7 @@ public class FollowSubjectControllerTests extends AuthorizedControllerTests<Foll
         public void Should_Result_In_UNAUTHORIZED_When_BearerToken_Null() {
 
                 BearerTokenNullException ex = assertThrows(BearerTokenNullException.class,
-                                () -> controller.handle(null, new FollowSubjectRequestBody("Subject 1")));
+                                () -> controller.handle(null, new FollowSubjectRequestData("Subject 1")));
 
                 assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.UNAUTHORIZED);
                 assertThat(ex.getMessage()).isNotBlank();
@@ -49,7 +49,7 @@ public class FollowSubjectControllerTests extends AuthorizedControllerTests<Foll
 
                 SubjectNameParameterException ex = assertThrows(SubjectNameParameterException.class,
                                 () -> controller
-                                                .handle("Bearer user_1_id_token", new FollowSubjectRequestBody(null)));
+                                                .handle("Bearer user_1_id_token", new FollowSubjectRequestData(null)));
 
                 assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.BAD_REQUEST);
                 assertThat(ex.getMessage()).isNotBlank();
@@ -62,7 +62,7 @@ public class FollowSubjectControllerTests extends AuthorizedControllerTests<Foll
                 UserDoesNotExistException ex = assertThrows(UserDoesNotExistException.class,
                                 () -> controller
                                                 .handle("Bearer user_4_id_token",
-                                                                new FollowSubjectRequestBody("Subject 1")));
+                                                                new FollowSubjectRequestData("Subject 1")));
 
                 assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.NOT_FOUND);
                 assertThat(ex.getMessage()).isNotBlank();
@@ -73,7 +73,7 @@ public class FollowSubjectControllerTests extends AuthorizedControllerTests<Foll
         public void Should_Result_In_NOT_FOUND_Exception_When_Subject_Not_Found() {
 
                 SubjectDoesNotExist ex = assertThrows(SubjectDoesNotExist.class, () -> controller
-                                .handle("Bearer user_1_id_token", new FollowSubjectRequestBody("NaN")));
+                                .handle("Bearer user_1_id_token", new FollowSubjectRequestData("NaN")));
 
                 assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.NOT_FOUND);
                 assertThat(ex.getMessage()).isNotBlank();
@@ -86,7 +86,7 @@ public class FollowSubjectControllerTests extends AuthorizedControllerTests<Foll
                 SubjectAlreadyFollowedException ex = assertThrows(SubjectAlreadyFollowedException.class,
                                 () -> controller
                                                 .handle("Bearer user_1_id_token",
-                                                                new FollowSubjectRequestBody("Subject 1")));
+                                                                new FollowSubjectRequestData("Subject 1")));
 
                 assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.BAD_REQUEST);
                 assertThat(ex.getMessage()).isNotBlank();
@@ -100,14 +100,14 @@ public class FollowSubjectControllerTests extends AuthorizedControllerTests<Foll
                 String subjectName = "Subject 3";
 
                 ResponseEntity<String> responseEntity = controller
-                                .handle(bearerToken, new FollowSubjectRequestBody(subjectName));
+                                .handle(bearerToken, new FollowSubjectRequestData(subjectName));
 
                 assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
 
                 SubjectAlreadyFollowedException ex = assertThrows(SubjectAlreadyFollowedException.class,
                                 () -> controller
                                                 .handle(bearerToken,
-                                                                new FollowSubjectRequestBody(subjectName)));
+                                                                new FollowSubjectRequestData(subjectName)));
 
                 assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.BAD_REQUEST);
                 assertThat(ex.getMessage()).isNotBlank();
@@ -121,14 +121,14 @@ public class FollowSubjectControllerTests extends AuthorizedControllerTests<Foll
                 String subjectName = "Subject 3";
 
                 ResponseEntity<String> responseEntity = controller
-                                .handle(bearerToken, new FollowSubjectRequestBody(subjectName));
+                                .handle(bearerToken, new FollowSubjectRequestData(subjectName));
 
                 assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
 
                 SubjectAlreadyFollowedException ex = assertThrows(SubjectAlreadyFollowedException.class,
                                 () -> controller
                                                 .handle(bearerToken,
-                                                                new FollowSubjectRequestBody(subjectName)));
+                                                                new FollowSubjectRequestData(subjectName)));
 
                 assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.BAD_REQUEST);
                 assertThat(ex.getMessage()).isNotBlank();

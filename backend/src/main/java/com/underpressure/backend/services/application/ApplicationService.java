@@ -5,11 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.underpressure.backend.requests.body.FollowSubjectRequestBody;
 import com.underpressure.backend.requests.body.UnfollowSubjectPathVariables;
 import com.underpressure.backend.requests.data.AuthenticationRequestData;
 import com.underpressure.backend.requests.data.FetchEntriesRequestData;
 import com.underpressure.backend.requests.data.FetchSubjectsRequestData;
+import com.underpressure.backend.requests.data.FollowSubjectRequestData;
 import com.underpressure.backend.requests.data.UpdateEntryRequestData;
 import com.underpressure.backend.responses.EntryDataDto;
 import com.underpressure.backend.services.database.DatabaseService;
@@ -49,7 +49,7 @@ public class ApplicationService {
                 .handle(bearerToken, requestData);
     }
 
-    public void followSubject(String bearerToken, FollowSubjectRequestBody requestData) {
+    public void followSubject(String bearerToken, FollowSubjectRequestData requestData) {
         new FollowSubject(utilityService, databaseService, googleService, clientId)
                 .handle(bearerToken, requestData);
     }
