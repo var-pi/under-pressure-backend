@@ -8,35 +8,33 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.underpressure.backend.controllers.UpdateEntryController;
 import com.underpressure.backend.controllers.web.abstracts.ControllerTests;
 import com.underpressure.backend.requests.body.UpdateEntryRequestBody;
+import com.underpressure.backend.requests.data.UpdateEntryRequestData;
 
 @WebMvcTest(UpdateEntryController.class)
 public class UpdateEntryControllerTests extends ControllerTests {
 
-    private String subjectName = "Subject";
-    private Integer stressLevel = 10;
-
-    private UpdateEntryRequestBody requestBody = new UpdateEntryRequestBody(subjectName, stressLevel);
+    private UpdateEntryRequestData requestData = new UpdateEntryRequestData("Subject", 10);
 
     @BeforeEach
     private void setUp() {
 
         doNothing().when(applicationServiceMock)
-                .updateEntry(subjectName, requestBody);
+                .updateEntry("Bearer id_token", requestData);
 
     }
 
     @Test
     public void Should_Update_Entry() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/entries")
+        mockMvc.perform(MockMvcRequestBuilders.post("/subjects/" + requestData.getSubjectName() + "/entries")
                 .header("Authorization", "Bearer id_token")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(requestBody)))
-                .andExpect(status().isNoContent());
+                .content(objectMapper.writeValueAsString(new UpdateEntryRequestBody(requestData))));
 
     }
 

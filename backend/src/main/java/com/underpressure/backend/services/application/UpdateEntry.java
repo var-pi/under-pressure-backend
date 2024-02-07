@@ -1,6 +1,6 @@
 package com.underpressure.backend.services.application;
 
-import com.underpressure.backend.requests.body.UpdateEntryRequestBody;
+import com.underpressure.backend.requests.data.UpdateEntryRequestData;
 import com.underpressure.backend.services.database.DatabaseService;
 import com.underpressure.backend.services.google.GoogleService;
 import com.underpressure.backend.services.utility.UtilityService;
@@ -23,7 +23,7 @@ public class UpdateEntry {
         this.clientId = clientId;
     }
 
-    void handle(String bearerToken, UpdateEntryRequestBody requestData) {
+    void handle(String bearerToken, UpdateEntryRequestData requestData) {
 
         databaseService.validate().bearerToken(bearerToken);
         String idTokenString = utilityService.extract().token(bearerToken);

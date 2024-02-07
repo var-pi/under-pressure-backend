@@ -39,7 +39,7 @@ public class FetchEntriesControllerTests extends ControllerTests {
     @Test
     public void Should_Fetch_Entries() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/entries/" + subjectName)
+        mockMvc.perform(MockMvcRequestBuilders.get("/subjects/" + subjectName + "/entries")
                 .header("Authorization", "Bearer id_token"))
                 .andExpect(status().isOk())
                 .andExpect(content().json(objectMapper.writeValueAsString(entriesMock)));
