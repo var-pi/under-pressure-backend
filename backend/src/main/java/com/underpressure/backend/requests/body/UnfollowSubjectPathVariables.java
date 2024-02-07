@@ -1,12 +1,12 @@
 package com.underpressure.backend.requests.body;
 
-public class UnfollowSubjectRequestBody {
+public class UnfollowSubjectPathVariables {
     private String subjectName;
 
-    public UnfollowSubjectRequestBody() {
+    public UnfollowSubjectPathVariables() {
     }
 
-    public UnfollowSubjectRequestBody(String subjectName) {
+    public UnfollowSubjectPathVariables(String subjectName) {
         this.subjectName = subjectName;
     }
 

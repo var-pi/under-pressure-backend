@@ -23,7 +23,7 @@ public class FetchEntriesController extends AuthenticatedGetController<List<Entr
     }
 
     @Override
-    @GetMapping("/entries/{subjectName}")
+    @GetMapping("/subjects/{subjectName}/entries")
     public ResponseEntity<List<EntryDataDto>> handle(
             @RequestHeader(value = "Authorization", required = false) String bearerToken,
             FetchEntriesPathVariables requestData) {

@@ -9,7 +9,7 @@ import com.underpressure.backend.requests.body.AuthenticationRequestBody;
 import com.underpressure.backend.requests.body.FetchEntriesPathVariables;
 import com.underpressure.backend.requests.body.FetchSubjectsPathVariables;
 import com.underpressure.backend.requests.body.FollowSubjectRequestBody;
-import com.underpressure.backend.requests.body.UnfollowSubjectRequestBody;
+import com.underpressure.backend.requests.body.UnfollowSubjectPathVariables;
 import com.underpressure.backend.requests.body.UpdateEntryRequestBody;
 import com.underpressure.backend.responses.EntryDataDto;
 import com.underpressure.backend.services.database.DatabaseService;
@@ -54,7 +54,7 @@ public class ApplicationService {
                 .handle(bearerToken, requestData);
     }
 
-    public void unfollowSubject(String bearerToken, UnfollowSubjectRequestBody requestData) {
+    public void unfollowSubject(String bearerToken, UnfollowSubjectPathVariables requestData) {
         new UnfollowSubject(utilityService, databaseService, googleService, clientId)
                 .handle(bearerToken, requestData);
     }
