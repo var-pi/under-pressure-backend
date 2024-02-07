@@ -72,7 +72,7 @@ public class UpdateEntryControllerTests extends AuthorizedControllerTests<Update
         @Test
         public void Should_Result_In_Bad_REQUEST_When_StressLevel_Null() {
 
-                UpdateEntryRequestBody requestBody = new UpdateEntryRequestBody((Integer) null);
+                UpdateEntryRequestBody requestBody = new UpdateEntryRequestBody(null);
                 UpdateEntryPathVariables requestPathVariables = new UpdateEntryPathVariables("Subject 1");
 
                 StressLevelParameterException ex = assertThrows(StressLevelParameterException.class, () -> controller

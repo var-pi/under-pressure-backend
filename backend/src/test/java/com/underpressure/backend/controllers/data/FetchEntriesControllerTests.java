@@ -18,6 +18,7 @@ import com.underpressure.backend.exceptions.does_not_exist.SubjectDoesNotExist;
 import com.underpressure.backend.exceptions.does_not_exist.UserDoesNotExistException;
 import com.underpressure.backend.exceptions.parameter.SubjectNameParameterException;
 import com.underpressure.backend.requests.data.FetchEntriesRequestData;
+import com.underpressure.backend.requests.path_variables.FetchEntriesPathVariables;
 import com.underpressure.backend.responses.EntryDataDto;
 import com.underpressure.backend.services.database.DatabaseService;
 
@@ -40,9 +41,10 @@ public class FetchEntriesControllerTests extends AuthorizedControllerTests<Fetch
         @Test
         public void Should_Result_In_UNAUTHORIZED_When_BearerToken_Null() {
 
+                FetchEntriesPathVariables pathVariables = new FetchEntriesPathVariables("Subject 1");
+
                 BearerTokenNullException ex = assertThrows(BearerTokenNullException.class,
-                                () -> controller
-                                                .handle(null, new FetchEntriesRequestData("Subject 1")));
+                                () -> controller.handle(null, pathVariables));
 
                 assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.UNAUTHORIZED);
                 assertThat(ex.getMessage()).isNotBlank();
@@ -52,10 +54,10 @@ public class FetchEntriesControllerTests extends AuthorizedControllerTests<Fetch
         @Test
         public void Should_Result_In_BAD_REQUEST_When_SubjectName_Null() {
 
+                FetchEntriesPathVariables pathVariables = new FetchEntriesPathVariables(null);
+
                 SubjectNameParameterException ex = assertThrows(SubjectNameParameterException.class,
-                                () -> controller
-                                                .handle("Bearer user_1_id_token",
-                                                                new FetchEntriesRequestData(null)));
+                                () -> controller.handle("Bearer user_1_id_token", pathVariables));
 
                 assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.BAD_REQUEST);
                 assertThat(ex.getMessage()).isNotBlank();
@@ -65,10 +67,11 @@ public class FetchEntriesControllerTests extends AuthorizedControllerTests<Fetch
         @Test
         public void Should_Result_In_NOT_FOUND_Exception_When_User_Not_Found() {
 
+                FetchEntriesPathVariables pathVariables = new FetchEntriesPathVariables("Subject 1");
+
                 UserDoesNotExistException ex = assertThrows(UserDoesNotExistException.class,
                                 () -> controller
-                                                .handle("Bearer user_4_id_token",
-                                                                new FetchEntriesRequestData("Subject 1")));
+                                                .handle("Bearer user_4_id_token", pathVariables));
 
                 assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.NOT_FOUND);
                 assertThat(ex.getMessage()).isNotBlank();
@@ -78,8 +81,10 @@ public class FetchEntriesControllerTests extends AuthorizedControllerTests<Fetch
         @Test
         public void Should_Result_In_NOT_FOUND_Exception_When_Subject_Not_Found() {
 
-                SubjectDoesNotExist ex = assertThrows(SubjectDoesNotExist.class, () -> controller
-                                .handle("Bearer user_1_id_token", new FetchEntriesRequestData("NaN")));
+                FetchEntriesPathVariables pathVariables = new FetchEntriesPathVariables("NaN");
+
+                SubjectDoesNotExist ex = assertThrows(SubjectDoesNotExist.class,
+                                () -> controller.handle("Bearer user_1_id_token", pathVariables));
 
                 assertThat(ex.getHttpStatus()).isEqualTo(HttpStatus.NOT_FOUND);
                 assertThat(ex.getMessage()).isNotBlank();
@@ -89,8 +94,10 @@ public class FetchEntriesControllerTests extends AuthorizedControllerTests<Fetch
         @Test
         public void Should_Return_Entries_When_Request_Valid() {
 
+                FetchEntriesPathVariables pathVariables = new FetchEntriesPathVariables("Subject 1");
+
                 ResponseEntity<List<EntryDataDto>> responseEntity = controller
-                                .handle("Bearer user_1_id_token", new FetchEntriesRequestData("Subject 1"));
+                                .handle("Bearer user_1_id_token", pathVariables);
 
                 assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
                 assertThat(responseEntity.getBody().size()).isEqualTo(2);

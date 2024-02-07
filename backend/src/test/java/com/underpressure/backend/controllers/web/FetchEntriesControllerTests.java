@@ -17,12 +17,13 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.underpressure.backend.controllers.FetchEntriesController;
 import com.underpressure.backend.controllers.web.abstracts.ControllerTests;
+import com.underpressure.backend.requests.path_variables.FetchEntriesPathVariables;
 import com.underpressure.backend.responses.EntryDataDto;
 
 @WebMvcTest(FetchEntriesController.class)
 public class FetchEntriesControllerTests extends ControllerTests {
 
-    private String subjectName = "Subject";
+    FetchEntriesPathVariables pathVariables = new FetchEntriesPathVariables("Subject");
 
     private List<EntryDataDto> entriesMock = Arrays.asList(
             new EntryDataDto(new Date(123), 10),
@@ -39,7 +40,7 @@ public class FetchEntriesControllerTests extends ControllerTests {
     @Test
     public void Should_Fetch_Entries() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/subjects/" + subjectName + "/entries")
+        mockMvc.perform(MockMvcRequestBuilders.get("/subjects/" + pathVariables.getSubjectName() + "/entries")
                 .header("Authorization", "Bearer id_token"))
                 .andExpect(status().isOk())
                 .andExpect(content().json(objectMapper.writeValueAsString(entriesMock)));
