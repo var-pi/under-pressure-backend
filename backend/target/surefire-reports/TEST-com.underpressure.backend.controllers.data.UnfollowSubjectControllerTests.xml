@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.underpressure.backend.controllers.data.UnfollowSubjectControllerTests" time="1.548" tests="7" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.underpressure.backend.controllers.data.UnfollowSubjectControllerTests" time="1.092" tests="7" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -13,7 +13,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-21-openjdk/lib"/>
-    <property name="sun.java.command" value="/home/stef/projects/under-pressure-backend/backend/target/surefire/surefirebooter-20240208130706218_3.jar /home/stef/projects/under-pressure-backend/backend/target/surefire 2024-02-08T13-07-06_080-jvmRun1 surefire-20240208130706218_1tmp surefire_0-20240208130706218_2tmp"/>
+    <property name="sun.java.command" value="/home/stef/projects/under-pressure-backend/backend/target/surefire/surefirebooter-20240208134604761_3.jar /home/stef/projects/under-pressure-backend/backend/target/surefire 2024-02-08T13-46-04_658-jvmRun1 surefire-20240208134604761_1tmp surefire_0-20240208134604761_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/home/stef/projects/under-pressure-backend/backend/target/test-classes:/home/stef/projects/under-pressure-backend/backend/target/classes:/home/stef/.m2/repository/org/postgresql/postgresql/42.6.0/postgresql-42.6.0.jar:/home/stef/.m2/repository/org/checkerframework/checker-qual/3.31.0/checker-qual-3.31.0.jar:/home/stef/.m2/repository/org/springframework/boot/spring-boot-starter-jdbc/3.2.2/spring-boot-starter-jdbc-3.2.2.jar:/home/stef/.m2/repository/org/springframework/boot/spring-boot-starter/3.2.2/spring-boot-starter-3.2.2.jar:/home/stef/.m2/repository/org/springframework/boot/spring-boot/3.2.2/spring-boot-3.2.2.jar:/home/stef/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/3.2.2/spring-boot-autoconfigure-3.2.2.jar:/home/stef/.m2/repository/org/springframework/boot/spring-boot-starter-logging/3.2.2/spring-boot-starter-logging-3.2.2.jar:/home/stef/.m2/repository/ch/qos/logback/logback-classic/1.4.14/logback-classic-1.4.14.jar:/home/stef/.m2/repository/ch/qos/logback/logback-core/1.4.14/logback-core-1.4.14.jar:/home/stef/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.21.1/log4j-to-slf4j-2.21.1.jar:/home/stef/.m2/repository/org/apache/logging/log4j/log4j-api/2.21.1/log4j-api-2.21.1.jar:/home/stef/.m2/repository/org/slf4j/jul-to-slf4j/2.0.11/jul-to-slf4j-2.0.11.jar:/home/stef/.m2/repository/jakarta/annotation/jakarta.annotation-api/2.1.1/jakarta.annotation-api-2.1.1.jar:/home/stef/.m2/repository/org/yaml/snakeyaml/2.2/snakeyaml-2.2.jar:/home/stef/.m2/repository/com/zaxxer/HikariCP/5.0.1/HikariCP-5.0.1.jar:/home/stef/.m2/repository/org/slf4j/slf4j-api/2.0.11/slf4j-api-2.0.11.jar:/home/stef/.m2/repository/org/springframework/spring-jdbc/6.1.3/spring-jdbc-6.1.3.jar:/home/stef/.m2/repository/org/springframework/spring-beans/6.1.3/spring-beans-6.1.3.jar:/home/stef/.m2/repository/org/springframework/spring-tx/6.1.3/spring-tx-6.1.3.jar:/home/stef/.m2/repository/org/springframework/boot/spring-boot-starter-web/3.2.2/spring-boot-starter-web-3.2.2.jar:/home/stef/.m2/repository/org/springframework/boot/spring-boot-starter-json/3.2.2/spring-boot-starter-json-3.2.2.jar:/home/stef/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.15.3/jackson-databind-2.15.3.jar:/home/stef/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.15.3/jackson-annotations-2.15.3.jar:/home/stef/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.15.3/jackson-core-2.15.3.jar:/home/stef/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.15.3/jackson-datatype-jdk8-2.15.3.jar:/home/stef/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.15.3/jackson-datatype-jsr310-2.15.3.jar:/home/stef/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.15.3/jackson-module-parameter-names-2.15.3.jar:/home/stef/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/3.2.2/spring-boot-starter-tomcat-3.2.2.jar:/home/stef/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.18/tomcat-embed-core-10.1.18.jar:/home/stef/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/10.1.18/tomcat-embed-el-10.1.18.jar:/home/stef/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/10.1.18/tomcat-embed-websocket-10.1.18.jar:/home/stef/.m2/repository/org/springframework/spring-web/6.1.3/spring-web-6.1.3.jar:/home/stef/.m2/repository/io/micrometer/micrometer-observation/1.12.2/micrometer-observation-1.12.2.jar:/home/stef/.m2/repository/io/micrometer/micrometer-commons/1.12.2/micrometer-commons-1.12.2.jar:/home/stef/.m2/repository/org/springframework/spring-webmvc/6.1.3/spring-webmvc-6.1.3.jar:/home/stef/.m2/repository/org/springframework/spring-aop/6.1.3/spring-aop-6.1.3.jar:/home/stef/.m2/repository/org/springframework/spring-context/6.1.3/spring-context-6.1.3.jar:/home/stef/.m2/repository/org/springframework/spring-expression/6.1.3/spring-expression-6.1.3.jar:/home/stef/.m2/repository/com/google/api-client/google-api-client/1.35.0/google-api-client-1.35.0.jar:/home/stef/.m2/repository/com/google/http-client/google-http-client-gson/1.41.8/google-http-client-gson-1.41.8.jar:/home/stef/.m2/repository/com/google/code/gson/gson/2.10.1/gson-2.10.1.jar:/home/stef/.m2/repository/com/google/guava/guava/31.1-jre/guava-31.1-jre.jar:/home/stef/.m2/repository/com/google/guava/failureaccess/1.0.1/failureaccess-1.0.1.jar:/home/stef/.m2/repository/com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar:/home/stef/.m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar:/home/stef/.m2/repository/com/google/errorprone/error_prone_annotations/2.11.0/error_prone_annotations-2.11.0.jar:/home/stef/.m2/repository/com/google/j2objc/j2objc-annotations/1.3/j2objc-annotations-1.3.jar:/home/stef/.m2/repository/com/google/http-client/google-http-client-apache-v2/1.41.8/google-http-client-apache-v2-1.41.8.jar:/home/stef/.m2/repository/org/apache/httpcomponents/httpcore/4.4.16/httpcore-4.4.16.jar:/home/stef/.m2/repository/org/apache/httpcomponents/httpclient/4.5.13/httpclient-4.5.13.jar:/home/stef/.m2/repository/commons-codec/commons-codec/1.16.0/commons-codec-1.16.0.jar:/home/stef/.m2/repository/com/google/http-client/google-http-client/1.41.8/google-http-client-1.41.8.jar:/home/stef/.m2/repository/io/opencensus/opencensus-api/0.31.0/opencensus-api-0.31.0.jar:/home/stef/.m2/repository/io/grpc/grpc-context/1.27.2/grpc-context-1.27.2.jar:/home/stef/.m2/repository/io/opencensus/opencensus-contrib-http-util/0.31.0/opencensus-contrib-http-util-0.31.0.jar:/home/stef/.m2/repository/com/google/oauth-client/google-oauth-client/1.35.0/google-oauth-client-1.35.0.jar:/home/stef/.m2/repository/org/springframework/boot/spring-boot-starter-test/3.2.2/spring-boot-starter-test-3.2.2.jar:/home/stef/.m2/repository/org/springframework/boot/spring-boot-test/3.2.2/spring-boot-test-3.2.2.jar:/home/stef/.m2/repository/org/springframework/boot/spring-boot-test-autoconfigure/3.2.2/spring-boot-test-autoconfigure-3.2.2.jar:/home/stef/.m2/repository/com/jayway/jsonpath/json-path/2.8.0/json-path-2.8.0.jar:/home/stef/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/4.0.1/jakarta.xml.bind-api-4.0.1.jar:/home/stef/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.2/jakarta.activation-api-2.1.2.jar:/home/stef/.m2/repository/net/minidev/json-smart/2.5.0/json-smart-2.5.0.jar:/home/stef/.m2/repository/net/minidev/accessors-smart/2.5.0/accessors-smart-2.5.0.jar:/home/stef/.m2/repository/org/ow2/asm/asm/9.3/asm-9.3.jar:/home/stef/.m2/repository/org/assertj/assertj-core/3.24.2/assertj-core-3.24.2.jar:/home/stef/.m2/repository/net/bytebuddy/byte-buddy/1.14.11/byte-buddy-1.14.11.jar:/home/stef/.m2/repository/org/awaitility/awaitility/4.2.0/awaitility-4.2.0.jar:/home/stef/.m2/repository/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar:/home/stef/.m2/repository/org/junit/jupiter/junit-jupiter/5.10.1/junit-jupiter-5.10.1.jar:/home/stef/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.1/junit-jupiter-api-5.10.1.jar:/home/stef/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/home/stef/.m2/repository/org/junit/platform/junit-platform-commons/1.10.1/junit-platform-commons-1.10.1.jar:/home/stef/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/stef/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.10.1/junit-jupiter-params-5.10.1.jar:/home/stef/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.1/junit-jupiter-engine-5.10.1.jar:/home/stef/.m2/repository/org/junit/platform/junit-platform-engine/1.10.1/junit-platform-engine-1.10.1.jar:/home/stef/.m2/repository/org/mockito/mockito-core/5.7.0/mockito-core-5.7.0.jar:/home/stef/.m2/repository/net/bytebuddy/byte-buddy-agent/1.14.11/byte-buddy-agent-1.14.11.jar:/home/stef/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:/home/stef/.m2/repository/org/mockito/mockito-junit-jupiter/5.7.0/mockito-junit-jupiter-5.7.0.jar:/home/stef/.m2/repository/org/skyscreamer/jsonassert/1.5.1/jsonassert-1.5.1.jar:/home/stef/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar:/home/stef/.m2/repository/org/springframework/spring-core/6.1.3/spring-core-6.1.3.jar:/home/stef/.m2/repository/org/springframework/spring-jcl/6.1.3/spring-jcl-6.1.3.jar:/home/stef/.m2/repository/org/springframework/spring-test/6.1.3/spring-test-6.1.3.jar:/home/stef/.m2/repository/org/xmlunit/xmlunit-core/2.9.1/xmlunit-core-2.9.1.jar:/home/stef/.m2/repository/com/h2database/h2/2.2.224/h2-2.2.224.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="FILE_LOG_CHARSET" value="UTF-8"/>
     <property name="java.awt.headless" value="true"/>
-    <property name="surefire.real.class.path" value="/home/stef/projects/under-pressure-backend/backend/target/surefire/surefirebooter-20240208130706218_3.jar"/>
+    <property name="surefire.real.class.path" value="/home/stef/projects/under-pressure-backend/backend/target/surefire/surefirebooter-20240208134604761_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="21.0.2+13"/>
     <property name="user.name" value="stef"/>
@@ -47,7 +47,7 @@
     <property name="user.dir" value="/home/stef/projects/under-pressure-backend/backend"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="PID" value="132418"/>
+    <property name="PID" value="157082"/>
     <property name="CONSOLE_LOG_CHARSET" value="UTF-8"/>
     <property name="native.encoding" value="UTF-8"/>
     <property name="java.library.path" value="/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib"/>
@@ -58,9 +58,9 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="Should_Result_In_NOT_FOUND_When_Request_To_Unfollow_Having_Never_Followed" classname="com.underpressure.backend.controllers.data.UnfollowSubjectControllerTests" time="0.026">
-    <system-out><![CDATA[2024-02-08T13:07:17.870+02:00  INFO 132418 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.underpressure.backend.controllers.data.UnfollowSubjectControllerTests]: UnfollowSubjectControllerTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-02-08T13:07:17.887+02:00  INFO 132418 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.underpressure.backend.BackendApplication for test class com.underpressure.backend.controllers.data.UnfollowSubjectControllerTests
+  <testcase name="Should_Result_In_NOT_FOUND_When_Request_To_Unfollow_Having_Never_Followed" classname="com.underpressure.backend.controllers.data.UnfollowSubjectControllerTests" time="0.011">
+    <system-out><![CDATA[2024-02-08T13:46:13.926+02:00  INFO 157082 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.underpressure.backend.controllers.data.UnfollowSubjectControllerTests]: UnfollowSubjectControllerTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-02-08T13:46:13.939+02:00  INFO 157082 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.underpressure.backend.BackendApplication for test class com.underpressure.backend.controllers.data.UnfollowSubjectControllerTests
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -70,14 +70,14 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.2)
 
-2024-02-08T13:07:17.921+02:00  INFO 132418 --- [           main] c.u.b.c.d.UnfollowSubjectControllerTests : Starting UnfollowSubjectControllerTests using Java 21.0.2 with PID 132418 (started by stef in /home/stef/projects/under-pressure-backend/backend)
-2024-02-08T13:07:17.922+02:00  INFO 132418 --- [           main] c.u.b.c.d.UnfollowSubjectControllerTests : No active profile set, falling back to 1 default profile: "default"
-2024-02-08T13:07:18.014+02:00  INFO 132418 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
-2024-02-08T13:07:18.031+02:00  INFO 132418 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:a20621cc-64ee-4bc7-804c-8cac3a0162a8;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
-2024-02-08T13:07:18.068+02:00  INFO 132418 --- [           main] c.u.b.c.d.UnfollowSubjectControllerTests : Started UnfollowSubjectControllerTests in 0.176 seconds (process running for 11.752)
+2024-02-08T13:46:13.974+02:00  INFO 157082 --- [           main] c.u.b.c.d.UnfollowSubjectControllerTests : Starting UnfollowSubjectControllerTests using Java 21.0.2 with PID 157082 (started by stef in /home/stef/projects/under-pressure-backend/backend)
+2024-02-08T13:46:13.974+02:00  INFO 157082 --- [           main] c.u.b.c.d.UnfollowSubjectControllerTests : No active profile set, falling back to 1 default profile: "default"
+2024-02-08T13:46:14.062+02:00  INFO 157082 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
+2024-02-08T13:46:14.074+02:00  INFO 157082 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:771cf874-4451-4965-96a1-dff6e1ab8145;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+2024-02-08T13:46:14.101+02:00  INFO 157082 --- [           main] c.u.b.c.d.UnfollowSubjectControllerTests : Started UnfollowSubjectControllerTests in 0.157 seconds (process running for 9.21)
 ]]></system-out>
   </testcase>
-  <testcase name="Should_Unfollow_A_Subject_When_Request_Valid" classname="com.underpressure.backend.controllers.data.UnfollowSubjectControllerTests" time="0.027">
+  <testcase name="Should_Unfollow_A_Subject_When_Request_Valid" classname="com.underpressure.backend.controllers.data.UnfollowSubjectControllerTests" time="0.014">
     <system-out><![CDATA[
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -87,14 +87,14 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.2)
 
-2024-02-08T13:07:18.130+02:00  INFO 132418 --- [           main] c.u.b.c.d.UnfollowSubjectControllerTests : Starting UnfollowSubjectControllerTests using Java 21.0.2 with PID 132418 (started by stef in /home/stef/projects/under-pressure-backend/backend)
-2024-02-08T13:07:18.130+02:00  INFO 132418 --- [           main] c.u.b.c.d.UnfollowSubjectControllerTests : No active profile set, falling back to 1 default profile: "default"
-2024-02-08T13:07:18.234+02:00  INFO 132418 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
-2024-02-08T13:07:18.251+02:00  INFO 132418 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:dad2c9bc-a6fd-4aca-b083-ca47c440f968;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
-2024-02-08T13:07:18.286+02:00  INFO 132418 --- [           main] c.u.b.c.d.UnfollowSubjectControllerTests : Started UnfollowSubjectControllerTests in 0.184 seconds (process running for 11.97)
+2024-02-08T13:46:14.130+02:00  INFO 157082 --- [           main] c.u.b.c.d.UnfollowSubjectControllerTests : Starting UnfollowSubjectControllerTests using Java 21.0.2 with PID 157082 (started by stef in /home/stef/projects/under-pressure-backend/backend)
+2024-02-08T13:46:14.130+02:00  INFO 157082 --- [           main] c.u.b.c.d.UnfollowSubjectControllerTests : No active profile set, falling back to 1 default profile: "default"
+2024-02-08T13:46:14.192+02:00  INFO 157082 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
+2024-02-08T13:46:14.201+02:00  INFO 157082 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:2ecf7ade-34e2-4dd2-b3da-6a5d2e80bae8;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+2024-02-08T13:46:14.220+02:00  INFO 157082 --- [           main] c.u.b.c.d.UnfollowSubjectControllerTests : Started UnfollowSubjectControllerTests in 0.103 seconds (process running for 9.329)
 ]]></system-out>
   </testcase>
-  <testcase name="Should_Result_In_NOT_FOUND_Exception_When_User_Not_Found" classname="com.underpressure.backend.controllers.data.UnfollowSubjectControllerTests" time="0.021">
+  <testcase name="Should_Result_In_NOT_FOUND_Exception_When_User_Not_Found" classname="com.underpressure.backend.controllers.data.UnfollowSubjectControllerTests" time="0.026">
     <system-out><![CDATA[
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -104,14 +104,14 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.2)
 
-2024-02-08T13:07:18.348+02:00  INFO 132418 --- [           main] c.u.b.c.d.UnfollowSubjectControllerTests : Starting UnfollowSubjectControllerTests using Java 21.0.2 with PID 132418 (started by stef in /home/stef/projects/under-pressure-backend/backend)
-2024-02-08T13:07:18.349+02:00  INFO 132418 --- [           main] c.u.b.c.d.UnfollowSubjectControllerTests : No active profile set, falling back to 1 default profile: "default"
-2024-02-08T13:07:18.467+02:00  INFO 132418 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
-2024-02-08T13:07:18.488+02:00  INFO 132418 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:61362de4-91e1-4cd4-8a73-5454f825990f;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
-2024-02-08T13:07:18.530+02:00  INFO 132418 --- [           main] c.u.b.c.d.UnfollowSubjectControllerTests : Started UnfollowSubjectControllerTests in 0.21 seconds (process running for 12.214)
+2024-02-08T13:46:14.253+02:00  INFO 157082 --- [           main] c.u.b.c.d.UnfollowSubjectControllerTests : Starting UnfollowSubjectControllerTests using Java 21.0.2 with PID 157082 (started by stef in /home/stef/projects/under-pressure-backend/backend)
+2024-02-08T13:46:14.254+02:00  INFO 157082 --- [           main] c.u.b.c.d.UnfollowSubjectControllerTests : No active profile set, falling back to 1 default profile: "default"
+2024-02-08T13:46:14.316+02:00  INFO 157082 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
+2024-02-08T13:46:14.324+02:00  INFO 157082 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:45f2be0f-8d2a-4963-bd89-27a32a2aec4d;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+2024-02-08T13:46:14.346+02:00  INFO 157082 --- [           main] c.u.b.c.d.UnfollowSubjectControllerTests : Started UnfollowSubjectControllerTests in 0.108 seconds (process running for 9.455)
 ]]></system-out>
   </testcase>
-  <testcase name="Should_Result_In_NOT_FOUND_Exception_When_Subject_Not_Found" classname="com.underpressure.backend.controllers.data.UnfollowSubjectControllerTests" time="0.024">
+  <testcase name="Should_Result_In_NOT_FOUND_Exception_When_Subject_Not_Found" classname="com.underpressure.backend.controllers.data.UnfollowSubjectControllerTests" time="0.012">
     <system-out><![CDATA[
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -121,14 +121,14 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.2)
 
-2024-02-08T13:07:18.593+02:00  INFO 132418 --- [           main] c.u.b.c.d.UnfollowSubjectControllerTests : Starting UnfollowSubjectControllerTests using Java 21.0.2 with PID 132418 (started by stef in /home/stef/projects/under-pressure-backend/backend)
-2024-02-08T13:07:18.594+02:00  INFO 132418 --- [           main] c.u.b.c.d.UnfollowSubjectControllerTests : No active profile set, falling back to 1 default profile: "default"
-2024-02-08T13:07:18.704+02:00  INFO 132418 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
-2024-02-08T13:07:18.719+02:00  INFO 132418 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:1b0b66fe-5eb3-4583-8ed0-df1d609d99c8;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
-2024-02-08T13:07:18.761+02:00  INFO 132418 --- [           main] c.u.b.c.d.UnfollowSubjectControllerTests : Started UnfollowSubjectControllerTests in 0.201 seconds (process running for 12.445)
+2024-02-08T13:46:14.411+02:00  INFO 157082 --- [           main] c.u.b.c.d.UnfollowSubjectControllerTests : Starting UnfollowSubjectControllerTests using Java 21.0.2 with PID 157082 (started by stef in /home/stef/projects/under-pressure-backend/backend)
+2024-02-08T13:46:14.411+02:00  INFO 157082 --- [           main] c.u.b.c.d.UnfollowSubjectControllerTests : No active profile set, falling back to 1 default profile: "default"
+2024-02-08T13:46:14.500+02:00  INFO 157082 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
+2024-02-08T13:46:14.513+02:00  INFO 157082 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:52a20f28-61a2-4dfe-8825-790f644ecb26;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+2024-02-08T13:46:14.541+02:00  INFO 157082 --- [           main] c.u.b.c.d.UnfollowSubjectControllerTests : Started UnfollowSubjectControllerTests in 0.162 seconds (process running for 9.65)
 ]]></system-out>
   </testcase>
-  <testcase name="Should_Result_In_BAD_REQUEST_When_SubjectName_Null" classname="com.underpressure.backend.controllers.data.UnfollowSubjectControllerTests" time="0.016">
+  <testcase name="Should_Result_In_BAD_REQUEST_When_SubjectName_Null" classname="com.underpressure.backend.controllers.data.UnfollowSubjectControllerTests" time="0.015">
     <system-out><![CDATA[
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -138,14 +138,14 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.2)
 
-2024-02-08T13:07:18.821+02:00  INFO 132418 --- [           main] c.u.b.c.d.UnfollowSubjectControllerTests : Starting UnfollowSubjectControllerTests using Java 21.0.2 with PID 132418 (started by stef in /home/stef/projects/under-pressure-backend/backend)
-2024-02-08T13:07:18.821+02:00  INFO 132418 --- [           main] c.u.b.c.d.UnfollowSubjectControllerTests : No active profile set, falling back to 1 default profile: "default"
-2024-02-08T13:07:18.917+02:00  INFO 132418 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
-2024-02-08T13:07:18.931+02:00  INFO 132418 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:cd5b97dd-acd9-4d65-9691-c46c2fb54d39;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
-2024-02-08T13:07:18.966+02:00  INFO 132418 --- [           main] c.u.b.c.d.UnfollowSubjectControllerTests : Started UnfollowSubjectControllerTests in 0.173 seconds (process running for 12.65)
+2024-02-08T13:46:14.580+02:00  INFO 157082 --- [           main] c.u.b.c.d.UnfollowSubjectControllerTests : Starting UnfollowSubjectControllerTests using Java 21.0.2 with PID 157082 (started by stef in /home/stef/projects/under-pressure-backend/backend)
+2024-02-08T13:46:14.581+02:00  INFO 157082 --- [           main] c.u.b.c.d.UnfollowSubjectControllerTests : No active profile set, falling back to 1 default profile: "default"
+2024-02-08T13:46:14.662+02:00  INFO 157082 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
+2024-02-08T13:46:14.673+02:00  INFO 157082 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:61c88a6e-402d-4f41-a23c-99a77cf10e41;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+2024-02-08T13:46:14.693+02:00  INFO 157082 --- [           main] c.u.b.c.d.UnfollowSubjectControllerTests : Started UnfollowSubjectControllerTests in 0.134 seconds (process running for 9.802)
 ]]></system-out>
   </testcase>
-  <testcase name="Should_Result_In_UNAUTHORIZED_When_BearerToken_Null" classname="com.underpressure.backend.controllers.data.UnfollowSubjectControllerTests" time="0.018">
+  <testcase name="Should_Result_In_UNAUTHORIZED_When_BearerToken_Null" classname="com.underpressure.backend.controllers.data.UnfollowSubjectControllerTests" time="0.012">
     <system-out><![CDATA[
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -155,14 +155,14 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.2)
 
-2024-02-08T13:07:19.021+02:00  INFO 132418 --- [           main] c.u.b.c.d.UnfollowSubjectControllerTests : Starting UnfollowSubjectControllerTests using Java 21.0.2 with PID 132418 (started by stef in /home/stef/projects/under-pressure-backend/backend)
-2024-02-08T13:07:19.022+02:00  INFO 132418 --- [           main] c.u.b.c.d.UnfollowSubjectControllerTests : No active profile set, falling back to 1 default profile: "default"
-2024-02-08T13:07:19.120+02:00  INFO 132418 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
-2024-02-08T13:07:19.137+02:00  INFO 132418 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:0a77dbf5-cde2-43f7-b120-84b769b42d53;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
-2024-02-08T13:07:19.179+02:00  INFO 132418 --- [           main] c.u.b.c.d.UnfollowSubjectControllerTests : Started UnfollowSubjectControllerTests in 0.189 seconds (process running for 12.863)
+2024-02-08T13:46:14.727+02:00  INFO 157082 --- [           main] c.u.b.c.d.UnfollowSubjectControllerTests : Starting UnfollowSubjectControllerTests using Java 21.0.2 with PID 157082 (started by stef in /home/stef/projects/under-pressure-backend/backend)
+2024-02-08T13:46:14.727+02:00  INFO 157082 --- [           main] c.u.b.c.d.UnfollowSubjectControllerTests : No active profile set, falling back to 1 default profile: "default"
+2024-02-08T13:46:14.796+02:00  INFO 157082 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
+2024-02-08T13:46:14.809+02:00  INFO 157082 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:b1690261-6802-4d32-989f-beadd8ce1c64;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+2024-02-08T13:46:14.843+02:00  INFO 157082 --- [           main] c.u.b.c.d.UnfollowSubjectControllerTests : Started UnfollowSubjectControllerTests in 0.13 seconds (process running for 9.952)
 ]]></system-out>
   </testcase>
-  <testcase name="Should_Result_In_BAD_REQUEST_When_Requested_To_Unfollow_Already_Unfollowed" classname="com.underpressure.backend.controllers.data.UnfollowSubjectControllerTests" time="0.023">
+  <testcase name="Should_Result_In_BAD_REQUEST_When_Requested_To_Unfollow_Already_Unfollowed" classname="com.underpressure.backend.controllers.data.UnfollowSubjectControllerTests" time="0.018">
     <system-out><![CDATA[
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -172,11 +172,11 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.2)
 
-2024-02-08T13:07:19.232+02:00  INFO 132418 --- [           main] c.u.b.c.d.UnfollowSubjectControllerTests : Starting UnfollowSubjectControllerTests using Java 21.0.2 with PID 132418 (started by stef in /home/stef/projects/under-pressure-backend/backend)
-2024-02-08T13:07:19.233+02:00  INFO 132418 --- [           main] c.u.b.c.d.UnfollowSubjectControllerTests : No active profile set, falling back to 1 default profile: "default"
-2024-02-08T13:07:19.325+02:00  INFO 132418 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
-2024-02-08T13:07:19.340+02:00  INFO 132418 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:03a85b42-4c2a-4a9e-a6cd-4a63fff244ce;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
-2024-02-08T13:07:19.380+02:00  INFO 132418 --- [           main] c.u.b.c.d.UnfollowSubjectControllerTests : Started UnfollowSubjectControllerTests in 0.175 seconds (process running for 13.064)
+2024-02-08T13:46:14.877+02:00  INFO 157082 --- [           main] c.u.b.c.d.UnfollowSubjectControllerTests : Starting UnfollowSubjectControllerTests using Java 21.0.2 with PID 157082 (started by stef in /home/stef/projects/under-pressure-backend/backend)
+2024-02-08T13:46:14.877+02:00  INFO 157082 --- [           main] c.u.b.c.d.UnfollowSubjectControllerTests : No active profile set, falling back to 1 default profile: "default"
+2024-02-08T13:46:14.951+02:00  INFO 157082 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
+2024-02-08T13:46:14.962+02:00  INFO 157082 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:8c06d6dc-be10-424f-ab69-8542853bc6c8;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+2024-02-08T13:46:14.993+02:00  INFO 157082 --- [           main] c.u.b.c.d.UnfollowSubjectControllerTests : Started UnfollowSubjectControllerTests in 0.132 seconds (process running for 10.102)
 ]]></system-out>
   </testcase>
 </testsuite>

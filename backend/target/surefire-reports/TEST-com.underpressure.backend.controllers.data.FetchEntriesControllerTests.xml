@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.underpressure.backend.controllers.data.FetchEntriesControllerTests" time="1.156" tests="5" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.underpressure.backend.controllers.data.FetchEntriesControllerTests" time="0.763" tests="5" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -13,7 +13,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-21-openjdk/lib"/>
-    <property name="sun.java.command" value="/home/stef/projects/under-pressure-backend/backend/target/surefire/surefirebooter-20240208130706218_3.jar /home/stef/projects/under-pressure-backend/backend/target/surefire 2024-02-08T13-07-06_080-jvmRun1 surefire-20240208130706218_1tmp surefire_0-20240208130706218_2tmp"/>
+    <property name="sun.java.command" value="/home/stef/projects/under-pressure-backend/backend/target/surefire/surefirebooter-20240208134604761_3.jar /home/stef/projects/under-pressure-backend/backend/target/surefire 2024-02-08T13-46-04_658-jvmRun1 surefire-20240208134604761_1tmp surefire_0-20240208134604761_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/home/stef/projects/under-pressure-backend/backend/target/test-classes:/home/stef/projects/under-pressure-backend/backend/target/classes:/home/stef/.m2/repository/org/postgresql/postgresql/42.6.0/postgresql-42.6.0.jar:/home/stef/.m2/repository/org/checkerframework/checker-qual/3.31.0/checker-qual-3.31.0.jar:/home/stef/.m2/repository/org/springframework/boot/spring-boot-starter-jdbc/3.2.2/spring-boot-starter-jdbc-3.2.2.jar:/home/stef/.m2/repository/org/springframework/boot/spring-boot-starter/3.2.2/spring-boot-starter-3.2.2.jar:/home/stef/.m2/repository/org/springframework/boot/spring-boot/3.2.2/spring-boot-3.2.2.jar:/home/stef/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/3.2.2/spring-boot-autoconfigure-3.2.2.jar:/home/stef/.m2/repository/org/springframework/boot/spring-boot-starter-logging/3.2.2/spring-boot-starter-logging-3.2.2.jar:/home/stef/.m2/repository/ch/qos/logback/logback-classic/1.4.14/logback-classic-1.4.14.jar:/home/stef/.m2/repository/ch/qos/logback/logback-core/1.4.14/logback-core-1.4.14.jar:/home/stef/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.21.1/log4j-to-slf4j-2.21.1.jar:/home/stef/.m2/repository/org/apache/logging/log4j/log4j-api/2.21.1/log4j-api-2.21.1.jar:/home/stef/.m2/repository/org/slf4j/jul-to-slf4j/2.0.11/jul-to-slf4j-2.0.11.jar:/home/stef/.m2/repository/jakarta/annotation/jakarta.annotation-api/2.1.1/jakarta.annotation-api-2.1.1.jar:/home/stef/.m2/repository/org/yaml/snakeyaml/2.2/snakeyaml-2.2.jar:/home/stef/.m2/repository/com/zaxxer/HikariCP/5.0.1/HikariCP-5.0.1.jar:/home/stef/.m2/repository/org/slf4j/slf4j-api/2.0.11/slf4j-api-2.0.11.jar:/home/stef/.m2/repository/org/springframework/spring-jdbc/6.1.3/spring-jdbc-6.1.3.jar:/home/stef/.m2/repository/org/springframework/spring-beans/6.1.3/spring-beans-6.1.3.jar:/home/stef/.m2/repository/org/springframework/spring-tx/6.1.3/spring-tx-6.1.3.jar:/home/stef/.m2/repository/org/springframework/boot/spring-boot-starter-web/3.2.2/spring-boot-starter-web-3.2.2.jar:/home/stef/.m2/repository/org/springframework/boot/spring-boot-starter-json/3.2.2/spring-boot-starter-json-3.2.2.jar:/home/stef/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.15.3/jackson-databind-2.15.3.jar:/home/stef/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.15.3/jackson-annotations-2.15.3.jar:/home/stef/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.15.3/jackson-core-2.15.3.jar:/home/stef/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.15.3/jackson-datatype-jdk8-2.15.3.jar:/home/stef/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.15.3/jackson-datatype-jsr310-2.15.3.jar:/home/stef/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.15.3/jackson-module-parameter-names-2.15.3.jar:/home/stef/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/3.2.2/spring-boot-starter-tomcat-3.2.2.jar:/home/stef/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.18/tomcat-embed-core-10.1.18.jar:/home/stef/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/10.1.18/tomcat-embed-el-10.1.18.jar:/home/stef/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/10.1.18/tomcat-embed-websocket-10.1.18.jar:/home/stef/.m2/repository/org/springframework/spring-web/6.1.3/spring-web-6.1.3.jar:/home/stef/.m2/repository/io/micrometer/micrometer-observation/1.12.2/micrometer-observation-1.12.2.jar:/home/stef/.m2/repository/io/micrometer/micrometer-commons/1.12.2/micrometer-commons-1.12.2.jar:/home/stef/.m2/repository/org/springframework/spring-webmvc/6.1.3/spring-webmvc-6.1.3.jar:/home/stef/.m2/repository/org/springframework/spring-aop/6.1.3/spring-aop-6.1.3.jar:/home/stef/.m2/repository/org/springframework/spring-context/6.1.3/spring-context-6.1.3.jar:/home/stef/.m2/repository/org/springframework/spring-expression/6.1.3/spring-expression-6.1.3.jar:/home/stef/.m2/repository/com/google/api-client/google-api-client/1.35.0/google-api-client-1.35.0.jar:/home/stef/.m2/repository/com/google/http-client/google-http-client-gson/1.41.8/google-http-client-gson-1.41.8.jar:/home/stef/.m2/repository/com/google/code/gson/gson/2.10.1/gson-2.10.1.jar:/home/stef/.m2/repository/com/google/guava/guava/31.1-jre/guava-31.1-jre.jar:/home/stef/.m2/repository/com/google/guava/failureaccess/1.0.1/failureaccess-1.0.1.jar:/home/stef/.m2/repository/com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar:/home/stef/.m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar:/home/stef/.m2/repository/com/google/errorprone/error_prone_annotations/2.11.0/error_prone_annotations-2.11.0.jar:/home/stef/.m2/repository/com/google/j2objc/j2objc-annotations/1.3/j2objc-annotations-1.3.jar:/home/stef/.m2/repository/com/google/http-client/google-http-client-apache-v2/1.41.8/google-http-client-apache-v2-1.41.8.jar:/home/stef/.m2/repository/org/apache/httpcomponents/httpcore/4.4.16/httpcore-4.4.16.jar:/home/stef/.m2/repository/org/apache/httpcomponents/httpclient/4.5.13/httpclient-4.5.13.jar:/home/stef/.m2/repository/commons-codec/commons-codec/1.16.0/commons-codec-1.16.0.jar:/home/stef/.m2/repository/com/google/http-client/google-http-client/1.41.8/google-http-client-1.41.8.jar:/home/stef/.m2/repository/io/opencensus/opencensus-api/0.31.0/opencensus-api-0.31.0.jar:/home/stef/.m2/repository/io/grpc/grpc-context/1.27.2/grpc-context-1.27.2.jar:/home/stef/.m2/repository/io/opencensus/opencensus-contrib-http-util/0.31.0/opencensus-contrib-http-util-0.31.0.jar:/home/stef/.m2/repository/com/google/oauth-client/google-oauth-client/1.35.0/google-oauth-client-1.35.0.jar:/home/stef/.m2/repository/org/springframework/boot/spring-boot-starter-test/3.2.2/spring-boot-starter-test-3.2.2.jar:/home/stef/.m2/repository/org/springframework/boot/spring-boot-test/3.2.2/spring-boot-test-3.2.2.jar:/home/stef/.m2/repository/org/springframework/boot/spring-boot-test-autoconfigure/3.2.2/spring-boot-test-autoconfigure-3.2.2.jar:/home/stef/.m2/repository/com/jayway/jsonpath/json-path/2.8.0/json-path-2.8.0.jar:/home/stef/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/4.0.1/jakarta.xml.bind-api-4.0.1.jar:/home/stef/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.2/jakarta.activation-api-2.1.2.jar:/home/stef/.m2/repository/net/minidev/json-smart/2.5.0/json-smart-2.5.0.jar:/home/stef/.m2/repository/net/minidev/accessors-smart/2.5.0/accessors-smart-2.5.0.jar:/home/stef/.m2/repository/org/ow2/asm/asm/9.3/asm-9.3.jar:/home/stef/.m2/repository/org/assertj/assertj-core/3.24.2/assertj-core-3.24.2.jar:/home/stef/.m2/repository/net/bytebuddy/byte-buddy/1.14.11/byte-buddy-1.14.11.jar:/home/stef/.m2/repository/org/awaitility/awaitility/4.2.0/awaitility-4.2.0.jar:/home/stef/.m2/repository/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar:/home/stef/.m2/repository/org/junit/jupiter/junit-jupiter/5.10.1/junit-jupiter-5.10.1.jar:/home/stef/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.1/junit-jupiter-api-5.10.1.jar:/home/stef/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/home/stef/.m2/repository/org/junit/platform/junit-platform-commons/1.10.1/junit-platform-commons-1.10.1.jar:/home/stef/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/stef/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.10.1/junit-jupiter-params-5.10.1.jar:/home/stef/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.1/junit-jupiter-engine-5.10.1.jar:/home/stef/.m2/repository/org/junit/platform/junit-platform-engine/1.10.1/junit-platform-engine-1.10.1.jar:/home/stef/.m2/repository/org/mockito/mockito-core/5.7.0/mockito-core-5.7.0.jar:/home/stef/.m2/repository/net/bytebuddy/byte-buddy-agent/1.14.11/byte-buddy-agent-1.14.11.jar:/home/stef/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:/home/stef/.m2/repository/org/mockito/mockito-junit-jupiter/5.7.0/mockito-junit-jupiter-5.7.0.jar:/home/stef/.m2/repository/org/skyscreamer/jsonassert/1.5.1/jsonassert-1.5.1.jar:/home/stef/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar:/home/stef/.m2/repository/org/springframework/spring-core/6.1.3/spring-core-6.1.3.jar:/home/stef/.m2/repository/org/springframework/spring-jcl/6.1.3/spring-jcl-6.1.3.jar:/home/stef/.m2/repository/org/springframework/spring-test/6.1.3/spring-test-6.1.3.jar:/home/stef/.m2/repository/org/xmlunit/xmlunit-core/2.9.1/xmlunit-core-2.9.1.jar:/home/stef/.m2/repository/com/h2database/h2/2.2.224/h2-2.2.224.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="FILE_LOG_CHARSET" value="UTF-8"/>
     <property name="java.awt.headless" value="true"/>
-    <property name="surefire.real.class.path" value="/home/stef/projects/under-pressure-backend/backend/target/surefire/surefirebooter-20240208130706218_3.jar"/>
+    <property name="surefire.real.class.path" value="/home/stef/projects/under-pressure-backend/backend/target/surefire/surefirebooter-20240208134604761_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="21.0.2+13"/>
     <property name="user.name" value="stef"/>
@@ -47,7 +47,7 @@
     <property name="user.dir" value="/home/stef/projects/under-pressure-backend/backend"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="PID" value="132418"/>
+    <property name="PID" value="157082"/>
     <property name="CONSOLE_LOG_CHARSET" value="UTF-8"/>
     <property name="native.encoding" value="UTF-8"/>
     <property name="java.library.path" value="/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib"/>
@@ -58,9 +58,9 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="Should_Return_Entries_When_Request_Valid" classname="com.underpressure.backend.controllers.data.FetchEntriesControllerTests" time="0.025">
-    <system-out><![CDATA[2024-02-08T13:07:21.003+02:00  INFO 132418 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.underpressure.backend.controllers.data.FetchEntriesControllerTests]: FetchEntriesControllerTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-02-08T13:07:21.020+02:00  INFO 132418 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.underpressure.backend.BackendApplication for test class com.underpressure.backend.controllers.data.FetchEntriesControllerTests
+  <testcase name="Should_Return_Entries_When_Request_Valid" classname="com.underpressure.backend.controllers.data.FetchEntriesControllerTests" time="0.02">
+    <system-out><![CDATA[2024-02-08T13:46:16.164+02:00  INFO 157082 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.underpressure.backend.controllers.data.FetchEntriesControllerTests]: FetchEntriesControllerTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-02-08T13:46:16.171+02:00  INFO 157082 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.underpressure.backend.BackendApplication for test class com.underpressure.backend.controllers.data.FetchEntriesControllerTests
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -70,14 +70,14 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.2)
 
-2024-02-08T13:07:21.056+02:00  INFO 132418 --- [           main] c.u.b.c.d.FetchEntriesControllerTests    : Starting FetchEntriesControllerTests using Java 21.0.2 with PID 132418 (started by stef in /home/stef/projects/under-pressure-backend/backend)
-2024-02-08T13:07:21.056+02:00  INFO 132418 --- [           main] c.u.b.c.d.FetchEntriesControllerTests    : No active profile set, falling back to 1 default profile: "default"
-2024-02-08T13:07:21.167+02:00  INFO 132418 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
-2024-02-08T13:07:21.184+02:00  INFO 132418 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:723b771f-e869-4203-b785-467329e06a03;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
-2024-02-08T13:07:21.222+02:00  INFO 132418 --- [           main] c.u.b.c.d.FetchEntriesControllerTests    : Started FetchEntriesControllerTests in 0.194 seconds (process running for 14.906)
+2024-02-08T13:46:16.192+02:00  INFO 157082 --- [           main] c.u.b.c.d.FetchEntriesControllerTests    : Starting FetchEntriesControllerTests using Java 21.0.2 with PID 157082 (started by stef in /home/stef/projects/under-pressure-backend/backend)
+2024-02-08T13:46:16.193+02:00  INFO 157082 --- [           main] c.u.b.c.d.FetchEntriesControllerTests    : No active profile set, falling back to 1 default profile: "default"
+2024-02-08T13:46:16.267+02:00  INFO 157082 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
+2024-02-08T13:46:16.278+02:00  INFO 157082 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:90f13f6d-816d-49fa-ad59-9138d74de867;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+2024-02-08T13:46:16.297+02:00  INFO 157082 --- [           main] c.u.b.c.d.FetchEntriesControllerTests    : Started FetchEntriesControllerTests in 0.124 seconds (process running for 11.406)
 ]]></system-out>
   </testcase>
-  <testcase name="Should_Result_In_NOT_FOUND_Exception_When_User_Not_Found" classname="com.underpressure.backend.controllers.data.FetchEntriesControllerTests" time="0.022">
+  <testcase name="Should_Result_In_NOT_FOUND_Exception_When_User_Not_Found" classname="com.underpressure.backend.controllers.data.FetchEntriesControllerTests" time="0.018">
     <system-out><![CDATA[
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -87,14 +87,14 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.2)
 
-2024-02-08T13:07:21.287+02:00  INFO 132418 --- [           main] c.u.b.c.d.FetchEntriesControllerTests    : Starting FetchEntriesControllerTests using Java 21.0.2 with PID 132418 (started by stef in /home/stef/projects/under-pressure-backend/backend)
-2024-02-08T13:07:21.287+02:00  INFO 132418 --- [           main] c.u.b.c.d.FetchEntriesControllerTests    : No active profile set, falling back to 1 default profile: "default"
-2024-02-08T13:07:21.387+02:00  INFO 132418 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
-2024-02-08T13:07:21.400+02:00  INFO 132418 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:6f2df383-8b3f-40dd-8c90-a4ee087f3e9c;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
-2024-02-08T13:07:21.437+02:00  INFO 132418 --- [           main] c.u.b.c.d.FetchEntriesControllerTests    : Started FetchEntriesControllerTests in 0.181 seconds (process running for 15.121)
+2024-02-08T13:46:16.336+02:00  INFO 157082 --- [           main] c.u.b.c.d.FetchEntriesControllerTests    : Starting FetchEntriesControllerTests using Java 21.0.2 with PID 157082 (started by stef in /home/stef/projects/under-pressure-backend/backend)
+2024-02-08T13:46:16.336+02:00  INFO 157082 --- [           main] c.u.b.c.d.FetchEntriesControllerTests    : No active profile set, falling back to 1 default profile: "default"
+2024-02-08T13:46:16.405+02:00  INFO 157082 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
+2024-02-08T13:46:16.440+02:00  INFO 157082 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:eef1bbd4-2360-44f2-bd49-395b93fa9d68;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+2024-02-08T13:46:16.466+02:00  INFO 157082 --- [           main] c.u.b.c.d.FetchEntriesControllerTests    : Started FetchEntriesControllerTests in 0.144 seconds (process running for 11.575)
 ]]></system-out>
   </testcase>
-  <testcase name="Should_Result_In_NOT_FOUND_Exception_When_Subject_Not_Found" classname="com.underpressure.backend.controllers.data.FetchEntriesControllerTests" time="0.021">
+  <testcase name="Should_Result_In_NOT_FOUND_Exception_When_Subject_Not_Found" classname="com.underpressure.backend.controllers.data.FetchEntriesControllerTests" time="0.012">
     <system-out><![CDATA[
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -104,14 +104,14 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.2)
 
-2024-02-08T13:07:21.490+02:00  INFO 132418 --- [           main] c.u.b.c.d.FetchEntriesControllerTests    : Starting FetchEntriesControllerTests using Java 21.0.2 with PID 132418 (started by stef in /home/stef/projects/under-pressure-backend/backend)
-2024-02-08T13:07:21.491+02:00  INFO 132418 --- [           main] c.u.b.c.d.FetchEntriesControllerTests    : No active profile set, falling back to 1 default profile: "default"
-2024-02-08T13:07:21.590+02:00  INFO 132418 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
-2024-02-08T13:07:21.608+02:00  INFO 132418 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:b9086b8a-e803-4ca8-a010-6a9e0abe2ffb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
-2024-02-08T13:07:21.654+02:00  INFO 132418 --- [           main] c.u.b.c.d.FetchEntriesControllerTests    : Started FetchEntriesControllerTests in 0.188 seconds (process running for 15.338)
+2024-02-08T13:46:16.517+02:00  INFO 157082 --- [           main] c.u.b.c.d.FetchEntriesControllerTests    : Starting FetchEntriesControllerTests using Java 21.0.2 with PID 157082 (started by stef in /home/stef/projects/under-pressure-backend/backend)
+2024-02-08T13:46:16.517+02:00  INFO 157082 --- [           main] c.u.b.c.d.FetchEntriesControllerTests    : No active profile set, falling back to 1 default profile: "default"
+2024-02-08T13:46:16.584+02:00  INFO 157082 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
+2024-02-08T13:46:16.593+02:00  INFO 157082 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:f9ce0473-21df-435d-9f8b-d85d297b2543;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+2024-02-08T13:46:16.614+02:00  INFO 157082 --- [           main] c.u.b.c.d.FetchEntriesControllerTests    : Started FetchEntriesControllerTests in 0.123 seconds (process running for 11.722)
 ]]></system-out>
   </testcase>
-  <testcase name="Should_Result_In_BAD_REQUEST_When_SubjectName_Null" classname="com.underpressure.backend.controllers.data.FetchEntriesControllerTests" time="0.021">
+  <testcase name="Should_Result_In_BAD_REQUEST_When_SubjectName_Null" classname="com.underpressure.backend.controllers.data.FetchEntriesControllerTests" time="0.016">
     <system-out><![CDATA[
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -121,14 +121,14 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.2)
 
-2024-02-08T13:07:21.720+02:00  INFO 132418 --- [           main] c.u.b.c.d.FetchEntriesControllerTests    : Starting FetchEntriesControllerTests using Java 21.0.2 with PID 132418 (started by stef in /home/stef/projects/under-pressure-backend/backend)
-2024-02-08T13:07:21.720+02:00  INFO 132418 --- [           main] c.u.b.c.d.FetchEntriesControllerTests    : No active profile set, falling back to 1 default profile: "default"
-2024-02-08T13:07:21.841+02:00  INFO 132418 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
-2024-02-08T13:07:21.859+02:00  INFO 132418 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:a4cc4749-eda0-49e6-92bf-4de489ff6cd7;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
-2024-02-08T13:07:21.894+02:00  INFO 132418 --- [           main] c.u.b.c.d.FetchEntriesControllerTests    : Started FetchEntriesControllerTests in 0.21 seconds (process running for 15.578)
+2024-02-08T13:46:16.647+02:00  INFO 157082 --- [           main] c.u.b.c.d.FetchEntriesControllerTests    : Starting FetchEntriesControllerTests using Java 21.0.2 with PID 157082 (started by stef in /home/stef/projects/under-pressure-backend/backend)
+2024-02-08T13:46:16.647+02:00  INFO 157082 --- [           main] c.u.b.c.d.FetchEntriesControllerTests    : No active profile set, falling back to 1 default profile: "default"
+2024-02-08T13:46:16.710+02:00  INFO 157082 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
+2024-02-08T13:46:16.722+02:00  INFO 157082 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:8f9036d5-e88c-49c0-a527-df972463406d;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+2024-02-08T13:46:16.750+02:00  INFO 157082 --- [           main] c.u.b.c.d.FetchEntriesControllerTests    : Started FetchEntriesControllerTests in 0.12 seconds (process running for 11.859)
 ]]></system-out>
   </testcase>
-  <testcase name="Should_Result_In_UNAUTHORIZED_When_BearerToken_Null" classname="com.underpressure.backend.controllers.data.FetchEntriesControllerTests" time="0.021">
+  <testcase name="Should_Result_In_UNAUTHORIZED_When_BearerToken_Null" classname="com.underpressure.backend.controllers.data.FetchEntriesControllerTests" time="0.016">
     <system-out><![CDATA[
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -138,11 +138,11 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.2)
 
-2024-02-08T13:07:21.954+02:00  INFO 132418 --- [           main] c.u.b.c.d.FetchEntriesControllerTests    : Starting FetchEntriesControllerTests using Java 21.0.2 with PID 132418 (started by stef in /home/stef/projects/under-pressure-backend/backend)
-2024-02-08T13:07:21.954+02:00  INFO 132418 --- [           main] c.u.b.c.d.FetchEntriesControllerTests    : No active profile set, falling back to 1 default profile: "default"
-2024-02-08T13:07:22.074+02:00  INFO 132418 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
-2024-02-08T13:07:22.093+02:00  INFO 132418 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:0dc0354f-fd63-4b47-876a-b0abac24d4b4;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
-2024-02-08T13:07:22.129+02:00  INFO 132418 --- [           main] c.u.b.c.d.FetchEntriesControllerTests    : Started FetchEntriesControllerTests in 0.203 seconds (process running for 15.813)
+2024-02-08T13:46:16.789+02:00  INFO 157082 --- [           main] c.u.b.c.d.FetchEntriesControllerTests    : Starting FetchEntriesControllerTests using Java 21.0.2 with PID 157082 (started by stef in /home/stef/projects/under-pressure-backend/backend)
+2024-02-08T13:46:16.789+02:00  INFO 157082 --- [           main] c.u.b.c.d.FetchEntriesControllerTests    : No active profile set, falling back to 1 default profile: "default"
+2024-02-08T13:46:16.865+02:00  INFO 157082 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
+2024-02-08T13:46:16.878+02:00  INFO 157082 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:c4290f05-064f-49ec-819a-49e81c960c5a;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+2024-02-08T13:46:16.904+02:00  INFO 157082 --- [           main] c.u.b.c.d.FetchEntriesControllerTests    : Started FetchEntriesControllerTests in 0.132 seconds (process running for 12.013)
 ]]></system-out>
   </testcase>
 </testsuite>
