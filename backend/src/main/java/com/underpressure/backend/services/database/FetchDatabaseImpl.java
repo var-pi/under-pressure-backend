@@ -65,7 +65,7 @@ public class FetchDatabaseImpl implements FetchDatabase {
     }
 
     public List<EntryDataDto> entries(Integer subjectInstanceId) {
-        String sql = "SELECT * FROM entries WHERE subject_instance_id=?";
+        String sql = "SELECT * FROM entries WHERE subject_instance_id=? ORDER BY entries.creation_date";
 
         return jdbcTemplate.query(sql, new EntryDataRowMapper(), subjectInstanceId);
     }

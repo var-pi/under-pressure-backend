@@ -39,9 +39,7 @@ public class FetchEntries {
         Integer subjectId = databaseService.fetch().subjectId(subjectName);
         Integer subjectInstanceId = databaseService.fetch().subjectInstanceId(userId, subjectId);
 
-        List<EntryDataDto> entries = databaseService.fetch().entries(subjectInstanceId);
-
-        return entries;
+        return databaseService.fetch().entries(subjectInstanceId);
 
     }
 

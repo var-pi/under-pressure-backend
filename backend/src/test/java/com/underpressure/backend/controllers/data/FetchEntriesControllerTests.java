@@ -3,7 +3,9 @@ package com.underpressure.backend.controllers.data;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.sql.Date;
 import java.util.List;
+import java.util.Objects;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.Import;
@@ -99,7 +101,20 @@ public class FetchEntriesControllerTests extends AuthorizedControllerTests<Fetch
                                 .handle("Bearer user_1_id_token", pathVariables);
 
                 assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
-                assertThat(responseEntity.getBody().size()).isEqualTo(2);
+                assertThat(Objects.requireNonNull(responseEntity.getBody()).size()).isEqualTo(2);
 
+        }
+
+        @Test
+        public void Should_Return_Sorted_Entries() {
+
+                FetchEntriesPathVariables pathVariables = new FetchEntriesPathVariables("Subject 1");
+
+                ResponseEntity<List<EntryDataDto>> responseEntity = controller
+                        .handle("Bearer user_1_id_token", pathVariables);
+
+                Date firstDate = Objects.requireNonNull(responseEntity.getBody()).getFirst().getCreationDate();
+                Date secondDate = responseEntity.getBody().getLast().getCreationDate();
+                assertThat(firstDate.before(secondDate)).isTrue();
         }
 }
