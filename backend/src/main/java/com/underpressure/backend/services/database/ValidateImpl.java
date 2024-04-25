@@ -61,7 +61,7 @@ class ValidateImpl implements Validate {
         String sql = "SELECT uuid FROM subjects WHERE name=?";
 
         try {
-            jdbcTemplate.queryForObject(sql, Integer.class, subjectName);
+            jdbcTemplate.queryForObject(sql, String.class, subjectName);
         } catch (EmptyResultDataAccessException e) {
             throw new SubjectDoesNotExist();
         }

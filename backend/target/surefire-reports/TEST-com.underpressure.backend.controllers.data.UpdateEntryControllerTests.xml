@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.underpressure.backend.controllers.data.UpdateEntryControllerTests" time="2.6" tests="10" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.underpressure.backend.controllers.data.UpdateEntryControllerTests" time="2.707" tests="10" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -13,7 +13,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-21-openjdk/lib"/>
-    <property name="sun.java.command" value="/home/stef/projects/under-pressure-backend/backend/target/surefire/surefirebooter-20240425203019984_3.jar /home/stef/projects/under-pressure-backend/backend/target/surefire 2024-04-25T20-30-19_885-jvmRun1 surefire-20240425203019984_1tmp surefire_0-20240425203019984_2tmp"/>
+    <property name="sun.java.command" value="/home/stef/projects/under-pressure-backend/backend/target/surefire/surefirebooter-20240425204930558_3.jar /home/stef/projects/under-pressure-backend/backend/target/surefire 2024-04-25T20-49-30_385-jvmRun1 surefire-20240425204930558_1tmp surefire_0-20240425204930558_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/home/stef/projects/under-pressure-backend/backend/target/test-classes:/home/stef/projects/under-pressure-backend/backend/target/classes:/home/stef/.m2/repository/org/postgresql/postgresql/42.6.0/postgresql-42.6.0.jar:/home/stef/.m2/repository/org/checkerframework/checker-qual/3.31.0/checker-qual-3.31.0.jar:/home/stef/.m2/repository/org/springframework/boot/spring-boot-starter-jdbc/3.2.2/spring-boot-starter-jdbc-3.2.2.jar:/home/stef/.m2/repository/org/springframework/boot/spring-boot-starter/3.2.2/spring-boot-starter-3.2.2.jar:/home/stef/.m2/repository/org/springframework/boot/spring-boot/3.2.2/spring-boot-3.2.2.jar:/home/stef/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/3.2.2/spring-boot-autoconfigure-3.2.2.jar:/home/stef/.m2/repository/org/springframework/boot/spring-boot-starter-logging/3.2.2/spring-boot-starter-logging-3.2.2.jar:/home/stef/.m2/repository/ch/qos/logback/logback-classic/1.4.14/logback-classic-1.4.14.jar:/home/stef/.m2/repository/ch/qos/logback/logback-core/1.4.14/logback-core-1.4.14.jar:/home/stef/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.21.1/log4j-to-slf4j-2.21.1.jar:/home/stef/.m2/repository/org/apache/logging/log4j/log4j-api/2.21.1/log4j-api-2.21.1.jar:/home/stef/.m2/repository/org/slf4j/jul-to-slf4j/2.0.11/jul-to-slf4j-2.0.11.jar:/home/stef/.m2/repository/jakarta/annotation/jakarta.annotation-api/2.1.1/jakarta.annotation-api-2.1.1.jar:/home/stef/.m2/repository/org/yaml/snakeyaml/2.2/snakeyaml-2.2.jar:/home/stef/.m2/repository/com/zaxxer/HikariCP/5.0.1/HikariCP-5.0.1.jar:/home/stef/.m2/repository/org/slf4j/slf4j-api/2.0.11/slf4j-api-2.0.11.jar:/home/stef/.m2/repository/org/springframework/spring-jdbc/6.1.3/spring-jdbc-6.1.3.jar:/home/stef/.m2/repository/org/springframework/spring-beans/6.1.3/spring-beans-6.1.3.jar:/home/stef/.m2/repository/org/springframework/spring-tx/6.1.3/spring-tx-6.1.3.jar:/home/stef/.m2/repository/org/springframework/boot/spring-boot-starter-web/3.2.2/spring-boot-starter-web-3.2.2.jar:/home/stef/.m2/repository/org/springframework/boot/spring-boot-starter-json/3.2.2/spring-boot-starter-json-3.2.2.jar:/home/stef/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.15.3/jackson-databind-2.15.3.jar:/home/stef/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.15.3/jackson-annotations-2.15.3.jar:/home/stef/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.15.3/jackson-core-2.15.3.jar:/home/stef/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.15.3/jackson-datatype-jdk8-2.15.3.jar:/home/stef/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.15.3/jackson-datatype-jsr310-2.15.3.jar:/home/stef/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.15.3/jackson-module-parameter-names-2.15.3.jar:/home/stef/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/3.2.2/spring-boot-starter-tomcat-3.2.2.jar:/home/stef/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.18/tomcat-embed-core-10.1.18.jar:/home/stef/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/10.1.18/tomcat-embed-el-10.1.18.jar:/home/stef/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/10.1.18/tomcat-embed-websocket-10.1.18.jar:/home/stef/.m2/repository/org/springframework/spring-web/6.1.3/spring-web-6.1.3.jar:/home/stef/.m2/repository/io/micrometer/micrometer-observation/1.12.2/micrometer-observation-1.12.2.jar:/home/stef/.m2/repository/io/micrometer/micrometer-commons/1.12.2/micrometer-commons-1.12.2.jar:/home/stef/.m2/repository/org/springframework/spring-webmvc/6.1.3/spring-webmvc-6.1.3.jar:/home/stef/.m2/repository/org/springframework/spring-aop/6.1.3/spring-aop-6.1.3.jar:/home/stef/.m2/repository/org/springframework/spring-context/6.1.3/spring-context-6.1.3.jar:/home/stef/.m2/repository/org/springframework/spring-expression/6.1.3/spring-expression-6.1.3.jar:/home/stef/.m2/repository/com/google/api-client/google-api-client/1.35.0/google-api-client-1.35.0.jar:/home/stef/.m2/repository/com/google/http-client/google-http-client-gson/1.41.8/google-http-client-gson-1.41.8.jar:/home/stef/.m2/repository/com/google/code/gson/gson/2.10.1/gson-2.10.1.jar:/home/stef/.m2/repository/com/google/guava/guava/31.1-jre/guava-31.1-jre.jar:/home/stef/.m2/repository/com/google/guava/failureaccess/1.0.1/failureaccess-1.0.1.jar:/home/stef/.m2/repository/com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar:/home/stef/.m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar:/home/stef/.m2/repository/com/google/errorprone/error_prone_annotations/2.11.0/error_prone_annotations-2.11.0.jar:/home/stef/.m2/repository/com/google/j2objc/j2objc-annotations/1.3/j2objc-annotations-1.3.jar:/home/stef/.m2/repository/com/google/http-client/google-http-client-apache-v2/1.41.8/google-http-client-apache-v2-1.41.8.jar:/home/stef/.m2/repository/org/apache/httpcomponents/httpcore/4.4.16/httpcore-4.4.16.jar:/home/stef/.m2/repository/org/apache/httpcomponents/httpclient/4.5.13/httpclient-4.5.13.jar:/home/stef/.m2/repository/commons-codec/commons-codec/1.16.0/commons-codec-1.16.0.jar:/home/stef/.m2/repository/com/google/http-client/google-http-client/1.41.8/google-http-client-1.41.8.jar:/home/stef/.m2/repository/io/opencensus/opencensus-api/0.31.0/opencensus-api-0.31.0.jar:/home/stef/.m2/repository/io/grpc/grpc-context/1.27.2/grpc-context-1.27.2.jar:/home/stef/.m2/repository/io/opencensus/opencensus-contrib-http-util/0.31.0/opencensus-contrib-http-util-0.31.0.jar:/home/stef/.m2/repository/com/google/oauth-client/google-oauth-client/1.35.0/google-oauth-client-1.35.0.jar:/home/stef/.m2/repository/org/springframework/boot/spring-boot-starter-test/3.2.2/spring-boot-starter-test-3.2.2.jar:/home/stef/.m2/repository/org/springframework/boot/spring-boot-test/3.2.2/spring-boot-test-3.2.2.jar:/home/stef/.m2/repository/org/springframework/boot/spring-boot-test-autoconfigure/3.2.2/spring-boot-test-autoconfigure-3.2.2.jar:/home/stef/.m2/repository/com/jayway/jsonpath/json-path/2.8.0/json-path-2.8.0.jar:/home/stef/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/4.0.1/jakarta.xml.bind-api-4.0.1.jar:/home/stef/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.2/jakarta.activation-api-2.1.2.jar:/home/stef/.m2/repository/net/minidev/json-smart/2.5.0/json-smart-2.5.0.jar:/home/stef/.m2/repository/net/minidev/accessors-smart/2.5.0/accessors-smart-2.5.0.jar:/home/stef/.m2/repository/org/ow2/asm/asm/9.3/asm-9.3.jar:/home/stef/.m2/repository/org/assertj/assertj-core/3.24.2/assertj-core-3.24.2.jar:/home/stef/.m2/repository/net/bytebuddy/byte-buddy/1.14.11/byte-buddy-1.14.11.jar:/home/stef/.m2/repository/org/awaitility/awaitility/4.2.0/awaitility-4.2.0.jar:/home/stef/.m2/repository/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar:/home/stef/.m2/repository/org/junit/jupiter/junit-jupiter/5.10.1/junit-jupiter-5.10.1.jar:/home/stef/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.1/junit-jupiter-api-5.10.1.jar:/home/stef/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/home/stef/.m2/repository/org/junit/platform/junit-platform-commons/1.10.1/junit-platform-commons-1.10.1.jar:/home/stef/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/stef/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.10.1/junit-jupiter-params-5.10.1.jar:/home/stef/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.1/junit-jupiter-engine-5.10.1.jar:/home/stef/.m2/repository/org/junit/platform/junit-platform-engine/1.10.1/junit-platform-engine-1.10.1.jar:/home/stef/.m2/repository/org/mockito/mockito-core/5.7.0/mockito-core-5.7.0.jar:/home/stef/.m2/repository/net/bytebuddy/byte-buddy-agent/1.14.11/byte-buddy-agent-1.14.11.jar:/home/stef/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:/home/stef/.m2/repository/org/mockito/mockito-junit-jupiter/5.7.0/mockito-junit-jupiter-5.7.0.jar:/home/stef/.m2/repository/org/skyscreamer/jsonassert/1.5.1/jsonassert-1.5.1.jar:/home/stef/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar:/home/stef/.m2/repository/org/springframework/spring-core/6.1.3/spring-core-6.1.3.jar:/home/stef/.m2/repository/org/springframework/spring-jcl/6.1.3/spring-jcl-6.1.3.jar:/home/stef/.m2/repository/org/springframework/spring-test/6.1.3/spring-test-6.1.3.jar:/home/stef/.m2/repository/org/xmlunit/xmlunit-core/2.9.1/xmlunit-core-2.9.1.jar:/home/stef/.m2/repository/com/h2database/h2/2.2.224/h2-2.2.224.jar:/home/stef/.m2/repository/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="FILE_LOG_CHARSET" value="UTF-8"/>
     <property name="java.awt.headless" value="true"/>
-    <property name="surefire.real.class.path" value="/home/stef/projects/under-pressure-backend/backend/target/surefire/surefirebooter-20240425203019984_3.jar"/>
+    <property name="surefire.real.class.path" value="/home/stef/projects/under-pressure-backend/backend/target/surefire/surefirebooter-20240425204930558_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="21.0.2+13"/>
     <property name="user.name" value="stef"/>
@@ -47,7 +47,7 @@
     <property name="user.dir" value="/home/stef/projects/under-pressure-backend/backend"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="PID" value="101244"/>
+    <property name="PID" value="106472"/>
     <property name="CONSOLE_LOG_CHARSET" value="UTF-8"/>
     <property name="native.encoding" value="UTF-8"/>
     <property name="java.library.path" value="/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib"/>
@@ -58,9 +58,9 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="Should_Update_Entry_When_Request_Valid" classname="com.underpressure.backend.controllers.data.UpdateEntryControllerTests" time="0.328">
-    <system-out><![CDATA[2024-04-25T20:30:26.209+03:00  INFO 101244 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.underpressure.backend.controllers.data.UpdateEntryControllerTests]: UpdateEntryControllerTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2024-04-25T20:30:26.242+03:00  INFO 101244 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.underpressure.backend.BackendApplication for test class com.underpressure.backend.controllers.data.UpdateEntryControllerTests
+  <testcase name="Should_Update_Entry_When_Request_Valid" classname="com.underpressure.backend.controllers.data.UpdateEntryControllerTests" time="0.469">
+    <system-out><![CDATA[2024-04-25T20:49:38.149+03:00  INFO 106472 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.underpressure.backend.controllers.data.UpdateEntryControllerTests]: UpdateEntryControllerTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-04-25T20:49:38.169+03:00  INFO 106472 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.underpressure.backend.BackendApplication for test class com.underpressure.backend.controllers.data.UpdateEntryControllerTests
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -70,14 +70,14 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.2)
 
-2024-04-25T20:30:26.267+03:00  INFO 101244 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : Starting UpdateEntryControllerTests using Java 21.0.2 with PID 101244 (started by stef in /home/stef/projects/under-pressure-backend/backend)
-2024-04-25T20:30:26.268+03:00  INFO 101244 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : The following 1 profile is active: "dev"
-2024-04-25T20:30:26.405+03:00  INFO 101244 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
-2024-04-25T20:30:26.467+03:00  INFO 101244 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:84cb6a64-80bc-494c-b4e0-d9bc666aaaa0;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
-2024-04-25T20:30:26.820+03:00  INFO 101244 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : Started UpdateEntryControllerTests in 0.575 seconds (process running for 6.749)
+2024-04-25T20:49:38.196+03:00  INFO 106472 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : Starting UpdateEntryControllerTests using Java 21.0.2 with PID 106472 (started by stef in /home/stef/projects/under-pressure-backend/backend)
+2024-04-25T20:49:38.196+03:00  INFO 106472 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : The following 1 profile is active: "dev"
+2024-04-25T20:49:38.343+03:00  INFO 106472 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
+2024-04-25T20:49:38.404+03:00  INFO 106472 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:60604528-f504-4bce-862e-ba536ad76464;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+2024-04-25T20:49:38.727+03:00  INFO 106472 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : Started UpdateEntryControllerTests in 0.554 seconds (process running for 8.038)
 ]]></system-out>
   </testcase>
-  <testcase name="Should_Result_In_Not_Found_Exception_When_Stress_Level_Out_Of_Range" classname="com.underpressure.backend.controllers.data.UpdateEntryControllerTests" time="0.03">
+  <testcase name="Should_Result_In_Not_Found_Exception_When_Stress_Level_Out_Of_Range" classname="com.underpressure.backend.controllers.data.UpdateEntryControllerTests" time="0.04">
     <system-out><![CDATA[
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -87,14 +87,14 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.2)
 
-2024-04-25T20:30:27.202+03:00  INFO 101244 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : Starting UpdateEntryControllerTests using Java 21.0.2 with PID 101244 (started by stef in /home/stef/projects/under-pressure-backend/backend)
-2024-04-25T20:30:27.203+03:00  INFO 101244 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : The following 1 profile is active: "dev"
-2024-04-25T20:30:27.308+03:00  INFO 101244 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
-2024-04-25T20:30:27.319+03:00  INFO 101244 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:53a046f7-6a8f-418a-aeb3-436c1de32d64;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
-2024-04-25T20:30:27.353+03:00  INFO 101244 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : Started UpdateEntryControllerTests in 0.19 seconds (process running for 7.283)
+2024-04-25T20:49:39.235+03:00  INFO 106472 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : Starting UpdateEntryControllerTests using Java 21.0.2 with PID 106472 (started by stef in /home/stef/projects/under-pressure-backend/backend)
+2024-04-25T20:49:39.235+03:00  INFO 106472 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : The following 1 profile is active: "dev"
+2024-04-25T20:49:39.326+03:00  INFO 106472 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
+2024-04-25T20:49:39.340+03:00  INFO 106472 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:8d643f11-b3ee-4694-8bbf-1ae5a859db7a;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+2024-04-25T20:49:39.374+03:00  INFO 106472 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : Started UpdateEntryControllerTests in 0.164 seconds (process running for 8.685)
 ]]></system-out>
   </testcase>
-  <testcase name="Should_Result_In_Bad_REQUEST_When_StressLevel_Null" classname="com.underpressure.backend.controllers.data.UpdateEntryControllerTests" time="0.027">
+  <testcase name="Should_Result_In_Bad_REQUEST_When_StressLevel_Null" classname="com.underpressure.backend.controllers.data.UpdateEntryControllerTests" time="0.022">
     <system-out><![CDATA[
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -104,14 +104,14 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.2)
 
-2024-04-25T20:30:27.412+03:00  INFO 101244 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : Starting UpdateEntryControllerTests using Java 21.0.2 with PID 101244 (started by stef in /home/stef/projects/under-pressure-backend/backend)
-2024-04-25T20:30:27.412+03:00  INFO 101244 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : The following 1 profile is active: "dev"
-2024-04-25T20:30:27.507+03:00  INFO 101244 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
-2024-04-25T20:30:27.520+03:00  INFO 101244 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:d44253e1-8fc1-4da6-98d7-56b09ae0fda6;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
-2024-04-25T20:30:27.555+03:00  INFO 101244 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : Started UpdateEntryControllerTests in 0.165 seconds (process running for 7.484)
+2024-04-25T20:49:39.447+03:00  INFO 106472 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : Starting UpdateEntryControllerTests using Java 21.0.2 with PID 106472 (started by stef in /home/stef/projects/under-pressure-backend/backend)
+2024-04-25T20:49:39.447+03:00  INFO 106472 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : The following 1 profile is active: "dev"
+2024-04-25T20:49:39.528+03:00  INFO 106472 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
+2024-04-25T20:49:39.542+03:00  INFO 106472 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:e8f0e443-30d1-42b9-89d2-de355c04506c;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+2024-04-25T20:49:39.573+03:00  INFO 106472 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : Started UpdateEntryControllerTests in 0.151 seconds (process running for 8.884)
 ]]></system-out>
   </testcase>
-  <testcase name="Should_Result_In_Bad_Request_When_Unfollowed" classname="com.underpressure.backend.controllers.data.UpdateEntryControllerTests" time="0.025">
+  <testcase name="Should_Result_In_Bad_Request_When_Unfollowed" classname="com.underpressure.backend.controllers.data.UpdateEntryControllerTests" time="0.022">
     <system-out><![CDATA[
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -121,14 +121,14 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.2)
 
-2024-04-25T20:30:27.617+03:00  INFO 101244 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : Starting UpdateEntryControllerTests using Java 21.0.2 with PID 101244 (started by stef in /home/stef/projects/under-pressure-backend/backend)
-2024-04-25T20:30:27.618+03:00  INFO 101244 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : The following 1 profile is active: "dev"
-2024-04-25T20:30:27.706+03:00  INFO 101244 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
-2024-04-25T20:30:27.719+03:00  INFO 101244 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:f7dbdccc-c313-4cbb-8a72-d24da4ebb1bf;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
-2024-04-25T20:30:27.749+03:00  INFO 101244 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : Started UpdateEntryControllerTests in 0.158 seconds (process running for 7.679)
+2024-04-25T20:49:39.624+03:00  INFO 106472 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : Starting UpdateEntryControllerTests using Java 21.0.2 with PID 106472 (started by stef in /home/stef/projects/under-pressure-backend/backend)
+2024-04-25T20:49:39.624+03:00  INFO 106472 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : The following 1 profile is active: "dev"
+2024-04-25T20:49:39.703+03:00  INFO 106472 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
+2024-04-25T20:49:39.716+03:00  INFO 106472 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:8b3476cd-a097-4b20-9f93-35e96ad1dd16;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+2024-04-25T20:49:39.761+03:00  INFO 106472 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : Started UpdateEntryControllerTests in 0.159 seconds (process running for 9.072)
 ]]></system-out>
   </testcase>
-  <testcase name="Should_Result_In_NOT_FOUND_Exception_When_User_Not_Found" classname="com.underpressure.backend.controllers.data.UpdateEntryControllerTests" time="0.032">
+  <testcase name="Should_Result_In_NOT_FOUND_Exception_When_User_Not_Found" classname="com.underpressure.backend.controllers.data.UpdateEntryControllerTests" time="0.04">
     <system-out><![CDATA[
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -138,14 +138,14 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.2)
 
-2024-04-25T20:30:27.805+03:00  INFO 101244 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : Starting UpdateEntryControllerTests using Java 21.0.2 with PID 101244 (started by stef in /home/stef/projects/under-pressure-backend/backend)
-2024-04-25T20:30:27.805+03:00  INFO 101244 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : The following 1 profile is active: "dev"
-2024-04-25T20:30:27.880+03:00  INFO 101244 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
-2024-04-25T20:30:27.892+03:00  INFO 101244 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:b355dbe8-6d1e-4105-9687-08d6431a6c9d;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
-2024-04-25T20:30:27.927+03:00  INFO 101244 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : Started UpdateEntryControllerTests in 0.146 seconds (process running for 7.857)
+2024-04-25T20:49:39.820+03:00  INFO 106472 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : Starting UpdateEntryControllerTests using Java 21.0.2 with PID 106472 (started by stef in /home/stef/projects/under-pressure-backend/backend)
+2024-04-25T20:49:39.820+03:00  INFO 106472 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : The following 1 profile is active: "dev"
+2024-04-25T20:49:39.900+03:00  INFO 106472 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
+2024-04-25T20:49:39.914+03:00  INFO 106472 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:ba6ffbf4-4bcb-4070-85f0-63d83c38ccf8;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+2024-04-25T20:49:39.944+03:00  INFO 106472 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : Started UpdateEntryControllerTests in 0.151 seconds (process running for 9.255)
 ]]></system-out>
   </testcase>
-  <testcase name="Should_Result_In_NOT_FOUND_Exception_When_Subject_Not_Found" classname="com.underpressure.backend.controllers.data.UpdateEntryControllerTests" time="0.021">
+  <testcase name="Should_Result_In_NOT_FOUND_Exception_When_Subject_Not_Found" classname="com.underpressure.backend.controllers.data.UpdateEntryControllerTests" time="0.025">
     <system-out><![CDATA[
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -155,14 +155,14 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.2)
 
-2024-04-25T20:30:27.993+03:00  INFO 101244 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : Starting UpdateEntryControllerTests using Java 21.0.2 with PID 101244 (started by stef in /home/stef/projects/under-pressure-backend/backend)
-2024-04-25T20:30:27.993+03:00  INFO 101244 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : The following 1 profile is active: "dev"
-2024-04-25T20:30:28.066+03:00  INFO 101244 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
-2024-04-25T20:30:28.077+03:00  INFO 101244 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:ab37f6fe-1789-4178-92bf-2d80fc1a8d16;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
-2024-04-25T20:30:28.110+03:00  INFO 101244 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : Started UpdateEntryControllerTests in 0.145 seconds (process running for 8.04)
+2024-04-25T20:49:40.024+03:00  INFO 106472 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : Starting UpdateEntryControllerTests using Java 21.0.2 with PID 106472 (started by stef in /home/stef/projects/under-pressure-backend/backend)
+2024-04-25T20:49:40.024+03:00  INFO 106472 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : The following 1 profile is active: "dev"
+2024-04-25T20:49:40.106+03:00  INFO 106472 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
+2024-04-25T20:49:40.119+03:00  INFO 106472 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:7e203660-40db-42d7-bba5-b77e9756ed8d;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+2024-04-25T20:49:40.147+03:00  INFO 106472 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : Started UpdateEntryControllerTests in 0.154 seconds (process running for 9.458)
 ]]></system-out>
   </testcase>
-  <testcase name="Should_Result_In_Bad_Request_When_Not_Followed" classname="com.underpressure.backend.controllers.data.UpdateEntryControllerTests" time="0.026">
+  <testcase name="Should_Result_In_Bad_Request_When_Not_Followed" classname="com.underpressure.backend.controllers.data.UpdateEntryControllerTests" time="0.02">
     <system-out><![CDATA[
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -172,14 +172,14 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.2)
 
-2024-04-25T20:30:28.160+03:00  INFO 101244 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : Starting UpdateEntryControllerTests using Java 21.0.2 with PID 101244 (started by stef in /home/stef/projects/under-pressure-backend/backend)
-2024-04-25T20:30:28.160+03:00  INFO 101244 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : The following 1 profile is active: "dev"
-2024-04-25T20:30:28.236+03:00  INFO 101244 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
-2024-04-25T20:30:28.250+03:00  INFO 101244 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:45e6dd32-8001-4a47-8327-aa16e1e8a257;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
-2024-04-25T20:30:28.288+03:00  INFO 101244 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : Started UpdateEntryControllerTests in 0.149 seconds (process running for 8.217)
+2024-04-25T20:49:40.205+03:00  INFO 106472 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : Starting UpdateEntryControllerTests using Java 21.0.2 with PID 106472 (started by stef in /home/stef/projects/under-pressure-backend/backend)
+2024-04-25T20:49:40.206+03:00  INFO 106472 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : The following 1 profile is active: "dev"
+2024-04-25T20:49:40.292+03:00  INFO 106472 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
+2024-04-25T20:49:40.303+03:00  INFO 106472 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:6dd7b8ad-b7da-4824-9f52-b3546c9c0a9c;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+2024-04-25T20:49:40.325+03:00  INFO 106472 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : Started UpdateEntryControllerTests in 0.146 seconds (process running for 9.636)
 ]]></system-out>
   </testcase>
-  <testcase name="Should_Result_In_BAD_REQUEST_When_SubjectName_Null" classname="com.underpressure.backend.controllers.data.UpdateEntryControllerTests" time="0.016">
+  <testcase name="Should_Result_In_BAD_REQUEST_When_SubjectName_Null" classname="com.underpressure.backend.controllers.data.UpdateEntryControllerTests" time="0.015">
     <system-out><![CDATA[
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -189,14 +189,14 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.2)
 
-2024-04-25T20:30:28.340+03:00  INFO 101244 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : Starting UpdateEntryControllerTests using Java 21.0.2 with PID 101244 (started by stef in /home/stef/projects/under-pressure-backend/backend)
-2024-04-25T20:30:28.340+03:00  INFO 101244 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : The following 1 profile is active: "dev"
-2024-04-25T20:30:28.412+03:00  INFO 101244 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
-2024-04-25T20:30:28.429+03:00  INFO 101244 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:9298056b-0791-438a-9cba-37166a0c3e5c;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
-2024-04-25T20:30:28.457+03:00  INFO 101244 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : Started UpdateEntryControllerTests in 0.138 seconds (process running for 8.387)
+2024-04-25T20:49:40.374+03:00  INFO 106472 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : Starting UpdateEntryControllerTests using Java 21.0.2 with PID 106472 (started by stef in /home/stef/projects/under-pressure-backend/backend)
+2024-04-25T20:49:40.374+03:00  INFO 106472 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : The following 1 profile is active: "dev"
+2024-04-25T20:49:40.440+03:00  INFO 106472 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
+2024-04-25T20:49:40.453+03:00  INFO 106472 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:2d3f6bcb-1dea-405e-8e6a-00fc78d7e000;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+2024-04-25T20:49:40.489+03:00  INFO 106472 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : Started UpdateEntryControllerTests in 0.138 seconds (process running for 9.8)
 ]]></system-out>
   </testcase>
-  <testcase name="Should_Result_In_UNAUTHORIZED_When_BearerToken_Null" classname="com.underpressure.backend.controllers.data.UpdateEntryControllerTests" time="0.017">
+  <testcase name="Should_Result_In_UNAUTHORIZED_When_BearerToken_Null" classname="com.underpressure.backend.controllers.data.UpdateEntryControllerTests" time="0.02">
     <system-out><![CDATA[
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -206,14 +206,14 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.2)
 
-2024-04-25T20:30:28.508+03:00  INFO 101244 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : Starting UpdateEntryControllerTests using Java 21.0.2 with PID 101244 (started by stef in /home/stef/projects/under-pressure-backend/backend)
-2024-04-25T20:30:28.508+03:00  INFO 101244 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : The following 1 profile is active: "dev"
-2024-04-25T20:30:28.585+03:00  INFO 101244 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
-2024-04-25T20:30:28.596+03:00  INFO 101244 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:a175728e-fb25-40bc-9bfb-1f34a0586dd6;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
-2024-04-25T20:30:28.623+03:00  INFO 101244 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : Started UpdateEntryControllerTests in 0.143 seconds (process running for 8.553)
+2024-04-25T20:49:40.530+03:00  INFO 106472 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : Starting UpdateEntryControllerTests using Java 21.0.2 with PID 106472 (started by stef in /home/stef/projects/under-pressure-backend/backend)
+2024-04-25T20:49:40.531+03:00  INFO 106472 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : The following 1 profile is active: "dev"
+2024-04-25T20:49:40.598+03:00  INFO 106472 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
+2024-04-25T20:49:40.607+03:00  INFO 106472 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:8312310e-6d28-48e9-ac62-425d6f92ae77;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+2024-04-25T20:49:40.630+03:00  INFO 106472 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : Started UpdateEntryControllerTests in 0.119 seconds (process running for 9.941)
 ]]></system-out>
   </testcase>
-  <testcase name="Should_Add_Entry_When_Request_Valid" classname="com.underpressure.backend.controllers.data.UpdateEntryControllerTests" time="0.022">
+  <testcase name="Should_Add_Entry_When_Request_Valid" classname="com.underpressure.backend.controllers.data.UpdateEntryControllerTests" time="0.026">
     <system-out><![CDATA[
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -223,11 +223,11 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.2)
 
-2024-04-25T20:30:28.665+03:00  INFO 101244 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : Starting UpdateEntryControllerTests using Java 21.0.2 with PID 101244 (started by stef in /home/stef/projects/under-pressure-backend/backend)
-2024-04-25T20:30:28.666+03:00  INFO 101244 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : The following 1 profile is active: "dev"
-2024-04-25T20:30:28.736+03:00  INFO 101244 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
-2024-04-25T20:30:28.748+03:00  INFO 101244 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:bac5bdc7-daf0-40f6-becf-e9494c3d7773;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
-2024-04-25T20:30:28.775+03:00  INFO 101244 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : Started UpdateEntryControllerTests in 0.13 seconds (process running for 8.705)
+2024-04-25T20:49:40.684+03:00  INFO 106472 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : Starting UpdateEntryControllerTests using Java 21.0.2 with PID 106472 (started by stef in /home/stef/projects/under-pressure-backend/backend)
+2024-04-25T20:49:40.684+03:00  INFO 106472 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : The following 1 profile is active: "dev"
+2024-04-25T20:49:40.765+03:00  INFO 106472 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
+2024-04-25T20:49:40.780+03:00  INFO 106472 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:dbc638b0-a4d9-4025-bece-767c564c1edc;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+2024-04-25T20:49:40.816+03:00  INFO 106472 --- [           main] c.u.b.c.data.UpdateEntryControllerTests  : Started UpdateEntryControllerTests in 0.159 seconds (process running for 10.127)
 ]]></system-out>
   </testcase>
 </testsuite>
