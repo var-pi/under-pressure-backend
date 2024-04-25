@@ -18,6 +18,7 @@
 /home/stef/projects/under-pressure-backend/backend/src/main/java/com/underpressure/backend/exceptions/does_not_exist/TodaysEntryDoesNotExistException.java
 /home/stef/projects/under-pressure-backend/backend/src/main/java/com/underpressure/backend/responses/OAuthTokenDto.java
 /home/stef/projects/under-pressure-backend/backend/src/main/java/com/underpressure/backend/exceptions/does_not_exist/DoesNotExistException.java
+/home/stef/projects/under-pressure-backend/backend/src/main/java/com/underpressure/backend/db/Subject.java
 /home/stef/projects/under-pressure-backend/backend/src/main/java/com/underpressure/backend/abstracts/GetController.java
 /home/stef/projects/under-pressure-backend/backend/src/main/java/com/underpressure/backend/exceptions/unexpected/InternalServerError.java
 /home/stef/projects/under-pressure-backend/backend/src/main/java/com/underpressure/backend/BackendApplication.java
@@ -53,6 +54,7 @@
 /home/stef/projects/under-pressure-backend/backend/src/main/java/com/underpressure/backend/exceptions/RequestException.java
 /home/stef/projects/under-pressure-backend/backend/src/main/java/com/underpressure/backend/controllers/FetchSubjectsAllController.java
 /home/stef/projects/under-pressure-backend/backend/src/main/java/com/underpressure/backend/exceptions/parameter/StressLevelParameterException.java
+/home/stef/projects/under-pressure-backend/backend/src/main/java/com/underpressure/backend/db/FetchCommandLineRunner.java
 /home/stef/projects/under-pressure-backend/backend/src/main/java/com/underpressure/backend/requests/data/FetchSubjectsAllRequestData.java
 /home/stef/projects/under-pressure-backend/backend/src/main/java/com/underpressure/backend/exceptions/unexpected/AuthenticationFailedException.java
 /home/stef/projects/under-pressure-backend/backend/src/main/java/com/underpressure/backend/services/google/FetchGoogleImpl.java
