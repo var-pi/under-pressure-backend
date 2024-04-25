@@ -1,3 +1,3 @@
-INSERT INTO subjects (name) VALUES ('Subject 1');
-INSERT INTO subjects (name) VALUES ('Subject 2');
-INSERT INTO subjects (name) VALUES ('Subject 3');
+INSERT INTO subjects (uuid, name) VALUES ('1', 'Subject 1');
+INSERT INTO subjects (uuid, name) VALUES ('2', 'Subject 2');
+INSERT INTO subjects (uuid, name) VALUES ('3', 'Subject 3');
