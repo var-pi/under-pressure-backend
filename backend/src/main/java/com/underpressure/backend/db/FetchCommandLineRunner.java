@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * This component is meant to automize the process of updating the list subjects.
  */
-@Component
+//@Component
 @Order(1)
 class FetchCommandLineRunner implements CommandLineRunner {
     @Getter
