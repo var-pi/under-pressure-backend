@@ -58,7 +58,7 @@ class ValidateImpl implements Validate {
         if (subjectName == null)
             throw new SubjectNameParameterException();
 
-        String sql = "SELECT id FROM subjects WHERE name=?";
+        String sql = "SELECT uuid FROM subjects WHERE name=?";
 
         try {
             jdbcTemplate.queryForObject(sql, Integer.class, subjectName);
