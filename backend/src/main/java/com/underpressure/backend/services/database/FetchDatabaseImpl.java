@@ -26,28 +26,28 @@ public class FetchDatabaseImpl implements FetchDatabase {
         return jdbcTemplate.queryForList(sql, String.class);
     }
 
-    public Integer subjectId(String subjectName) throws RequestException {
-        String requestForSubjectId = "SELECT id FROM subjects WHERE name=?";
+    public String subjectUuid(String subjectName) throws RequestException {
+        String requestForSubjectUuid = "SELECT uuid FROM subjects WHERE name=?";
 
         try {
-            return jdbcTemplate.queryForObject(requestForSubjectId, Integer.class, subjectName);
+            return jdbcTemplate.queryForObject(requestForSubjectUuid, String.class, subjectName);
         } catch (EmptyResultDataAccessException e) {
             throw new SubjectDoesNotExist();
         }
     }
 
     public List<String> followedSubjects(Integer userId) {
-        String sql = "SELECT subjects.name FROM subject_instances INNER JOIN subjects ON subject_instances.subject_id=subjects.id WHERE subject_instances.user_id=? AND if_followed=true";
+        String sql = "SELECT subjects.name FROM subject_instances INNER JOIN subjects ON subject_instances.subject_uuid=subjects.uuid WHERE subject_instances.user_id=? AND if_followed=true";
 
         return jdbcTemplate.queryForList(sql, String.class, userId);
     }
 
-    public Integer subjectInstanceId(Integer userId, Integer subjectId)
+    public Integer subjectInstanceId(Integer userId, String subjectUuid)
             throws RequestException {
-        String sql = "SELECT id FROM subject_instances WHERE user_id=? AND subject_id=?";
+        String sql = "SELECT id FROM subject_instances WHERE user_id=? AND subject_uuid=?";
 
         try {
-            return jdbcTemplate.queryForObject(sql, Integer.class, userId, subjectId);
+            return jdbcTemplate.queryForObject(sql, Integer.class, userId, subjectUuid);
         } catch (EmptyResultDataAccessException e) {
             throw new SubjectInstanceDoesNotExistsException();
         }

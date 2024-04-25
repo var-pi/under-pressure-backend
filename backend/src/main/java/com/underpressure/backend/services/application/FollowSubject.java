@@ -32,11 +32,11 @@ public class FollowSubject {
 
         Integer userId = googleService.fetch().userId(idTokenString, clientId);
 
-        Integer subjectId = databaseService.fetch().subjectId(subjectName);
+        String subjectUuid = databaseService.fetch().subjectUuid(subjectName);
 
-        if (databaseService.check().subjectInstanceExists(userId, subjectId)) {
+        if (databaseService.check().subjectInstanceExists(userId, subjectUuid)) {
 
-            Integer subjectInstanceId = databaseService.fetch().subjectInstanceId(userId, subjectId);
+            Integer subjectInstanceId = databaseService.fetch().subjectInstanceId(userId, subjectUuid);
 
             databaseService.validate().isUnfollowed(subjectInstanceId);
 
@@ -44,7 +44,7 @@ public class FollowSubject {
 
         } else {
 
-            databaseService.add().subjectInstance(userId, subjectId);
+            databaseService.add().subjectInstance(userId, subjectUuid);
 
         }
 

@@ -33,8 +33,8 @@ public class UnfollowSubject {
 
         Integer userId = googleService.fetch().userId(idTokenString, clientId);
 
-        Integer subjectId = databaseService.fetch().subjectId(subjectName);
-        Integer subjectInstanceId = databaseService.fetch().subjectInstanceId(userId, subjectId);
+        String subjectUuid = databaseService.fetch().subjectUuid(subjectName);
+        Integer subjectInstanceId = databaseService.fetch().subjectInstanceId(userId, subjectUuid);
 
         databaseService.validate().isFollowed(subjectInstanceId);
 

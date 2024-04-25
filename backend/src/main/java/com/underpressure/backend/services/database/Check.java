@@ -2,7 +2,7 @@ package com.underpressure.backend.services.database;
 
 public interface Check {
 
-    boolean subjectInstanceExists(Integer userId, Integer subjectId);
+    boolean subjectInstanceExists(Integer userId, String subjectUuid);
 
     boolean subjectInstanceFollowed(Integer subjectInstanceId);
 

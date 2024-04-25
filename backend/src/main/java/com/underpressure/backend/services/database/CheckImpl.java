@@ -11,10 +11,10 @@ class CheckImpl implements Check {
     }
 
     @Override
-    public boolean subjectInstanceExists(Integer userId, Integer subjectId) {
-        String sql = "SELECT COUNT(*) from subject_instances WHERE user_id=? AND subject_id=?";
+    public boolean subjectInstanceExists(Integer userId, String subjectUuid) {
+        String sql = "SELECT COUNT(*) from subject_instances WHERE user_id=? AND subject_uuid=?";
 
-        Integer rowCount = jdbcTemplate.queryForObject(sql, Integer.class, userId, subjectId);
+        Integer rowCount = jdbcTemplate.queryForObject(sql, Integer.class, userId, subjectUuid);
 
         return rowCount > 0;
     }

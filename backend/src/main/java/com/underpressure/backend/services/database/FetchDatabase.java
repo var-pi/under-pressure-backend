@@ -9,11 +9,11 @@ public interface FetchDatabase {
 
     public List<String> subjects();
 
-    public Integer subjectId(String subjectName) throws RequestException;
+    public String subjectUuid(String subjectName) throws RequestException;
 
     public List<String> followedSubjects(Integer userId);
 
-    public Integer subjectInstanceId(Integer userId, Integer subjectId) throws RequestException;
+    public Integer subjectInstanceId(Integer userId, String subjectUuid) throws RequestException;
 
     public Integer todaysEntryId(Integer subjectInstanceId) throws RequestException;
 

@@ -16,12 +16,12 @@ class AddImpl implements Add {
                 this.jdbcTemplate = jdbcTemplate;
         }
 
-        public void subjectInstance(Integer userId, Integer subjectId)
+        public void subjectInstance(Integer userId, String subjectUuid)
                         throws RequestException {
 
-                String sql = "INSERT INTO subject_instances (user_id, subject_id, if_followed) VALUES (?,?,true)";
+                String sql = "INSERT INTO subject_instances (user_id, subject_uuid, if_followed) VALUES (?,?,true)";
 
-                int numOfRowsAffected = jdbcTemplate.update(sql, userId, subjectId);
+                int numOfRowsAffected = jdbcTemplate.update(sql, userId, subjectUuid);
 
                 if (numOfRowsAffected == 0)
                         throw new SubjectNotAddedException();
