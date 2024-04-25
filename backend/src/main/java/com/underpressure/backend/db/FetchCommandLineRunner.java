@@ -3,17 +3,20 @@ package com.underpressure.backend.db;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * This component is meant to automize the process of updating the list subjects.
  */
-//@Component
-//@Order(1)
+@Component
+@Order(1)
 class FetchCommandLineRunner implements CommandLineRunner {
     @Getter
     @Setter
@@ -21,7 +24,11 @@ class FetchCommandLineRunner implements CommandLineRunner {
         private final String[] studyLevels = { "bachelor", "bachelor_master" };
         private final String[] structural_units = { "LTAT", "LTMS" };
         private final int take = 300;
-        private int start = 1;
+        private int start;
+
+        public Body(int start) {
+            this.start = start;
+        }
     }
 
     private final JdbcTemplate jdbcTemplate;
@@ -33,30 +40,41 @@ class FetchCommandLineRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        ArrayList<Subject> subjects = new ArrayList<>();
-
         String url = "https://ois2.ut.ee/api/courses";
 
-        Subject[] response;
+        Subject[] subjects;
         int start = 1;
 
+        // Create a list to hold batch parameters
+        List<Object[]> batchParameters = new ArrayList<>();
+
         do {
-            Body body = new Body();
-            body.setStart(start);
+            Body body = new Body(start);
 
-            response = restTemplate.postForObject(url, body, Subject[].class);
+            subjects = restTemplate.postForObject(url, body, Subject[].class);
 
-            assert response != null;
-            subjects.addAll(Arrays.asList(response));
+            assert subjects != null;
 
-            start += response.length;
-        } while (response.length > 0);
+            // Prepare batch parameters
+            for (Subject subject : subjects) {
+                String subjectFormatted = String.format(
+                        "%s %s (%d EAP)",
+                        subject.getCode(),
+                        subject.getTitle().getEt(),
+                        subject.getCredits());
 
-        for (Subject subject : subjects) {
-            String sql = "INSERT INTO subjects (name) VALUES (?)";
+                // Add parameters to the batch
+                batchParameters.add(new Object[]{subject.getUuid(), subjectFormatted});
+            }
 
-            jdbcTemplate.update(sql, subject.getTitle().getEt());
-        }
+            start += subjects.length;
+        } while (subjects.length > 0);
+
+        // SQL statement for batch update
+        String sql = "INSERT INTO subjects (uuid, name) VALUES (?, ?)";
+
+        // Perform batch update
+        jdbcTemplate.batchUpdate(sql, batchParameters);
     }
 
 }
